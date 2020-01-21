@@ -6,19 +6,25 @@
   "scripts": {
     "test": "nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --exit",
     "server": "nodemon --exec babel-node ./server/index.js",
-    "start": "babel-node ./server/index.js"
+    "start": "babel-node ./server/index.js",
+    "coverage": "nyc npm run test && nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Stackup-Rwanda/ateam-bn-backend.git"
   },
+
   "author": "The A Team",
+
+
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Stackup-Rwanda/ateam-bn-backend/issues"
   },
+
   "homepage": "https://github.com/Stackup-Rwanda/ateam-bn-backend#readme",
   "dependencies": {
+    "env": "0.0.2",
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "@babel/node": "^7.5.5",
@@ -41,6 +47,7 @@
     "swagger-ui-express": "^4.1.1"
   },
   "devDependencies": {
+    "coveralls": "^3.0.9",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.9.0",
@@ -54,6 +61,13 @@
   },
   "engines": {
     "node": "10.16.3",
-    "npm": "6.9.0"
+    "npm": "6.9.0",
+    
+
+   
   }
+
+
+
+
 }
