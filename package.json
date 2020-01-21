@@ -1,6 +1,7 @@
 {
   "name": "ateam-bn-backend",
   "version": "1.0.0",
+<<<<<<< HEAD
   "scripts": {
 <<<<<<< HEAD
     "test": "nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --exit",
@@ -8,10 +9,24 @@
     "start": "babel-node ./server/index.js",
     "coverage": "nyc npm run test && nyc report --reporter=text-lcov | coveralls"
 =======
+=======
+
+  "description": "We make company global travel and accommodation easy and convenient for the strong workforce of savvy members of staff, by leveraging the modern web.",
+  "main": "index.js",
+
+  "dependencies": {
+    "env": "0.0.2"
+  },
+ 
+  "scripts": {
+>>>>>>> ft(coveralls-integration): add coveralls
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls"
+<<<<<<< HEAD
+>>>>>>> ft(coveralls-integration): add coveralls
+=======
 >>>>>>> ft(coveralls-integration): add coveralls
   },
   "repository": {
@@ -27,6 +42,10 @@
     "url": "https://github.com/Stackup-Rwanda/ateam-bn-backend/issues"
   },
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> ft(coveralls-integration): add coveralls
   "homepage": "https://github.com/Stackup-Rwanda/ateam-bn-backend#readme",
   "dependencies": {
     "env": "0.0.2",
@@ -63,12 +82,17 @@
     "eslint-plugin-react-hooks": "^1.7.0",
     "prettier": "^1.19.1",
 <<<<<<< HEAD
+<<<<<<< HEAD
     "babel-install": "2.1.0"
   },
   "engines": {
     "node": "10.16.3",
     "npm": "6.9.0",
     
+=======
+    "coveralls": "^3.0.9",
+    "jest": "^24.9.0"
+>>>>>>> ft(coveralls-integration): add coveralls
 =======
     "coveralls": "^3.0.9",
     "jest": "^24.9.0"

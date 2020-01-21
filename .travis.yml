@@ -1,7 +1,18 @@
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> ft(coveralls-integration): add coveralls
 sudo: false
 language: node_js
 node_js:
   - node
+<<<<<<< HEAD
     script:
       - npm run test:coveralls
 
+=======
+
+    script:
+      - npm run test:coveralls
+>>>>>>> ft(coveralls-integration): add coveralls
