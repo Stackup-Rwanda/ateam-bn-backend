@@ -2,6 +2,7 @@
   "name": "ateam-bn-backend",
   "version": "1.0.0",
 <<<<<<< HEAD
+<<<<<<< HEAD
   "scripts": {
 <<<<<<< HEAD
     "test": "nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --exit",
@@ -20,11 +21,26 @@
  
   "scripts": {
 >>>>>>> ft(coveralls-integration): add coveralls
+=======
+  "description": "��#\u0000 \u0000a\u0000t\u0000e\u0000a\u0000m\u0000-\u0000b\u0000n\u0000-\u0000b\u0000a\u0000c\u0000k\u0000e\u0000n\u0000d\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "dependencies": {
+    "env": "0.0.2"
+  },
+  "devDependencies": {
+    "coveralls": "^3.0.9",
+    "jest": "^24.9.0"
+  },
+  "scripts": {
+>>>>>>> ft(coveralls-integration): add coveralls
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls"
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> ft(coveralls-integration): add coveralls
+=======
 >>>>>>> ft(coveralls-integration): add coveralls
 =======
 >>>>>>> ft(coveralls-integration): add coveralls
@@ -33,14 +49,19 @@
     "type": "git",
     "url": "git+https://github.com/Stackup-Rwanda/ateam-bn-backend.git"
   },
+<<<<<<< HEAD
 
   "author": "The A Team",
 
 
+=======
+  "author": "",
+>>>>>>> ft(coveralls-integration): add coveralls
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Stackup-Rwanda/ateam-bn-backend/issues"
   },
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 =======
@@ -104,4 +125,7 @@
 
 
 
+=======
+  "homepage": "https://github.com/Stackup-Rwanda/ateam-bn-backend#readme"
+>>>>>>> ft(coveralls-integration): add coveralls
 }
