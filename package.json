@@ -1,0 +1,39 @@
+{
+  "name": "BareFoot-Nomad",
+  "version": "1.0.0",
+  "description": "BareFoot Nomad",
+  "main": "index.js",
+  "scripts": {
+    "server": "nodemon --exec babel-node ./server/index.js",
+    "start": "babel-node ./server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": " https://github.com/Stackup-Rwanda/ateam-bn-backend.git"
+  },
+  "author": "The-A-Team",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
+    "@babel/runtime": "^7.5.5",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "swagger-ui-express": "^4.1.1"
+  },
+  "devDependencies": {
+    "babel-install": "2.1.0"
+  },
+  "engines": {
+    "node": "10.16.3",
+    "npm": "6.9.0"
+  }
+}
