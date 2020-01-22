@@ -1,7 +1,7 @@
 {
   "name": "BareFoot-Nomad",
   "version": "1.0.0",
-  "description": "BareFoot Nomad",
+  "description": "BareFoot Nomad is application that Make company global travel and accommodation easy and convenient for the strong workforce of savvy members of staff, by leveraging the modern web. ",
   "main": "index.js",
   "scripts": {
     "server": "nodemon --exec babel-node ./server/index.js",
