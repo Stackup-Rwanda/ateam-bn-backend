@@ -12,7 +12,7 @@ app.use(`${basePath}/documentation`, swaggerUi.serve, swaggerUi.setup(apiDocumen
 app.get('**', (req, res) => {
     res.status(400).send({ 
         status: 400,
-        message: 'Hey !! You are Welcome to BareFoot Nomad, Use the link below it is documentation of application',
+        message: 'Hey !! are you looking for BareFoot Nomad,  If yes Use the link below it is documentation of application',
         data: docUrl,
     });
   });
