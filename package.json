@@ -1,0 +1,30 @@
+{
+  "name": "ateam-bn-backend",
+  "version": "1.0.0",
+  "description": "We make company global travel and accommodation easy and convenient for the strong workforce of savvy members of staff, by leveraging the modern web.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stackup-Rwanda/ateam-bn-backend.git"
+  },
+  "author": "The A Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Stackup-Rwanda/ateam-bn-backend/issues"
+  },
+  "homepage": "https://github.com/Stackup-Rwanda/ateam-bn-backend#readme",
+  "devDependencies": {
+    "eslint": "^6.1.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "prettier": "^1.19.1"
+  }
+}
