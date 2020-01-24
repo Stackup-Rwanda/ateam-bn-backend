@@ -31,8 +31,5 @@
             "ClassDeclaration": true
         }
     }]
-  },
-  "parserOptions": {
-    "sourceType": "module"
   }
 }
