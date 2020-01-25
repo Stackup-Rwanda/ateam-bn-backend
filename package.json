@@ -4,7 +4,9 @@
   "description": "We make company global travel and accommodation easy and convenient for the strong workforce of savvy members of staff, by leveraging the modern web.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --exit",
+    "server": "nodemon --exec babel-node ./server/index.js",
+    "start": "babel-node ./server/index.js"
   },
   "repository": {
     "type": "git",
@@ -16,6 +18,28 @@
     "url": "https://github.com/Stackup-Rwanda/ateam-bn-backend/issues"
   },
   "homepage": "https://github.com/Stackup-Rwanda/ateam-bn-backend#readme",
+  "dependencies": {
+    "@babel/cli": "^7.5.5",
+    "@babel/core": "^7.5.5",
+    "@babel/node": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.8.3",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
+    "@babel/runtime": "^7.5.5",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^8.0.6",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "body-parser": "^1.19.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "express": "^4.17.1",
+    "mocha": "^7.0.0",
+    "mocha-lcov-reporter": "^1.3.0",
+    "nyc": "^15.0.0",
+    "swagger-ui-express": "^4.1.1"
+  },
   "devDependencies": {
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^18.0.1",
@@ -25,6 +49,11 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "babel-install": "2.1.0"
+  },
+  "engines": {
+    "node": "10.16.3",
+    "npm": "6.9.0"
   }
 }
