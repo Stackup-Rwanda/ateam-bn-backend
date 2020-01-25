@@ -1,0 +1,20 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "BareFoot Nomad is application that Make company global travel and accommodation easy and convenient for the strong workforce of savvy members of staff, by leveraging the modern web.",
+    "version": " ",
+    "title": "BareFootNomad",
+    "termsOfService": "https://github.com/Stackup-Rwanda/ateam-bn-backend/blob/develop/README.md",
+    "contact": { "email": "the-a-team@gmail.com" }
+  },
+
+  "host": "localhost:3000",
+  "basePath": "/api/v-unknown",
+  
+  "schemes": ["http","https"],
+  "consumes": ["application/json", "none"],
+  "produces": [ "application/json", "none"]
+
+}
+
+     
