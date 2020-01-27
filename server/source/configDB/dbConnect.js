@@ -1,7 +1,8 @@
 import pg from 'pg';
+import dotenv from 'dotenv';
 
-const databaseURL = 'postgresql://postgres:key07202020@localhost:5432/barefoot';
-const pool = new pg.Pool({ connectionString: databaseURL });
+dotenv.config();
+const pool = new pg.Pool({ connectionString: process.env.databaseURL });
 if (pool) console.log("connected successfully to barefoot Database");
 
 
