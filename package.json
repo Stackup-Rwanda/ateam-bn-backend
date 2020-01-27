@@ -31,6 +31,7 @@
     "coveralls": "^3.0.9",
     "jest": "^24.9.0"
   },
+
   "scripts": {
 >>>>>>> ft(coveralls-integration): add coveralls
     "test": "jest",
@@ -60,6 +61,7 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Stackup-Rwanda/ateam-bn-backend/issues"
+<<<<<<< HEAD
   },
 <<<<<<< HEAD
 
@@ -121,6 +123,9 @@
 
    
   }
+=======
+  }}
+>>>>>>> ft(conflict): soving conflicts
 
 
 
