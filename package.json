@@ -1,77 +1,25 @@
 {
   "name": "ateam-bn-backend",
   "version": "1.0.0",
-<<<<<<< HEAD
-<<<<<<< HEAD
-  "scripts": {
-<<<<<<< HEAD
-    "test": "nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --exit",
-    "server": "nodemon --exec babel-node ./server/index.js",
-    "start": "babel-node ./server/index.js",
-    "coverage": "nyc npm run test && nyc report --reporter=text-lcov | coveralls"
-=======
-=======
-
   "description": "We make company global travel and accommodation easy and convenient for the strong workforce of savvy members of staff, by leveraging the modern web.",
   "main": "index.js",
-
-  "dependencies": {
-    "env": "0.0.2"
-  },
- 
   "scripts": {
->>>>>>> ft(coveralls-integration): add coveralls
-=======
-  "description": "��#\u0000 \u0000a\u0000t\u0000e\u0000a\u0000m\u0000-\u0000b\u0000n\u0000-\u0000b\u0000a\u0000c\u0000k\u0000e\u0000n\u0000d\u0000\r\u0000 \u0000",
-  "main": "index.js",
-  "dependencies": {
-    "env": "0.0.2"
-  },
-  "devDependencies": {
-    "coveralls": "^3.0.9",
-    "jest": "^24.9.0"
-  },
-
-  "scripts": {
->>>>>>> ft(coveralls-integration): add coveralls
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "test:coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls"
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> ft(coveralls-integration): add coveralls
-=======
->>>>>>> ft(coveralls-integration): add coveralls
-=======
->>>>>>> ft(coveralls-integration): add coveralls
+    "test": "nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --exit",
+    "connectdb": "nodemon --exec babel-node ./server/source/configDB/dbconnect.js",
+    "server": "nodemon --exec babel-node ./server/index.js",
+    "start": "babel-node ./server/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Stackup-Rwanda/ateam-bn-backend.git"
   },
-<<<<<<< HEAD
-
   "author": "The A Team",
-
-
-=======
-  "author": "",
->>>>>>> ft(coveralls-integration): add coveralls
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Stackup-Rwanda/ateam-bn-backend/issues"
-<<<<<<< HEAD
   },
-<<<<<<< HEAD
-
-<<<<<<< HEAD
-=======
-
->>>>>>> ft(coveralls-integration): add coveralls
   "homepage": "https://github.com/Stackup-Rwanda/ateam-bn-backend#readme",
   "dependencies": {
-    "env": "0.0.2",
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "@babel/node": "^7.5.5",
@@ -87,14 +35,16 @@
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "coveralls": "^3.0.9",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mocha": "^7.0.0",
     "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^15.0.0",
+    "pg": "^7.17.1",
     "swagger-ui-express": "^4.1.1"
   },
   "devDependencies": {
-    "coveralls": "^3.0.9",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.9.0",
@@ -104,33 +54,10 @@
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
     "prettier": "^1.19.1",
-<<<<<<< HEAD
-<<<<<<< HEAD
     "babel-install": "2.1.0"
   },
   "engines": {
     "node": "10.16.3",
-    "npm": "6.9.0",
-    
-=======
-    "coveralls": "^3.0.9",
-    "jest": "^24.9.0"
->>>>>>> ft(coveralls-integration): add coveralls
-=======
-    "coveralls": "^3.0.9",
-    "jest": "^24.9.0"
->>>>>>> ft(coveralls-integration): add coveralls
-
-   
+    "npm": "6.9.0"
   }
-=======
-  }}
->>>>>>> ft(conflict): soving conflicts
-
-
-
-
-=======
-  "homepage": "https://github.com/Stackup-Rwanda/ateam-bn-backend#readme"
->>>>>>> ft(coveralls-integration): add coveralls
 }
