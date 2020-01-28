@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --exit",
-    "connectdb": "nodemon --exec babel-node ./server/source/configDB/dbconnect.js",
     "server": "nodemon --exec babel-node ./server/index.js",
     "start": "babel-node ./server/index.js"
   },
@@ -20,12 +19,13 @@
   },
   "homepage": "https://github.com/Stackup-Rwanda/ateam-bn-backend#readme",
   "dependencies": {
-    "@babel/cli": "^7.5.5",
-    "@babel/core": "^7.5.5",
+    "dotenv": "^8.2.0",
+    "pg": "^7.17.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.21.3",
     "@babel/node": "^7.5.5",
     "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.5.5",
-    "@babel/register": "^7.5.5",
     "@babel/runtime": "^7.5.5",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.6",
@@ -41,20 +41,23 @@
     "mocha": "^7.0.0",
     "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^15.0.0",
-    "pg": "^7.17.1",
     "swagger-ui-express": "^4.1.1"
   },
   "devDependencies": {
-    "eslint": "^6.1.0",
+    "@babel/cli": "^7.8.3",
+    "@babel/core": "^7.8.3",
+    "@babel/register": "^7.8.3",
+    "babel-install": "2.1.0",
+    "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.9.0",
     "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.2",
-    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react": "^7.18.0",
     "eslint-plugin-react-hooks": "^1.7.0",
     "prettier": "^1.19.1",
-    "babel-install": "2.1.0"
+    "sequelize-cli": "^5.5.1"
   },
   "engines": {
     "node": "10.16.3",
