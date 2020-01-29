@@ -4,7 +4,7 @@
   "description": "We make company global travel and accommodation easy and convenient for the strong workforce of savvy members of staff, by leveraging the modern web.",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test sequelize db:migrate && cross-env NODE_ENV=test sequelize db:seed:all && cross-env NODE_ENV=test nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js && cross-env NODE_ENV=test sequelize db:migrate:undo --exit",
+    "test": "cross-env NODE_ENV=test sequelize db:migrate && sequelize db:seed:all && nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js && sequelize db:migrate:undo --exit",
     "server": "nodemon --exec babel-node ./server/index.js",
     "start": "cross-env NODE_ENV=production babel-node ./server/index.js",
     "lint": "eslint ./server"
