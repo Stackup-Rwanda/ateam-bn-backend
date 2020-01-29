@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 import db from '../config/db';
 
-const User = db.define('User', {
+const User = db.define('user', {
   name: {
     type: Sequelize.STRING
   },
@@ -9,6 +9,9 @@ const User = db.define('User', {
     type: Sequelize.STRING
   },
   email: {
+    type: Sequelize.STRING
+  },
+  username: {
     type: Sequelize.STRING
   },
   password: {
