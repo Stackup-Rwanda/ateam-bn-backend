@@ -1,10 +1,13 @@
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import apiDocumentation from '../swagger.json';
-
+import '../server/source/dbconnection';
+import userRoute from '../server/joRoutes/userRoute';
+import '../server/strategies/fbStrategy';
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use( '', userRoute );
 const basePath = '/api/v-unknown';
 
 app.listen(process.env.PORT || 3000, () => {
