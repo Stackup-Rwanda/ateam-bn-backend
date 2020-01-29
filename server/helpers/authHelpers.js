@@ -1,4 +1,5 @@
 import UserModel from '../models/user';
+import Hasher from './passwordHashHelper';
 
 /**
  * This class contains
@@ -7,13 +8,24 @@ import UserModel from '../models/user';
  */
 class AuthHelpers {
   /**
-   * Finds the user if he/she exists.
+   * Finds the user's email if he/she exists.
    * @param {string} email The user's email.
    * @returns {object} The users's data.
    */
-  static async alreadyExists(email) {
+  static async emailExists(email) {
     const user = await UserModel.findOne({ where: { email } });
     return user;
+  }
+
+
+  /**
+   * Finds the user's username if he/she exists.
+   * @param {string} username The user's username.
+   * @returns {object} The users's data.
+   */
+  static async usernameExists(username) {
+    const alreadyUser = await UserModel.findOne({ where: { username } });
+    return alreadyUser;
   }
 
   /**
@@ -27,7 +39,7 @@ class AuthHelpers {
       gender: user.gender,
       email: user.email,
       username: user.username,
-      password: user.password,
+      password: Hasher.hashPassword(user.password),
       birthdate: user.birthdate,
       preferredLanguage: user.preferredLanguage,
       preferredCurrency: user.preferredCurrency,
@@ -44,6 +56,7 @@ class AuthHelpers {
         'gender',
         'email',
         'username',
+        'password',
         'birthdate',
         'preferredLanguage',
         'preferredCurrency',

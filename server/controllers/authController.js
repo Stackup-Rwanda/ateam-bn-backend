@@ -13,18 +13,18 @@ class AuthController {
    * @returns {object} The status and some data of the user.
    */
   static async signUp(req, res) {
-    const userExists = await AuthHelpers.alreadyExists(req.body.email);
+    const emailExists = await AuthHelpers.emailExists(req.body.email);
+    const usernameExists = await AuthHelpers.usernameExists(req.body.username);
 
-    if (userExists) {
+    if (emailExists || usernameExists) {
       return res.status(409).json({
         status: 409,
-        error: 'This user already exists'
+        error: 'This user already exists, use another email or username'
       });
     }
 
     const savedUser = await AuthHelpers.saveUser(req.body);
 
-    console.log(savedUser);
     return res.status(201).json({
       status: 201,
       message: 'User was created successfully',
@@ -32,6 +32,7 @@ class AuthController {
         name: savedUser.name,
         email: savedUser.email,
         username: savedUser.username,
+        password: savedUser.password,
         createdAt: savedUser.createdAt
       }
     });
