@@ -196,8 +196,7 @@
           }
         }
       }
-    }
-  },
+    },
   "definitions": {
     "Signup": {
       "type": "object",
