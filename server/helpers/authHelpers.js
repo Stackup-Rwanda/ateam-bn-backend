@@ -1,5 +1,7 @@
-import UserModel from '../models/user';
+import models from '../models';
 import Hasher from './passwordHashHelper';
+
+const { User } = models;
 
 /**
  * This class contains
@@ -13,7 +15,7 @@ class AuthHelpers {
    * @returns {object} The users's data.
    */
   static async emailExists(email) {
-    const user = await UserModel.findOne({ where: { email } });
+    const user = await User.findOne({ where: { email } });
     return user;
   }
 
@@ -24,7 +26,7 @@ class AuthHelpers {
    * @returns {object} The users's data.
    */
   static async usernameExists(username) {
-    const alreadyUser = await UserModel.findOne({ where: { username } });
+    const alreadyUser = await User.findOne({ where: { username } });
     return alreadyUser;
   }
 
@@ -34,7 +36,7 @@ class AuthHelpers {
    * @returns {object} The users's data.
    */
   static async saveUser(user) {
-    const acceptedUser = await UserModel.create({
+    const acceptedUser = await User.create({
       name: user.name,
       gender: user.gender,
       email: user.email,

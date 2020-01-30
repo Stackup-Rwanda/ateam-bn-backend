@@ -7,7 +7,7 @@ const development = {
   password: process.env.DB_PASSWORD,
   database: process.env.DEVELOP_DB_NAME,
   host: process.env.HOST,
-  dialect: "postgres",
+  dialect: "postgres"
 };
 
 const test = {
@@ -15,7 +15,7 @@ const test = {
   password: process.env.DB_PASSWORD,
   database: process.env.TEST_DB_NAME,
   host: process.env.HOST,
-  dialect: "postgres",
+  dialect: "postgres"
 };
 
 const production = {
@@ -23,7 +23,13 @@ const production = {
   password: process.env.DB_PASSWORD,
   database: process.env.PRODUCTION_DB_NAME,
   host: process.env.HOST,
-  dialect: "postgres",
+  dialect: "postgres"
+};
+
+export default {
+  development,
+  test,
+  production
 };
 
 export {
