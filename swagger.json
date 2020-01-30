@@ -16,11 +16,7 @@
       "description": "Authentication endpoints"
     },
     {
-<<<<<<< HEAD
       "name": "Sign up",
-=======
-      "name": "Signup Endpoint",
->>>>>>> ft(generate-jwt): add function to generate token
       "description": "Access to signup API endpoints"
     }
   ],

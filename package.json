@@ -52,7 +52,11 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+<<<<<<< HEAD
     "bcrypt": "3.0.6",
+=======
+    "bcrypt": "3.0.2",
+>>>>>>> ft(signup-endpoint): install bcrypt dependency
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
