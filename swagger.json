@@ -1,20 +1,54 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "BareFoot Nomad is application that Make company global travel and accommodation easy and convenient for the strong workforce of savvy members of staff, by leveraging the modern web.",
+    "description": "BareFoot Nomad is application that Make company global travel and accommodation easy and convenient for the strong workforce of save members of staff, by leveraging the modern web.",
     "version": " ",
     "title": "BareFootNomad",
     "termsOfService": "https://github.com/Stackup-Rwanda/ateam-bn-backend/blob/develop/README.md",
     "contact": { "email": "the-a-team@gmail.com" }
   },
 
-  "host": "localhost:3000",
+  "host": "localhost:8080",
   "basePath": "/api/v-unknown",
-  
-  "schemes": ["http","https"],
+
+  "schemes": ["http", "https"],
   "consumes": ["application/json", "none"],
-  "produces": [ "application/json", "none"]
+  "produces": ["application/json", "none"],
+  "tags": [
+    {
+      "name": "Users",
+      "description": " Users endpoints :: All those endpoints are used by the users like to signup, signin and signout with application"
+    }
+  ],
+  "paths": {
+    "/users/jkhgftgftydcrdc": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Access wrong link",
+        "description": "Now by the use of this GET endpoint user Should be redirected to the documentation of application",
+        "responses": {
+          "400": {
+            "description": " Bad request : Hey !! are you looking for BareFoot Nomad,  If yes Use the link below it is documentation of application"
+          }
+        }
+      }
+    },
 
+    "/users/logout": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "logout user from application",
+        "description": "Now by the use of this GET endpoint user Should logout from application",
+        "responses": { "200": { "description": " OK : Logout successfully" } },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": " This is user token which must be deleted directly when logged out from application",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  }
 }
-
-     

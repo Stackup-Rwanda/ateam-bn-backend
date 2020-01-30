@@ -4,8 +4,11 @@
   "description": "We make company global travel and accommodation easy and convenient for the strong workforce of savvy members of staff, by leveraging the modern web.",
   "main": "index.js",
   "scripts": {
-    "test": "nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --exit",
-    "connectdb": "nodemon --exec babel-node ./server/source/configDB/dbconnect.js",
+    "test": "nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --timeout 50000  --exit",
+    "createAndInsertIntoValidTokensTable": "babel-node ./server/source/models/migrations/insertValidTokenTableQuery.js",
+    "connectDBWithSequelize": "babel-node ./server/source/configDB/dbConnectWithSequelize.js.js",
+    "connectDBWithQuery": "babel-node ./server/source/configDB/dbConnectWithQuery.js.js",
+    "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test | coveralls",
     "server": "nodemon --exec babel-node ./server/index.js",
     "start": "babel-node ./server/index.js"
   },
@@ -35,26 +38,29 @@
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "coveralls": "^3.0.9",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mocha": "^7.0.0",
     "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^2.0.2",
     "nyc": "^15.0.0",
-    "pg": "^7.17.1",
+    "pg": "^7.18.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.21.3",
     "swagger-ui-express": "^4.1.1"
   },
   "devDependencies": {
+    "babel-install": "2.1.0",
     "eslint": "^6.1.0",
     "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-prettier": "^6.9.0",
+    "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.0",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.14.3",
     "eslint-plugin-react-hooks": "^1.7.0",
-    "prettier": "^1.19.1",
-    "babel-install": "2.1.0"
+    "prettier": "^1.19.1"
   },
   "engines": {
     "node": "10.16.3",
