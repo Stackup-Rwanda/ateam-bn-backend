@@ -18,10 +18,6 @@ app.use(express.json());
 
 const basePath = '/api';
 
-db.authenticate()
-.then(() => console.log('Connection has been established successfully.'))
-.catch((error) => console.error('Unable to connect to the database:', error));
-
 app.listen(process.env.PORT || 3000, () => {
   console.log('server is running on port 3000');
 });
