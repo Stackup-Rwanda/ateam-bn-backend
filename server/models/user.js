@@ -1,21 +1,53 @@
-const userDefinition = (sequelize) => {
-  const User = sequelize.define('User', {
-    firstName: {
-      type: sequelize.STRING
-    },
-    lastName: {
-      type: sequelize.STRING
-    },
-    email: {
-      type: sequelize.STRING,
-      unique: true
-    }
-  }, {});
-  // eslint-disable-next-line no-unused-vars
-  User.associate = (models) => {
-    // associations can be defined here
-  };
-  return User;
-};
+import Sequelize from 'sequelize';
+import db from '../config/db';
 
-export default userDefinition;
+const User = db.define('User', {
+  name: {
+    type: Sequelize.STRING
+  },
+  gender: {
+    type: Sequelize.STRING
+  },
+  email: {
+    type: Sequelize.STRING
+  },
+  password: {
+    type: Sequelize.STRING
+  },
+  birthdate: {
+    type: Sequelize.DATE
+  },
+  preferredLanguage: {
+    type: Sequelize.STRING
+  },
+  preferredCurrency: {
+    type: Sequelize.STRING
+  },
+  location: {
+    type: Sequelize.STRING
+  },
+  role: {
+    type: Sequelize.STRING
+  },
+  department: {
+    type: Sequelize.STRING
+  },
+  lineManager: {
+    type: Sequelize.STRING
+  },
+  createdAt: {
+    type: Sequelize.DATE
+  },
+  updatedAt: {
+    type: Sequelize.DATE
+  },
+  fb_id: {
+            type: Sequelize.STRING,
+            unique:true,
+},
+google_id: {
+  type: Sequelize.STRING,
+  unique:true,
+}});
+
+export default User;

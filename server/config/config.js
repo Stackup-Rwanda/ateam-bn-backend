@@ -8,6 +8,7 @@ const development = {
   database: process.env.DEVELOP_DB_NAME,
   host: process.env.HOST,
   dialect: "postgres",
+  logging: console.log('connected')
 };
 
 const test = {
