@@ -13,9 +13,7 @@ const ownerVerifier = async (req, res, next) => {
       where: { email: req.requesterEmail }
     });
     if (pretender) {
-      if (pretender.username === verified.username && pretender.name === verified.name
-        && req.params.username
-        === pretender.username) {
+      if (pretender.username === verified.username && req.params.username === pretender.username) {
         req.requesterId = pretender.id;
         return next();
       }

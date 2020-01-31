@@ -5,10 +5,10 @@ import index from '../index';
 chai.use(http);
 chai.should();
 
-const manziToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQnV0aXJpZ2l0d2EgTWFuemkiLCJ1c2VybmFtZSI6Im1hbnppIiwiZW1haWwiOiJtYW56aUBnbWFpbC5jb20iLCJpYXQiOjE1ODAzMzgyMTJ9.SPcqNj82SoVpGO8FYc6TalKOS5GCJQE_Xs_IYSc7qm0';
-const jimmyToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmltbXkgS2F5a2F5IiwidXNlcm5hbWUiOiJrYXkiLCJlbWFpbCI6IkprYXlAZ21haWwuY29tIiwicm9sZSI6ImNpdGl6ZW4iLCJpYXQiOjE1ODA0MDM4MDB9.Qoi4sEqqQmRzNBL85yrne98NNmfWoLwGgFJ_jrqMI0M';
-const wrongToken = 'eyJhbGciOeJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmltbXkgS2F5a2F5IiwidXNlcm5hbWUiOiJrYXkiLCJlbWFpbCI6IkprYXlAZ21haWwuY29tIiwicm9sZSI6ImNpdGl6ZW4iLCJpYXQiOjE1ODA0MDM4MDB9.Qoi4sEqqQmRzNBL85yrne98NNmfWoLwGgFJ_jrqMI0M';
-const emelyneToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiRW1lbHluZSIsInVzZXJuYW1lIjoiRW1lbHluZSIsImVtYWlsIjoiZW1lbHlAZ21haWwuY29tIiwiaWF0IjoxNTgwMzQwMDUyfQ.orkAFs_o_02PXtzoFmOIY4aIcWhk5-2s1uy_Ch1cCfo';
+const manziToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQnV0aXJpZ2l0d2EgTWFuemkiLCJ1c2VybmFtZSI6Im1hbnppIiwiZW1haWwiOiJtYW56aUBnbWFpbC5jb20iLCJpYXQiOjE1ODA4MjA1MTZ9.jPcc3YOJCGZaq-3Y-hQNQG_VlzijnocglCg5b0twHYA';
+const jimmyToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmltbXkgS2F5a2F5IiwidXNlcm5hbWUiOiJrYXkiLCJlbWFpbCI6IkprYXlAZ21haWwuY29tIiwiaWF0IjoxNTgwODIwNjAwfQ.GugiqBFSyVbZqt7X4b19Abu6mXlJDTU3RyXTtepNNuY';
+const wrongToken = 'eyJhbGciOijIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmltbXkgS2F5a2F5IiwidXNlcm5hbWUiOiJrYXkiLCJlbWFpbCI6IkprYXlAZ21haWwuY29tIiwiaWF0IjoxNTgwODIwNzM3fQ.jCVUdtDEMpcyliUcuwxGixSn2dcqoJ6xLaXEFswHfFI';
+const karenToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiR2lyYW1hdGEgS2FyZW4iLCJ1c2VybmFtZSI6ImtnaXIiLCJlbWFpbCI6IkthcmVuQGdtYWlsLmNvbSIsImlhdCI6MTU4MDgyMTI3OH0.AR-FqtlZ5-MnWqWZS-R-zjsiq6ingBz8b0RwvZ_GUSk';
 const updatedJimmy = {
   name: "Jimmy Kaykay",
   birthdate: "12/22/2019",
@@ -63,7 +63,7 @@ describe('running profile route tests', () => {
       .request(index)
       .get('/api/profile/kay')
       .send()
-      .set('token', emelyneToken);
+      .set('token', karenToken);
     result.should.have.status(401);
     result.body.should.have.property('error');
   });
