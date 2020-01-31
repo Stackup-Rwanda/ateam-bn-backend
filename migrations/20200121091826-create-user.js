@@ -51,10 +51,12 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Users', {
     allowNull: false,
     type: Sequelize.DATE
   },
-  google_id:{type:Sequelize.STRING,
-  unique:true},
-  fb_id:{
-    type:Sequelize.STRING,
+  google_id: {
+    type: Sequelize.STRING,
+    unique: true
+  },
+  fb_id: {
+    type: Sequelize.STRING,
     unique: true
   }
 });

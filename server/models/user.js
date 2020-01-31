@@ -1,5 +1,5 @@
 const userDefinition = (sequelize, DataTypes) => {
-  const User = sequelize.define('user', {
+  const User = sequelize.define('User', {
     name: {
       type: DataTypes.STRING
     },
@@ -41,6 +41,12 @@ const userDefinition = (sequelize, DataTypes) => {
     },
     updatedAt: {
       type: DataTypes.DATE
+    },
+    google_id: {
+      type: DataTypes.STRING,
+    },
+    fb_id: {
+      type: DataTypes.STRING,
     }
   }, {});
   // eslint-disable-next-line no-unused-vars
