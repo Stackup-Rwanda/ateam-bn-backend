@@ -8,16 +8,9 @@
     "createAndInsertIntoValidTokensTable": "babel-node ./server/source/models/migrations/insertValidTokenTableQuery.js",
     "connectDBWithSequelize": "babel-node ./server/source/configDB/dbConnectWithSequelize.js.js",
     "connectDBWithQuery": "babel-node ./server/source/configDB/dbConnectWithQuery.js.js",
+    "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test | coveralls",
     "server": "nodemon --exec babel-node ./server/index.js",
-    "start": "cross-env NODE_ENV=production babel-node ./server/index.js",
-    "createtables:dev": "cross-env NODE_ENV=dev node_modules/.bin/sequelize db:migrate",
-    "seed:dev": "cross-env NODE_ENV=dev node_modules/.bin/sequelize db:seed:all",
-    "droptables:dev": "cross-env NODE_ENV=dev node_modules/.bin/sequelize db:migrate:undo",
-    "createtables:test": "cross-env NODE_ENV=test node_modules/.bin/sequelize db:migrate",
-    "seed:test": "cross-env NODE_ENV=test node_modules/.bin/sequelize db:seed:all",
-    "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls",
-    "droptables:test": "cross-env NODE_ENV=test node_modules/.bin/sequelize db:migrate:undo",
-    "lint": "eslint ./server"
+    "start": "babel-node ./server/index.js"
   },
   "repository": {
     "type": "git",
