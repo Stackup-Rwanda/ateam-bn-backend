@@ -1,6 +1,10 @@
 global:
   - CI=true
+<<<<<<< HEAD
   - SECRET_KEY=mysecretkey
+=======
+  - SECRET_KEY=12345
+>>>>>>> ft(signup-endpoint): fix bugs in my test
   - NODE_ENV=test
   - CC_TEST_REPORTER_ID=d570e2625aaffa20e7828eaddfbec748c525e866b6d413472bc26e188cb2bc6a
   - DATABASE_URL_TEST=postgres://postgres@localhost:5432/barefootnomaddb_test
@@ -21,12 +25,21 @@ cache:
 services:
   - postgresql
 before_script:
+<<<<<<< HEAD
   - psql -c 'CREATE DATABASE barefootnomaddb_test;' -U postgres
+=======
+  - psql -c 'CREATE DATABASE authorhavens_test;' -U postgres
+>>>>>>> ft(signup-endpoint): fix bugs in my test
   - npm i sequelize-cli -g
   - npm i sequelize -g
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
+<<<<<<< HEAD
+=======
+script:
+  - npm run cover
+>>>>>>> ft(signup-endpoint): fix bugs in my test
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 after_success:
