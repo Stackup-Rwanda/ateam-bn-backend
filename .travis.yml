@@ -1,6 +1,10 @@
 global:
   - CI=true
+<<<<<<< HEAD
   - SECRET_KEY=mysecretkey
+=======
+  - SECRET_KEY=12345
+>>>>>>> ft(signup-endpoint): fix bugs in my test
   - NODE_ENV=test
   - CC_TEST_REPORTER_ID=d570e2625aaffa20e7828eaddfbec748c525e866b6d413472bc26e188cb2bc6a
   - DATABASE_URL_TEST=postgres://postgres@localhost:5432/barefootnomaddb_test
@@ -22,7 +26,11 @@ services:
   - postgresql
 before_script:
 <<<<<<< HEAD
+<<<<<<< HEAD
   - psql -c 'CREATE DATABASE barefootnomaddb_test;' -U postgres
+=======
+  - psql -c 'CREATE DATABASE authorhavens_test;' -U postgres
+>>>>>>> ft(signup-endpoint): fix bugs in my test
 =======
   - psql -c 'CREATE DATABASE authorhavens_test;' -U postgres
 >>>>>>> ft(signup-endpoint): fix bugs in my test
@@ -33,11 +41,16 @@ before_script:
   - ./cc-test-reporter before-build
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 script:
   - npm run cover
 >>>>>>> ft(signup-endpoint): fix bugs in my test
 =======
+>>>>>>> ft(signup-endpoint): fix bugs in my test
+=======
+script:
+  - npm run cover
 >>>>>>> ft(signup-endpoint): fix bugs in my test
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

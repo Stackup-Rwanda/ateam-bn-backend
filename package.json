@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "test": "npm run droptables:test && npm run createtables:test && npm run seed:test && cross-env NODE_ENV=test nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill --timeout 10000 --exit ./server/tests/*.js --exit",
     "server": "nodemon --exec babel-node ./server/index.js",
     "start": "npx sequelize db:migrate && cross-env NODE_ENV=production babel-node ./server/index.js",
@@ -25,6 +26,17 @@
     "createtables:test": "cross-env NODE_ENV=test node_modules/.bin/sequelize db:migrate",
     "seed:test": "cross-env NODE_ENV=test node_modules/.bin/sequelize db:seed:all",
     "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls",
+    "droptables:test": "cross-env NODE_ENV=test node_modules/.bin/sequelize db:migrate:undo",
+>>>>>>> ft(signup-endpoint): fix bugs in my test
+=======
+    "test": "npm run droptables:test && npm run createtables:test && cross-env NODE_ENV=test nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --exit",
+    "server": "nodemon --exec babel-node ./server/index.js",
+    "start": "cross-env NODE_ENV=production babel-node ./server/index.js",
+    "createtables:dev": "cross-env NODE_ENV=dev node_modules/.bin/sequelize db:migrate",
+    "seed:dev": "cross-env NODE_ENV=dev node_modules/.bin/sequelize db:seed:all",
+    "droptables:dev": "cross-env NODE_ENV=dev node_modules/.bin/sequelize db:migrate:undo",
+    "createtables:test": "cross-env NODE_ENV=test node_modules/.bin/sequelize db:migrate",
+    "seed:test": "cross-env NODE_ENV=test node_modules/.bin/sequelize db:seed:all",
     "droptables:test": "cross-env NODE_ENV=test node_modules/.bin/sequelize db:migrate:undo",
 >>>>>>> ft(signup-endpoint): fix bugs in my test
     "lint": "eslint ./server"

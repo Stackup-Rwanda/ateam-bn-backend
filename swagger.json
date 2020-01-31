@@ -16,13 +16,8 @@
       "description": "Authentication endpoints"
     },
     {
-<<<<<<< HEAD
       "name": "Sign up",
       "description": "Access to signup API endpoints"
-=======
-      "name": "Red-flags",
-      "description": "Access to red-flags API endpoints"
->>>>>>> ft(signup-endpoint): edit swagger doc for this endpoint
     }
   ],
   "paths": {
