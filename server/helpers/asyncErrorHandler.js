@@ -1,4 +1,4 @@
-export default fn => async (req, res) => {
+export default (fn) => async (req, res) => {
   try {
     await fn(req, res);
   } catch (error) {
