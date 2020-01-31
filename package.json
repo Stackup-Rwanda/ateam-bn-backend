@@ -4,6 +4,7 @@
   "description": "We make company global travel and accommodation easy and convenient for the strong workforce of savvy members of staff, by leveraging the modern web.",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "test": "npm run droptables:test && npm run createtables:test && npm run seed:test && cross-env NODE_ENV=test nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --exit",
     "server": "nodemon --exec babel-node ./server/index.js",
     "start": "cross-env NODE_ENV=production babel-node ./server/index.js",
@@ -13,6 +14,16 @@
     "createtables:test": "cross-env NODE_ENV=test node_modules/.bin/sequelize db:migrate",
     "seed:test": "cross-env NODE_ENV=test node_modules/.bin/sequelize db:seed:all",
     "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls",
+=======
+    "test": "npm run droptables:test && npm run createtables:test && cross-env NODE_ENV=test nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --exit",
+    "server": "nodemon --exec babel-node ./server/index.js",
+    "start": "cross-env NODE_ENV=production babel-node ./server/index.js",
+    "createtables:dev": "cross-env NODE_ENV=dev node_modules/.bin/sequelize db:migrate",
+    "seed:dev": "cross-env NODE_ENV=dev node_modules/.bin/sequelize db:seed:all",
+    "droptables:dev": "cross-env NODE_ENV=dev node_modules/.bin/sequelize db:migrate:undo",
+    "createtables:test": "cross-env NODE_ENV=test node_modules/.bin/sequelize db:migrate",
+    "seed:test": "cross-env NODE_ENV=test node_modules/.bin/sequelize db:seed:all",
+>>>>>>> ft(signup-endpoint): fix bugs in my test
     "droptables:test": "cross-env NODE_ENV=test node_modules/.bin/sequelize db:migrate:undo",
     "lint": "eslint ./server"
   },
