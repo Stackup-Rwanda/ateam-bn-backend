@@ -1,3 +1,4 @@
+import TokenHelper from '../helpers/TokenHelper';
 import AuthHelpers from '../helpers/authHelpers';
 
 /**
@@ -29,11 +30,7 @@ class AuthController {
       status: 201,
       message: 'User was created successfully',
       data: {
-        name: savedUser.name,
-        email: savedUser.email,
-        username: savedUser.username,
-        password: savedUser.password,
-        isVerified: savedUser.isVerified,
+        token: TokenHelper.generateToken(savedUser.id, savedUser.email),
         createdAt: savedUser.createdAt
       }
     });
