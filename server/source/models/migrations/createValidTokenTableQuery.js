@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 import databaseConnection from '../../configDB/dbConnectWithSequelize';
 
-module.exports = databaseConnection.define('validtoken', {
+const validTokenTable = databaseConnection.define('validtoken', {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -10,3 +10,4 @@ module.exports = databaseConnection.define('validtoken', {
   },
   token: Sequelize.STRING(1000)
 });
+export default validTokenTable;

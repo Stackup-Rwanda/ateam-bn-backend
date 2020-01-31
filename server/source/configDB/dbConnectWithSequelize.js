@@ -1,7 +1,7 @@
 import Sequelize from 'sequelize';
 import dotenv from 'dotenv';
 dotenv.config();
-module.exports = new Sequelize(
+const sequelize = new Sequelize(
   process.env.DATABASE,
   process.env.DATABASE_USER,
   process.env.DATABASE_PASSWORD,
@@ -9,3 +9,5 @@ module.exports = new Sequelize(
     dialect: 'postgres'
   }
 );
+const databaseConnection = sequelize;
+export default databaseConnection;
