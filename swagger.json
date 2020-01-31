@@ -16,18 +16,8 @@
       "description": "Authentication endpoints"
     },
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
       "name": "Sign up",
       "description": "Access to signup API endpoints"
-=======
-      "name": "Red-flags",
-      "description": "Access to red-flags API endpoints"
->>>>>>> ft(signup-endpoint): edit swagger doc for this endpoint
-=======
-      "name": "Red-flags",
-      "description": "Access to red-flags API endpoints"
->>>>>>> ft(signup-endpoint): edit swagger doc for this endpoint
     }
   ],
   "paths": {
@@ -61,56 +51,7 @@
           }
         }
       }
-<<<<<<< HEAD
-<<<<<<< HEAD
-    },
-        
-"/auth/google": {
-  "get": {
-    "description": "Sign in to Barefoot application via Google",
-    "summary": "Google",
-    "tags": [
-      "User"
-    ],
-    "operationId": "Google",
-    "deprecated": false,
-    "produces": [
-      "application/json"
-    ],
-    "responses": {
-      "200": {
-        "description": "",
-        "headers": {}
-      }
     }
-  }
-},
-"/auth/facebook": {
-  "get": {
-    "description": "Sign in to Barefoot application via Facebook",
-    "summary": "Facebook",
-    "tags": [
-      "User"
-    ],
-    "operationId": "Facebook",
-    "deprecated": false,
-    "produces": [
-      "application/json"
-    ],
-    "responses": {
-      "200": {
-        "description": "",
-        "headers": {}
-      }
-    }
-  }
-}
-=======
-    }
->>>>>>> ft(signup-endpoint): edit swagger doc for this endpoint
-=======
-    }
->>>>>>> ft(signup-endpoint): edit swagger doc for this endpoint
   },
   "definitions": {
     "Signup": {
