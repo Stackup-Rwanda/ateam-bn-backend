@@ -43,6 +43,9 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Users', {
   lineManager: {
     type: Sequelize.STRING
   },
+  isVerified: {
+    type: Sequelize.BOOLEAN
+  },
   createdAt: {
     allowNull: false,
     type: Sequelize.DATE
