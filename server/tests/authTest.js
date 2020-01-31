@@ -14,10 +14,10 @@ after(async () => {
 
 describe('Test for signup endpoint', () => {
   it(
-    "should create a new user account with appropriate request",
+    'should create a new user account with appropriate request',
     mochaAsync(async () => {
       const res = await router()
-        .post("/api/auth/signup")
+        .post('/api/auth/signup')
         .send(usersTester[0]);
       expect(res.body.status).to.equal(201);
       expect(res.body).to.be.an('object');
@@ -30,7 +30,7 @@ describe('Test for signup endpoint', () => {
     "shouldn't signup already saved user",
     mochaAsync(async () => {
       const res = await router()
-        .post("/api/auth/signup")
+        .post('/api/auth/signup')
         .send(usersTester[1]);
       expect(res.body.status).to.equal(409);
       expect(res.body).to.be.an('object');
