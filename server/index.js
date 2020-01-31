@@ -3,8 +3,8 @@ import swaggerUi from 'swagger-ui-express';
 import dotenv from 'dotenv';
 import apiDocumentation from '../swagger.json';
 import allRoutes from './routes/allRoutes';
-import "./strategies/fbStrategy";
-import "./strategies/googleStrategy";
+import "./middlewares/fbStrategy";
+import "./middlewares/googleStrategy";
 import authRoutes from "./routes/authRoutes";
 
 dotenv.config();

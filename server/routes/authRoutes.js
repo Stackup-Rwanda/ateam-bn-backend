@@ -8,7 +8,7 @@ import passwordHasher from '../middlewares/passwordHashMiddleware';
 import resetEmailTokenMiddleware from '../middlewares/ResetEmailTokenMiddleware';
 import userIdExistMiddleware from '../middlewares/UserIdExistMiddleware';
 import signUp from '../middlewares/validation';
-import storeAuth from '../controllers/fbAuthController';
+import { googleAuth, storeAuth } from '../controllers/socialController';
 
 const router = Router();
 router.use(passport.initialize());
