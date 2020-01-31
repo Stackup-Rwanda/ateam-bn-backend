@@ -3,7 +3,7 @@ import validTokenTable from './migrations/createValidTokenTableQuery';
 
 class InteractDatabase {
   deleteValidToken(valitoken1) {
-    databaseConnection.sync({ logging: console.log, force: true }).then(() => {
+    databaseConnection.sync().then(() => {
       validTokenTable.destroy({ where: { token: valitoken1 } });
     });
   }
