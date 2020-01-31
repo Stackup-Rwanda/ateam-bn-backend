@@ -13,8 +13,8 @@ class AuthController {
    * @returns {object} The status and some data of the user.
    */
   static async signUp(req, res) {
-    const emailExists = await AuthHelpers.emailExists(req.body.email);
-    const usernameExists = await AuthHelpers.usernameExists(req.body.username);
+    const emailExists = await AuthHelpers.userExists('email', req.body.email);
+    const usernameExists = await AuthHelpers.userExists('username', req.body.username);
 
     if (emailExists || usernameExists) {
       return res.status(409).json({

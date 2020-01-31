@@ -1,5 +1,4 @@
 import models from '../models';
-import Hasher from './passwordHashHelper';
 
 const { User } = models;
 
@@ -11,23 +10,13 @@ const { User } = models;
 class AuthHelpers {
   /**
    * Finds the user's email if he/she exists.
-   * @param {string} email The user's email.
+   * @param {string} attr users table field.
+   * @param {string} val value to be found.
    * @returns {object} The users's data.
    */
-  static async emailExists(email) {
-    const user = await User.findOne({ where: { email } });
+  static async userExists(attr, val) {
+    const user = await User.findOne({ where: { [attr]: val } });
     return user;
-  }
-
-
-  /**
-   * Finds the user's username if he/she exists.
-   * @param {string} username The user's username.
-   * @returns {object} The users's data.
-   */
-  static async usernameExists(username) {
-    const alreadyUser = await User.findOne({ where: { username } });
-    return alreadyUser;
   }
 
   /**
@@ -36,42 +25,23 @@ class AuthHelpers {
    * @returns {object} The users's data.
    */
   static async saveUser(user) {
-    const acceptedUser = await User.create({
-      name: user.name,
-      gender: user.gender,
-      email: user.email,
-      username: user.username,
-      password: Hasher.hashPassword(user.password),
-      birthdate: user.birthdate,
-      preferredLanguage: user.preferredLanguage,
-      preferredCurrency: user.preferredCurrency,
-      location: user.location,
-      role: user.role,
-      department: user.department,
-      lineManager: user.lineManager,
-      isVerified: false,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }, {
-      fields:
-      [
-        'name',
-        'gender',
-        'email',
-        'username',
-        'password',
-        'birthdate',
-        'preferredLanguage',
-        'preferredCurrency',
-        'location',
-        'role',
-        'department',
-        'lineManager',
-        'isVerified',
-        'createAt',
-        'updatedAt'
-      ]
-    });
+    const acceptedUser = await User.create(
+      {
+        ...user,
+        isVerified: false,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        fields:
+        [
+          'name', 'gender', 'email', 'username',
+          'password', 'birthdate', 'preferredLanguage',
+          'preferredCurrency', 'location', 'role', 'department',
+          'lineManager', 'isVerified', 'createAt', 'updatedAt'
+        ]
+      }
+    );
 
     return acceptedUser;
   }

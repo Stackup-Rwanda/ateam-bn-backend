@@ -36,11 +36,7 @@ const userDefinition = (sequelize, DataTypes) => {
     lineManager: {
       type: DataTypes.STRING
     },
-<<<<<<< HEAD
     isVerified: {
-=======
-    lineManager: {
->>>>>>> ft(signup-endpoint): add is Verified attribute
       type: DataTypes.BOOLEAN
     },
     createdAt: {
