@@ -49,6 +49,7 @@ class AuthHelpers {
       role: user.role,
       department: user.department,
       lineManager: user.lineManager,
+      isVerified: false,
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
@@ -66,6 +67,7 @@ class AuthHelpers {
         'role',
         'department',
         'lineManager',
+        'isVerified',
         'createAt',
         'updatedAt'
       ]
