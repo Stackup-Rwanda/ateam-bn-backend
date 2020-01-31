@@ -11,7 +11,7 @@ app.use(express.json());
 app.use(basePath, importAuthUserRoute);
 app.use(`${basePath}/documentation`, swaggerUi.serve, swaggerUi.setup(apiDocumentation));
 app.listen(8080, () => {
-  console.log('server is running on port 3000');
+  console.log('server is running on port 8080');
 });
 app.get('**', (req, res) => {
   res.status(400).send({
