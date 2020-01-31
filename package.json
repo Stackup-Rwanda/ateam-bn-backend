@@ -61,7 +61,10 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
+<<<<<<< HEAD
     "mailgen": "^2.0.10",
+=======
+>>>>>>> ft-(generate-jwt): create helper to generate and decode token
     "mocha": "^7.0.0",
     "mocha-lcov-reporter": "^1.3.0",
     "nyc": "^15.0.0",
