@@ -13,7 +13,9 @@ app.use(express.json());
 
 const basePath = '/api';
 
-app.listen(process.env.PORT || 3000, () => {
+app.use('/api', allRoutes);
+
+app.listen(process.env.PORT, () => {
   console.log('server is running on port 3000');
 });
 
