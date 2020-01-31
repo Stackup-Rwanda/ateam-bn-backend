@@ -50,8 +50,6 @@
             "description": "This user already exists, use another email or username"
           }
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
       },
     "/auth/reset-password": {
       "post": {
@@ -238,7 +236,6 @@
     }
   }
 }
-=======
       }
     },
   "definitions": {
