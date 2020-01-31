@@ -1,16 +1,11 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
-import sequelize from '../config/db';
 import app from '../index';
 import mochaAsync from '../helpers/mochaAsync';
 import usersTester from './mochData/users';
 
 chai.use(chaiHttp);
 const router = () => chai.request(app);
-
-after(async () => {
-  await sequelize.close();
-});
 
 describe('Test for signup endpoint', () => {
   it(
