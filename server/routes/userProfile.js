@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import isProfileOwner from '../middlewares/isProfileOwner';
-import validateProfile from '../middlewares/validators/profileValidator';
+import validateProfile from '../middlewares/profileValidator';
 import { viewProfile, editProfile } from '../controllers/profileController';
 
 const router = Router();
