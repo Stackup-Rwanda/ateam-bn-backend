@@ -1,4 +1,3 @@
-import Browser from 'zombie';
 import dotenv from 'dotenv';
 import chai, { expect } from 'chai';
 import GoogleStrategy from 'passport-google-oauth20';
