@@ -1,6 +1,4 @@
 import TokenHelper from '../helpers/TokenHelper';
-/* eslint-disable no-empty */
-/* eslint-disable require-jsdoc */
 import AuthHelpers from '../helpers/authHelpers';
 import sendmail from '../helpers/email';
 
@@ -36,8 +34,8 @@ class AuthController {
       status: 201,
       message: 'User was created successfully, Verify your email to confirm registration',
       data: {
-        token: TokenHelper.generateToken(id, email, role, isVerified),
-        createdAt
+        token: TokenHelper.generateToken(savedUser.id, savedUser.email),
+        createdAt: savedUser.createdAt
       }
     });
   }
