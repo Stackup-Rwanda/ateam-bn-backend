@@ -12,6 +12,7 @@
     "droptables:dev": "cross-env NODE_ENV=dev node_modules/.bin/sequelize db:migrate:undo",
     "createtables:test": "cross-env NODE_ENV=test node_modules/.bin/sequelize db:migrate",
     "seed:test": "cross-env NODE_ENV=test node_modules/.bin/sequelize db:seed:all",
+    "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls",
     "droptables:test": "cross-env NODE_ENV=test node_modules/.bin/sequelize db:migrate:undo",
     "lint": "eslint ./server"
   },
