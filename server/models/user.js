@@ -36,6 +36,9 @@ const userDefinition = (sequelize, DataTypes) => {
     lineManager: {
       type: DataTypes.STRING
     },
+    lineManager: {
+      type: DataTypes.BOOLEAN
+    },
     createdAt: {
       type: DataTypes.DATE
     },

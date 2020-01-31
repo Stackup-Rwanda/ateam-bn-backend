@@ -13,6 +13,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Users', [{
   role: 'Broker',
   department: 'Cleaner',
   lineManager: 'MrNobody',
+  isVerified: false,
   createdAt: new Date(),
   updatedAt: new Date()
 }]);
