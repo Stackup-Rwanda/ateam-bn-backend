@@ -20,7 +20,7 @@ passport.use(new GoogleStrategy({
 
       if(!User.length){
       await db.sync().then(()=>{ User.create({
-          name: profile.name,
+          name: profile.displayName,
           google_id: profile.id
 
         });})

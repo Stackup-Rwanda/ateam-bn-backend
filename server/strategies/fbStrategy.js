@@ -1,7 +1,8 @@
 import FacebookStrategy from 'passport-facebook';
 import passport from 'passport';
 import dotenv from 'dotenv';
-import fbAuth from '../models/fbModel';
+import User from '../models/user';
+import db from '../config/db';
 dotenv.config();
 
 
@@ -12,25 +13,22 @@ dotenv.config();
      clientSecret: process.env.clientSecret,
      callbackURL: process.env.callbackURL
    },
-   (accessToken, refreshToken, profile,email, cb)=> {
-    console.log(profile.email);
-    console.log(email)
-   cb(null, profile, email);
+   async(accessToken, refreshToken, profile,cb)=> {
+    console.log(profile);
+   cb(null, profile);
 
-//  connection.sync().then(()=>{
-    
-//          fbAuth.create({
-//             fb_id: profile.id,
-//             display_name: profile.displayName
-//         }
-    
-//         ) ;
-//     })
+   const {id,displayName}= profile;
+    await User.findAll({
+      limit:1,
+        where: {fb_id:id }
+      });
+      if(!User.length){
+        await db.sync().then(()=>{ User.create({
+            name: profile.displayName,
+            fb_id: profile.id
+ 
+});})
+   console.log(id);     
+}})
 
-  
-}
-));
-
-
-
-
+);

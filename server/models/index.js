@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import Sequelize from 'sequelize';
+// eslint-disable-next-line import/extensions
 import configuration from '../config/config.js';
 
 const basename = path.basename(__filename);
