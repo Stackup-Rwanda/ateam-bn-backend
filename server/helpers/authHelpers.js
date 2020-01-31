@@ -28,6 +28,7 @@ class AuthHelpers {
   static async updateUserPassword(id, { password }) {
     const hashedPwd = Hasher.hashPassword(password);
     const updatedUser = await User.update({ password: hashedPwd }, { where: { id } });
+    await Token.destroy({ where: { userId: id } });
     return updatedUser;
   }
 
