@@ -7,10 +7,6 @@ cache:
 services:
   - postgresql
 before_script:
-<<<<<<< HEAD
-=======
-  - psql -c "CREATE USER chris WITH PASSWORD 'admin';" -U postgres
->>>>>>> bug fixing travis
   - psql -c 'CREATE DATABASE barefoot_test;' -U postgres
   - npm i sequelize-cli -g
   - npm i sequelize -g
