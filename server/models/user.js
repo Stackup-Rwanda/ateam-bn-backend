@@ -34,6 +34,9 @@ const userDefinition = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     lineManager: {
+      type: DataTypes.STRING
+    },
+    isVerified: {
       type: DataTypes.BOOLEAN
     },
     createdAt: {
@@ -43,7 +46,7 @@ const userDefinition = (sequelize, DataTypes) => {
       type: DataTypes.DATE
     }
   }, {});
-  // eslint-disable-next-line no-unused-vars
+
   User.associate = (models) => {
     User.hasMany(models.Trip, {
       foreignKey: 'userId',

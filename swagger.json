@@ -16,8 +16,8 @@
       "description": "Authentication endpoints"
     },
     {
-      "name": "Red-flags",
-      "description": "Access to red-flags API endpoints"
+      "name": "Sign up",
+      "description": "Access to signup API endpoints"
     }
   ],
   "paths": {
