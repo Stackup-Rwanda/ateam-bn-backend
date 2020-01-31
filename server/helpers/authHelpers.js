@@ -1,7 +1,6 @@
 import models from '../models';
 
 const { User } = models;
-
 /**
  * This class contains
  * all methods required to save/edit/retrieve/delete

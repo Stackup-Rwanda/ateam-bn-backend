@@ -4,6 +4,7 @@ import TokenHelper from '../helpers/TokenHelper';
 import AuthHelpers from '../helpers/authHelpers';
 import sendmail from '../helpers/email';
 
+import passwordHashHelper from '../helpers/passwordHashHelper';
 /**
  * This class contains all methods
  * required to handle
@@ -62,6 +63,29 @@ class AuthController {
         message: 'Email has successfully been verified. You can now login'
       });
     }
+  }
+
+  static async signIn(req, res) {
+    const emailExists = await AuthHelpers.emailExists(req.body.email);
+
+    if (emailExists) {
+      const passwordExist = await passwordHashHelper
+        .checkPassword(req.body.password, emailExists.password);
+      if (passwordExist) {
+        return res.status(200).json({
+          status: 200,
+          message: 'user successfully logged In',
+        });
+      }
+      return res.status(401).json({
+        status: 401,
+        message: 'password or email is incorrect'
+      });
+    }
+    return res.status(401).json({
+      status: 401,
+      message: 'password or email is incorrect'
+    });
   }
 }
 

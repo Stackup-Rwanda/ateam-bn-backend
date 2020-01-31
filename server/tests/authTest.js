@@ -136,3 +136,29 @@ describe('Test for signup endpoint', () => {
     })
   );
 });
+
+describe('signIn tests', () => {
+  it('User should be able to log into account when valid credentials', () => {
+    mochaAsync(async () => {
+      const res = await chai
+        .request(app)
+        .post('/api/auth/signin')
+        .send(usersTester[1]);
+      res.should.have.status(200);
+      res.body.should.be.an('object');
+      res.body.should.have.property('message', 'user successfully logged In');
+    });
+  });
+
+  it('User should not be able to log into account when invalid credentials', () => {
+    mochaAsync(async () => {
+      const res = await chai
+        .request(app)
+        .post('/api/auth/signin')
+        .send(usersTester[0]);
+      res.should.have.status(401);
+      res.body.should.be.an('object');
+      res.body.should.have.property('message', 'password or email is incorrect');
+    });
+  });
+});
