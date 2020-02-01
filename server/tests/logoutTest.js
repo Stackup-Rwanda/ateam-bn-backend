@@ -20,4 +20,18 @@ describe('my Testing suite', () => {
         done(error);
       });
   });
+
+  it('users should be able to logout from application', done => {
+    router()
+      .get('/api/v-unknown/users/logout')
+      .end((error, response) => {
+        expect(response).to.have.status([200]);
+        expect(response.body).to.be.a('object');
+        expect(response.body).to.have.property('status');
+        expect(response.body.status).to.be.equal(200);
+        expect(response.body).to.have.property('message');
+        expect(response.body.message).to.be.a('string');
+        done(error);
+      });
+  });
 });
