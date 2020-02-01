@@ -8,7 +8,7 @@
     "contact": { "email": "the-a-team@gmail.com" }
   },
 
-  "host": "localhost:8080",
+  "host": "localhost:3000",
   "basePath": "/api/v-unknown",
 
   "schemes": ["http", "https"],
