@@ -1,6 +1,5 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
-import sequelize from '../config/db';
 import app from '../index';
 import mochaAsync from '../helpers/mochaAsync';
 import usersTester from './mochData/users';
@@ -21,10 +20,6 @@ describe('Test for signup endpoint', () => {
       expect(res.body.data).to.be.an('object');
     })
   );
-
-  after(async () => {
-    await sequelize.close();
-  });
 
   it(
     "shouldn't signup already saved user",

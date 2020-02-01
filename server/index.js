@@ -1,9 +1,11 @@
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import dotenv from 'dotenv';
-
 import apiDocumentation from '../swagger.json';
 import allRoutes from './routes/allRoutes';
+import "./strategies/fbStrategy";
+import "./strategies/googleStrategy";
+import authRoutes from "./routes/authRoutes";
 
 dotenv.config();
 
@@ -21,7 +23,7 @@ app.listen(process.env.PORT || 3000, () => {
 app.use(basePath, allRoutes);
 
 app.use(`${basePath}/documentation`, swaggerUi.serve, swaggerUi.setup(apiDocumentation));
-
+app.use(basePath, authRoutes);
 app.get('**', (req, res) => {
   res.status(400).send({
     status: 400,
