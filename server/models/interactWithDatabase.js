@@ -1,4 +1,4 @@
-import databaseConnection from '../configDB/dbConnectWithSequelize';
+import databaseConnection from '../config/dbConnectWithSequelize';
 import validTokenTable from './migrations/createValidTokenTableQuery';
 
 class InteractDatabase {

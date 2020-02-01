@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --timeout 50000  --exit",
-    "createAndInsertIntoValidTokensTable": "babel-node ./server/source/models/migrations/insertValidTokenTableQuery.js",
-    "connectDBWithSequelize": "babel-node ./server/source/configDB/dbConnectWithSequelize.js.js",
-    "connectDBWithQuery": "babel-node ./server/source/configDB/dbConnectWithQuery.js.js",
+    "createAndInsertIntoValidTokensTable": "babel-node ./server/models/migrations/insertValidTokenTableQuery.js",
+    "connectDBWithSequelize": "babel-node ./server/configDB/dbConnectWithSequelize.js.js",
+    "connectDBWithQuery": "babel-node ./server/configDB/dbConnectWithQuery.js.js",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test | coveralls",
     "server": "nodemon --exec babel-node ./server/index.js",
     "start": "babel-node ./server/index.js"

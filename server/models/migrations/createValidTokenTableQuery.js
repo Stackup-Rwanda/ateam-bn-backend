@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-import databaseConnection from '../../configDB/dbConnectWithSequelize';
+import databaseConnection from '../../config/dbConnectWithSequelize';
 
 module.exports = databaseConnection.define('validtoken', {
   id: {

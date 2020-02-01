@@ -1,7 +1,7 @@
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import apiDocumentation from '../swagger.json';
-import importAuthUserRoute from './source/routes/authUserRoute';
+import importAuthUserRoute from './routes/authUserRoute';
 
 const app = express();
 const basePath = '/api/v-unknown';
