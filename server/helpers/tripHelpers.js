@@ -16,10 +16,19 @@ class TripHelpers {
      * @returns {object} trip data.
      */
   static async reasonsDate(trip) {
+    const {
+      userId,
+      reasons,
+      to,
+      date
+    } = trip;
+    const newDate = new Date(date);
     const tripExist = await Trip.findOne({
       where: {
-        reasons: trip.reasons,
-        date: trip.date
+        userId,
+        reasons,
+        to,
+        date: newDate
       }
     });
     return tripExist;
@@ -33,13 +42,12 @@ class TripHelpers {
   static async saveTrip(trip) {
     const acceptedTrip = await Trip.create({
       userId: trip.userId,
-      tripType: trip.type,
+      tripType: trip.typeType,
       from: trip.from,
       to: trip.to,
       date: trip.date,
-      returnDate: trip.returnDate,
       reasons: trip.reasons,
-      accommodation: trip.accommodation,
+      accommodationId: trip.accommodationId,
       status: trip.status,
       createdAt: new Date(),
       updatedAt: new Date()
@@ -50,9 +58,9 @@ class TripHelpers {
         'from',
         'to',
         'date',
-        'returnDate',
         'reasons',
-        'accommodation',
+        'accommodationId',
+        'returnDate',
         'status',
         'createAt',
         'updatedAt'

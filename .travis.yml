@@ -1,6 +1,6 @@
 global:
   - CI=true
-  - SECRET_KEY=12345
+  - SECRET_KEY=mysecretkey
   - NODE_ENV=test
   - CC_TEST_REPORTER_ID=d570e2625aaffa20e7828eaddfbec748c525e866b6d413472bc26e188cb2bc6a
   - DATABASE_URL_TEST=postgres://postgres@localhost:5432/barefootnomaddb_test
@@ -40,5 +40,6 @@ script:
  
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
 after_success:
   - npm run coveralls

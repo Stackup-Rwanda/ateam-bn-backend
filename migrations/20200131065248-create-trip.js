@@ -28,8 +28,8 @@ const up = (queryInterface, sequelize) => queryInterface.createTable('Trips', {
   reasons: {
     type: sequelize.STRING,
   },
-  accommodation: {
-    type: sequelize.STRING,
+  accommodationId: {
+    type: sequelize.INTEGER,
   },
   status: {
     type: sequelize.STRING,

@@ -4,8 +4,9 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [{
   from: 'kigali',
   to: 'new york',
   date: new Date(),
+  returnDate: null,
   reasons: 'being a mannager',
-  accommodation: '3000USD',
+  accommodationId: 1,
   status: 'approved',
   createdAt: new Date(),
   updatedAt: new Date()
