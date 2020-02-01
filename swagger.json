@@ -50,7 +50,7 @@
             "description": "This user already exists, use another email or username"
           }
         }
-      }
+      },
     "/auth/reset-password": {
       "post": {
         "tags": ["Auth"],

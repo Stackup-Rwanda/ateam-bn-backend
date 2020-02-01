@@ -4,6 +4,7 @@ import GoogleStrategy from 'passport-google-oauth20';
 import http from 'http';
 import app from '../index';
 import strategyGenerator from '../helpers/strategyHelper';
+import Browser from 'zombie';
 
 http.createServer(app).listen(5000);
 dotenv.config();

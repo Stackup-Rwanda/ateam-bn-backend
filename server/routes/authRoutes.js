@@ -15,10 +15,13 @@ import userIdExistMiddleware from '../middlewares/UserIdExistMiddleware';
 import signUp from '../middlewares/validation';
 import storeAuth from '../controllers/fbAuthController';
 
+<<<<<<< HEAD
 =======
 import storeAuth from '../controllers/fbAuthController';
 >>>>>>> ft-login-via-facebook-and-google-170766085(facebook login):
 
+=======
+>>>>>>> ft-login-via-facebook-and-google-170766085(facebook and google login test): test social logins
 const router = Router();
 router.use(passport.initialize());
 router.post(
@@ -51,6 +54,7 @@ router.get('/auth/google',
   passport.authenticate('google', { scope: ['profile'] }));
 router.get('/auth/google/callback',
   passport.authenticate('google', { session: false }), googleAuth);
+<<<<<<< HEAD
 
 router.get('/auth/facebook',
   passport.authenticate('facebook'));
@@ -76,4 +80,12 @@ router.get(
 >>>>>>> ft-login-via-facebook-and-google-170766085(facebook login):
 router.get('/auth/facebook/callback', passport.authenticate('facebook', { session: false }), storeAuth);
 
+=======
+
+
+router.get('/auth/facebook',
+  passport.authenticate('facebook'));
+router.get('/auth/facebook/callback', passport.authenticate('facebook', { session: false }), storeAuth);
+
+>>>>>>> ft-login-via-facebook-and-google-170766085(facebook and google login test): test social logins
 export default router;
