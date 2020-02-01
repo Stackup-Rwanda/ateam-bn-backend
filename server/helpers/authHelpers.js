@@ -17,6 +17,16 @@ class AuthHelpers {
     return user;
   }
 
+  /**
+   * Finds the user's email if he/she exists.
+   * @param {string} id The user's email.
+   * @returns {object} The users's data.
+   */
+  static async getUserById(id) {
+    const user = await UserModel.findOne({ where: { id } });
+    return user;
+  }
+
 
   /**
    * Finds the user's username if he/she exists.
@@ -26,6 +36,18 @@ class AuthHelpers {
   static async usernameExists(username) {
     const alreadyUser = await UserModel.findOne({ where: { username } });
     return alreadyUser;
+  }
+
+  /**
+   * Finds the user's username if he/she exists.
+   * @param {string} id The user's username.
+   * @param {string} pwd The user's username.
+   * @returns {object} The users's data.
+   */
+  static async updateUserPassword(id, { password }) {
+    const hashedPwd = Hasher.hashPassword(password);
+    const updatedUser = await UserModel.update({ password: hashedPwd }, { where: { id } });
+    return updatedUser;
   }
 
   /**

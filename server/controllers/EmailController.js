@@ -1,0 +1,95 @@
+import sgMail from '@sendgrid/mail';
+import dotenv from 'dotenv';
+import TokenHelper from '../helpers/TokenHelper';
+import AuthHelpers from '../helpers/authHelpers';
+import {
+  resetPasswordSubjectAndHtmlBoy,
+  sendEmailTemplate,
+} from '../helpers/emailHelper';
+
+dotenv.config();
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+/**
+ * This class contains all methods
+ * required to handle
+ * signup and login endpoints' request.
+ */
+class EmailController {
+  /**
+   * This method handle the signup request.
+   * @param {object} req The user's request.
+   * @param {object} res The response.
+   * @returns {object} The status and some data of the user.
+   */
+  static async sendResetPasswordEmail(req, res) {
+    const { email } = req.body;
+
+    const userExist = await AuthHelpers.emailExists(email);
+    if (!userExist) {
+      return res.status(404).json({
+        status: res.statusCode,
+        error: 'Sorry! This email does not exist in Barefoot system.',
+      });
+    }
+
+    const token = TokenHelper.generateResetPasswordToken(userExist);
+    const url = `http://localhost:3000/password/reset/${userExist.id}/${token}`;
+    const subjectAndHhtmlBody = resetPasswordSubjectAndHtmlBoy(userExist, url);
+    const theMessage = sendEmailTemplate('support@borafoot.com', userExist, subjectAndHhtmlBody);
+    sgMail.send(theMessage);
+
+    return res.status(200).json({
+      status: res.statusCode,
+      message: 'The email has been sent successfully.',
+      data: {
+        token,
+        userDetails: {
+          id: userExist.id,
+          Name: userExist.name,
+          Email: userExist.email,
+        },
+      },
+    });
+  }
+
+  /**
+   * This method handle the signup request.
+   * @param {object} req The user's request.
+   * @param {object} res The response.
+   * @returns {object} The status and some data of the user.
+   */
+  static async updatePassword(req, res) {
+    const { userId, token } = req.params;
+
+    const userExist = await AuthHelpers.getUserById(userId);
+    if (!userExist) {
+      return res.status(400).json({
+        status: res.statusCode,
+        error: 'Sorry! The user does not exist.',
+      });
+    }
+
+    const tokenValide = TokenHelper.decodedToken(token, `${userExist.password}_${userExist.createdAt}`);
+
+    if (userExist.password !== tokenValide.password) {
+      return res.status(400).json({
+        status: res.statusCode,
+        error: 'Sorry! You can not update the password with Expired token.',
+      });
+    }
+
+    await AuthHelpers.updateUserPassword(userExist.id, req.body);
+
+    return res.status(200).json({
+      status: res.statusCode,
+      message: 'The password has been updated successfully.',
+      userDetails: {
+        Name: userExist.name,
+        Email: userExist.email,
+      },
+    });
+  }
+}
+
+export default EmailController;
