@@ -13,23 +13,11 @@ passport.use(new GoogleStrategy({
   callbackURL: process.env.gcallbackURL
 },
 async (accessToken, refreshToken, profile, cb) => {
-  console.log(profile);
   cb(null, profile);
-  const { id } = profile;
-  await User.findAll({
+  console.log(profile);
+  await User.create({
+    name: profile.displayName,
+    google_id: profile.id
 
-    where: { google_id: id }
   });
-
-
-  if (!User.length) {
-    await User.create({
-      name: profile.displayName,
-      google_id: profile.id
-
-    });
-
-
-  // eslint-disable-next-line block-spacing
-  }
 }));

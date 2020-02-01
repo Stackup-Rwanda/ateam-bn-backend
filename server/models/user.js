@@ -14,7 +14,9 @@ const userDefinition = (sequelize, DataTypes) => {
     lineManager: { type: DataTypes.STRING },
     isVerified: { type: DataTypes.BOOLEAN },
     createdAt: { type: DataTypes.DATE },
-    updatedAt: { type: DataTypes.DATE }
+    updatedAt: { type: DataTypes.DATE },
+    social_id: { type: DataTypes.STRING, unique: true },
+    provider: { type: DataTypes.STRING }
   }, {});
   return User;
 };

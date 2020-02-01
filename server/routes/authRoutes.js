@@ -40,7 +40,7 @@ router.post('/auth/signin', asyncErrorHandler(AuthController.signIn));
 
 router.get(
   '/auth/google',
-  passport.authenticate('google', { scope: ['profile'] })
+  passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 router.get(
   '/auth/google/callback',
@@ -53,3 +53,5 @@ router.get(
   passport.authenticate('facebook')
 );
 router.get('/auth/facebook/callback', passport.authenticate('facebook', { session: false }), storeAuth);
+
+export default router;

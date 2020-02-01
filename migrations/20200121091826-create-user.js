@@ -54,13 +54,12 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Users', {
     allowNull: false,
     type: Sequelize.DATE
   },
-  google_id: {
+  social_id: {
     type: Sequelize.STRING,
     unique: true
   },
-  fb_id: {
-    type: Sequelize.STRING,
-    unique: true
+  provider: {
+    type: Sequelize.STRING
   }
 });
 
