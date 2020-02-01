@@ -1,5 +1,19 @@
 language: node_js
 node_js:
   - 'stable'
-script:
-  - 'npm run test'
+cache:
+  directories:
+    - 'node_modules'
+services:
+  - postgresql
+before_script:
+  - psql -c 'CREATE DATABASE barefoot_test;' -U postgres
+  - npm i sequelize-cli -g
+  - npm i sequelize -g
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+after_success:
+  - npm run coveralls
