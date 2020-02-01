@@ -1,5 +1,12 @@
+
+sudo: false
 language: node_js
 node_js:
+
+  - node
+
+    script:
+      - npm run test:coveralls
   - 'stable'
 cache:
   directories:
@@ -17,3 +24,4 @@ after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 after_success:
   - npm run coveralls
+
