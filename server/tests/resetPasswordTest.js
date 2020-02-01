@@ -105,18 +105,4 @@ describe('Test for sending email endpoint', () => {
       expect(res.body.error).to.be.a('string');
     })
   );
-
-  // it(
-  //   "shouldn't update user password, Because of bad credentials",
-  //   mochaAsync(async () => {
-  //     const { password, confirmPassword, badToken } = usersTester[3];
-  //     const res = await router()
-  //       .post(`/api/auth/update-password/0/${badToken}/asd`)
-  //       .send({ password, confirmPassword });
-  //       console.log(res.body);
-  //     // expect(res.body.status).to.equal(500);
-  //     // expect(res.body).to.be.an('object');
-  //     // expect(res.body.error).to.be.a('string');
-  //   })
-  // );
 });
