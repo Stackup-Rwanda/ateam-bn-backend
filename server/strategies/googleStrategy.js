@@ -14,7 +14,6 @@ passport.use(new GoogleStrategy({
 },
 (accessToken, refreshToken, profile, cb) => {
   cb(null, profile);
-
   User.create({
     name: profile.displayName,
     google_id: profile.id

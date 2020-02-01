@@ -6,18 +6,15 @@ import models from '../models';
 dotenv.config();
 
 const { User } = models;
-
 passport.use(new FacebookStrategy({
   clientID: process.env.clientID,
   clientSecret: process.env.clientSecret,
   callbackURL: process.env.callbackURL
 },
 (accessToken, refreshToken, profile, cb) => {
-  console.log(profile);
   cb(null, profile);
   User.create({
     name: profile.displayName,
     fb_id: profile.id
   });
-  console.log(id);
 }));
