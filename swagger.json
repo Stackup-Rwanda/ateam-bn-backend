@@ -51,7 +51,48 @@
           }
         }
       }
+    },
+        
+"/auth/google": {
+  "get": {
+    "description": "Sign in to Barefoot application via Google",
+    "summary": "Google",
+    "tags": [
+      "User"
+    ],
+    "operationId": "Google",
+    "deprecated": false,
+    "produces": [
+      "application/json"
+    ],
+    "responses": {
+      "200": {
+        "description": "",
+        "headers": {}
+      }
     }
+  }
+},
+"/auth/facebook": {
+  "get": {
+    "description": "Sign in to Barefoot application via Facebook",
+    "summary": "Facebook",
+    "tags": [
+      "User"
+    ],
+    "operationId": "Facebook",
+    "deprecated": false,
+    "produces": [
+      "application/json"
+    ],
+    "responses": {
+      "200": {
+        "description": "",
+        "headers": {}
+      }
+    }
+  }
+}
   },
   "definitions": {
     "Signup": {
