@@ -14,7 +14,7 @@ services:
   - postgresql
 
 before_install:
-  - psql -c 'create database broadcaster' -U postgres
+  - psql -c 'create database barefoot' -U postgres
 
 before_script:
   - npm install
