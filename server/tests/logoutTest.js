@@ -21,7 +21,7 @@ describe('my Testing suite', () => {
       });
   });
 
-  it('users should be able to logout from application', done => {
+  it('users should be able to logout even if there is no token detected from application', done => {
     router()
       .get('/api/v-unknown/users/logout')
       .end((error, response) => {
