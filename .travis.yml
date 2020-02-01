@@ -1,27 +1,26 @@
-
-sudo: false
 language: node_js
 
 node_js:
-
-  - node
-
-    script:
-      - npm run test:coveralls
   - 'stable'
+
 cache:
   directories:
     - 'node_modules'
+
+addons:
+  postgresql: '9.6'
+
 services:
   - postgresql
+
+before_install:
+  - psql -c 'create database barefoot' -U postgres
+
 before_script:
-  - psql -c 'CREATE DATABASE barefoot_test;' -U postgres
-  - npm i sequelize-cli -g
-  - npm i sequelize -g
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - npm install
+
+script:
+  - npm run test
+
 after_success:
   - npm run coveralls
