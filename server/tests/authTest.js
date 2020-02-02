@@ -86,7 +86,6 @@ describe('Test for signup endpoint', () => {
   );
 });
 
-<<<<<<< HEAD
 describe('signIn tests', () => {
   it('User should not be able to log into account when email is not verified', async () => {
     const res = await chai
@@ -123,8 +122,6 @@ describe('Test for signup endpoint', () => {
     })
   );
 
-=======
->>>>>>> ft-login-via-facebook-and-google-170766085(facebook and google login test): test social logins
   it(
     "shouldn't signup already saved user",
     mochaAsync(async () => {
