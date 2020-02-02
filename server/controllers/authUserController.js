@@ -10,7 +10,8 @@ class AuthUsers {
     } catch (error) {
       return res.status(500).json({
         status: 500,
-        message: ' something goes wrong '
+        message: ' something goes wrong ',
+        error: error.message
       });
     }
   }
