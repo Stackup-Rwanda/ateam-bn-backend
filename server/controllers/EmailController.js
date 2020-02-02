@@ -9,6 +9,7 @@ import {
 
 dotenv.config();
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const resetPasswordURL = process.env.RESET_PASSWORD_URL;
 
 /**
  * This class contains all methods
@@ -33,23 +34,24 @@ class EmailController {
       });
     }
 
-    const token = TokenHelper.generateResetPasswordToken(userExist);
-    const url = `http://localhost:3000/password/reset/${userExist.id}/${token}`;
-    const subjectAndHhtmlBody = resetPasswordSubjectAndHtmlBoy(userExist, url);
-    const theMessage = sendEmailTemplate('support@borafoot.com', userExist, subjectAndHhtmlBody);
-    sgMail.send(theMessage);
+    const userData = {
+      id: userExist.id,
+      name: userExist.name,
+      email: userExist.email,
+      password: userExist.password,
+      createdAt: userExist.createdAt
+    };
 
-    return res.status(200).json({
+    const token = TokenHelper.generateResetPasswordToken(userData);
+    const url = `${resetPasswordURL}${userExist.id}/${token}`;
+    const subjectAndHhtmlBody = resetPasswordSubjectAndHtmlBoy(userData, url);
+    const theMessage = sendEmailTemplate('support@borafoot.com', userData, subjectAndHhtmlBody);
+    await sgMail.send(theMessage);
+
+    res.status(200).json({
       status: res.statusCode,
       message: 'The email has been sent successfully.',
-      data: {
-        token,
-        userDetails: {
-          id: userExist.id,
-          Name: userExist.name,
-          Email: userExist.email,
-        },
-      },
+      link: url
     });
   }
 
@@ -71,6 +73,13 @@ class EmailController {
     }
 
     const tokenValide = TokenHelper.decodedToken(token, `${userExist.password}_${userExist.createdAt}`);
+
+    if (!tokenValide) {
+      res.status(400).json({
+        status: res.statusCode,
+        error: 'Sorry! You can not update the password with Expired token.',
+      });
+    }
 
     if (userExist.password !== tokenValide.password) {
       return res.status(400).json({
