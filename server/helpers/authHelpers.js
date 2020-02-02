@@ -10,7 +10,7 @@ class AuthHelpers {
   /**
    * Finds the user's email if he/she exists.
    * @param {string} email The user's email.
-   * @returns {object} The users's data.
+   * @returns {object} user The users's data.
    */
   static async emailExists(email) {
     const user = await UserModel.findOne({ where: { email } });
@@ -18,9 +18,9 @@ class AuthHelpers {
   }
 
   /**
-   * Finds the user's email if he/she exists.
-   * @param {string} id The user's email.
-   * @returns {object} The users's data.
+   * Finds the user id if he/she exists.
+   * @param {string} id The user id.
+   * @returns {object} The user's data about email.
    */
   static async getUserById(id) {
     const user = await UserModel.findOne({ where: { id } });
@@ -31,7 +31,7 @@ class AuthHelpers {
   /**
    * Finds the user's username if he/she exists.
    * @param {string} username The user's username.
-   * @returns {object} The users's data.
+   * @returns {object} The user's data about username.
    */
   static async usernameExists(username) {
     const alreadyUser = await UserModel.findOne({ where: { username } });
@@ -39,10 +39,10 @@ class AuthHelpers {
   }
 
   /**
-   * Finds the user's username if he/she exists.
+   * Update a user's password.
    * @param {string} id The user's username.
    * @param {string} pwd The user's username.
-   * @returns {object} The users's data.
+   * @returns {object} The user's data about update password.
    */
   static async updateUserPassword(id, { password }) {
     const hashedPwd = Hasher.hashPassword(password);
