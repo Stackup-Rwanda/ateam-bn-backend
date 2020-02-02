@@ -14,20 +14,18 @@ router.post(
 
 router.get(
   '/auth/google',
-  passport.authenticate( 'google', { scope: [ 'profile' ] } )
+  passport.authenticate('google', { scope: ['profile'] })
 );
-router.get(
-  '/auth/google/callback',
-  passport.authenticate( 'google', { session: false } ), googleAuth
+router.get('/auth/google/callback',
+  passport.authenticate('google', { session: false }), googleAuth
 );
 
 
-router.get(
-  '/auth/facebook',
-  passport.authenticate( 'facebook' )
+router.get('/auth/facebook',
+  passport.authenticate('facebook')
 );
 router.get(
-  '/auth/facebook/callback', passport.authenticate( 'facebook', { session: false } ), storeAuth
+  '/auth/facebook/callback', passport.authenticate('facebook', { session: false }), storeAuth
 );
 
 export default router;
