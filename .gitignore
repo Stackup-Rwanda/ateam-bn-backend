@@ -1,6 +1,6 @@
 node_modules
-.vscode
 .nyc_output
 .env
+.vscode
 coverage
 package-lock.json

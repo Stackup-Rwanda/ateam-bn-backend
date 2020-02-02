@@ -1,19 +1,58 @@
-const userDefinition = (sequelize) => {
+const userDefinition = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    firstName: {
-      type: sequelize.STRING
+    name: {
+      type: DataTypes.STRING
     },
-    lastName: {
-      type: sequelize.STRING
+    gender: {
+      type: DataTypes.STRING
     },
     email: {
-      type: sequelize.STRING,
-      unique: true
+      type: DataTypes.STRING
+    },
+    username: {
+      type: DataTypes.STRING
+    },
+    password: {
+      type: DataTypes.STRING
+    },
+    birthdate: {
+      type: DataTypes.DATE
+    },
+    preferredLanguage: {
+      type: DataTypes.STRING
+    },
+    preferredCurrency: {
+      type: DataTypes.STRING
+    },
+    location: {
+      type: DataTypes.STRING
+    },
+    role: {
+      type: DataTypes.STRING
+    },
+    department: {
+      type: DataTypes.STRING
+    },
+    lineManager: {
+      type: DataTypes.STRING
+    },
+    isVerified: {
+      type: DataTypes.BOOLEAN
+    },
+    createdAt: {
+      type: DataTypes.DATE
+    },
+    updatedAt: {
+      type: DataTypes.DATE
     }
   }, {});
   // eslint-disable-next-line no-unused-vars
   User.associate = (models) => {
-    // associations can be defined here
+    User.hasMany(models.Trip, {
+      foreignKey: 'userId',
+      as: 'trips',
+      onDelete: 'CASCADE',
+    });
   };
   return User;
 };
