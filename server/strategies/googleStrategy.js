@@ -17,6 +17,5 @@ passport.use(new GoogleStrategy({
   User.create({
     name: profile.displayName,
     google_id: profile.id
-
   });
 }));

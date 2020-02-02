@@ -49,9 +49,7 @@ const userDefinition = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
     }
   }, {});
-  // eslint-disable-next-line no-unused-vars
   User.associate = (models) => {
-    // associations can be defined here
   };
   return User;
 };

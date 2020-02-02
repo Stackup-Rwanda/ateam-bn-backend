@@ -71,7 +71,6 @@ describe('Strategy', () => {
   describe('constructed with undefined options', () => {
     it('should throw', () => {
       expect(() => {
-        const strategy = new GoogleStrategy(undefined, (() => { }));
       }).to.throw(Error);
     });
   });
