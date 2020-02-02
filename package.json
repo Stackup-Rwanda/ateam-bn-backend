@@ -6,10 +6,14 @@
   "scripts": {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     "test": "npm run droptables:test && npm run createtables:test && npm run seed:test && cross-env NODE_ENV=test nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --exit",
 =======
     "test": "nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --timeout 1000000  --exit",
 >>>>>>> ft-login-via-facebook-and-google-170766085(facebook and google login test): test social logins
+=======
+    "test": "nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --timeout 50000  --exit",
+>>>>>>> ft-login-via-facebook-and-google-170766085(add tests on social logins):social login tests
     "server": "nodemon --exec babel-node ./server/index.js",
     "start": "cross-env NODE_ENV=production babel-node ./server/index.js",
     "createtables:dev": "node_modules/.bin/sequelize db:migrate",
@@ -56,6 +60,7 @@
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
+    "chai-passport-strategy": "^1.0.1",
     "cross-env": "^7.0.0",
     "coveralls": "^3.0.9",
     "dotenv": "^8.2.0",
