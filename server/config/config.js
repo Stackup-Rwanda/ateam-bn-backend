@@ -1,8 +1,6 @@
 import dotenv from 'dotenv';
-
 dotenv.config();
-
-const development = {
+const generateCredentials = (database, host) => ({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DEVELOP_DB_NAME,
@@ -31,7 +29,6 @@ export default {
   test,
   production
 };
-
 export {
   development,
   test,
