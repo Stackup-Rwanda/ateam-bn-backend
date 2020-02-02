@@ -51,7 +51,10 @@ class EmailController {
     res.status(200).json({
       status: res.statusCode,
       message: 'The email has been sent successfully.',
-      link: url
+      userDetails: {
+        Name: userData.name,
+        Email: userData.email,
+      },
     });
   }
 
@@ -64,7 +67,7 @@ class EmailController {
   static async updatePassword(req, res) {
     const { userId, token } = req.params;
 
-    const userExist = await AuthHelpers.getUserById(userId);
+    const userExist = await AuthHelpers.userExists('id', userId);
     if (!userExist) {
       return res.status(400).json({
         status: res.statusCode,
