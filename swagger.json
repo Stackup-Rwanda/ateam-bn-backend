@@ -16,13 +16,8 @@
       "description": "Authentication endpoints"
     },
     {
-<<<<<<< HEAD
       "name": "Sign up",
       "description": "Access to signup API endpoints"
-=======
-      "name": "Red-flags",
-      "description": "Access to red-flags API endpoints"
->>>>>>> ft(social logins test): user should login via facebook and google
     }
   ],
   "paths": {
@@ -56,9 +51,6 @@
           }
         }
       }
-<<<<<<< HEAD
-    },
-<<<<<<< HEAD
     "/auth/reset-password": {
       "post": {
         "tags": ["Auth"],
@@ -204,8 +196,6 @@
         }
       }
     },
-=======
-        
 "/auth/google": {
   "get": {
     "description": "Sign in to Barefoot application via Google",
@@ -247,11 +237,6 @@
   }
 }
   },
->>>>>>> ft-login-via-facebook-and-google-170766085(facebook and google login test): test social logins
-=======
-    }
-  },
->>>>>>> ft(social logins test): user should login via facebook and google
   "definitions": {
     "Signup": {
       "type": "object",
@@ -307,7 +292,6 @@
           "type": "string"
         }
       }
-<<<<<<< HEAD
     },
     "SendEmail": {
       "type": "object",
@@ -374,8 +358,6 @@
         "preferredCurrency",
         "location"
       ]
-=======
->>>>>>> ft(social logins test): user should login via facebook and google
     }
   },
   "schemes": ["http", "https"],
