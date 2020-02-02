@@ -1,14 +1,9 @@
-import importDeleteQuery from '../models/interactWithDatabase';
+import importQuery from '../models/interactWithDatabase';
 
 class AuthUsers {
   async logout(req, res) {
     try {
-      if (req.headers.authorization) {
-        await importDeleteQuery.deleteValidToken(req.headers.authorization);
-        return res
-          .status(200)
-          .json({ status: 200, message: ` Hey Joshua !! you are logged out successfully` });
-      }
+      await importQuery.deleteValidToken(req.headers.authorization);
       return res
         .status(200)
         .json({ status: 200, message: ` Hey Joshua !! you are logged out successfully` });
