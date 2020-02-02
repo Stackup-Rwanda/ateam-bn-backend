@@ -31,8 +31,11 @@
     "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/preset-env": "^7.5.5",
     "@babel/runtime": "^7.5.5",
+<<<<<<< HEAD
     "@hapi/joi": "^17.1.0",
     "@sendgrid/mail": "^6.5.1",
+=======
+>>>>>>> ft-login-via-facebook-and-google-170766085(add tests on social logins):social login tests
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.6",
     "babel-node": "0.0.1-security",
@@ -44,6 +47,10 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "chai-passport-strategy": "^1.0.1",
+<<<<<<< HEAD
+=======
+    "cross-env": "^7.0.0",
+>>>>>>> ft-login-via-facebook-and-google-170766085(add tests on social logins):social login tests
     "coveralls": "^3.0.9",
     "cross-env": "^7.0.0",
     "dotenv": "^8.2.0",

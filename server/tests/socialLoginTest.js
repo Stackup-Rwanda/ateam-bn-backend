@@ -1,7 +1,10 @@
 import dotenv from 'dotenv';
 import chai, { expect } from 'chai';
 import GoogleStrategy from 'passport-google-oauth20';
+<<<<<<< HEAD
 import http from 'http';
+=======
+>>>>>>> ft-login-via-facebook-and-google-170766085(add tests on social logins):social login tests
 import app from '../index';
 import strategyGenerator from '../helpers/strategyHelper';
 import Browser from 'zombie';
@@ -10,6 +13,10 @@ http.createServer(app).listen(5000);
 dotenv.config();
 const router = () => chai.request(app);
 chai.should();
+<<<<<<< HEAD
+=======
+chai.use(http);
+>>>>>>> ft-login-via-facebook-and-google-170766085(add tests on social logins):social login tests
 
 chai.use(require('chai-passport-strategy'));
 
@@ -76,6 +83,7 @@ describe('User login via facebook', () => {
     });
   });
 
+<<<<<<< HEAD
 
   describe('authorization request with documented parameters', () => {
     const strategy = new GoogleStrategy({
@@ -126,6 +134,78 @@ describe('User login via facebook', () => {
 
     it('should be redirected', () => {
       expect(url).to.equal('https://accounts.google.com/o/oauth2/v2/auth?display=touch&response_type=code&client_id=836856073443143');
+=======
+describe('Strategy', () => {
+  describe('constructed', () => {
+    const strategy = new GoogleStrategy({
+      clientID: process.env.clientID,
+      clientSecret: process.env.clientSecret
+    }, (() => { }));
+
+    it('should be named google', () => {
+      expect(strategy.name).to.equal('google');
+>>>>>>> ft-login-via-facebook-and-google-170766085(add tests on social logins):social login tests
     });
+  });
+
+  describe('constructed with undefined options', () => {
+    it('should throw', () => {
+      expect(() => {
+        const strategy = new GoogleStrategy(undefined, (() => { }));
+      }).to.throw(Error);
+    });
+  });
+});
+
+
+describe('authorization request with documented parameters', () => {
+  const strategy = new GoogleStrategy({
+    clientID: process.env.clientID,
+    clientSecret: process.env.clientSecret
+  }, (() => {}));
+
+
+  let url;
+
+  before((done) => {
+    chai.passport.use(strategy)
+      .redirect((u) => {
+        url = u;
+        done();
+      })
+      .req((req) => {
+        req.session = {};
+      })
+      .authenticate({ prompt: 'select_account', loginHint: 'izabayojonas12@gmail.com', accessType: 'offline' });
+  });
+
+  it('should be redirected', () => {
+    expect(url).to.equal('https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&prompt=select_account&login_hint=izabayojonas12%40gmail.com&response_type=code&client_id=836856073443143');
+  });
+}); //
+
+describe('authorization request with documented parameters from OpenID Connect', () => {
+  const strategy = new GoogleStrategy({
+    clientID: process.env.clientID,
+    clientSecret: process.env.clientSecret
+  }, (() => {}));
+
+
+  let url;
+
+  before((done) => {
+    chai.passport.use(strategy)
+      .redirect((u) => {
+        url = u;
+        done();
+      })
+      .req((req) => {
+        req.session = {};
+      })
+      .authenticate({ display: 'touch' });
+  });
+
+  it('should be redirected', () => {
+    expect(url).to.equal('https://accounts.google.com/o/oauth2/v2/auth?display=touch&response_type=code&client_id=836856073443143');
   });
 });
