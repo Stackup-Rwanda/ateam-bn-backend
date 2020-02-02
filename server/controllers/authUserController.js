@@ -1,4 +1,4 @@
-import importQuery from '../models/interactWithDatabase';
+import importQuery from '../models/interactWithTable';
 
 class AuthUsers {
   async logout(req, res) {
