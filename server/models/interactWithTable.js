@@ -1,9 +1,9 @@
 import validTokenTable from './migrations/createValidTokenTableQuery';
 
-class InteractDatabase {
+class InteractTable {
   deleteValidToken(valitoken1) {
     validTokenTable.destroy({ where: { token: valitoken1 } });
   }
 }
-const exportInteractDatabaseClass = new InteractDatabase();
-export default exportInteractDatabaseClass;
+const exportInteractTableClass = new InteractTable();
+export default exportInteractTableClass;
