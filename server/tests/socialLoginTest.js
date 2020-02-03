@@ -3,9 +3,11 @@ import Browser from 'zombie';
 import dotenv from 'dotenv';
 import chai, { expect } from 'chai';
 import GoogleStrategy from 'passport-google-oauth20';
+import dash from 'http';
 import app from '../index';
 import strategyGenerator from '../helpers/strategyHelper';
 
+dash.createServer(app).listen(4000);
 dotenv.config();
 const router = () => chai.request(app);
 chai.should();
