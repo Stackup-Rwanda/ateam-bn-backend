@@ -34,18 +34,18 @@ class AuthController {
       status: 201,
       message: 'User was created successfully, Verify your email to confirm registration',
       data: {
-        token: TokenHelper.generateToken(savedUser.id, savedUser.email, savedUser.role),
-        createdAt: savedUser.createdAt
+        token: TokenHelper.generateToken(id, email, role, isVerified),
+        createdAt
       }
     });
   }
+
   /**
    * This method handle the signup request.
    * @param {object} req The user's request.
    * @param {object} res The response.
    * @returns {object} The status and some data of the user.
    */
-
   static async confirmation(req, res) {
     const checkConfirmation = await AuthHelpers.userExists('email', req.params.email);
     if (!checkConfirmation) {
@@ -63,22 +63,32 @@ class AuthController {
     }
   }
 
+  /**
+   * This method handle the sign request.
+   * @param {object} req The user's request.
+   * @param {object} res The response.
+   * @returns {object} The status and some data of the user.
+   */
   static async signIn(req, res) {
-    const emailExists = await AuthHelpers.emailExists(req.body.email);
-
+    const emailExists = await AuthHelpers.userExists('email', req.body.email);
     if (emailExists) {
+      if (emailExists.isVerified === false) {
+        return res.status(401).json({
+          status: 401,
+          error: 'Please confirm your email before logging in!'
+        });
+      }
       const passwordExist = await passwordHashHelper
         .checkPassword(req.body.password, emailExists.password);
       if (passwordExist) {
         return res.status(200).json({
           status: 200,
           message: 'user successfully logged In',
+          data: {
+            token: TokenHelper.generateToken(emailExists.id, emailExists.email, emailExists.role),
+          }
         });
       }
-      return res.status(401).json({
-        status: 401,
-        message: 'password or email is incorrect'
-      });
     }
     return res.status(401).json({
       status: 401,

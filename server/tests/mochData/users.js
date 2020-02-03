@@ -38,5 +38,8 @@ export default [
     role: 'Architect',
     department: 'Construction',
     lineManager: 'Igor The G'
+  }, {
+    email: 'dummy2@email.rw',
+    password: '12345678'
   }
 ];

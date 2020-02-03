@@ -21,36 +21,12 @@ cache:
 services:
   - postgresql
 before_script:
-<<<<<<< HEAD
-<<<<<<< HEAD
   - psql -c 'CREATE DATABASE barefootnomaddb_test;' -U postgres
-=======
-  - psql -c 'CREATE DATABASE authorhavens_test;' -U postgres
->>>>>>> ft(signup-endpoint): fix bugs in my test
-=======
-  - psql -c 'CREATE DATABASE authorhavens_test;' -U postgres
->>>>>>> ft(signup-endpoint): fix bugs in my test
   - npm i sequelize-cli -g
   - npm i sequelize -g
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-script:
-  - npm run cover
->>>>>>> ft(signup-endpoint): fix bugs in my test
-=======
->>>>>>> ft(signup-endpoint): fix bugs in my test
-=======
-script:
-  - npm run cover
->>>>>>> ft(signup-endpoint): fix bugs in my test
-=======
->>>>>>> ft(signup-endpoint): fix bugs in my test
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 after_success:

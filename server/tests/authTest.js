@@ -70,7 +70,6 @@ describe('Test for signup endpoint', () => {
       expect(res.body.status).to.equal(201);
       expect(res.body).to.be.an('object');
       expect(res.body.message).to.be.a('string');
-      // expect(res.body.data).to.be.an('object');
     })
   );
 
@@ -88,27 +87,23 @@ describe('Test for signup endpoint', () => {
 });
 
 describe('signIn tests', () => {
-  it('User should be able to log into account when valid credentials', () => {
-    mochaAsync(async () => {
-      const res = await chai
-        .request(app)
-        .post('/api/auth/signin')
-        .send(usersTester[1]);
-      res.should.have.status(200);
-      res.body.should.be.an('object');
-      res.body.should.have.property('message', 'user successfully logged In');
-    });
+  it('User should not be able to log into account when email is not verified', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/auth/signin')
+      .send(usersTester[1]);
+    res.should.have.status(401);
+    res.body.should.be.an('object');
+    res.body.should.have.property('error', 'Please confirm your email before logging in!');
   });
 
-  it('User should not be able to log into account when invalid credentials', () => {
-    mochaAsync(async () => {
-      const res = await chai
-        .request(app)
-        .post('/api/auth/signin')
-        .send(usersTester[0]);
-      res.should.have.status(401);
-      res.body.should.be.an('object');
-      res.body.should.have.property('message', 'password or email is incorrect');
-    });
+  it('User should not be able to log into account when invalid credentials', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/auth/signin')
+      .send(usersTester[3]);
+    res.should.have.status(401);
+    res.body.should.be.an('object');
+    res.body.should.have.property('message', 'password or email is incorrect');
   });
 });
