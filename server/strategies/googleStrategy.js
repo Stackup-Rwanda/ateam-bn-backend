@@ -14,11 +14,10 @@ passport.use(
     (accessToken, refreshToken, profile, cb) => {
       cb(null, profile);
       console.log(profile);
-      User.create(
-        {
-          name: profile.displayName,
-          google_id: profile.id
-        }
-      );
+      User.create({
+        name: profile.displayName,
+        google_id: profile.id
+      });
     }
-  ));
+  )
+);

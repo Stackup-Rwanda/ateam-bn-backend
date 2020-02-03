@@ -17,15 +17,13 @@ router.get(
   passport.authenticate('google', { scope: ['profile'] })
 );
 router.get('/auth/google/callback',
-  passport.authenticate('google', { session: false }), googleAuth
-);
+  passport.authenticate('google', { session: false }), googleAuth);
 
 
-router.get('/auth/facebook',
+router.get(
+  '/auth/facebook',
   passport.authenticate('facebook')
 );
-router.get(
-  '/auth/facebook/callback', passport.authenticate('facebook', { session: false }), storeAuth
-);
+router.get('/auth/facebook/callback', passport.authenticate('facebook', { session: false }), storeAuth);
 
 export default router;
