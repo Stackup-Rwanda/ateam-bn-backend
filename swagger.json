@@ -9,12 +9,10 @@
   },
 
   "host": "localhost:3000",
-  "basePath": "/api/v-unknown",
-  
+  "basePath": "/api",
+
   "schemes": ["http","https"],
   "consumes": ["application/json", "none"],
   "produces": [ "application/json", "none"]
 
 }
-
-     
