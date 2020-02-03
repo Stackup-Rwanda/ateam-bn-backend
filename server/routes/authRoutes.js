@@ -26,7 +26,6 @@ router.get(
   '/auth/facebook',
   passport.authenticate('facebook')
 );
-router.get('/auth/facebook/callback', passport.authenticate('facebook', { session: false }), storeAuth
-);
+router.get('/auth/facebook/callback', passport.authenticate('facebook', { session: false }), storeAuth);
 
 export default router;
