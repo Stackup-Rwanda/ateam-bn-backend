@@ -129,13 +129,3 @@ describe('User login via facebook', () => {
     });
   });
 });
-describe('running profile route tests', () => {
-  it('user should be able to view details of his/her profile', async () => {
-    const result = await chai
-      .request(app)
-      .get('/api/auth/facebook/callback')
-      .send()
-    result.should.have.status(200);
-    result.body.should.have.property('message');
-  });
-});
