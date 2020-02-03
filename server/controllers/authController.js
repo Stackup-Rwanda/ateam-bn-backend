@@ -30,15 +30,7 @@ class AuthController {
       status: 201,
       message: 'User was created successfully',
       data: {
-<<<<<<< HEAD
-        token: TokenHelper.generateToken(savedUser.id, savedUser.email),
-=======
-        name: savedUser.name,
-        email: savedUser.email,
-        username: savedUser.username,
-        password: savedUser.password,
-        isVerified: savedUser.isVerified,
->>>>>>> ft(signup-endpoint): add is Verified attribute
+        token: TokenHelper.generateToken(savedUser.id, savedUser.email, savedUser.role),
         createdAt: savedUser.createdAt
       }
     });
