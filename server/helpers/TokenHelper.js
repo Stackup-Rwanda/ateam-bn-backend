@@ -20,8 +20,8 @@ class TokenHelper {
    * @param {string} password The user's password.
    * @returns {string} The users's hashed password.
    */
-  static generateToken(id, email) {
-    return jwt.sign({ id, email }, process.env.SECRET_KEY, { expiresIn: 3600 });
+  static generateToken(id, email, role) {
+    return jwt.sign({ id, email, role }, process.env.SECRET_KEY, { expiresIn: 3600 });
   }
 
   /**

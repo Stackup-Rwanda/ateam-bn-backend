@@ -34,7 +34,7 @@ class AuthController {
       status: 201,
       message: 'User was created successfully, Verify your email to confirm registration',
       data: {
-        token: TokenHelper.generateToken(savedUser.id, savedUser.email),
+        token: TokenHelper.generateToken(savedUser.id, savedUser.email, savedUser.role),
         createdAt: savedUser.createdAt
       }
     });
