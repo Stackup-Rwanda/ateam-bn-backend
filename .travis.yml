@@ -21,7 +21,7 @@ cache:
 services:
   - postgresql
 before_script:
-  - psql -c 'CREATE DATABASE authorhavens_test;' -U postgres
+  - psql -c 'CREATE DATABASE barefootnomaddb_test;' -U postgres
   - npm i sequelize-cli -g
   - npm i sequelize -g
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
