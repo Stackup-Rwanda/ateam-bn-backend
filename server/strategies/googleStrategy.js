@@ -5,7 +5,6 @@ import models from '../models';
 import strategyGenerator from '../helpers/strategyHelper';
 
 dotenv.config();
-
 const { User } = models;
 
 passport.use(new GoogleStrategy(
