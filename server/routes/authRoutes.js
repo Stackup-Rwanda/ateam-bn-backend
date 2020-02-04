@@ -11,5 +11,6 @@ router.post(
   passwordHasher,
   asyncErrorHandler(AuthController.signUp)
 );
+router.put('/user/:email/confirm', AuthController.confirmation);
 
 export default router;
