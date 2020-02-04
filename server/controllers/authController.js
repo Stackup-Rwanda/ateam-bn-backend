@@ -37,7 +37,7 @@ class AuthController {
       message: 'User was created successfully',
       data: {
         token: TokenHelper.generateToken(id, email, role, isVerified),
-        createdAt: createdAt
+        createdAt
       }
     });
   }
