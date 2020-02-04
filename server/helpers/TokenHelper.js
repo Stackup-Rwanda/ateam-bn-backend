@@ -19,39 +19,13 @@ class TokenHelper {
    */
   static generateToken(id, email, role, isVerified) {
     return jwt.sign(
-      { 
+      {
         id,
         email,
         role,
         isVerified
-      }, process.env.SECRET_KEY,
-      { 
-        expiresIn: 3600
-      }
+      }, process.env.SECRET_KEY
     );
-  }
-
-  /**
-   * Hashs the password.
-   * @param {integer} id The user's id.
-   * @param {string} email The user's email.
-   * @param {string} password The user's password.
-   * @returns {string} The users's hashed password.
-   */
-  static generateResetPasswordToken({
-    id, email, password, createdAt,
-  }) {
-    const secrect = `${password}_${createdAt}`;
-    return jwt.sign({ id, email }, secrect, { expiresIn: 3600 });
-  }
-  /**
-   * Hashs the password.
-   * @param {string} token The user's token.
-   * @param {string} secrectKey The secret key.
-   * @returns {string} The users's hashed password.
-   */
-  static decodedToken(token, secrectKey) {
-    return jwt.verify(token, secrectKey);
   }
 }
 export default TokenHelper;

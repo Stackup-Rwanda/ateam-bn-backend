@@ -1,11 +1,11 @@
 export default [
   {
-    name: 'Elsie Agasaro',
+    name: 'Agasaro',
     gender: 'Female',
     email: 'elsieagasaro@gmail.com',
     username: 'TheOneAndOnly',
     password: '123456789',
-    birthdate: '7/2/2002',
+    birthdate: '2002-06-21',
     preferredLanguage: 'French',
     preferredCurrency: 'Dollars',
     location: 'Kibagabaga',
