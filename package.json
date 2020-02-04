@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "testSocial": "nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --timeout 1000000  --exit",
-    "test": "npm run droptables:test && npm run createtables:test && npm run seed:test && cross-env NODE_ENV=test nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --exit",
     "server": "nodemon --exec babel-node ./server/index.js",
     "start": "cross-env NODE_ENV=production babel-node ./server/index.js",
     "createtables:dev": "node_modules/.bin/sequelize db:migrate",
