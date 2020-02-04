@@ -2,8 +2,8 @@ export default [
   {
     name: 'Elsie Agasaro',
     gender: 'Female',
-    email: 'elsieagasaro@gmail.com',
-    username: 'TheOneAndOnly',
+    email: 'ssselsieagasaro@gmail.com',
+    username: 'sssTheOneAndOnly',
     password: '123456789',
     birthdate: '7/2/2002',
     preferredLanguage: 'French',
@@ -15,8 +15,8 @@ export default [
   }, {
     name: 'Dummy',
     gender: 'Male',
-    email: 'dummy@email.rw',
-    username: 'MrDummy',
+    email: 'sssdummy@email.rw',
+    username: 'sssMrDummy',
     password: '123456789',
     birthdate: new Date(),
     preferredLanguage: 'French',
@@ -28,8 +28,8 @@ export default [
   }, {
     name: 'Jaja Jaden',
     gender: 'Male',
-    email: 'jajajaden01@gmail.com',
-    username: 'jaja',
+    email: 'sssjajajaden01@gmail.com',
+    username: 'ssjaja',
     password: '123456',
     birthdate: '7/2/2002',
     preferredLanguage: 'French',

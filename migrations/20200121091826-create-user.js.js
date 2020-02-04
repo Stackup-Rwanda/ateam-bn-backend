@@ -1,4 +1,4 @@
-const up = (queryInterface, Sequelize) => queryInterface.createTable('users', {
+const up = (queryInterface, Sequelize) => queryInterface.createTable('Users', {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -43,6 +43,9 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('users', {
   lineManager: {
     type: Sequelize.STRING
   },
+  isVerified: {
+    type: Sequelize.BOOLEAN
+  },
   createdAt: {
     allowNull: false,
     type: Sequelize.DATE
@@ -53,7 +56,7 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('users', {
   }
 });
 
-const down = (queryInterface) => queryInterface.dropTable('users');
+const down = (queryInterface) => queryInterface.dropTable('Users');
 
 export {
   up,

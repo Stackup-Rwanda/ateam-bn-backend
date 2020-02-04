@@ -26,7 +26,7 @@ class EmailController {
   static async sendResetPasswordEmail(req, res) {
     const { email } = req.body;
 
-    const userExist = await AuthHelpers.emailExists(email);
+    const userExist = await AuthHelpers.userExists('email', email);
     if (!userExist) {
       return res.status(404).json({
         status: res.statusCode,
@@ -41,6 +41,8 @@ class EmailController {
       password: userExist.password,
       createdAt: userExist.createdAt
     };
+
+    console.log(userData);
 
     const token = TokenHelper.generateResetPasswordToken(userData);
     const url = `${resetPasswordURL}${userExist.id}/${token}`;
