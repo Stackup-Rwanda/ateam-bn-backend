@@ -18,13 +18,16 @@ class TokenHelper {
    * @returns {string} The users's hashed password.
    */
   static generateToken(id, email, role, isVerified) {
-    return jwt.sign({ 
-      id,
-      email,
-      role,
-      isVerified
-    }, process.env.SECRET_KEY,
-      { expiresIn: 3600 }
+    return jwt.sign(
+      { 
+        id,
+        email,
+        role,
+        isVerified
+      }, process.env.SECRET_KEY,
+      { 
+        expiresIn: 3600
+      }
     );
   }
 
