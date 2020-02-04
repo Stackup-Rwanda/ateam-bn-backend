@@ -7,7 +7,7 @@ import dash from 'http';
 import app from '../index';
 import strategyGenerator from '../helpers/strategyHelper';
 
-dash.createServer(app).listen(4000);
+dash.createServer(app).listen(3000);
 dotenv.config();
 const router = () => chai.request(app);
 chai.should();
