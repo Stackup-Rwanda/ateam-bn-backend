@@ -5,15 +5,46 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Users', {
     primaryKey: true,
     type: Sequelize.INTEGER
   },
-  firstName: {
+  name: {
     type: Sequelize.STRING
   },
-  lastName: {
+  gender: {
     type: Sequelize.STRING
   },
   email: {
     type: Sequelize.STRING,
     unique: true
+  },
+  username: {
+    type: Sequelize.STRING,
+    unique: true
+  },
+  password: {
+    type: Sequelize.STRING
+  },
+  birthdate: {
+    type: Sequelize.DATE
+  },
+  preferredLanguage: {
+    type: Sequelize.STRING
+  },
+  preferredCurrency: {
+    type: Sequelize.STRING
+  },
+  location: {
+    type: Sequelize.STRING
+  },
+  role: {
+    type: Sequelize.STRING
+  },
+  department: {
+    type: Sequelize.STRING
+  },
+  lineManager: {
+    type: Sequelize.STRING
+  },
+  isVerified: {
+    type: Sequelize.BOOLEAN
   },
   createdAt: {
     allowNull: false,

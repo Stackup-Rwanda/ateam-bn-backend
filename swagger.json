@@ -9,46 +9,108 @@
   },
 
   "host": "localhost:3000",
-  "basePath": "/api/v-unknown",
-
-  "schemes": ["http", "https"],
-  "consumes": ["application/json", "none"],
-  "produces": ["application/json", "none"],
+  "basePath": "/api",
   "tags": [
     {
-      "name": "Users",
-      "description": " Users endpoints :: All those endpoints are used by the users like to signup, signin and signout with application"
+      "name": "Auth",
+      "description": "Authentication endpoints"
+    },
+    {
+      "name": "Sign up",
+      "description": "Access to signup API endpoints"
     }
   ],
   "paths": {
-    "/users/jkhgftgftydcrdc": {
-      "get": {
-        "tags": ["Users"],
-        "summary": "Access wrong link",
-        "description": "Now by the use of this GET endpoint user Should be redirected to the documentation of application",
+    "/auth/signup/": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Signup",
+        "description": "User signup endpoint",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User credentials to be used for signup",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Signup"
+            }
+          }
+        ],
         "responses": {
+          "201": {
+            "description": "User was created successfully"
+          },
           "400": {
-            "description": " Bad request : Hey !! are you looking for BareFoot Nomad,  If yes Use the link below it is documentation of application"
+            "description": "Invalid credentials"
+          },
+          "409": {
+            "description": "This user already exists, use another email or username"
           }
         }
       }
-    },
-
-    "/users/logout": {
-      "get": {
-        "tags": ["Users"],
-        "summary": "logout user from application",
-        "description": "Now by the use of this GET endpoint user Should logout from application",
-        "responses": { "200": { "description": " OK : Logout successfully" } },
-        "parameters": [
-          {
-            "in": "header",
-            "name": "Authorization",
-            "description": " This is user token which must be deleted directly when logged out from application",
-            "type": "string"
-          }
-        ]
+    }
+  },
+  "definitions": {
+    "Signup": {
+      "type": "object",
+      "required": [
+        "name",
+        "gender",
+        "email",
+        "username",
+        "password",
+        "birthdate",
+        "preferredLanguage",
+        "referredCurrency",
+        "location",
+        "role",
+        "department",
+        "lineManager"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "birthdate": {
+          "type": "date"
+        },
+        "preferredLanguage": {
+          "type": "string"
+        },
+        "preferredCurrency": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "department": {
+          "type": "string"
+        },
+        "lineManager": {
+          "type": "string"
+        }
       }
     }
-  }
+  },
+  "schemes": ["http", "https"],
+  "consumes": ["application/json", "none"],
+  "produces": ["application/json", "none"]
 }
