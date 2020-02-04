@@ -11,15 +11,19 @@ dotenv.config();
 class TokenHelper {
   /**
    * Hashs the password for signup and login response.
-   * @param {string} password The user's password.
+   * @param {integer} id The user's id.
+   * @param {string} email The user's email.
+   * @param {string} role The user's role.
    * @returns {string} The users's hashed password.
    */
-  static generateToken(id, email, role) {
-    return jwt.sign({ id, email, role }, process.env.SECRET_KEY, { expiresIn: 3600 });
+  static generateToken(id, email, role, isVerified) {
+    return jwt.sign({ id, email, role, isVerified }, process.env.SECRET_KEY, { expiresIn: 3600 });
   }
 
   /**
    * Hashs the password.
+   * @param {integer} id The user's id.
+   * @param {string} email The user's email.
    * @param {string} password The user's password.
    * @returns {string} The users's hashed password.
    */

@@ -24,14 +24,20 @@ class AuthController {
       });
     }
 
-    const savedUser = await AuthHelpers.saveUser(req.body);
+    const {
+      id,
+      email,
+      role,
+      isVerified,
+      createdAt
+    } = await AuthHelpers.saveUser(req.body);
 
     return res.status(201).json({
       status: 201,
       message: 'User was created successfully',
       data: {
-        token: TokenHelper.generateToken(savedUser.id, savedUser.email, savedUser.role),
-        createdAt: savedUser.createdAt
+        token: TokenHelper.generateToken(id, email, role, isVerified),
+        createdAt: createdAt
       }
     });
   }
