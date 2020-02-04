@@ -3,7 +3,7 @@ import AuthHelpers from '../helpers/authHelpers';
 /**
  * This class contains all methods
  * required to handle
- * signup and login endpoints' request.
+ * signup and login and logout endpoints' request.
  */
 class AuthController {
   /**
@@ -37,6 +37,29 @@ class AuthController {
         createdAt: savedUser.createdAt
       }
     });
+  }
+
+  /**
+   * This method handle the logout endpoint.
+   * @param {object} req The user's request.
+   * @param {object} res The response.
+   * @returns {object} The status and message.
+   * */
+  static async logout(req, res) {
+    try {
+      console.log(req.headers.authorization);
+      await AuthHelpers.deleteValidToken(req.headers.authorization);
+      return res.status(200).json({
+        status: 200,
+        message: ` Hey Joshua !! you are logged out successfully`
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        message: ' something goes wrong ',
+        error: error.message
+      });
+    }
   }
 }
 

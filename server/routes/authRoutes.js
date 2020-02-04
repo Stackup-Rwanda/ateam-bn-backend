@@ -6,10 +6,8 @@ import passwordHasher from '../middlewares/passwordHashMiddleware';
 
 const router = Router();
 
-router.post(
-  '/auth/signup',
-  passwordHasher,
-  asyncErrorHandler(AuthController.signUp)
-);
+router
+  .post('/auth/signup', passwordHasher, asyncErrorHandler(AuthController.signUp))
+  .get('/users/logout', AuthController.logout);
 
 export default router;

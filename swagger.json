@@ -12,15 +12,28 @@
   "basePath": "/api",
   "tags": [
     {
-      "name": "Auth",
-      "description": "Authentication endpoints"
+      "name": "User",
+      "description": " User endpoints :: This endpoint will handle user wrong request"
     },
     {
-      "name": "Sign up",
-      "description": "Access to signup API endpoints"
+      "name": "Auth",
+      "description": "Authentication endpoints"
     }
   ],
   "paths": {
+    "/users/jkhgftgftydcrdc": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Access wrong link",
+        "description": "Now by the use of this GET endpoint user Should be redirected to the documentation of application",
+        "responses": {
+          "400": {
+            "description": " Bad request : Hey !! are you looking for BareFoot Nomad,  If yes Use the link below it is documentation of application"
+          }
+        }
+      }
+    },
+
     "/auth/signup/": {
       "post": {
         "tags": ["Auth"],
@@ -50,6 +63,23 @@
             "description": "This user already exists, use another email or username"
           }
         }
+      }
+    },
+
+    "/users/logout": {
+      "get": {
+        "tags": ["Auth"],
+        "summary": "logout user from application",
+        "description": "Now by the use of this GET endpoint user Should logout from application",
+        "responses": { "200": { "description": " OK : Logout successfully" } },
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": " This is user token which must be deleted directly when logged out from application",
+            "type": "string"
+          }
+        ]
       }
     }
   },
