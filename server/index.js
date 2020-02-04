@@ -11,10 +11,10 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 const basePath = '/api';
-app.use(basePath, allRoutes);
-app.use(`${basePath}/documentation`, swaggerUi.serve, swaggerUi.setup(apiDocumentation));
-app.listen(8080, () => {
+
+app.listen(process.env.PORT || 3000, () => {
   console.log('server is running on port 3000');
 });
 
