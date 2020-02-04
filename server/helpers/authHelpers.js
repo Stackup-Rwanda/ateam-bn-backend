@@ -27,28 +27,18 @@ class AuthHelpers {
   static async saveUser(user) {
     const acceptedUser = await User.create(
       {
-        user,
+        ...user,
         isVerified: false,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        fields: [
-          'name',
-          'gender',
-          'email',
-          'username',
-          'password',
-          'birthdate',
-          'preferredLanguage',
-          'preferredCurrency',
-          'location',
-          'role',
-          'department',
-          'lineManager',
-          'isVerified',
-          'createAt',
-          'updatedAt'
+        fields:
+        [
+          'name', 'gender', 'email', 'username',
+          'password', 'birthdate', 'preferredLanguage',
+          'preferredCurrency', 'location', 'role', 'department',
+          'lineManager', 'isVerified', 'createAt', 'updatedAt'
         ]
       }
     );
