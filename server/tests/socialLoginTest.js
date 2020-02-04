@@ -23,8 +23,8 @@ describe('User login via facebook', () => {
   describe('submits form', (done) => {
     before(() => {
       browser.fill('input[name="email"]', process.env.email)
-        .then(() => browser.fill('input[name="password"]', process.env.credential))
-        .then(() => browser.pressButton('Log in', done));
+        .then(() => browser.fill('input[name="password"]', process.env.credential));
+      return browser.pressButton('login', done);
     });
 
     it('should be successful', () => {
@@ -32,15 +32,13 @@ describe('User login via facebook', () => {
     });
 
     it('should see welcome page', () => {
-      browser.assert.text('title', 'Log into Facebook | Facebook');
+      browser.assert.text('title', 'Injira kuri Facebook | Facebook');
     });
 
     it('should receive data from facebook', () => {
       router()
         .get('/api/auth/facebook/callback')
         .end((error, res) => {
-          expect(res.profile.provider).to.equal('facebook');
-          expect(res.profile.id).to.equal('2802182399866874');
           expect(res.profile.username).to.equal(undefined);
           expect(res.profile.dotenv.displayName).to.equal('Izabayo Johnson Jonas');
           expect(res.profile.name.familyName).to.equal(undefined);
@@ -48,8 +46,9 @@ describe('User login via facebook', () => {
           expect(res.profile.middleName).to.equal(undefined);
           expect(res.profile.gender).to.equal(undefined);
           expect(res.profileUrl).to.equal(undefined);
-          expect(res.body.status).to.be.equal(200);
-          expect(res.body).to.be.an('object');
+          expect(res.body).to.have.status(200);
+          expect(res.body).to.have.property('message', "you are logged in successfully");
+          done(error);
         });
     });
   });

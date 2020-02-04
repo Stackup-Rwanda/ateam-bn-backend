@@ -1,7 +1,20 @@
+import '../middlewares/googleStrategy';
+import generateSocialToken from '../helpers/socialToken';
+import models from '../models';
+
+const { User } = models;
 const googleAuth = (req, res) => {
-  res.status(200).json({
-    status: 200,
-    message: "user logged in successfully"
+  const google = req.user;
+  res.status(201).json({
+    status: 201,
+    message: `welcome ${google.displayName}`,
+    data: {
+      token: generateSocialToken(google.displayName, google.id)
+    }
+  });
+  User.create({
+    name: google.displayName,
+    google_id: google.id
   });
 };
 

@@ -1,10 +1,21 @@
+import '../middlewares/fbStrategy';
+import generateSocialToken from '../helpers/socialToken';
+import models from '../models';
 
-const storeAuth = async (req, res) => {
-  await res.status(200).json({
+const { User } = models;
+const storeAuth = (req, res) => {
+  const profile = req.user;
+  res.status(200).json({
     status: 200,
-    message: "authentication is successfull"
+    message: `welcome ${profile.displayName}`,
+    data: {
+      token: generateSocialToken(profile.DisplayName, profile.id),
+    }
+  });
+
+  User.create({
+    name: profile.displayName,
+    fb_id: profile.id
   });
 };
-
-
 export default storeAuth;

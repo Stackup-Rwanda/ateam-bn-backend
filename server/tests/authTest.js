@@ -33,4 +33,3 @@ describe('Test for signup endpoint', () => {
     })
   );
 });
-
