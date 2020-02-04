@@ -11,9 +11,7 @@ const app = express();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 const basePath = '/api';
-
 app.use(basePath, allRoutes);
 app.use(`${basePath}/documentation`, swaggerUi.serve, swaggerUi.setup(apiDocumentation));
 app.listen(8080, () => {
