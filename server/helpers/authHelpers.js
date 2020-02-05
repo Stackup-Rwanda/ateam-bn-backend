@@ -33,6 +33,16 @@ class AuthHelpers {
   }
 
   /**
+   * Finds the user's email if he/she exists.
+   * @param {string} email users table field.
+   * @returns {object} The users's data.
+   */
+  static async confirm(email) {
+    const user = await User.update({ isVerified: true }, { where: { email } });
+    return user;
+  }
+
+  /**
    * Saves the user in the DB.
    * @param {object} user The request sent by a user.
    * @returns {object} The users's data.
@@ -40,24 +50,15 @@ class AuthHelpers {
   static async saveUser(user) {
     const acceptedUser = await User.create(
       {
-        ...user,
-        isVerified: false,
-        createdAt: new Date(),
-        updatedAt: new Date()
+        ...user, isVerified: false, createdAt: new Date(), updatedAt: new Date()
       },
       {
-        fields:
-        [
-          'name', 'gender', 'email', 'username',
-          'password', 'birthdate', 'preferredLanguage',
-          'preferredCurrency', 'location', 'role', 'department',
-          'lineManager', 'isVerified', 'createAt', 'updatedAt'
+        fields: [
+          'name', 'gender', 'email', 'username', 'password', 'birthdate', 'preferredLanguage', 'preferredCurrency', 'location', 'role', 'department', 'lineManager', 'isVerified', 'createAt', 'updatedAt'
         ]
       }
     );
-
     return acceptedUser;
   }
 }
-
 export default AuthHelpers;

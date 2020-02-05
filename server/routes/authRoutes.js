@@ -15,11 +15,13 @@ router.post(
   passwordHasher,
   asyncErrorHandler(AuthController.signUp)
 );
+
 router.post(
   '/auth/reset-password',
   Validations.checkEmail,
   asyncErrorHandler(EmailController.sendResetPasswordEmail)
 );
+
 router.patch(
   '/auth/update-password/:userId/:token',
   Validations.checkPassword,
@@ -28,5 +30,7 @@ router.patch(
   resetEmailTokenMiddleware,
   asyncErrorHandler(EmailController.updatePassword)
 );
+
+router.put('/user/:email/confirm', AuthController.confirmation);
 
 export default router;
