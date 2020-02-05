@@ -1,8 +1,7 @@
 import bcrypt from 'bcrypt';
-
 /**
  * This class contains
- * two methods, one to help hashing password (hashPassword)
+ * two methods, one to help hashing password
  * and the second to retrieve hashed password
  */
 class Hasher {

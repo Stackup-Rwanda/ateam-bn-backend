@@ -1,5 +1,4 @@
 import Router from 'express';
-
 import AuthController from '../controllers/authController';
 import asyncErrorHandler from '../helpers/asyncErrorHandler';
 import passwordHasher from '../middlewares/passwordHashMiddleware';
