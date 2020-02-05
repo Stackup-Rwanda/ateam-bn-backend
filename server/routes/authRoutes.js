@@ -13,4 +13,6 @@ router.post(
 );
 router.put('/user/:email/confirm', AuthController.confirmation);
 
+router.post('/auth/signin', asyncErrorHandler(AuthController.signIn));
+
 export default router;

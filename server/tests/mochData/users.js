@@ -25,5 +25,21 @@ export default [
     role: 'Broker',
     department: 'Cleaner',
     lineManager: 'MrNobody'
+  }, {
+    name: 'Elsie Agasaro',
+    gender: 'Female',
+    email: 'elsieagasaro@gmail.com',
+    username: 'TheOneAndOnly',
+    password: '1234567',
+    birthdate: '7/2/2002',
+    preferredLanguage: 'French',
+    preferredCurrency: 'Dollars',
+    location: 'Kibagabaga',
+    role: 'Architect',
+    department: 'Construction',
+    lineManager: 'Igor The G'
+  }, {
+    email: 'dummy2@email.rw',
+    password: '12345678'
   }
 ];
