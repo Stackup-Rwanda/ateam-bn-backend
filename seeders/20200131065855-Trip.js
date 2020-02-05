@@ -1,4 +1,4 @@
-const up = (queryInterface) => queryInterface.bulkInsert('trips', [{
+const up = (queryInterface) => queryInterface.bulkInsert('Trips', [{
   userId: 1,
   tripType: 'One-way',
   from: 'kigali',
@@ -12,7 +12,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('trips', [{
   updatedAt: new Date()
 }]);
 
-const down = (queryInterface) => queryInterface.bulkDelete('trips', null, {});
+const down = (queryInterface) => queryInterface.bulkDelete('Trips', null, {});
 
 export {
   up,

@@ -42,7 +42,7 @@ const up = (queryInterface, sequelize) => queryInterface.createTable('Trips', {
     type: sequelize.DATE,
   },
 });
-const down = (queryInterface) => queryInterface.dropTable('trips');
+const down = (queryInterface) => queryInterface.dropTable('Trips');
 
 export {
   up,

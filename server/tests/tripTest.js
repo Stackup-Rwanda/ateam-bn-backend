@@ -1,6 +1,5 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
-import sequelize from '../config/db';
 import app from '../index';
 import mochaAsync from '../helpers/mochaAsync';
 import {
@@ -11,9 +10,6 @@ import {
 chai.use(chaiHttp);
 const router = () => chai.request(app);
 
-after(async () => {
-  await sequelize.close();
-});
 
 describe('Test for create one way trip endpoint', () => {
   it(
