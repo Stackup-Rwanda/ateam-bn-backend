@@ -14,7 +14,7 @@ const promise = (x, y) => {
 };
 
 describe('Test suite for helpers', () => {
-  it('check if a promise was resolved', async () => {
+  it('check if a promise was resolved', () => {
     const data = mochaAsync(promise(2, 2));
     expect(data()).to.not.eq(undefined);
   });
