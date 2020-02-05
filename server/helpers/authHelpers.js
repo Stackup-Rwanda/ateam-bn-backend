@@ -1,6 +1,6 @@
 import models from '../models';
 
-const { User, Token } = models;
+const { User, Token, Notification } = models;
 
 /**
  * This class contains
@@ -68,6 +68,16 @@ class AuthHelpers {
    */
   static async deleteValidToken(validtoken) {
     await Token.destroy({ where: { value: validtoken } });
+  }
+
+  /**
+   * insert notification into Notification table in the DB.
+   * @param {clientNotification} clientNotification after user request.
+   * @returns {clientNotification} The user notification will stored.
+   */
+  static async insertNotification(clientNotification) {
+    const createdNotification = await Notification.create(clientNotification);
+    return createdNotification;
   }
 }
 export default AuthHelpers;
