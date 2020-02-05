@@ -3,7 +3,7 @@ import Hasher from '../server/helpers/passwordHashHelper';
 const up = (queryInterface) => queryInterface.bulkInsert('Users', [{
   name: 'Dummy',
   gender: 'Male',
-  email: 'dummy@email.rw',
+  email: 'manzi@gmail.com',
   username: 'MrDummy',
   password: Hasher.hashPassword('123456789'),
   birthdate: new Date(),

@@ -6,7 +6,7 @@ import passwordHashHelper from '../helpers/passwordHashHelper';
 /**
  * This class contains all methods
  * required to handle
- * signup and login endpoints' request.
+ * signup and login and logout endpoints' request.
  */
 class AuthController {
   /**
@@ -94,6 +94,28 @@ class AuthController {
       status: 401,
       message: 'password or email is incorrect'
     });
+  }
+
+  /**
+    *  This method handle the logout endpoint.
+   * @param {object} req The user's request.
+   * @param {object} res The response.
+   * @returns {object} The status and message.
+    */
+  static async logout(req, res) {
+    try {
+      await AuthHelpers.deleteValidToken(req.header('token'));
+      return res.status(200).json({
+        status: 200,
+        message: `${req.user.username} successfully signed out.`
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        message: ' something goes wrong ',
+        error: error.message
+      });
+    }
   }
 }
 
