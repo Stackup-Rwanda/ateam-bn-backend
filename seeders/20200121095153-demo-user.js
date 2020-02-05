@@ -16,23 +16,6 @@ const up = (queryInterface) => queryInterface.bulkInsert('Users', [{
   isVerified: false,
   createdAt: new Date(),
   updatedAt: new Date()
-},
-{
-  name: 'Butirigitwa Manzi',
-  gender: 'Male',
-  email: 'manzi@gmail.com',
-  username: 'manzi',
-  password: Hasher.hashPassword('123456789'),
-  birthdate: new Date(),
-  preferredLanguage: 'French',
-  preferredCurrency: 'Euro',
-  location: 'Paris',
-  role: 'Broker',
-  department: 'Cleaner',
-  lineManager: 'MrNobody',
-  isVerified: false,
-  createdAt: new Date(),
-  updatedAt: new Date()
 }]);
 
 const down = (queryInterface) => queryInterface.bulkDelete('Users', null, {});
