@@ -10,7 +10,6 @@ import {
 chai.use(chaiHttp);
 const router = () => chai.request(app);
 
-
 describe('Test for create one way trip endpoint', () => {
   it(
     'should create a new one way trip',
