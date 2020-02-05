@@ -1,6 +1,6 @@
 import models from '../models';
 
-const { User, validtokens } = models;
+const { User, Token } = models;
 
 /**
  * This class contains
@@ -34,12 +34,12 @@ class AuthHelpers {
       },
       {
         fields:
-        [
-          'name', 'gender', 'email', 'username',
-          'password', 'birthdate', 'preferredLanguage',
-          'preferredCurrency', 'location', 'role', 'department',
-          'lineManager', 'isVerified', 'createAt', 'updatedAt'
-        ]
+          [
+            'name', 'gender', 'email', 'username',
+            'password', 'birthdate', 'preferredLanguage',
+            'preferredCurrency', 'location', 'role', 'department',
+            'lineManager', 'isVerified', 'createAt', 'updatedAt'
+          ]
       }
     );
 
@@ -52,7 +52,7 @@ class AuthHelpers {
    * @returns {string} The users's token.
    */
   static async deleteValidToken(validtoken) {
-    await validtokens.destroy({ where: { tokens: validtoken } });
+    await Token.destroy({ where: { value: validtoken } });
   }
 }
 

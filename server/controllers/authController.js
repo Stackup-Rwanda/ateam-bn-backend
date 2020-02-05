@@ -47,11 +47,10 @@ class AuthController {
    * */
   static async logout(req, res) {
     try {
-      console.log(req.headers.authorization);
-      await AuthHelpers.deleteValidToken(req.headers.authorization);
+      await AuthHelpers.deleteValidToken(req.header('token'));
       return res.status(200).json({
         status: 200,
-        message: ` Hey Joshua !! you are logged out successfully`
+        message: `${req.verifiedData.username} successfully signed out.`
       });
     } catch (error) {
       return res.status(500).json({
