@@ -1,49 +1,22 @@
-import Sequelize from 'sequelize';
-import db from '../config/db';
+const userDefinition = (sequelize, DataTypes) => {
+  const User = sequelize.define('User', {
+    name: { type: DataTypes.STRING },
+    gender: { type: DataTypes.STRING },
+    email: { type: DataTypes.STRING },
+    username: { type: DataTypes.STRING },
+    password: { type: DataTypes.STRING },
+    birthdate: { type: DataTypes.DATE },
+    preferredLanguage: { type: DataTypes.STRING },
+    preferredCurrency: { type: DataTypes.STRING },
+    location: { type: DataTypes.STRING },
+    role: { type: DataTypes.STRING },
+    department: { type: DataTypes.STRING },
+    lineManager: { type: DataTypes.STRING },
+    isVerified: { type: DataTypes.BOOLEAN },
+    createdAt: { type: DataTypes.DATE },
+    updatedAt: { type: DataTypes.DATE }
+  }, {});
+  return User;
+};
 
-const User = db.define('user', {
-  name: {
-    type: Sequelize.STRING
-  },
-  gender: {
-    type: Sequelize.STRING
-  },
-  email: {
-    type: Sequelize.STRING
-  },
-  username: {
-    type: Sequelize.STRING
-  },
-  password: {
-    type: Sequelize.STRING
-  },
-  birthdate: {
-    type: Sequelize.DATE
-  },
-  preferredLanguage: {
-    type: Sequelize.STRING
-  },
-  preferredCurrency: {
-    type: Sequelize.STRING
-  },
-  location: {
-    type: Sequelize.STRING
-  },
-  role: {
-    type: Sequelize.STRING
-  },
-  department: {
-    type: Sequelize.STRING
-  },
-  lineManager: {
-    type: Sequelize.STRING
-  },
-  createdAt: {
-    type: Sequelize.DATE
-  },
-  updatedAt: {
-    type: Sequelize.DATE
-  }
-});
-
-export default User;
+export default userDefinition;

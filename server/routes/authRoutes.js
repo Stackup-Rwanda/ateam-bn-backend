@@ -3,12 +3,16 @@ import Router from 'express';
 import AuthController from '../controllers/authController';
 import EmailController from '../controllers/EmailController';
 import asyncErrorHandler from '../helpers/asyncErrorHandler';
-import Validations from '../middleware/ValidateResetPassword';
+import Validations from '../middlewares/ValidateResetPassword';
+import passwordHasher from '../middlewares/passwordHashMiddleware';
+import resetEmailTokenMiddleware from '../middlewares/ResetEmailTokenMiddleware';
+import userIdExistMiddleware from '../middlewares/UserIdExistMiddleware';
 
 const router = Router();
 
 router.post(
   '/auth/signup',
+  passwordHasher,
   asyncErrorHandler(AuthController.signUp)
 );
 router.post(
@@ -19,6 +23,8 @@ router.post(
 router.patch(
   '/auth/update-password/:userId/:token',
   Validations.checkPassword,
+  userIdExistMiddleware,
+  resetEmailTokenMiddleware,
   asyncErrorHandler(EmailController.updatePassword)
 );
 

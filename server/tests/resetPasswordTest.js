@@ -9,7 +9,6 @@ const router = () => chai.request(app);
 
 let thatUser;
 let userObject;
-let usertoken;
 
 describe('Test for sending email endpoint', () => {
   it("should create a new user account with appropriate request",
@@ -17,11 +16,10 @@ describe('Test for sending email endpoint', () => {
       const res = await router()
         .post("/api/auth/signup")
         .send(usersTester[2]);
-        console.log(res.body, '=======igor(201)========');
-      // expect(res.body.status).to.equal(201);
-      // expect(res.body).to.be.an('object');
-      // expect(res.body.message).to.be.a('string');
-      // expect(res.body.data).to.be.an('object');
+      expect(res.body.status).to.equal(201);
+      expect(res.body).to.be.an('object');
+      expect(res.body.message).to.be.a('string');
+      expect(res.body.data).to.be.an('object');
       thatUser = res.body.data;
     }));
   it(
@@ -31,16 +29,12 @@ describe('Test for sending email endpoint', () => {
       const res = await router()
         .post("/api/auth/reset-password")
         .send({ email });
-        console.log(res.body, '=======jaja(200)========');
-      // const { userDetails } = res.body.data;
-      // userObject = userDetails;
-      // usertoken = res.body.data.token;
-      // expect(res.body.status).to.equal(200);
-      // expect(res.body).to.be.an('object');
-      // expect(res.body.message).to.be.a('string');
-      // expect(res.body.data).to.be.an('object');
-      // expect(res.body.data.token).to.be.an('string');
-      // expect(res.body.data.userDetails).to.be.an('object');
+      const { userDetails } = await res.body;
+      userObject = userDetails;
+      expect(res.body.status).to.equal(200);
+      expect(res.body).to.be.an('object');
+      expect(res.body.message).to.be.a('string');
+      expect(res.body.userDetails).to.be.an('object');
     })
   );
 
@@ -50,10 +44,9 @@ describe('Test for sending email endpoint', () => {
       const res = await router()
         .post("/api/auth/reset-password")
         .send({ email: 'asdfsdf' });
-        console.log(res.body, '=======jaja(400)========');
-      // expect(res.body.status).to.equal(400);
-      // expect(res.body).to.be.an('object');
-      // expect(res.body.error).to.be.a('string');
+      expect(res.body.status).to.equal(400);
+      expect(res.body).to.be.an('object');
+      expect(res.body.error).to.be.a('string');
     })
   );
 
@@ -63,10 +56,9 @@ describe('Test for sending email endpoint', () => {
       const res = await router()
         .post("/api/auth/reset-password")
         .send({ email: 'theFakeEmail@fake.com' });
-        console.log(res.body, '=======jaja(404)========');
-      // expect(res.body.status).to.equal(404);
-      // expect(res.body).to.be.an('object');
-      // expect(res.body.error).to.be.a('string');
+      expect(res.body.status).to.equal(404);
+      expect(res.body).to.be.an('object');
+      expect(res.body.error).to.be.a('string');
     })
   );
 
@@ -75,41 +67,51 @@ describe('Test for sending email endpoint', () => {
     mochaAsync(async () => {
       const { password, confirmPassword } = usersTester[3];
       const res = await router()
-        .patch(`/api/auth/update-password/${userObject.id}/${usertoken}`)
+        .patch(`/api/auth/update-password/${userObject.id}/${userObject.token}`)
         .send({ password, confirmPassword });
-        console.log(res.body, '=======jaja(200)========');
-      // expect(res.body.status).to.equal(200);
-      // expect(res.body).to.be.an('object');
-      // expect(res.body.message).to.be.a('string');
-      // expect(res.body.userDetails).to.be.an('object');
+      expect(res.body.status).to.equal(200);
+      expect(res.body).to.be.an('object');
+      expect(res.body.message).to.be.a('string');
+      expect(res.body.userDetails).to.be.an('object');
     })
   );
 
   it(
-    "shouldn't update user password, Because of bad credentials",
+    "shouldn't update password, Because of unknown user",
+    mochaAsync(async () => {
+      const { password, confirmPassword } = usersTester[3];
+      const res = await router()
+        .patch(`/api/auth/update-password/badId/${userObject.token}`)
+        .send({ password, confirmPassword });
+      expect(res.body.status).to.equal(404);
+      expect(res.body).to.be.an('object');
+      expect(res.body.error).to.be.a('string');
+    })
+  );
+
+  it(
+    "shouldn't update user password, Because of uncomplete data",
     mochaAsync(async () => {
       const { confirmPassword } = usersTester[3];
       const res = await router()
-        .patch(`/api/auth/update-password/${userObject.id}/${usertoken}`)
+        .patch(`/api/auth/update-password/${userObject.id}/${userObject.token}`)
         .send({ confirmPassword });
-        console.log(res.body, '=======jaja(400)========');
-      // expect(res.body.status).to.equal(400);
-      // expect(res.body).to.be.an('object');
-      // expect(res.body.error).to.be.a('string');
+      expect(res.body.status).to.equal(400);
+      expect(res.body).to.be.an('object');
+      expect(res.body.error).to.be.a('string');
     })
   );
 
   it(
-    "shouldn't update user password, Because of bad credentials",
+    "shouldn't update user password, Because of bad Token",
     mochaAsync(async () => {
       const { password, confirmPassword, badToken } = usersTester[3];
       const res = await router()
         .patch(`/api/auth/update-password/${userObject.id}/${badToken}`)
         .send({ password, confirmPassword });
-        console.log(res.body, '=======jaja(500)========');
-      // expect(res.body.status).to.equal(500);
-      // expect(res.body).to.be.an('object');
-      // expect(res.body.error).to.be.a('string');
+      expect(res.body.status).to.equal(401);
+      expect(res.body).to.be.an('object');
+      expect(res.body.error).to.be.a('string');
     })
   );
 });

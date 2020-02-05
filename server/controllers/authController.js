@@ -33,6 +33,7 @@ class AuthController {
         email: savedUser.email,
         username: savedUser.username,
         password: savedUser.password,
+        isVerified: savedUser.isVerified,
         createdAt: savedUser.createdAt
       }
     });
