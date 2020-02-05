@@ -7,7 +7,6 @@ import usersTester from './mochData/users';
 chai.use(chaiHttp);
 const router = () => chai.request(app);
 
-let thatUser;
 let userObject;
 
 describe('Test for sending email endpoint', () => {
@@ -21,17 +20,15 @@ describe('Test for sending email endpoint', () => {
       expect(res.body).to.be.an('object');
       expect(res.body.message).to.be.a('string');
       expect(res.body.data).to.be.an('object');
-      thatUser = res.body.data;
     })
   );
 
   it(
     "should send an email to a user",
     mochaAsync(async () => {
-      const { email } = thatUser;
       const res = await router()
         .post("/api/auth/reset-password")
-        .send({ email });
+        .send({ email: usersTester[2].email });
       const { userDetails } = await res.body;
       userObject = userDetails;
       expect(res.body.status).to.equal(200);
