@@ -46,7 +46,6 @@ const userDefinition = (sequelize, DataTypes) => {
       type: DataTypes.DATE
     }
   }, {});
-  // eslint-disable-next-line no-unused-vars
   User.associate = (models) => {
     User.hasMany(models.Trip, {
       foreignKey: 'userId',
