@@ -22,6 +22,7 @@ class TokenHelper {
     const generatedToken = jwt.sign({
       id, email, role, isVerified
     }, process.env.SECRET_KEY);
+
     importAuthHelpers.insertGeneratedToken(generatedToken);
     return generatedToken;
   }
