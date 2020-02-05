@@ -4,6 +4,7 @@ import AuthController from '../controllers/authController';
 import asyncErrorHandler from '../helpers/asyncErrorHandler';
 import importedTokenValidator from '../middlewares/tokenValidator';
 import passwordHasher from '../middlewares/passwordHashMiddleware';
+import signUp from '../middlewares/validation';
 
 const router = Router();
 
