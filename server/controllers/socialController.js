@@ -4,19 +4,18 @@ import models from '../models';
 import '../middlewares/googleStrategy';
 
 const { User } = models;
-
-const storeAuth = (req, res) => {
-  res.status(200).json({
+const storeAuth = (profile, fb) => {
+  fb.status(200).json({
     status: 200,
-    message: `welcome ${req.user.displayName}`,
+    message: `welcome ${profile.user.displayName}`,
     data: {
-      token: generateSocialToken(req.user.DisplayName, req.user.id),
+      token: generateSocialToken(profile.user.DisplayName, profile.id),
     }
   });
 
   User.create({
-    name: req.user.displayName,
-    fb_id: req.user.id
+    name: profile.user.displayName,
+    fb_id: profile.user.id
   });
 };
 const googleAuth = (req, res) => {
