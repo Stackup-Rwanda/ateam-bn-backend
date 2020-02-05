@@ -45,7 +45,7 @@ class EmailController {
     const url = `${resetPasswordURL}${userData.id}/${token}`;
     const subjectAndHhtmlBody = resetPasswordSubjectAndHtmlBoy(userData, url);
     const theMessage = sendEmailTemplate('support@borafoot.com', userData, subjectAndHhtmlBody);
-    await sgMail.send(theMessage);
+    sgMail.send(theMessage);
 
     res.status(200).json({
       status: res.statusCode,
