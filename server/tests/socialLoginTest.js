@@ -6,7 +6,7 @@ import http from 'http';
 import app from '../index';
 import strategyGenerator from '../helpers/strategyHelper';
 
-http.createServer(app).listen(5000);
+http.createServer(app).listen(6000);
 dotenv.config();
 const router = () => chai.request(app);
 chai.should();
@@ -32,7 +32,7 @@ describe('User login via facebook', () => {
     });
 
     it('should see welcome page', () => {
-      browser.assert.text('title', 'Injira kuri Facebook | Facebook');
+      browser.assert.text('title', 'Log into Facebook | Facebook');
     });
 
     it('should receive data from facebook', () => {
