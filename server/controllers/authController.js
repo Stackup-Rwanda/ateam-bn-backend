@@ -1,3 +1,4 @@
+import TokenHelper from '../helpers/TokenHelper';
 import AuthHelpers from '../helpers/authHelpers';
 
 /**
@@ -23,18 +24,20 @@ class AuthController {
       });
     }
 
-    const savedUser = await AuthHelpers.saveUser(req.body);
+    const {
+      id,
+      email,
+      role,
+      isVerified,
+      createdAt
+    } = await AuthHelpers.saveUser(req.body);
 
     return res.status(201).json({
       status: 201,
       message: 'User was created successfully',
       data: {
-        name: savedUser.name,
-        email: savedUser.email,
-        username: savedUser.username,
-        password: savedUser.password,
-        isVerified: savedUser.isVerified,
-        createdAt: savedUser.createdAt
+        token: TokenHelper.generateToken(id, email, role, isVerified),
+        createdAt
       }
     });
   }
