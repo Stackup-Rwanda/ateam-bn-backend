@@ -8,7 +8,8 @@ chai.use(chaiHttp);
 const router = () => chai.request(app);
 
 describe('Test for signup endpoint', () => {
-  it('should create a new user account with appropriate request',
+  it(
+    'should create a new user account with appropriate request',
     mochaAsync(async () => {
       const res = await router()
         .post('/api/auth/signup')
@@ -17,9 +18,11 @@ describe('Test for signup endpoint', () => {
       expect(res.body).to.be.an('object');
       expect(res.body.message).to.be.a('string');
       expect(res.body.data).to.be.an('object');
-    }));
+    })
+  );
 
-  it("shouldn't signup already saved user",
+  it(
+    "shouldn't signup already saved user",
     mochaAsync(async () => {
       const res = await router()
         .post('/api/auth/signup')
@@ -27,5 +30,6 @@ describe('Test for signup endpoint', () => {
       expect(res.body.status).to.equal(409);
       expect(res.body).to.be.an('object');
       expect(res.body.error).to.be.a('string');
-    }));
+    })
+  );
 });
