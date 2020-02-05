@@ -8,8 +8,6 @@ dotenv.config();
 
 const verifyToken = async (req, res, next) => {
   try {
-    const verify = jwt.verify(req.header('token'), process.env.JWT_PRIVATE_KEY);
-    req.verifiedData = verify;
     const userExists = await User.findOne({
       where: { email: verify.email }
     });
