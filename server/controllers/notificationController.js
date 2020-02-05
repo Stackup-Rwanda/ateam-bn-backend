@@ -1,9 +1,19 @@
-/* eslint-disable class-methods-use-this */
-/* eslint-disable require-jsdoc */
 import importQuery from '../helpers/authHelpers';
 import importService from '../helpers/emailService';
 
+/**
+ * This class contains all methods
+ * required to handle
+ * viewing notification with app and send notification to email with app.
+ */
 class Notifications {
+  /**
+   * This function will use insertNotification method to store into DB.
+   * This function will use emailing method to send email to users.
+   * @param {object} req The user's request.
+   * @param {object} res The response.
+   * @returns {object} The status and some data of the user.
+   */
   async createNotification(req, res) {
     try {
       const clientNotify = {
