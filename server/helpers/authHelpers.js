@@ -49,6 +49,19 @@ class AuthHelpers {
   }
 
   /**
+   * insert generatyed token into table in the DB.
+   * @param {string} generatedtoken The request sent by a user.
+   * @returns {string} The users's token.
+   */
+  static async insertGeneratedToken(generatedtoken) {
+    await Token.create({
+      value: generatedtoken,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    });
+  }
+
+  /**
    * delete token from validtoken table in the DB.
    * @param {string} validtoken The request sent by a user.
    * @returns {string} The users's token.

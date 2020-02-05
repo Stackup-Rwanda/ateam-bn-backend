@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import importAuthHelpers from './authHelpers';
 
 dotenv.config();
 
@@ -18,7 +19,7 @@ class TokenHelper {
    * @returns {string} The users's hashed password.
    */
   static generateToken(id, email, role, isVerified) {
-    return jwt.sign(
+    const generatedToken = jwt.sign(
       {
         id,
         email,
@@ -26,6 +27,8 @@ class TokenHelper {
         isVerified
       }, process.env.SECRET_KEY
     );
+    importAuthHelpers.insertGeneratedToken(generatedToken);
+    return generatedToken;
   }
 }
 export default TokenHelper;

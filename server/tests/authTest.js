@@ -94,7 +94,7 @@ describe('signIn tests', () => {
       .send(usersTester[1]);
     res.should.have.status(401);
     res.body.should.be.an('object');
-    res.body.should.have.property('error', 'Please confirm your email before logging in!');
+    res.body.should.have.property('message');
   });
 
   it('User should not be able to log into account when invalid credentials', async () => {
