@@ -6,8 +6,8 @@ export const resetPasswordSubjectAndHtmlBoy = (user, url) => ({
       <style type="text/css">
       body{ height: 100%; text-align: center; color: #000}
       .barefoot-color{ color: #3AB397; }
-      .button{ background-color:#3AB397; color: #3AB397; border: 2px solid #3AB397; border-radius: 20px 20px; padding: 15px 32px; text-decoration: none; display: inline-block; font-size: 16px; }
-      .button:hover{ background-color: #3AB397; color: #fff; }
+      a.button{ background-color:#fff; color: #3AB397; border: 2px solid #3AB397; border-radius: 20px 20px; padding: 15px 32px; text-decoration: none; display: inline-block; font-size: 16px; }
+      a.button:hover{ background-color: #3AB397; color: #fff; }
       </style>
       <title></title>
     </head>
