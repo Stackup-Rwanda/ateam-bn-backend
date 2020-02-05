@@ -1,9 +1,8 @@
 import Router from 'express';
 import passport from 'passport';
-import googleAuth from '../controllers/googleAuthController';
 import AuthController from '../controllers/authController';
 import asyncErrorHandler from '../helpers/asyncErrorHandler';
-import storeAuth from '../controllers/fbAuthController';
+import social from '../controllers/socialController';
 
 const router = Router();
 router.use(passport.initialize());
@@ -18,7 +17,7 @@ router.get(
 );
 router.get(
   '/auth/google/callback',
-  passport.authenticate('google', { session: false }), googleAuth
+  passport.authenticate('google', { session: false }), social.googleAuth
 );
 
 
@@ -26,6 +25,6 @@ router.get(
   '/auth/facebook',
   passport.authenticate('facebook')
 );
-router.get('/auth/facebook/callback', passport.authenticate('facebook', { session: false }), storeAuth);
+router.get('/auth/facebook/callback', passport.authenticate('facebook', { session: false }), social.storeAuth);
 
 export default router;
