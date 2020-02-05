@@ -63,7 +63,7 @@ class AuthController {
       });
     }
   }
-  
+
   /**
    * This method handle the logout endpoint.
    * @param {object} req The user's request.
@@ -84,6 +84,7 @@ class AuthController {
         error: error.message
       });
     }
+  }
 }
 
 export default AuthController;
