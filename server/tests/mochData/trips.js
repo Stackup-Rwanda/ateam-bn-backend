@@ -1,26 +1,28 @@
 export const oneWayTrip = {
-  userId: 1,
-  tripType: 'One-way',
+  typeType: 'One way',
   from: 'kigali',
   to: 'new york',
-  date: new Date(),
-  reasons: 'being a mannager',
-  accommodation: '3000USD',
+  date: '2020-02-02',
+  reasons: 'being a ass director',
+  accommodationId: 1,
   status: 'approved',
-  createdAt: new Date(),
-  updatedAt: new Date()
+};
+export const incopreteWayTrip = {
+  typeType: 'One way',
+  from: 'kigali',
+  to: 'new york',
+  date: '2020-02-02',
+  accommodationId: 1,
+  status: 'approved',
 };
 
 export const twoWayTrip = {
-  userId: 1,
-  tripType: 'One-way',
+  typeType: 'One-way',
   from: 'kigali',
   to: 'new york',
-  date: new Date(),
-  returnDate: new Date(),
-  reasons: 'being a mannager',
-  accommodation: '3000USD',
+  date: '2020-02-10',
+  returnDate: '2020-02-25',
+  reasons: 'being a director',
+  accommodationId: 1,
   status: 'approved',
-  createdAt: new Date(),
-  updatedAt: new Date()
 };
