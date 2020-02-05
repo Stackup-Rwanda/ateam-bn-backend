@@ -23,6 +23,7 @@ router.post(
 router.patch(
   '/auth/update-password/:userId/:token',
   Validations.checkPassword,
+  Validations.checkPasswordAnConfirmPassword,
   userIdExistMiddleware,
   resetEmailTokenMiddleware,
   asyncErrorHandler(EmailController.updatePassword)

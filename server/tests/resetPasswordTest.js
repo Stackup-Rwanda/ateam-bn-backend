@@ -103,6 +103,19 @@ describe('Test for sending email endpoint', () => {
   );
 
   it(
+    "shouldn't update user password, Because of unmatch password",
+    mochaAsync(async () => {
+      const { password, confirmBadPassword } = usersTester[3];
+      const res = await router()
+        .patch(`/api/auth/update-password/${userObject.id}/${userObject.token}`)
+        .send({ password, confirmPassword: confirmBadPassword });
+      expect(res.body.status).to.equal(400);
+      expect(res.body).to.be.an('object');
+      expect(res.body.error).to.be.a('string');
+    })
+  );
+
+  it(
     "shouldn't update user password, Because of bad Token",
     mochaAsync(async () => {
       const { password, confirmPassword, badToken } = usersTester[3];
