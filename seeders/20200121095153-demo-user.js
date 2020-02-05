@@ -1,6 +1,6 @@
 import Hasher from '../server/helpers/passwordHashHelper';
 
-const up = (queryInterface) => queryInterface.bulkInsert('Users', [{
+const up = (queryInterface) => queryInterface.bulkInsert('users', [{
   name: 'Dummy',
   gender: 'Male',
   email: 'dummy@email.rw',
@@ -18,7 +18,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Users', [{
   updatedAt: new Date()
 }]);
 
-const down = (queryInterface) => queryInterface.bulkDelete('Users', null, {});
+const down = (queryInterface) => queryInterface.bulkDelete('users', null, {});
 
 export {
   up,

@@ -29,8 +29,8 @@ const up = (queryInterface, sequelize) => queryInterface.createTable('Trips', {
   reasons: {
     type: sequelize.STRING,
   },
-  accommodation: {
-    type: sequelize.STRING,
+  accommodationId: {
+    type: sequelize.INTEGER,
   },
   status: {
     type: sequelize.STRING,
@@ -42,7 +42,7 @@ const up = (queryInterface, sequelize) => queryInterface.createTable('Trips', {
     type: sequelize.DATE,
   },
 });
-const down = (queryInterface) => queryInterface.dropTable('Trips');
+const down = (queryInterface) => queryInterface.dropTable('trips');
 
 export {
   up,
