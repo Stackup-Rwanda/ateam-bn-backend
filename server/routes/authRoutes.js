@@ -7,7 +7,7 @@ import signUp from '../middlewares/validation';
 
 const router = Router();
 router
-  .post('/auth/signup', passwordHasher, asyncErrorHandler(AuthController.signUp))
+  .post('/auth/signup', signUp, passwordHasher, asyncErrorHandler(AuthController.signUp))
   .put('/user/:email/confirm', AuthController.confirmation)
   .get('/users/logout', importedTokenValidator, AuthController.logout);
 
