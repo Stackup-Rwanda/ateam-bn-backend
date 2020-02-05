@@ -38,7 +38,7 @@ describe('my Testing suite', () => {
       });
   });
 
-  it('users should not click twice on button of logout from application', (done) => {
+  it('users should not logout when does not exist in database', (done) => {
     router()
       .get('/api/users/logout')
       .set('token', Unexistuser)
