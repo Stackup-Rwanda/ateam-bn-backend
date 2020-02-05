@@ -50,7 +50,7 @@ class AuthController {
       await AuthHelpers.deleteValidToken(req.header('token'));
       return res.status(200).json({
         status: 200,
-        message: `${req.verifiedData.username} successfully signed out.`
+        message: `${req.user.username} successfully signed out.`
       });
     } catch (error) {
       return res.status(500).json({
