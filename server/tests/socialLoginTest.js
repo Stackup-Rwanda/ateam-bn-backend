@@ -6,7 +6,7 @@ import http from 'http';
 import app from '../index';
 import strategyGenerator from '../helpers/strategyHelper';
 
-http.createServer(app).listen(6000);
+http.createServer(app).listen(3000);
 dotenv.config();
 const router = () => chai.request(app);
 chai.should();
