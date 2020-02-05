@@ -18,10 +18,9 @@ const verifyToken = async (req, res, next) => {
     });
     if (userExists) {
       if (tokenExists) {
-        console.log('passed');
         return next();
       }
-      return res.status(401).json({ status: 401, error: 'Token not registered for session. Sign in and try again.' });
+      return res.status(401).json({ status: 401, error: 'Already logged out. Sign in and try again.' });
     }
     return res.status(401).json({ status: 401, error: 'User not recognised. Please create account and try again.' });
   } catch (error) {
