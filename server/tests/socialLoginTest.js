@@ -5,10 +5,8 @@ import GoogleStrategy from 'passport-google-oauth20';
 import http from 'http';
 import app from '../index';
 import strategyGenerator from '../helpers/strategyHelper';
-import models from '../models';
 
-const { User } = models;
-http.createServer(app).listen(5000);
+http.createServer(app).listen(3000);
 dotenv.config();
 const router = () => chai.request(app);
 chai.should();
@@ -131,14 +129,3 @@ describe('User login via facebook', () => {
   });
 });
 
-// describe('social user db test', () => {
-//   beforeEach((req,res) => User.create({
-//     name: req.user.displayName,
-//     google_id: req.user.id
-//   }));
-//   it('should register a',
-//     async () => {
-//       const Users = User.findAll();
-//       expect(Users.fb_id).to.be.equal("2802182399866874");
-//     });
-// });

@@ -1,9 +1,17 @@
 import Router from 'express';
 import passport from 'passport';
 import AuthController from '../controllers/authController';
+import EmailController from '../controllers/EmailController';
 import asyncErrorHandler from '../helpers/asyncErrorHandler';
 import social from '../controllers/socialController';
+<<<<<<< HEAD
 import passwordHasher from '../middlewares/passwordHashMiddleware';
+=======
+import Validations from '../middlewares/ValidateResetPassword';
+import passwordHasher from '../middlewares/passwordHashMiddleware';
+import resetEmailTokenMiddleware from '../middlewares/ResetEmailTokenMiddleware';
+import userIdExistMiddleware from '../middlewares/UserIdExistMiddleware';
+>>>>>>> 9742064ae7f31b5b5cd1b46fd5f9db2fef272d09
 import signUp from '../middlewares/validation';
 
 
@@ -14,6 +22,22 @@ router.post(
   passwordHasher,
   asyncErrorHandler(AuthController.signUp)
 );
+
+router.post(
+  '/auth/reset-password',
+  Validations.checkEmail,
+  asyncErrorHandler(EmailController.sendResetPasswordEmail)
+);
+
+router.patch(
+  '/auth/update-password/:userId/:token',
+  Validations.checkPassword,
+  Validations.checkPasswordAnConfirmPassword,
+  userIdExistMiddleware,
+  resetEmailTokenMiddleware,
+  asyncErrorHandler(EmailController.updatePassword)
+);
+
 router.put('/user/:email/confirm', AuthController.confirmation);
 
 router.post('/auth/signin', asyncErrorHandler(AuthController.signIn));
