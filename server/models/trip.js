@@ -46,7 +46,7 @@ const tripDefinition = (sequelize, DataTypes) => {
   Trip.associate = (models) => {
     Trip.belongsTo(models.User, {
       foreignKey: 'userId',
-      as: 'users',
+      as: 'Users',
       onDelete: 'CASCADE'
     });
   };

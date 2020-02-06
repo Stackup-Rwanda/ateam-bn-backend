@@ -50,7 +50,7 @@ const userDefinition = (sequelize, DataTypes) => {
   User.associate = (models) => {
     User.hasMany(models.Trip, {
       foreignKey: 'userId',
-      as: 'trips',
+      as: 'Trips',
       onDelete: 'CASCADE',
     });
   };
