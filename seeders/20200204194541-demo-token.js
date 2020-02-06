@@ -5,7 +5,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Tokens', [
     updatedAt: new Date()
   },
   {
-    value: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmltbXkgS2F5a2F5IiwidXNlcm5hbWUiOiJrYXkiLCJlbWFpbCI6IkprYXlAZ21haWwuY29tIiwiaWF0IjoxNTgwODIwNjAwfQ.GugiqBFSyVbZqt7X4b19Abu6mXlJDTU3RyXTtepNNuY',
+    value: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJkdW1teTJAZW1haWwucnciLCJyb2xlIjoiU3VwZXIgQWRtaW5pc3RyYXRvciIsImlhdCI6MTU4MDk1NzUwNH0.iOPzeyAUNCawgWmMfV9KCAbdAIpLdqHP8e9xVxZv6kA',
     createdAt: new Date(),
     updatedAt: new Date()
   }]);
