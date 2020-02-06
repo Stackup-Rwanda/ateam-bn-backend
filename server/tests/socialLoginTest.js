@@ -32,7 +32,7 @@ describe('User login via facebook', () => {
     });
 
     it('should see welcome page', () => {
-      browser.assert.text('title', 'Log into Facebook | Facebook');
+      browser.assert.text('title', 'Log in to Facebook | Facebook');
     });
 
     it('should receive data from facebook', () => {
