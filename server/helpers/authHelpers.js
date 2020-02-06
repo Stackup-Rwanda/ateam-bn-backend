@@ -68,7 +68,23 @@ class AuthHelpers {
   static async saveSocial(user) {
     const acceptedUser = await User.create(
       {
-        name: user.displayName, gender: user.gender, email: user.emails[0].value, username: user.username, password: user.password, birthdate: user.birthdate, preferredLanguage: user.preferredLanguage, preferredCurrency: user.preferredLanguage, location: user.location, role: user.role, department: user.department, lineManager: user.lineManager, isVerified: false, createdAt: new Date(), updatedAt: new Date(), google_id: user.id, fb_id: user.fbId
+        name: user.displayName,
+        gender: user.gender,
+        email: user.emails[0].value,
+        username: user.username,
+        password: user.password,
+        birthdate: user.birthdate,
+        preferredLanguage: user.preferredLanguage,
+        preferredCurrency: user.preferredLanguage,
+        location: user.location,
+        role: user.role,
+        department: user.department,
+        lineManager: user.lineManager,
+        isVerified: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        google_id: user.id,
+        fb_id: user.fbId
       },
       {
         fields: [

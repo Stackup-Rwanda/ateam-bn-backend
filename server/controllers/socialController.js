@@ -33,8 +33,8 @@ const googleAuth = async (req, res) => {
   }
   const user = await AuthHelper.saveSocial(req.user);
 
-  return res.status(200).json({
-    status: 200,
+  return res.status(201).json({
+    status: 201,
     message: `welcome ${user.name}`,
     data: {
       token: generateSocialToken(user.name, user.id)
