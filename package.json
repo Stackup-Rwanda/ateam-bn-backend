@@ -4,7 +4,6 @@
   "description": "We make company global travel and accommodation easy and convenient for the strong workforce of savvy members of staff, by leveraging the modern web.",
   "main": "index.js",
   "scripts": {
-
     "test": "npm run droptables:test && npm run createtables:test && npm run seed:test && cross-env NODE_ENV=test nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill --timeout 10000 --exit ./server/tests/*.js --exit",
     "testSocial": "nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --timeout 1000000  --exit",
     "server": "nodemon --exec babel-node ./server/index.js",
