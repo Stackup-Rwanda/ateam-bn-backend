@@ -347,6 +347,54 @@
           }
         }
       }
+    },
+    "/request/{id}/approve": {
+      "patch": {
+        "tags": [
+          "Approve Trip Request"
+        ],
+        "summary": "Manager can approve a trip request",
+        "description": "Manager can approve trip request done by users under his/her authority",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Approve a request: update the status of the trip",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/approvalRequest"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "parsing a trip id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This trip request was successfully approved"
+          },
+          "400": {
+            "description": "Please provide a authentic request"
+          },
+          "401": {
+            "description": "Please provide a token first"
+          },
+          "403": {
+            "description": "You are not authorized to approve this request"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -500,6 +548,17 @@
       "required": [
         "role"
       ]
+    },
+    "approvalRequest": {
+      "type": "object",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      }
     }
   }
 }

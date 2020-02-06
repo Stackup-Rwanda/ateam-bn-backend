@@ -14,6 +14,7 @@ router.use(authRoutes);
 router.use(profileRoute);
 router.use(roleRoutes);
 router.use(requestRoutes);
+router.use(roleRoutes);
 
 
 export default router;

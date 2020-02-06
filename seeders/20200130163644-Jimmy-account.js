@@ -4,7 +4,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Users', [{
   email: 'Jkay@gmail.com',
   role: 'Manager',
   gender: 'MALE',
-  lineManager: 'Runyamahe',
+  lineManager: 3,
   createdAt: new Date(),
   updatedAt: new Date()
 }]);

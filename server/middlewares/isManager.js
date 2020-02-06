@@ -12,7 +12,7 @@ export default (req, res, next) => {
         error: 'Please provide a token first',
       });
     }
-    const token = req.headers.token;
+    const { token } = req.headers;
     const decoded = Auth.decodedToken(token, process.env.SECRET_KEY);
     req.userData = decoded;
     if (req.userData.role !== 'Manager') {
