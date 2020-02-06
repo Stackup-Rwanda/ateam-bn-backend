@@ -21,7 +21,6 @@ const storeAuth = (profile, fb) => {
 };
 const googleAuth = async (req, res) => {
   const doesExists = await AuthHelper.userExists('email', req.user.emails[0].value);
-
   if (doesExists) {
     return res.status(200).json({
       status: 200,
@@ -32,7 +31,7 @@ const googleAuth = async (req, res) => {
     });
   }
   const user = await AuthHelper.saveSocial(req.user);
-  res.status(201).json({
+  return res.status(201).send({
     status: 201,
     message: `welcome ${user.name}`,
     data: {
