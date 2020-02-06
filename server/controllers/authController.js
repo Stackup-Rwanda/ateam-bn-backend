@@ -26,7 +26,7 @@ class AuthController {
       });
     }
     const {
-      id, email, role, isVerified, createdAt
+      id, username, email, role, isVerified, createdAt
     } = req.body;
     const savedUser = await AuthHelpers.saveUser(req.body);
     await sendmail(savedUser.email, savedUser.name);
@@ -34,7 +34,7 @@ class AuthController {
       status: 201,
       message: 'User was created successfully, Verify your email to confirm registration',
       data: {
-        token: TokenHelper.generateToken(id, email, role, isVerified),
+        token: TokenHelper.generateToken(id, username, email, role, isVerified),
         createdAt
       }
     });
@@ -85,7 +85,12 @@ class AuthController {
           status: 200,
           message: 'user successfully logged In',
           data: {
-            token: TokenHelper.generateToken(emailExists.id, emailExists.email, emailExists.role),
+            token: TokenHelper.generateToken(
+              emailExists.id,
+              emailExists.username,
+              emailExists.email,
+              emailExists.role
+            ),
           }
         });
       }
@@ -97,11 +102,11 @@ class AuthController {
   }
 
   /**
-    *  This method handle the logout endpoint.
+   * This method handle the logout endpoint.
    * @param {object} req The user's request.
    * @param {object} res The response.
    * @returns {object} The status and message.
-    */
+   * */
   static async logout(req, res) {
     try {
       await AuthHelpers.deleteValidToken(req.header('token'));

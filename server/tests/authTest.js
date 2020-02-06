@@ -70,6 +70,7 @@ describe('Test for signup endpoint', () => {
       expect(res.body.status).to.equal(201);
       expect(res.body).to.be.an('object');
       expect(res.body.message).to.be.a('string');
+      expect(res.body.data).to.be.an('object');
     })
   );
 
@@ -91,17 +92,16 @@ describe('signIn tests', () => {
     const res = await chai
       .request(app)
       .post('/api/auth/signin')
-      .send(usersTester[1]);
+      .send(usersTester[4]);
     res.should.have.status(401);
     res.body.should.be.an('object');
-    res.body.should.have.property('message');
   });
 
   it('User should not be able to log into account when invalid credentials', async () => {
     const res = await chai
       .request(app)
       .post('/api/auth/signin')
-      .send(usersTester[3]);
+      .send(usersTester[5]);
     res.should.have.status(401);
     res.body.should.be.an('object');
     res.body.should.have.property('message', 'password or email is incorrect');

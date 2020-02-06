@@ -1,4 +1,5 @@
 import models from '../models';
+import Hasher from './passwordHashHelper';
 
 const { User, Token, Notification } = models;
 
@@ -17,6 +18,18 @@ class AuthHelpers {
   static async userExists(attr, val) {
     const user = await User.findOne({ where: { [attr]: val } });
     return user;
+  }
+
+  /**
+   * Update a user's password.
+   * @param {string} id The user's username.
+   * @param {string} password The user's username.
+   * @returns {object} The user's data about update password.
+   */
+  static async updateUserPassword(id, { password }) {
+    const hashedPwd = Hasher.hashPassword(password);
+    const updatedUser = await User.update({ password: hashedPwd }, { where: { id } });
+    return updatedUser;
   }
 
   /**
@@ -76,8 +89,15 @@ class AuthHelpers {
    * @returns {clientNotification} The user notification will stored.
    */
   static async insertNotification(clientNotification) {
-    const createdNotification = await Notification.create(clientNotification);
-    return createdNotification;
+    await Notification.create({
+      title: clientNotification.title,
+      description: clientNotification.description,
+      email: clientNotification.email,
+      requester: clientNotification.requester,
+      manager: clientNotification.manager,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    });
   }
 }
 export default AuthHelpers;

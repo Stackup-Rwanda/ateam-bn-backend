@@ -1,4 +1,4 @@
-const up = (queryInterface, Sequelize) => queryInterface.createTable('Notification', {
+const up = (queryInterface, Sequelize) => queryInterface.createTable('Notifications', {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -14,10 +14,10 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Notificati
   email: {
     type: Sequelize.STRING
   },
-  clent: {
+  requester: {
     type: Sequelize.STRING
   },
-  agent: {
+  manager: {
     type: Sequelize.STRING
   },
   createdAt: {
@@ -31,7 +31,7 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Notificati
 });
 
 
-const down = (queryInterface) => queryInterface.dropTable('Notification');
+const down = (queryInterface) => queryInterface.dropTable('Notifications');
 
 export {
   up,

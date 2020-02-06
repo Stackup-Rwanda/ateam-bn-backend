@@ -5,10 +5,11 @@
     "version": " ",
     "title": "BareFootNomad",
     "termsOfService": "https://github.com/Stackup-Rwanda/ateam-bn-backend/blob/develop/README.md",
-    "contact": { "email": "the-a-team@gmail.com" }
+    "contact": {
+      "email": "the-a-team@gmail.com"
+    }
   },
-
-  "host": "localhost:3000",
+  "host": "ateam-bn-backend-staging.herokuapp.com",
   "basePath": "/api",
   "tags": [
     {
@@ -20,10 +21,24 @@
       "description": "Authentication endpoints"
     }
   ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "none"
+  ],
+  "produces": [
+    "application/json",
+    "none"
+  ],
   "paths": {
     "/users/jkhgftgftydcrdc": {
       "get": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "Access wrong link",
         "description": "Now by the use of this GET endpoint user Should be redirected to the documentation of application",
         "responses": {
@@ -33,14 +48,19 @@
         }
       }
     },
-
     "/auth/signup/": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "Signup",
         "description": "User signup endpoint",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -65,13 +85,18 @@
         }
       }
     },
-
     "/users/logout": {
       "get": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "logout user from application",
         "description": "Now by the use of this GET endpoint user Should logout from application",
-        "responses": { "200": { "description": " OK : Logout successfully" } },
+        "responses": {
+          "200": {
+            "description": " OK : Logout successfully"
+          }
+        },
         "parameters": [
           {
             "in": "header",
@@ -80,6 +105,164 @@
             "type": "string"
           }
         ]
+      }
+    },
+    "/auth/reset-password": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Send Email to reset password",
+        "description": "User can get an email to reset password, endpoint",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User email to be used for resetting password",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SendEmail"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The email has been sent successfully."
+          },
+          "400": {
+            "description": "email must be a valid email"
+          },
+          "404": {
+            "description": "Sorry! This email does not exist in Barefoot system."
+          }
+        }
+      }
+    },
+    "/auth/update-password/{userId}/{token}": {
+      "patch": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Reset password",
+        "description": "User can reset password, endpoint",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New password and confirmation password for a user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetPassword"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The password has been updated successfully."
+          },
+          "400": {
+            "description": "password must be a valid email"
+          },
+          "401": {
+            "description": "Sorry, the Token is invalide"
+          },
+          "404": {
+            "description": "Sorry! The user does not exist."
+          }
+        }
+      }
+    },
+    "/profile/{username}": {
+      "get": {
+        "description": "user can view his/her profile details",
+        "summary": "View User's Profile",
+        "tags": [
+          "Profile"
+        ],
+        "operationId": "ViewProfile",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "profile details are provided",
+            "headers": {}
+          },
+          "400": {
+            "description": "token is malformed/invalid",
+            "headers": {}
+          },
+          "401": {
+            "description": "profile doesn't belong to user or user is not registered",
+            "headers": {}
+          }
+        }
+      },
+      "patch": {
+        "description": "User can update details of his/her profile",
+        "summary": "Update User's Profile",
+        "tags": [
+          "Profile"
+        ],
+        "operationId": "UpdateProfile",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "user is able to update his/her profile details",
+            "schema": {
+              "$ref": "#/definitions/profileUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "profile is updated successfuly",
+            "headers": {}
+          },
+          "400": {
+            "description": "token is malformed/invalid",
+            "headers": {}
+          },
+          "401": {
+            "description": "profile doesn't belong to user or user is not registered",
+            "headers": {}
+          }
+        }
       }
     }
   },
@@ -138,9 +321,72 @@
           "type": "string"
         }
       }
+    },
+    "SendEmail": {
+      "type": "object",
+      "required": [
+        "email"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "ResetPassword": {
+      "type": "object",
+      "required": [
+        "password",
+        "confirmPassword"
+      ],
+      "properties": {
+        "password": {
+          "type": "string"
+        },
+        "confirmPassword": {
+          "type": "string"
+        }
+      }
+    },
+    "profileUpdate": {
+      "title": "Profile Update Request",
+      "example": {
+        "name": "Guebuyu",
+        "birthdate": "22/12/2019",
+        "gender": "MALE",
+        "preferredLanguage": "English",
+        "preferredCurrency": "USD",
+        "location": "Kigali Rwanda"
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "birthdate": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "preferredLanguage": {
+          "type": "string"
+        },
+        "preferredCurrency": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "birthdate",
+        "gender",
+        "preferredLanguage",
+        "preferredCurrency",
+        "location"
+      ]
     }
-  },
-  "schemes": ["http", "https"],
-  "consumes": ["application/json", "none"],
-  "produces": ["application/json", "none"]
+  }
 }
