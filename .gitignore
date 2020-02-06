@@ -3,8 +3,5 @@ node_modules
 .vscode
 coverage
 package-lock.json
-<<<<<<< HEAD
 .env
 
-=======
->>>>>>> ft(signup-endpoint): edit user model
