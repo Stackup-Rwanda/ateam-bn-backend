@@ -7,7 +7,7 @@ dotenv.config();
 
 const ownerVerifier = async (req, res, next) => {
   try {
-    const verified = jwt.verify(req.header('token'), process.env.JWT_PRIVATE_KEY);
+    const verified = jwt.verify(req.header('token'), process.env.SECRET_KEY);
     req.requesterEmail = verified.email;
     const pretender = await User.findOne({
       where: { email: req.requesterEmail }
