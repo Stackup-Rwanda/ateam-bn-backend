@@ -32,7 +32,8 @@ const up = (queryInterface) => queryInterface.bulkInsert('Users', [{
   isVerified: true,
   createdAt: '7/02/2020',
   updatedAt: '4/3/2000'
-}]);
+}
+]);
 
 const down = (queryInterface) => queryInterface.bulkDelete('Users', null, {});
 
