@@ -1,4 +1,5 @@
 import models from '../models';
+import Hasher from './passwordHashHelper';
 
 const { User, Token } = models;
 
@@ -17,6 +18,18 @@ class AuthHelpers {
   static async userExists(attr, val) {
     const user = await User.findOne({ where: { [attr]: val } });
     return user;
+  }
+
+  /**
+   * Update a user's password.
+   * @param {string} id The user's username.
+   * @param {string} password The user's username.
+   * @returns {object} The user's data about update password.
+   */
+  static async updateUserPassword(id, { password }) {
+    const hashedPwd = Hasher.hashPassword(password);
+    const updatedUser = await User.update({ password: hashedPwd }, { where: { id } });
+    return updatedUser;
   }
 
   /**
