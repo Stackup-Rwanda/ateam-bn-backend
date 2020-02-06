@@ -5,8 +5,10 @@ import GoogleStrategy from 'passport-google-oauth20';
 import http from 'http';
 import app from '../index';
 import strategyGenerator from '../helpers/strategyHelper';
+import models from '../models';
 
-http.createServer(app).listen(3000);
+const { User } = models;
+http.createServer(app).listen(5000);
 dotenv.config();
 const router = () => chai.request(app);
 chai.should();
@@ -32,7 +34,7 @@ describe('User login via facebook', () => {
     });
 
     it('should see welcome page', () => {
-      browser.assert.text('title', 'Log into Facebook | Facebook');
+      browser.assert.text('title', 'Injira kuri Facebook | Facebook');
     });
 
     it('should receive data from facebook', () => {
@@ -128,3 +130,15 @@ describe('User login via facebook', () => {
     });
   });
 });
+
+// describe('social user db test', () => {
+//   beforeEach((req,res) => User.create({
+//     name: req.user.displayName,
+//     google_id: req.user.id
+//   }));
+//   it('should register a',
+//     async () => {
+//       const Users = User.findAll();
+//       expect(Users.fb_id).to.be.equal("2802182399866874");
+//     });
+// });

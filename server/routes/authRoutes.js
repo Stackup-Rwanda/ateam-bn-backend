@@ -3,17 +3,24 @@ import passport from 'passport';
 import AuthController from '../controllers/authController';
 import asyncErrorHandler from '../helpers/asyncErrorHandler';
 import social from '../controllers/socialController';
+import passwordHasher from '../middlewares/passwordHashMiddleware';
+import signUp from '../middlewares/validation';
+
 
 const router = Router();
 router.use(passport.initialize());
 router.post(
-  '/auth/signup',
+  '/auth/signup', signUp,
+  passwordHasher,
   asyncErrorHandler(AuthController.signUp)
 );
+router.put('/user/:email/confirm', AuthController.confirmation);
+
+router.post('/auth/signin', asyncErrorHandler(AuthController.signIn));
 
 router.get(
   '/auth/google',
-  passport.authenticate('google', { scope: ['profile'] })
+  passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 router.get(
   '/auth/google/callback',
