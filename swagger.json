@@ -171,6 +171,87 @@
           }
         }
       }
+    },
+    "/profile/{username}": {
+      "get": {
+        "description": "user can view his/her profile details",
+        "summary": "View User's Profile",
+        "tags": [
+          "Profile"
+        ],
+        "operationId": "ViewProfile",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "profile details are provided",
+            "headers": {}
+          },
+          "400": {
+            "description": "token is malformed/invalid",
+            "headers": {}
+          },
+          "401": {
+            "description": "profile doesn't belong to user or user is not registered",
+            "headers": {}
+          }
+        }
+      },
+      "patch": {
+        "description": "User can update details of his/her profile",
+        "summary": "Update User's Profile",
+        "tags": [
+          "Profile"
+        ],
+        "operationId": "UpdateProfile",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "user is able to update his/her profile details",
+            "schema": {
+              "$ref": "#/definitions/profileUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "profile is updated successfuly",
+            "headers": {}
+          },
+          "400": {
+            "description": "token is malformed/invalid",
+            "headers": {}
+          },
+          "401": {
+            "description": "profile doesn't belong to user or user is not registered",
+            "headers": {}
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -254,6 +335,46 @@
           "type": "string"
         }
       }
+    },
+    "profileUpdate": {
+      "title": "Profile Update Request",
+      "example": {
+        "name": "Guebuyu",
+        "birthdate": "22/12/2019",
+        "gender": "MALE",
+        "preferredLanguage": "English",
+        "preferredCurrency": "USD",
+        "location": "Kigali Rwanda"
+      },
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "birthdate": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "preferredLanguage": {
+          "type": "string"
+        },
+        "preferredCurrency": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "birthdate",
+        "gender",
+        "preferredLanguage",
+        "preferredCurrency",
+        "location"
+      ]
     }
   },
   "schemes": [

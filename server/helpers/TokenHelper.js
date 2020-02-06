@@ -35,15 +35,17 @@ class TokenHelper {
   /**
    * Hashs the password for signup and login response.
    * @param {integer} id The user's id.
+   * @param {string} username The user's username.
    * @param {string} email The user's email.
    * @param {string} role The user's role.
    * @param {string} isVerified The user's isVerified.
    * @returns {string} The users's hashed password.
    */
-  static generateToken(id, email, role, isVerified) {
+  static generateToken(id, username, email, role, isVerified) {
     return jwt.sign(
       {
         id,
+        username,
         email,
         role,
         isVerified
