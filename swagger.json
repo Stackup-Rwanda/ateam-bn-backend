@@ -9,7 +9,7 @@
       "email": "the-a-team@gmail.com"
     }
   },
-  "host": "https://ateam-bn-backend-staging.herokuapp.com",
+  "host": "ateam-bn-backend-staging.herokuapp.com",
   "basePath": "/api",
   "tags": [
     {
@@ -20,6 +20,18 @@
       "name": "Auth",
       "description": "Authentication endpoints"
     }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "none"
+  ],
+  "produces": [
+    "application/json",
+    "none"
   ],
   "paths": {
     "/users/jkhgftgftydcrdc": {
@@ -376,17 +388,5 @@
         "location"
       ]
     }
-  },
-  "schemes": [
-    "http",
-    "https"
-  ],
-  "consumes": [
-    "application/json",
-    "none"
-  ],
-  "produces": [
-    "application/json",
-    "none"
-  ]
+  }
 }
