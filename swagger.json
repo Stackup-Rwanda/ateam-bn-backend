@@ -8,7 +8,7 @@
     "contact": { "email": "the-a-team@gmail.com" }
   },
 
-  "host": "localhost:3000",
+  "host": "https://ateam-bn-backend-staging.herokuapp.com",
   "basePath": "/api",
   "tags": [
     {
@@ -48,6 +48,70 @@
           },
           "409": {
             "description": "This user already exists, use another email or username"
+          }
+        }
+      }
+    },
+    "/auth/reset-password": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Send Email to reset password",
+        "description": "User can get an email to reset password, endpoint",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User email to be used for resetting password",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SendEmail"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The email has been sent successfully."
+          },
+          "400": {
+            "description": "email must be a valid email"
+          },
+          "404": {
+            "description": "Sorry! This email does not exist in Barefoot system."
+          }
+        }
+      }
+    },"/auth/update-password/{userId}/{token}": {
+      "patch": {
+        "tags": ["Auth"],
+        "summary": "Reset password",
+        "description": "User can reset password, endpoint",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "New password and confirmation password for a user",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResetPassword"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The password has been updated successfully."
+          },
+          "400": {
+            "description": "password must be a valid email"
+          },
+          "401": {
+            "description": "Sorry, the Token is invalide"
+          },
+          "404": {
+            "description": "Sorry! The user does not exist."
           }
         }
       }
@@ -105,6 +169,32 @@
           "type": "string"
         },
         "lineManager": {
+          "type": "string"
+        }
+      }
+    },
+    "SendEmail": {
+      "type": "object",
+      "required": [
+        "email"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        }
+      }
+    },
+    "ResetPassword": {
+      "type": "object",
+      "required": [
+        "password",
+        "confirmPassword"
+      ],
+      "properties": {
+        "password": {
+          "type": "string"
+        },
+        "confirmPassword": {
           "type": "string"
         }
       }
