@@ -2,7 +2,6 @@ import models from '../models';
 import Hasher from './passwordHashHelper';
 
 const { User } = models;
-
 /**
  * This class contains
  * all methods required to save/edit/retrieve/delete

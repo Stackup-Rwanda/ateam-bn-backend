@@ -1,9 +1,8 @@
 import TokenHelper from '../helpers/TokenHelper';
-/* eslint-disable no-empty */
-/* eslint-disable require-jsdoc */
 import AuthHelpers from '../helpers/authHelpers';
 import sendmail from '../helpers/email';
 
+import passwordHashHelper from '../helpers/passwordHashHelper';
 /**
  * This class contains all methods
  * required to handle
@@ -40,13 +39,13 @@ class AuthController {
       }
     });
   }
+
   /**
    * This method handle the signup request.
    * @param {object} req The user's request.
    * @param {object} res The response.
    * @returns {object} The status and some data of the user.
    */
-
   static async confirmation(req, res) {
     const checkConfirmation = await AuthHelpers.userExists('email', req.params.email);
     if (!checkConfirmation) {
@@ -62,6 +61,39 @@ class AuthController {
         message: 'Email has successfully been verified. You can now login'
       });
     }
+  }
+
+  /**
+   * This method handle the sign request.
+   * @param {object} req The user's request.
+   * @param {object} res The response.
+   * @returns {object} The status and some data of the user.
+   */
+  static async signIn(req, res) {
+    const emailExists = await AuthHelpers.userExists('email', req.body.email);
+    if (emailExists) {
+      if (emailExists.isVerified === false) {
+        return res.status(401).json({
+          status: 401,
+          error: 'Please confirm your email before logging in!'
+        });
+      }
+      const passwordExist = await passwordHashHelper
+        .checkPassword(req.body.password, emailExists.password);
+      if (passwordExist) {
+        return res.status(200).json({
+          status: 200,
+          message: 'user successfully logged In',
+          data: {
+            token: TokenHelper.generateToken(emailExists.id, emailExists.email, emailExists.role),
+          }
+        });
+      }
+    }
+    return res.status(401).json({
+      status: 401,
+      message: 'password or email is incorrect'
+    });
   }
 }
 
