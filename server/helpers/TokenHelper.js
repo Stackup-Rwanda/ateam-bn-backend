@@ -10,6 +10,29 @@ dotenv.config();
  */
 class TokenHelper {
   /**
+   * Hashs the password.
+   * @param {string} password The user's password.
+   * @returns {string} The users's hashed password.
+   */
+  static generateResetPasswordToken({
+    id, email, password, createdAt,
+  }) {
+    const secrect = `${password}_${createdAt}`;
+    return jwt.sign({ id, email, password }, secrect, { expiresIn: 3600 });
+  }
+
+  /**
+   * Hashs the password.
+   * @param {string} token The user's token.
+   * @param {string} secrectKey The secret key.
+   * @returns {string} The users's hashed password.
+   */
+  static decodedToken(token, secrectKey) {
+    const isToken = jwt.verify(token, secrectKey);
+    return isToken;
+  }
+
+  /**
    * Hashs the password for signup and login response.
    * @param {integer} id The user's id.
    * @param {string} email The user's email.

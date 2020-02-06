@@ -12,14 +12,20 @@ global:
   - TWITTER_CONSUMER_SECRET=
   - GOOGLE_CONSUMER_KEY=
   - GOOGLE_CONSUMER_SECRET=
+
 language: node_js
 node_js:
   - 'stable'
-cache:
-  directories:
-    - 'node_modules'
+
 services:
   - postgresql
+
+cache:
+  directories:
+    - "node_modules"
+
+before_install:
+  - npm i
 before_script:
   - psql -c 'CREATE DATABASE barefootnomaddb_test;' -U postgres
   - npm i sequelize-cli -g
@@ -27,8 +33,12 @@ before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
+
+script:
+  - 'npm run test'
+ 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
 after_success:
   - npm run coveralls
-
