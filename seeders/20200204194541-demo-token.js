@@ -10,7 +10,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Tokens', [
     updatedAt: new Date()
   }]);
 const down = (queryInterface) => queryInterface.bulkDelete('Tokens', null, {});
-https://github.com/Stackup-Rwanda/ateam-bn-backend/pull/28/conflict?name=seeders%252F20200204194541-demo-token.js&base_oid=99fc04fff71bda8fae1d47e9d2a6a286182f3535&head_oid=177c4d20fbd05bf3fd0a322e69d47bb942d130ca
+
 export {
   up,
   down

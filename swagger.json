@@ -5,10 +5,11 @@
     "version": " ",
     "title": "BareFootNomad",
     "termsOfService": "https://github.com/Stackup-Rwanda/ateam-bn-backend/blob/develop/README.md",
-    "contact": { "email": "the-a-team@gmail.com" }
+    "contact": {
+      "email": "the-a-team@gmail.com"
+    }
   },
-
-  "host": "https://ateam-bn-backend-staging.herokuapp.com",
+  "host": "ateam-bn-backend-staging.herokuapp.com",
   "basePath": "/api",
   "tags": [
     {
@@ -20,10 +21,24 @@
       "description": "Authentication endpoints"
     }
   ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "consumes": [
+    "application/json",
+    "none"
+  ],
+  "produces": [
+    "application/json",
+    "none"
+  ],
   "paths": {
     "/users/jkhgftgftydcrdc": {
       "get": {
-        "tags": ["User"],
+        "tags": [
+          "User"
+        ],
         "summary": "Access wrong link",
         "description": "Now by the use of this GET endpoint user Should be redirected to the documentation of application",
         "responses": {
@@ -33,14 +48,19 @@
         }
       }
     },
-
     "/auth/signup/": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "Signup",
         "description": "User signup endpoint",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -65,13 +85,18 @@
         }
       }
     },
-
     "/users/logout": {
       "get": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "logout user from application",
         "description": "Now by the use of this GET endpoint user Should logout from application",
-        "responses": { "200": { "description": " OK : Logout successfully" } },
+        "responses": {
+          "200": {
+            "description": " OK : Logout successfully"
+          }
+        },
         "parameters": [
           {
             "in": "header",
@@ -82,14 +107,19 @@
         ]
       }
     },
-    
     "/auth/reset-password": {
       "post": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "Send Email to reset password",
         "description": "User can get an email to reset password, endpoint",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -113,13 +143,20 @@
           }
         }
       }
-    },"/auth/update-password/{userId}/{token}": {
+    },
+    "/auth/update-password/{userId}/{token}": {
       "patch": {
-        "tags": ["Auth"],
+        "tags": [
+          "Auth"
+        ],
         "summary": "Reset password",
         "description": "User can reset password, endpoint",
-        "consumes": ["application/json"],
-        "produces": ["application/json"],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -351,8 +388,5 @@
         "location"
       ]
     }
-  },
-  "schemes": ["http", "https"],
-  "consumes": ["application/json", "none"],
-  "produces": ["application/json", "none"]
+  }
 }

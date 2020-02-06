@@ -1,12 +1,13 @@
-import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
+import importInsertToken from './authHelpers';
 
 dotenv.config();
 
 /**
- * This class contains
- * two methods, one to help hashing password (hashPassword)
- * and the second to retrieve hashed password
+ * This class contains.
+ * two methods, one to help hashing password (hashPassword).
+ * and the second to retrieve hashed password.
  */
 class TokenHelper {
   /**
@@ -42,15 +43,11 @@ class TokenHelper {
    * @returns {string} The users's hashed password.
    */
   static generateToken(id, username, email, role, isVerified) {
-    return jwt.sign(
-      {
-        id,
-        username,
-        email,
-        role,
-        isVerified
-      }, process.env.SECRET_KEY
-    );
+    const generatedToken = jwt.sign({
+      id, username, email, role, isVerified
+    }, process.env.SECRET_KEY);
+    importInsertToken.insertGeneratedToken(generatedToken);
+    return generatedToken;
   }
 }
 export default TokenHelper;

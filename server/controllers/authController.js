@@ -1,7 +1,6 @@
 import TokenHelper from '../helpers/TokenHelper';
 import AuthHelpers from '../helpers/authHelpers';
 import sendmail from '../helpers/email';
-
 import passwordHashHelper from '../helpers/passwordHashHelper';
 /**
  * This class contains all methods
@@ -102,11 +101,11 @@ class AuthController {
   }
 
   /**
-    *  This method handle the logout endpoint.
+   * This method handle the logout endpoint.
    * @param {object} req The user's request.
    * @param {object} res The response.
    * @returns {object} The status and message.
-    */
+   * */
   static async logout(req, res) {
     try {
       await AuthHelpers.deleteValidToken(req.header('token'));
