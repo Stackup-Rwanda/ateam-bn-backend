@@ -60,6 +60,7 @@ class TripHelpers {
         'date',
         'reasons',
         'accommodationId',
+        'returnDate',
         'status',
         'createAt',
         'updatedAt'
