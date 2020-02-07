@@ -25,7 +25,7 @@ class AuthController {
       });
     }
     const {
-      id, username, email, role, isVerified, createdAt
+      username, email, role, isVerified, createdAt
     } = req.body;
     const savedUser = await AuthHelpers.saveUser(req.body);
     await sendmail(savedUser.email, savedUser.name);
@@ -33,11 +33,12 @@ class AuthController {
       status: 201,
       message: 'User was created successfully, Verify your email to confirm registration',
       data: {
-        token: TokenHelper.generateToken(id, username, email, role, isVerified),
+        token: await TokenHelper.generateToken(savedUser.id, username, email, role, isVerified),
         createdAt
       }
     });
   }
+
 
   /**
    * This method handle the signup request.

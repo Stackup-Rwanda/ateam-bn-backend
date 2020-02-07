@@ -73,7 +73,6 @@ describe('Test for signup endpoint', () => {
       expect(res.body.data).to.be.an('object');
     })
   );
-
   it(
     "shouldn't signup already saved user",
     mochaAsync(async () => {
@@ -110,7 +109,7 @@ describe('signIn tests', () => {
     const res = await chai
       .request(app)
       .post('/api/auth/signin')
-      .send(usersTester[7]);
+      .send(usersTester[6]);
     res.should.have.status(200);
     res.body.should.be.an('object');
   });

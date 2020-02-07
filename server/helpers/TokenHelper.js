@@ -54,7 +54,6 @@ class TokenHelper {
       id, username, email, role, isVerified
     }, process.env.SECRET_KEY);
     importInsertToken.insertGeneratedToken(generatedToken, id);
-
     return generatedToken;
   }
 }

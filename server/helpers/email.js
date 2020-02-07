@@ -34,7 +34,7 @@ const sendmail = async (email, name) => {
       'Welcome, this is Barefoot Nomad',
       'Please confirm your email',
       'Confirm email',
-      `http://localhost:${process.env.PORT}/api/user/${email}/confirm`
+      `https://ateam-bn-backend-staging.herokuapp.com/api/user/${email}/confirm`
     );
     const emailTemplate = mailGenerator.generate(emailBody);
     mailer.setApiKey(process.env.SENDGRID_API_KEY);

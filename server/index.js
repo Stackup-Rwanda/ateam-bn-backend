@@ -3,6 +3,9 @@ import swaggerUi from 'swagger-ui-express';
 import dotenv from 'dotenv';
 import apiDocumentation from '../swagger.json';
 import allRoutes from './routes/allRoutes';
+import "./middlewares/fbStrategy";
+import "./middlewares/googleStrategy";
+import authRoutes from "./routes/authRoutes";
 
 dotenv.config();
 
@@ -14,7 +17,6 @@ app.use(express.json());
 const basePath = '/api';
 
 app.use('/api', allRoutes);
-
 app.listen(process.env.PORT, () => {
   console.log('server is running on port 3000');
 });
@@ -22,7 +24,7 @@ app.listen(process.env.PORT, () => {
 app.use(basePath, allRoutes);
 
 app.use(`${basePath}/documentation`, swaggerUi.serve, swaggerUi.setup(apiDocumentation));
-
+app.use(basePath, authRoutes);
 app.get('**', (req, res) => {
   res.status(400).send({
     status: 400,

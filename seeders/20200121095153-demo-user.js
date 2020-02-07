@@ -30,25 +30,8 @@ const up = (queryInterface) => queryInterface.bulkInsert('Users', [{
   department: 'Cleaner',
   lineManager: 'MrNobody',
   isVerified: true,
-  createdAt: '7/02/2020',
-  updatedAt: '4/3/2000'
-},
-{
-  name: 'Dummy3',
-  gender: 'Male',
-  email: 'dummy3@email.rw',
-  username: 'MrDummy3',
-  password: Hasher.hashPassword('123456789'),
-  birthdate: new Date(),
-  preferredLanguage: 'French',
-  preferredCurrency: 'Euro',
-  location: 'Paris',
-  role: 'Broker',
-  department: 'Cleaner',
-  lineManager: 'MrNobody',
-  isVerified: true,
-  createdAt: '7/02/2020',
-  updatedAt: '4/3/2000'
+  createdAt: '04/05/2020',
+  updatedAt: '02/03/2010'
 }
 ]);
 
