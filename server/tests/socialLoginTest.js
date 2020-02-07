@@ -80,7 +80,7 @@ describe('User login via facebook', () => {
     const strategy = new GoogleStrategy({
       clientID: process.env.clientID,
       clientSecret: process.env.clientSecret
-    }, (() => {}));
+    }, (() => { }));
 
 
     let url;
@@ -100,13 +100,13 @@ describe('User login via facebook', () => {
     it('should be redirected', () => {
       expect(url).to.equal('https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&prompt=select_account&login_hint=izabayojonas12%40gmail.com&response_type=code&client_id=836856073443143');
     });
-  }); //
+  });
 
   describe('authorization request with documented parameters from OpenID Connect', () => {
     const strategy = new GoogleStrategy({
       clientID: process.env.clientID,
       clientSecret: process.env.clientSecret
-    }, (() => {}));
+    }, (() => { }));
 
 
     let url;
