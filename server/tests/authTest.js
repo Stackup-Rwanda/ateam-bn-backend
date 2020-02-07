@@ -73,7 +73,6 @@ describe('Test for signup endpoint', () => {
       expect(res.body.data).to.be.an('object');
     })
   );
-
   it(
     "shouldn't signup already saved user",
     mochaAsync(async () => {
