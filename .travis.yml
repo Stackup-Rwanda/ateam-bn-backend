@@ -12,9 +12,14 @@ global:
   - TWITTER_CONSUMER_SECRET=
   - GOOGLE_CONSUMER_KEY=
   - GOOGLE_CONSUMER_SECRET=
+
 language: node_js
 node_js:
   - 'stable'
+
+services:
+  - postgresql
+
 cache:
   directories:
     - "node_modules"
