@@ -10,10 +10,12 @@ const storeAuth = async (profile, fb) => {
       status: 200,
       message: `welcome ${facebookExists.name}`,
       data: {
-        token: tokenHelper.generateToken(facebookExists.id,
+        token: tokenHelper.generateToken(
+          facebookExists.id,
           facebookExists.username,
           facebookExists.email,
-          facebookExists.role)
+          facebookExists.role
+        )
       }
     });
   }
@@ -28,8 +30,6 @@ const storeAuth = async (profile, fb) => {
     }
   });
 };
-
-export default storeAuth;
 const googleAuth = async (req, res) => {
   const doesExists = await AuthHelper.userExists('email', req.user.emails[0].value);
   if (doesExists) {
@@ -37,10 +37,12 @@ const googleAuth = async (req, res) => {
       status: 200,
       message: `welcome ${doesExists.name}`,
       data: {
-        token: tokenHelper.generateToken(doesExists.id,
+        token: tokenHelper.generateToken(
+          doesExists.id,
           doesExists.username,
           doesExists.email,
-          doesExists.role)
+          doesExists.role
+        )
       }
     });
   }
