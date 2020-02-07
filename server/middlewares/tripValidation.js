@@ -2,14 +2,14 @@ import Joi from '@hapi/joi';
 
 const schemas = {
   trip: Joi.object().keys({
-    typeType: Joi.string().required(),
+    tripType: Joi.string().required(),
     from: Joi.string().required(),
     to: Joi.string().required(),
     reasons: Joi.string().required(),
     date: Joi.date().iso().required(),
     returnDate: Joi.date().iso(),
     accommodationId: Joi.number().integer().required(),
-    status: Joi.string().valid('pending', 'approved'),
+    status: Joi.string().valid('pending', 'approved', 'rejected'),
   }),
 
 };

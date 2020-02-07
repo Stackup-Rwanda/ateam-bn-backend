@@ -19,7 +19,7 @@ describe('Test for create one way trip endpoint', () => {
         .send(oneWayTrip);
       expect(res.body.status).to.equal(201);
       expect(res.body).to.be.an('object');
-      expect(res.body.message).to.be.equal('Trip was created successfully');
+      expect(res.body.message).to.be.equal('Trip was created successfully.');
       expect(res.body.data).to.be.an('object');
     })
   );
