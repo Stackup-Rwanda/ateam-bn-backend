@@ -1,19 +1,6 @@
-import tokenHelper from './TokenHelper';
+import responses from './responsesHelper';
 
 const authorization = (facebook, fb) => {
-  if (facebook) {
-    return fb.status(200).json({
-      status: 200,
-      message: `welcome ${facebook.name}`,
-      data: {
-        token: tokenHelper.generateToken(
-          facebook.id,
-          facebook.username,
-          facebook.email,
-          facebook.role
-        )
-      }
-    });
-  }
+  if (facebook) responses(200, fb, facebook);
 };
 export default authorization;
