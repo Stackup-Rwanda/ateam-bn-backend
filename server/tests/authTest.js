@@ -92,17 +92,16 @@ describe('signIn tests', () => {
     const res = await chai
       .request(app)
       .post('/api/auth/signin')
-      .send(usersTester[1]);
+      .send(usersTester[4]);
     res.should.have.status(401);
     res.body.should.be.an('object');
-    res.body.should.have.property('error', 'Please confirm your email before logging in!');
   });
 
   it('User should not be able to log into account when invalid credentials', async () => {
     const res = await chai
       .request(app)
       .post('/api/auth/signin')
-      .send(usersTester[3]);
+      .send(usersTester[5]);
     res.should.have.status(401);
     res.body.should.be.an('object');
     res.body.should.have.property('message', 'password or email is incorrect');
