@@ -3,8 +3,8 @@ import passport from 'passport';
 import dotenv from 'dotenv';
 
 dotenv.config();
-passport.use(
-  new FacebookStrategy({
+passport.use(new FacebookStrategy(
+  {
     clientID: process.env.clientID,
     clientSecret: process.env.clientSecret,
     callbackURL: process.env.callbackURL,
@@ -12,6 +12,5 @@ passport.use(
   },
   (accessToken, refreshToken, profile, cb) => {
     cb(null, profile);
-    console.log(profile);
-  })
-);
+  }
+));
