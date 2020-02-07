@@ -84,11 +84,12 @@ class AuthController {
           status: 200,
           message: 'user successfully logged In',
           data: {
-            token: TokenHelper.generateToken(
+            token: await TokenHelper.generateToken(
               emailExists.id,
               emailExists.username,
               emailExists.email,
-              emailExists.role
+              emailExists.role,
+              emailExists.isVerified
             ),
           }
         });

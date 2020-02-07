@@ -34,7 +34,7 @@ const sendmail = async (email, name) => {
       'Welcome, this is Barefoot Nomad',
       'Please confirm your email',
       'Confirm email',
-      `http://localhost:4000/user/${email}/confirm`
+      `http://localhost:${process.env.PORT}/api/user/${email}/confirm`
     );
     const emailTemplate = mailGenerator.generate(emailBody);
     mailer.setApiKey(process.env.SENDGRID_API_KEY);
@@ -46,6 +46,6 @@ const sendmail = async (email, name) => {
       html: emailTemplate
     };
     await mailer.send(message);
-  } catch (error) {}
+  } catch (error) { }
 };
 export default sendmail;

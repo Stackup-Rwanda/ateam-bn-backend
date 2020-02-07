@@ -97,6 +97,24 @@ describe('signIn tests', () => {
     res.body.should.be.an('object');
   });
 
+  it('User should be able to log into account when email is verified', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/auth/signin')
+      .send(usersTester[6]);
+    res.should.have.status(200);
+    res.body.should.be.an('object');
+  });
+
+  it('User should be able to log into account when email is verified', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/auth/signin')
+      .send(usersTester[7]);
+    res.should.have.status(200);
+    res.body.should.be.an('object');
+  });
+
   it('User should not be able to log into account when invalid credentials', async () => {
     const res = await chai
       .request(app)

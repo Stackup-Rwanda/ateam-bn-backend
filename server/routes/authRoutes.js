@@ -19,6 +19,4 @@ router
   .post('/auth/signin', signIn, asyncErrorHandler(AuthController.signIn))
   .get('/users/logout', importedTokenValidator, AuthController.logout);
 
-router.get('/users/logout', importedTokenValidator, AuthController.logout);
-
 export default router;

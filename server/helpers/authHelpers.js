@@ -64,11 +64,13 @@ class AuthHelpers {
   /**
    * insert generatyed token into table in the DB.
    * @param {string} generatedtoken The request sent by a user.
+   * @param {integer} userId The user id.
    * @returns {string} The users's token.
    */
-  static async insertGeneratedToken(generatedtoken) {
+  static async insertGeneratedToken(generatedtoken, userId) {
     await Token.create({
       value: generatedtoken,
+      userId,
       createdAt: new Date(),
       updatedAt: new Date()
     });
