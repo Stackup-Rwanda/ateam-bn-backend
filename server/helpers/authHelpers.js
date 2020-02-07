@@ -95,5 +95,14 @@ class AuthHelpers {
 
     return acceptedUser;
   }
+
+  /**
+   * delete token from validtoken table in the DB.
+   * @param {string} validtoken The request sent by a user.
+   * @returns {string} The users's token.
+   */
+  static async deleteValidToken(validtoken) {
+    await Token.destroy({ where: { value: validtoken } });
+  }
 }
 export default AuthHelpers;
