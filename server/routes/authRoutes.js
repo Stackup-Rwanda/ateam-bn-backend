@@ -34,9 +34,13 @@ router.patch(
   asyncErrorHandler(EmailController.updatePassword)
 );
 
-router.put('/user/:email/confirm', AuthController.confirmation);
-
-router.post('/auth/signin', asyncErrorHandler(AuthController.signIn));
+router
+  .post('/auth/signup', signUp, passwordHasher, asyncErrorHandler(AuthController.signUp))
+  .post('/auth/reset-password', Validations.checkEmail, asyncErrorHandler(EmailController.sendResetPasswordEmail))
+  .patch('/auth/update-password/:userId/:token', Validations.checkPassword, Validations.checkPasswordAnConfirmPassword, userIdExistMiddleware, resetEmailTokenMiddleware, asyncErrorHandler(EmailController.updatePassword))
+  .put('/user/:email/confirm', AuthController.confirmation)
+  .post('/auth/signin', signIn, asyncErrorHandler(AuthController.signIn))
+  .get('/users/logout', importedTokenValidator, AuthController.logout);
 
 router.get(
   '/auth/google',

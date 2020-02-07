@@ -18,6 +18,7 @@ const userDefinition = (sequelize, DataTypes) => {
     social_id: { type: DataTypes.STRING, unique: true },
     provider: { type: DataTypes.STRING }
   }, {});
+
   return User;
 };
 
