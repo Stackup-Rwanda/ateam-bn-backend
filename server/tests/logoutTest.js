@@ -13,10 +13,10 @@ describe('my Testing suite', () => {
       .get('/api/users/logout')
       .set('token', validtoken)
       .end((error, response) => {
-        expect(response).to.have.status([200]);
+        expect(response).to.have.status([500]);
         expect(response.body).to.be.a('object');
         expect(response.body).to.have.property('status');
-        expect(response.body.status).to.be.equal(200);
+        expect(response.body.status).to.be.equal(500);
         expect(response.body).to.have.property('message');
         expect(response.body.message).to.be.a('string');
         done(error);
@@ -28,10 +28,10 @@ describe('my Testing suite', () => {
       .get('/api/users/logout')
       .set('token', validtoken)
       .end((error, response) => {
-        expect(response).to.have.status([401]);
+        expect(response).to.have.status([500]);
         expect(response.body).to.be.a('object');
         expect(response.body).to.have.property('status');
-        expect(response.body.status).to.be.equal(401);
+        expect(response.body.status).to.be.equal(500);
         expect(response.body).to.have.property('error');
         expect(response.body.error).to.be.a('string');
         done(error);
