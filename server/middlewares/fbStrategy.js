@@ -9,7 +9,6 @@ passport.use(new FacebookStrategy({
   callbackURL: process.env.callbackURL,
   profileFields: ['id', 'displayName', 'email']
 },
-// strategyGenerator(process.env.clientID, process.env.clientSecret, process.env.callbackURL),
 (accessToken, refreshToken, profile, cb) => {
   cb(null, profile);
   console.log(profile);
