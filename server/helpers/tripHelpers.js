@@ -11,6 +11,17 @@ const {
  */
 class TripHelpers {
   /**
+   * Finds if a trip exists.
+   * @param {string} attr trip table field.
+   * @param {string} val value to be found.
+   * @returns {object} The trip's data.
+   */
+  static async tripExists(attr, val) {
+    const trip = await Trip.findOne({ where: { [attr]: val } });
+    return trip;
+  }
+
+  /**
      * Finds a trip by reasons and date.
      * @param {string} trip a trip data.
      * @returns {object} trip data.
