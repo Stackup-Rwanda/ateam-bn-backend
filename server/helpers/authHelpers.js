@@ -75,6 +75,42 @@ class AuthHelpers {
   }
 
   /**
+   * Saves the user in the DB.
+   * @param {object} user The request sent by a user.
+   * @returns {object} The users's data.
+   */
+  static async saveSocial(user) {
+    const acceptedUser = await User.create(
+      {
+        name: user.displayName,
+        gender: user.gender,
+        email: user.emails[0].value,
+        username: user.username,
+        password: user.password,
+        birthdate: user.birthdate,
+        preferredLanguage: user.preferredLanguage,
+        preferredCurrency: user.preferredLanguage,
+        location: user.location,
+        role: user.role,
+        department: user.department,
+        lineManager: user.lineManager,
+        isVerified: false,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        social_id: user.id,
+        provider: user.provider
+      },
+      {
+        fields: [
+          'name', 'gender', 'email', 'username', 'password', 'birthdate', 'preferredLanguage', 'preferredCurrency', 'location', 'role', 'department', 'lineManager', 'isVerified', 'createAt', 'updatedAt', 'social_id', 'provider'
+        ]
+      }
+    );
+
+    return acceptedUser;
+  }
+
+  /**
    * delete token from validtoken table in the DB.
    * @param {string} validtoken The request sent by a user.
    * @returns {string} The users's token.

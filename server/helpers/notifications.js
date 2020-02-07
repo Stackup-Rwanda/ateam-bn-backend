@@ -10,8 +10,6 @@ import importService from './emailService';
       email: 'k.joshua855@gmail.com', // req.request.email
       requester: 'Joshua', // req.request.username
       manager: 'agent Moriah', // req.request.agent
-      created: new Date().toString(),
-      modified: 'none'
     };
   *  await notification.createNotification(clientNotify);
 
@@ -28,7 +26,7 @@ class Notifications {
         */
   async createNotification(clientNotify) {
     await importQuery.insertNotification(clientNotify);
-    importService.emailing(clientNotify.client, clientNotify.email, clientNotify.title, clientNotify.dsscription);
+    importService.emailing(clientNotify.requester, clientNotify.email, clientNotify.title, clientNotify.description);
   }
 }
 

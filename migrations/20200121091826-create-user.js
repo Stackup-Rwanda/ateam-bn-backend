@@ -53,6 +53,13 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Users', {
   updatedAt: {
     allowNull: false,
     type: Sequelize.DATE
+  },
+  social_id: {
+    type: Sequelize.STRING,
+    unique: true
+  },
+  provider: {
+    type: Sequelize.STRING
   }
 });
 
