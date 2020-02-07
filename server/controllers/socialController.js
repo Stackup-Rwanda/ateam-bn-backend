@@ -3,31 +3,28 @@ import AuthHelper from '../helpers/authHelpers';
 import '../middlewares/googleStrategy';
 import tokenHelper from '../helpers/TokenHelper';
 
-const storeAuth = async (profile, fb) => {
-  const facebookExists = await AuthHelper.userExists('email', profile.user.emails[0].value);
-  if (facebookExists) {
-    return fb.status(200).json({
+const storeAuth = (profile, fb) => {
+  AuthHelper.userExists('email', profile.user.emails[0].value).then((facebookExists) => {
+    if (facebookExists) {
+      return fb.status(200).json({
+        status: 200,
+        message: `welcome ${facebookExists.name}`,
+        data: {
+          token: tokenHelper.generateToken(
+            facebookExists.id,
+            facebookExists.username,
+            facebookExists.email,
+            facebookExists.role
+          )
+        }
+      });
+    }AuthHelper.saveSocial(profile.user).then((user) => fb.status(201).send({
       status: 200,
-      message: `welcome ${facebookExists.name}`,
+      message: `welcome ${user.name} signup complete`,
       data: {
-        token: tokenHelper.generateToken(
-          facebookExists.id,
-          facebookExists.username,
-          facebookExists.email,
-          facebookExists.role
-        )
+        token: tokenHelper.generateToken(user.id, user.username, user.email, user.role)
       }
-    });
-  }
-  const user = await AuthHelper.saveSocial(profile.user);
-  return fb.status(201).send({
-    status: 200,
-    message: `welcome ${user.name} signup complete`,
-    data: {
-      token: tokenHelper.generateToken(user.id, user.username, user.email, user.role)
-
-
-    }
+    }));
   });
 };
 const googleAuth = async (req, res) => {
