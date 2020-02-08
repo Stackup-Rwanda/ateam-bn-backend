@@ -53,5 +53,13 @@ export default [
   {
     email: 'dummy2@email.rw',
     password: '12345678'
+  },
+  {
+    email: 'dummy2@email.rw',
+    password: '123456789'
+  },
+  {
+    email: 'dummy3@email.rw',
+    password: '123456789'
   }
 ];

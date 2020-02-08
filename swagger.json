@@ -14,7 +14,7 @@
   "tags": [
     {
       "name": "User",
-      "description": " User endpoints :: This endpoint will handle user wrong request"
+      "description": " User endpoints :: This endpoint will handle users wrong request"
     },
     {
       "name": "Auth",
