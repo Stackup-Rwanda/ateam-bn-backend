@@ -1,13 +1,17 @@
-import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import importAuthHelpers from './authHelpers';
+import jwt from 'jsonwebtoken';
+import importInsertToken from './authHelpers';
+import models from '../models';
+
+const { Token } = models;
 
 dotenv.config();
 
 /**
- * This class contains
- * two methods, one to help hashing password (hashPassword)
- * and the second to retrieve hashed password
+ * This class contains.
+ * three methods, one to help hashing password (hashPassword).
+ * other the second to retrieve hashed password.
+ * and the lastone for generating token.
  */
 class TokenHelper {
   /**
@@ -42,12 +46,15 @@ class TokenHelper {
    * @param {string} isVerified The user's isVerified.
    * @returns {string} The users's hashed password.
    */
-  static generateToken(id, username, email, role, isVerified) {
+  static async generateToken(id, username, email, role, isVerified) {
+    const userTokenExists = await Token.findOne({ where: { userId: id } });
+    if (userTokenExists) {
+      return userTokenExists.value;
+    }
     const generatedToken = jwt.sign({
       id, username, email, role, isVerified
     }, process.env.SECRET_KEY);
-
-    importAuthHelpers.insertGeneratedToken(generatedToken);
+    importInsertToken.insertGeneratedToken(generatedToken, id);
     return generatedToken;
   }
 }

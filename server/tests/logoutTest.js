@@ -10,7 +10,7 @@ describe('my Testing suite', () => {
   const Unexistuser = token.UnExistUser;
   it('users should be able to logout from application', (done) => {
     router()
-      .get('/api/users/logout')
+      .get('/api/auth/logout')
       .set('token', validtoken)
       .end((error, response) => {
         expect(response).to.have.status([200]);
@@ -25,7 +25,7 @@ describe('my Testing suite', () => {
 
   it('users should not click twice on button of logout from application', (done) => {
     router()
-      .get('/api/users/logout')
+      .get('/api/auth/logout')
       .set('token', validtoken)
       .end((error, response) => {
         expect(response).to.have.status([401]);
@@ -37,10 +37,9 @@ describe('my Testing suite', () => {
         done(error);
       });
   });
-
   it('users should not logout when does not exist in database', (done) => {
     router()
-      .get('/api/users/logout')
+      .get('/api/auth/logout')
       .set('token', Unexistuser)
       .end((error, response) => {
         expect(response).to.have.status([401]);
