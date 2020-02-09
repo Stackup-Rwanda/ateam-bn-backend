@@ -10,7 +10,7 @@ const dummy1 = {
   preferredLanguage: 'French',
   preferredCurrency: 'Euro',
   location: 'Paris',
-  role: 'Broker',
+  role: 'Requester',
   department: 'Cleaner',
   lineManager: 3,
   isVerified: false,

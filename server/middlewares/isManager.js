@@ -1,5 +1,9 @@
+import dotenv from 'dotenv';
+
 import Auth from '../helpers/TokenHelper';
 import users from '../helpers/authHelpers';
+
+dotenv.config();
 
 export default (req, res, next) => {
   try {
@@ -10,7 +14,7 @@ export default (req, res, next) => {
       });
     }
     const token = req.headers.authorization;
-    const decoded = Auth.decodedToken(token);
+    const decoded = Auth.decodedToken(token, process.env.SECRET_KEY);
     req.userData = decoded;
     if (!users.userExists('email', req.userData.email)) {
       return res.status(403).send({
@@ -23,6 +27,7 @@ export default (req, res, next) => {
       return next();
     }
   } catch (error) {
+    console.log(error);
     return res.status(401).json({
       status: 401,
       error: 'Auth failed'
