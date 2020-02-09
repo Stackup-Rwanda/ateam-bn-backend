@@ -12,7 +12,6 @@ const statusValidator = (req, res, next) => {
   });
   if (error) {
     const { details } = error;
-    console.log(error);
     const message = details.map((i) => i.message.replace(/"/g, '')).join(', ');
     return res.status(400).json({ status: 400, error: message });
   }

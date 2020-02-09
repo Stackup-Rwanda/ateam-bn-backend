@@ -4,6 +4,8 @@ import Auth from '../helpers/TokenHelper';
 
 dotenv.config();
 
+dotenv.config();
+
 export default (req, res, next) => {
   try {
     if (!req.headers.token) {
