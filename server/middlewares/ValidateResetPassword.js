@@ -9,6 +9,16 @@ import error4OOHappyJoi from '../helpers/ErrorResponse';
 class Validations {
   /**
    * This method handle the signup request.
+   * @returns {object} The status and some data of the user.
+   */
+  static validatePassword() {
+    return Joi.string().trim().required().min(8)
+      .alphanum()
+      .max(50);
+  }
+
+  /**
+   * This method handle the signup request.
    * @param {object} req The user's request.
    * @param {object} res The response.
    * @param {object} next The response.
@@ -32,12 +42,8 @@ class Validations {
    */
   static checkPassword(req, res, next) {
     const schema = Joi.object().keys({
-      password: Joi.string().trim().required().min(8)
-        .alphanum()
-        .max(50),
-      confirmPassword: Joi.string().trim().required().min(8)
-        .alphanum()
-        .max(),
+      password: Validations.validatePassword(),
+      confirmPassword: Validations.validatePassword()
     });
 
     const { error } = schema.validate(req.body);
