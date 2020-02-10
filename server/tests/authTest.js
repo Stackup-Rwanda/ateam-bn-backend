@@ -73,7 +73,6 @@ describe('Test for signup endpoint', () => {
       expect(res.body.data).to.be.an('object');
     })
   );
-
   it(
     "shouldn't signup already saved user",
     mochaAsync(async () => {
@@ -94,6 +93,24 @@ describe('signIn tests', () => {
       .post('/api/auth/signin')
       .send(usersTester[4]);
     res.should.have.status(401);
+    res.body.should.be.an('object');
+  });
+
+  it('User should be able to log into account when email is verified', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/auth/signin')
+      .send(usersTester[6]);
+    res.should.have.status(200);
+    res.body.should.be.an('object');
+  });
+
+  it('User should be able to log into account when email is verified', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/auth/signin')
+      .send(usersTester[6]);
+    res.should.have.status(200);
     res.body.should.be.an('object');
   });
 

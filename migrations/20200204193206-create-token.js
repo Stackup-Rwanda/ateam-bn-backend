@@ -8,6 +8,9 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Tokens', {
   value: {
     type: Sequelize.STRING
   },
+  userId: {
+    type: Sequelize.INTEGER
+  },
   createdAt: {
     allowNull: false,
     type: Sequelize.DATE
