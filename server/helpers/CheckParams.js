@@ -6,6 +6,4 @@ const checkIdParams = (id) => {
   return Number.isInteger(integer);
 };
 
-export default {
-  checkIdParams
-};
+export default checkIdParams;

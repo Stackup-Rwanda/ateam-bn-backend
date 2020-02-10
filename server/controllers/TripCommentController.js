@@ -1,6 +1,6 @@
 import tripHelpers from '../helpers/tripHelpers';
 import commentHelper from '../helpers/TripCommentHelper';
-import { checkIdParams } from '../helpers/CheckParams';
+import checkIdParams from '../helpers/CheckParams';
 
 /**
  * This class contains all methods

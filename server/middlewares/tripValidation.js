@@ -29,7 +29,7 @@ const tripValidator = (schema, property) => {
         details
       } = error;
       const message = details.map((i) => i.message).join(',');
-      console.log('error', message);
+
       res.status(422).json({
         status: 422,
         error: message

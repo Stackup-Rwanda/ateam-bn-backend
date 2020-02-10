@@ -13,10 +13,9 @@ const verifyToken = async (req, res, next) => {
     const userExists = await User.findOne({
       where: { email: verify.email }
     });
-    const tokenExists = true;
-    // const tokenExists = await Token.findOne({
-    //   where: { value: req.header('token') }
-    // });
+    const tokenExists = await Token.findOne({
+      where: { value: req.header('token') }
+    });
     if (userExists) {
       if (tokenExists) {
         return next();
