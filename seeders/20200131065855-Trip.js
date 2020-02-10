@@ -1,13 +1,13 @@
 const up = (queryInterface) => queryInterface.bulkInsert('Trips', [{
   userId: 1,
   tripType: 'One-way',
-  from: 'kigali',
-  to: 'new york',
+  from: 1,
+  to: 2,
   date: new Date(),
   returnDate: null,
   reasons: 'being a mannager',
   accommodationId: 1,
-  status: 'pending',
+  status: 'Pending',
   createdAt: new Date(),
   updatedAt: new Date()
 }]);

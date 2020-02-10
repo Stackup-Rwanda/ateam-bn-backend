@@ -1,4 +1,4 @@
-import bcrypt from 'bcryptjs';
+import bcrypt from 'bcrypt';
 /**
  * This class contains
  * two methods, one to help hashing password

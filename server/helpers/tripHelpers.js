@@ -41,14 +41,7 @@ class TripHelpers {
      */
   static async saveTrip(trip) {
     const acceptedTrip = await Trip.create({
-      userId: trip.userId,
-      tripType: trip.tripType,
-      from: trip.from,
-      to: trip.to,
-      date: trip.date,
-      reasons: trip.reasons,
-      accommodationId: trip.accommodationId,
-      status: trip.status,
+      ...trip,
       createdAt: new Date(),
       updatedAt: new Date()
     }, {

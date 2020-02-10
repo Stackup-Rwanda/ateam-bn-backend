@@ -9,11 +9,11 @@ const tripDefinition = (sequelize, DataTypes) => {
       allowNull: false,
     },
     from: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     to: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
     },
     date: {

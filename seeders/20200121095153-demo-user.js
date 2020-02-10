@@ -30,8 +30,8 @@ const up = (queryInterface) => queryInterface.bulkInsert('Users', [{
   department: 'Cleaner',
   lineManager: 'MrNobody',
   isVerified: true,
-  createdAt: '7/02/2020',
-  updatedAt: '4/3/2000'
+  createdAt: '04/05/2020',
+  updatedAt: '02/03/2010'
 }
 ]);
 

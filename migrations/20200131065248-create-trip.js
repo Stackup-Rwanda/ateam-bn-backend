@@ -7,19 +7,24 @@ const up = (queryInterface, sequelize) => queryInterface.createTable('Trips', {
     type: sequelize.INTEGER
   },
   userId: {
-    type: sequelize.INTEGER
+    type: sequelize.INTEGER,
+    allowNull: true
   },
   tripType: {
-    type: sequelize.STRING
+    type: sequelize.STRING,
+    allowNull: true
   },
   from: {
-    type: sequelize.STRING
+    type: sequelize.INTEGER,
+    allowNull: true
   },
   to: {
-    type: sequelize.STRING,
+    type: sequelize.INTEGER,
+    allowNull: true
   },
   date: {
     type: sequelize.DATE,
+    allowNull: true
   },
   returnDate: {
     type: sequelize.DATE,
@@ -28,12 +33,14 @@ const up = (queryInterface, sequelize) => queryInterface.createTable('Trips', {
   },
   reasons: {
     type: sequelize.STRING,
+    allowNull: true
   },
   accommodationId: {
     type: sequelize.INTEGER,
   },
   status: {
-    type: sequelize.STRING,
+    type: sequelize.ENUM('Pending', 'Aproved', 'Rejected'),
+    defaultValue: 'Pending'
   },
   createdAt: {
     type: sequelize.DATE,
