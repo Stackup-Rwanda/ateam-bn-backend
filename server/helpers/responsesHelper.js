@@ -5,7 +5,7 @@ const responses = (code, response, data) => {
     status: code,
     message: `welcome ${data.name} you are signed up`,
     data: {
-      token: tokenHelper.generateToken(data.id, data.username, data.email, data.role)
+      token: tokenHelper.generateToken(data.id, data.username, data.email, data.role, true)
     }
   });
 };

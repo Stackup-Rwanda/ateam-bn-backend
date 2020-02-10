@@ -128,10 +128,12 @@ class AuthHelpers {
   static async insertNotification(clientNotification) {
     await Notification.create({
       title: clientNotification.title,
-      description: clientNotification.description,
-      email: clientNotification.email,
       requester: clientNotification.requester,
       manager: clientNotification.manager,
+      email: clientNotification.email,
+      status: clientNotification.status,
+      comment: clientNotification.comment,
+      description: clientNotification.description,
       createdAt: new Date(),
       updatedAt: new Date()
     });

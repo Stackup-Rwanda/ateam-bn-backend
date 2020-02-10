@@ -8,16 +8,22 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Notificati
   title: {
     type: Sequelize.STRING
   },
-  description: {
+  requester: {
+    type: Sequelize.STRING
+  },
+  manager: {
     type: Sequelize.STRING
   },
   email: {
     type: Sequelize.STRING
   },
-  requester: {
+  status: {
     type: Sequelize.STRING
   },
-  manager: {
+  comment: {
+    type: Sequelize.STRING
+  },
+  description: {
     type: Sequelize.STRING
   },
   createdAt: {
