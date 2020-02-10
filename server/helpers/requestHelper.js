@@ -20,8 +20,8 @@ class RequestHelper {
 
   /**
    * Finds the request in the DB.
-   * @param {string} attr notifications table field.
-   * @param {string} val value to be found.
+   * @param {string} state notifications table field.
+   * @param {string} id value to be found.
    * @returns {object} The notification's data.
    */
   static async updateStatus(state, id) {

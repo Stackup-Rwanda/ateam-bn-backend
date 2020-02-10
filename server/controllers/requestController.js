@@ -17,13 +17,14 @@ class RequestController {
     await RequestHelper.updateStatus('Approved', parseInt(req.params.id, 10));
     const reqq = await RequestHelper.findRequest('id', parseInt(req.params.id, 10));
     const manager = await users.userExists('id', parseInt(reqq.userId, 10));
-    const properManager = await users.userExists('id', parseInt(req.userData.id));
+    const properManager = await users.userExists('id', parseInt(req.userData.id, 10));
     console.log(reqq.userId, properManager.username, manager.lineManager, req.userData.username);
-    if (manager.lineManager === properManager.username)
-    res.status(200).json({
-      status: 200,
-      data: reqq
-    });
+    if (manager.lineManager === properManager.username) {
+      res.status(200).json({
+        status: 200,
+        data: reqq
+      });
+    }
   }
 }
 
