@@ -76,7 +76,7 @@ class EmailController {
     await AuthHelpers.updateUserPassword(userExist.id, req.body);
     const subjectAndHhtmlBody = passwordResetWellSubjectAndHtmlBoy(userExist);
     const theMessage = sendEmailTemplate('support@borafoot.com', userExist, subjectAndHhtmlBody);
-    sgMail.send(theMessage);
+    await sgMail.send(theMessage);
 
     return res.status(200).json({
       status: res.statusCode,
