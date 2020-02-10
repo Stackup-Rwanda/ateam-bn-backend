@@ -1,22 +1,23 @@
 import Router from 'express';
-import CommentController from '../controllers/CommentController';
+import TripCommentController from '../controllers/TripCommentController';
 import asyncErrorHandler from '../helpers/asyncErrorHandler';
-import CommentValidator from '../middlewares/CommentValidator';
+import TripCommentValidator from '../middlewares/TripCommentValidator';
 import tokenValidator from '../middlewares/tokenValidator';
 
 const router = Router();
 
-router.post(
-  '/Trips/:tripId/Comment',
-  tokenValidator,
-  CommentValidator.NewComment,
-  asyncErrorHandler(CommentController.saveComment)
-);
+router
+  .post(
+    '/Trips/:tripId/Comment',
+    tokenValidator,
+    TripCommentValidator.NewComment,
+    asyncErrorHandler(TripCommentController.saveComment)
+  )
 
-router.delete(
-  '/Trips/:tripId/Comments/:commentId/delete',
-  tokenValidator,
-  asyncErrorHandler(CommentController.deleteComment)
-);
+  .delete(
+    '/Trips/:tripId/Comments/:commentId/delete',
+    tokenValidator,
+    asyncErrorHandler(TripCommentController.deleteComment)
+  );
 
 export default router;

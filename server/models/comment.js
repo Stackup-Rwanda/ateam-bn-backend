@@ -4,35 +4,11 @@ const commentDefinition = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    tripType: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    from: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    to: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    date: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    returnDate: {
-      type: DataTypes.DATE,
-      allowNull: true,
-      defaultValue: null
-    },
-    reasons: {
-      type: DataTypes.STRING,
-    },
-    accommodationId: {
+    tripId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    status: {
+    comment: {
       type: DataTypes.STRING,
       allowNull: false,
     },

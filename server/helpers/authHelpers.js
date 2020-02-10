@@ -1,7 +1,8 @@
 import models from '../models';
 import Hasher from './passwordHashHelper';
 
-const { User } = models;
+const { User, Token } = models;
+
 /**
  * This class contains
  * all methods required to save/edit/retrieve/delete
@@ -58,6 +59,15 @@ class AuthHelpers {
       }
     );
     return acceptedUser;
+  }
+
+  /**
+   * delete token from validtoken table in the DB.
+   * @param {string} validtoken The request sent by a user.
+   * @returns {string} The users's token.
+   */
+  static async deleteValidToken(validtoken) {
+    await Token.destroy({ where: { value: validtoken } });
   }
 }
 export default AuthHelpers;

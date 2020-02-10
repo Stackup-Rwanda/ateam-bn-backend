@@ -26,3 +26,13 @@ export const twoWayTrip = {
   accommodationId: 1,
   status: 'approved',
 };
+
+export const jajaTrip = {
+  typeType: 'One way',
+  from: 'kigali',
+  to: 'new york',
+  date: '2020-03-02',
+  reasons: 'Test jaja one way trip',
+  accommodationId: 1,
+  status: 'pending',
+};

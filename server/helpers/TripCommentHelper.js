@@ -8,13 +8,13 @@ const { Comment } = models;
  */
 class CommentsHelper {
   /**
-   * Finds if a comment exists.
-   * @param {string} attr comment table field.
-   * @param {string} val value to be found.
+   * Finds if a user has a trip comment.
+   * @param {string} id trip id.
+   * @param {string} userId userId of a comment.
    * @returns {object} The comment's data.
    */
-  static async commentExists(attr, val) {
-    const comment = await Comment.findOne({ where: { [attr]: val } });
+  static async userCommentExists(id, userId) {
+    const comment = await Comment.findOne({ where: { id, userId } });
     return comment;
   }
 

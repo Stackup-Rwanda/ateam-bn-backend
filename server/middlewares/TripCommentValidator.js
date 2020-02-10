@@ -16,8 +16,6 @@ class CommentValidator {
    */
   static NewComment(req, res, next) {
     const schema = Joi.object().keys({
-      userId: Joi.number().min(1).required(),
-      tripId: Joi.number().min(1).required(),
       comment: Joi.string().min(2).required()
     });
     const { error } = schema.validate(req.body, {

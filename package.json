@@ -6,14 +6,14 @@
   "scripts": {
     "test": "npm run droptables:test && npm run createtables:test && npm run seed:test && cross-env NODE_ENV=test nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill --timeout 10000 --exit ./server/tests/*.js --exit",
     "server": "nodemon --exec babel-node ./server/index.js",
-    "start": "npx sequelize db:migrate && cross-env NODE_ENV=production babel-node ./server/index.js",
+    "start": "npx sequelize-cli db:migrate && cross-env NODE_ENV=production babel-node ./server/index.js",
     "createtables:dev": "npx sequelize db:migrate",
     "seed:dev": "npx sequelize db:seed:all",
-    "droptables:dev": "npx sequelize db:migrate:undo",
+    "droptables:dev": "npx sequelize db:migrate:undo:all",
     "createtables:test": "cross-env NODE_ENV=test npx sequelize db:migrate",
     "seed:test": "cross-env NODE_ENV=test npx sequelize db:seed:all",
     "coveralls": "npm test && nyc report --reporter=text-lcov | coveralls",
-    "droptables:test": "cross-env NODE_ENV=test npx sequelize db:migrate:undo",
+    "droptables:test": "cross-env NODE_ENV=test npx sequelize db:migrate:undo:all",
     "lint": "eslint ./server"
   },
   "repository": {
