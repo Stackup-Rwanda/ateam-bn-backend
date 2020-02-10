@@ -32,8 +32,12 @@ class Validations {
    */
   static checkPassword(req, res, next) {
     const schema = Joi.object().keys({
-      password: Joi.string().min(5).max(50).required(),
-      confirmPassword: Joi.string().min(5).max(50).required()
+      password: Joi.string().trim().required().min(8)
+        .alphanum()
+        .max(50),
+      confirmPassword: Joi.string().trim().required().min(8)
+        .alphanum()
+        .max(),
     });
 
     const { error } = schema.validate(req.body);
