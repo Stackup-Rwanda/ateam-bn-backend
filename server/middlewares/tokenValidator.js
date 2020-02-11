@@ -9,7 +9,6 @@ dotenv.config();
 const verifyToken = async (req, res, next) => {
   try {
     const verify = jwt.verify(req.header('token'), process.env.SECRET_KEY);
-    req.user = verify;
     const userExists = await User.findOne({
       where: { email: verify.email }
     });
@@ -18,6 +17,7 @@ const verifyToken = async (req, res, next) => {
     });
     if (userExists) {
       if (tokenExists) {
+        req.user = userExists;
         return next();
       }
       return res.status(401).json({ status: 401, error: 'Already logged out. Sign in and try again.' });

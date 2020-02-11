@@ -4,6 +4,7 @@ import TokenHelper from '../helpers/TokenHelper';
 import AuthHelpers from '../helpers/authHelpers';
 import {
   resetPasswordSubjectAndHtmlBoy,
+  passwordResetWellSubjectAndHtmlBoy,
   sendEmailTemplate,
 } from '../helpers/emailHelper';
 
@@ -45,7 +46,7 @@ class EmailController {
     const url = `${resetPasswordURL}${userData.id}/${token}`;
     const subjectAndHhtmlBody = resetPasswordSubjectAndHtmlBoy(userData, url);
     const theMessage = sendEmailTemplate('support@borafoot.com', userData, subjectAndHhtmlBody);
-    sgMail.send(theMessage);
+    await sgMail.send(theMessage);
 
     res.status(200).json({
       status: res.statusCode,
@@ -69,6 +70,9 @@ class EmailController {
     const { userExist } = req.body;
 
     await AuthHelpers.updateUserPassword(userExist.id, req.body);
+    const subjectAndHhtmlBody = passwordResetWellSubjectAndHtmlBoy(userExist);
+    const theMessage = sendEmailTemplate('support@borafoot.com', userExist, subjectAndHhtmlBody);
+    await sgMail.send(theMessage);
 
     return res.status(200).json({
       status: res.statusCode,

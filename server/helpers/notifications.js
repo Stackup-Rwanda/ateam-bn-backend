@@ -23,11 +23,11 @@ class Notifications {
       email: `${information.email}`,
       status: information.status,
       comment: `${information.comment}`,
-      description: `Hello ${information.requester} your request was ${information.status} by Manager ${information.requester} on ${new Date()} 
-      for more details about your travel clieck link below http://localhost:1000/api/users/${information.email}/`,
     };
-    await importQuery.insertNotification(requesterNotify);
-    importService.emailing(information.requester, 'requester.email(requesterNotify.email)', requesterNotify.title, requesterNotify.description);
+    const savedNotification = await importQuery.insertNotification(requesterNotify);
+    const description = `Hello ${information.requester} your request was ${information.status} by Manager ${information.manager} on ${new Date()}
+      for more details about your travel clieck link below http://localhost:1000/api/users/notifications/${savedNotification.id}/`;
+    importService.emailing(information.requester, information.email/* email of requester */, requesterNotify.title, description);
   }
 
   /**
@@ -45,11 +45,11 @@ class Notifications {
       email: information.email,
       status: information.status,
       comment: `${information.comment}`,
-      description: `Hello Manager a client ${information.requester} has ${information.status} request on ${new Date()} 
-      for more details about this travel clieck link below http://localhost:1000/api/users/${information.email}/`,
     };
-    await importQuery.insertNotification(managertNotify);
-    importService.emailing(managertNotify.manager, 'manager.email(managertNotify.email)', managertNotify.title, managertNotify.description);
+    const savedNotification = await importQuery.insertNotification(managertNotify);
+    const description = `Hello Manager a client ${information.requester} has ${information.status} request on ${new Date()} 
+    for more details about this travel clieck link below http://localhost:1000/api/users/notifications/${savedNotification.id}/`;
+    importService.emailing(managertNotify.manager, information.email/* email of manager */, managertNotify.title, description);
   }
 }
 

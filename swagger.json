@@ -14,7 +14,7 @@
   "tags": [
     {
       "name": "User",
-      "description": " User endpoints :: This endpoint will handle users wrong request"
+      "description": " User endpoints :: This endpoint will handle user wrong request"
     },
     {
       "name": "Auth",
@@ -53,19 +53,13 @@
         "tags": [
           "Auth"
         ],
-        "summary": "Signup",
-        "description": "User signup endpoint",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "summary": "Signup with application",
+        "description": "Now by the use of this POST endpoint user Should be able to create account with Barefoot Nomad application",
         "parameters": [
           {
             "in": "body",
             "name": "body",
-            "description": "User credentials to be used for signup",
+            "description": "Create user account: User credentials needed to be used for signup",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Signup"
@@ -85,7 +79,35 @@
         }
       }
     },
-    "/users/logout": {
+    "/auth/signin/": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Signin with application",
+        "description": "Now by the use of this POST endpoint user Should be able to signin into his/her account with  Barefoot Nomad  application",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "signin into user account: Correct user credentials needed to be used for login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/signin"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Authorizeduser: successfully logged In"
+          },
+          "401": {
+            "description": "Unauthorized: Please confirm your email before logging in! or Incorrect credentials"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
       "get": {
         "tags": [
           "Auth"
@@ -100,7 +122,7 @@
         "parameters": [
           {
             "in": "header",
-            "name": "Authorization",
+            "name": "token",
             "description": " This is user token which must be deleted directly when logged out from application",
             "type": "string"
           }
@@ -151,12 +173,6 @@
         ],
         "summary": "Reset password",
         "description": "User can reset password, endpoint",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
             "in": "body",
@@ -166,6 +182,18 @@
             "schema": {
               "$ref": "#/definitions/ResetPassword"
             }
+          },
+          {
+            "in": "path",
+            "name": "userId",
+            "type": "integer",
+            "description": "parsing a user ID"
+          },
+          {
+            "in": "path",
+            "name": "token",
+            "type": "string",
+            "description": "parsing a user token"
           }
         ],
         "responses": {
@@ -203,6 +231,12 @@
             "required": true,
             "type": "string",
             "description": ""
+          },
+          {
+            "in": "path",
+            "name": "username",
+            "type": "string",
+            "description": "parsing a username"
           }
         ],
         "responses": {
@@ -238,6 +272,12 @@
             "required": true,
             "type": "string",
             "description": ""
+          },
+          {
+            "in": "path",
+            "name": "username",
+            "type": "string",
+            "description": "parsing a username"
           },
           {
             "name": "Body",
@@ -322,6 +362,21 @@
         }
       }
     },
+    "signin": {
+      "type": "object",
+      "required": [
+        "email",
+        "password"
+      ],
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
     "SendEmail": {
       "type": "object",
       "required": [
@@ -351,9 +406,9 @@
     "profileUpdate": {
       "title": "Profile Update Request",
       "example": {
-        "name": "Guebuyu",
-        "birthdate": "22/12/2019",
-        "gender": "MALE",
+        "name": "edited username",
+        "birthdate": "2000-02-02",
+        "gender": "male",
         "preferredLanguage": "English",
         "preferredCurrency": "USD",
         "location": "Kigali Rwanda"

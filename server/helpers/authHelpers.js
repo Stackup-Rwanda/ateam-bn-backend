@@ -126,17 +126,17 @@ class AuthHelpers {
    * @returns {clientNotification} The user notification will stored.
    */
   static async insertNotification(clientNotification) {
-    await Notification.create({
+    const createdNotification = await Notification.create({
       title: clientNotification.title,
       requester: clientNotification.requester,
       manager: clientNotification.manager,
       email: clientNotification.email,
       status: clientNotification.status,
       comment: clientNotification.comment,
-      description: clientNotification.description,
       createdAt: new Date(),
       updatedAt: new Date()
     });
+    return createdNotification;
   }
 }
 export default AuthHelpers;
