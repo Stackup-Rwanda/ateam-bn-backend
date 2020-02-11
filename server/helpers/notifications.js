@@ -41,13 +41,13 @@ class Notifications {
     const managertNotify = {
       title: `REQUEST ${information.status}`,
       requester: information.requester,
-      manager: 'Manager',
+      manager: information.manager,
       email: information.email,
       status: information.status,
       comment: `${information.comment}`,
     };
     const savedNotification = await importQuery.insertNotification(managertNotify);
-    const description = `Hello Manager a client ${information.requester} has ${information.status} request on ${new Date()} 
+    const description = `Hello ${information.manager} a client ${information.requester} has ${information.status} request on ${new Date()} 
     for more details about this travel clieck link below http://localhost:1000/api/users/notifications/${savedNotification.id}/`;
     importService.emailing(managertNotify.manager, information.email/* email of manager */, managertNotify.title, description);
   }
