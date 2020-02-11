@@ -1,6 +1,7 @@
 import responses from './responsesHelper';
 
-const authorization = (facebook, fb) => {
-  if (facebook) responses(200, fb, facebook);
+const authorize = (facebookUser, fbResponse) => {
+  if (facebookUser) responses(200, fbResponse, facebookUser);
 };
-export default authorization;
+
+export default authorize;

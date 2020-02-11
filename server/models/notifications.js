@@ -6,7 +6,6 @@ const notificationnDefinition = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     status: DataTypes.STRING,
     comment: DataTypes.STRING,
-    description: DataTypes.STRING,
     createdAt: { type: DataTypes.DATE },
     updatedAt: { type: DataTypes.DATE }
   }, {});

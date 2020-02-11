@@ -15,7 +15,7 @@ const userDefinition = (sequelize, DataTypes) => {
     isVerified: { type: DataTypes.BOOLEAN },
     createdAt: { type: DataTypes.DATE },
     updatedAt: { type: DataTypes.DATE },
-    social_id: { type: DataTypes.STRING, unique: true },
+    social_id: { type: DataTypes.STRING },
     provider: { type: DataTypes.STRING }
   }, {});
 

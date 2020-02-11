@@ -23,9 +23,6 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Notificati
   comment: {
     type: Sequelize.STRING
   },
-  description: {
-    type: Sequelize.STRING
-  },
   createdAt: {
     allowNull: false,
     type: Sequelize.DATE
