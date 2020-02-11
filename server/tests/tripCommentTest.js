@@ -3,15 +3,11 @@ import chaiHttp from 'chai-http';
 import app from '../index';
 import mochaAsync from '../helpers/mochaAsync';
 import usersTester from './mochData/users';
-import commentTester from './mochData/tripComment';
-import {
-  jajaTrip,
-} from './mochData/trips';
+import { jajaTrip } from './mochData/trips';
 
 chai.use(chaiHttp);
 const router = () => chai.request(app);
 
-let userObject;
 let userToken;
 let savedTrip;
 let savedComment;

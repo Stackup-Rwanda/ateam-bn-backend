@@ -50,6 +50,20 @@ const tripDefinition = (sequelize, DataTypes) => {
       onDelete: 'CASCADE'
     });
   };
+  Trip.associate = (models) => {
+    Trip.belongsTo(models.User, {
+      foreignKey: 'userId',
+      as: 'Users',
+      onDelete: 'CASCADE'
+    });
+  };
+  Trip.associate = (models) => {
+    Trip.hasMany(models.Comment, {
+      foreignKey: 'tripId',
+      as: 'Comments',
+      onDelete: 'CASCADE',
+    });
+  };
   return Trip;
 };
 

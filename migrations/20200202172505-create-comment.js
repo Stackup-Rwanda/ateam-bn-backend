@@ -25,7 +25,6 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Comments',
   }
 });
 const down = (queryInterface) => queryInterface.dropTable('Comments');
-
 export {
   up, down
 };
