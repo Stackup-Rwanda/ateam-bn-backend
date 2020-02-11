@@ -30,7 +30,8 @@ class Notification {
       html: `<p>${description}</p>`
     };
 
-    await transporter.sendMail(messageObj);
+    const realemail = await transporter.sendMail(messageObj);
+    return realemail;
   }
 }
 

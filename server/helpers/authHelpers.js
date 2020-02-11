@@ -122,17 +122,15 @@ class AuthHelpers {
 
   /**
    * insert notification into Notification table in the DB.
-   * @param {clientNotification} clientNotification after user request.
-   * @returns {clientNotification} The user notification will stored.
+   * @param {object} notification after user request.
+   * @returns {object} The user notification will stored.
    */
-  static async insertNotification(clientNotification) {
+  static async insertNotification(notification) {
     const createdNotification = await Notification.create({
-      title: clientNotification.title,
-      requester: clientNotification.requester,
-      manager: clientNotification.manager,
-      email: clientNotification.email,
-      status: clientNotification.status,
-      comment: clientNotification.comment,
+      tripId: notification.tripId,
+      receiverId: notification.receiverId,
+      description: notification.description,
+      viewed: false,
       createdAt: new Date(),
       updatedAt: new Date()
     });

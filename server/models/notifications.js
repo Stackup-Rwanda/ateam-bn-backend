@@ -1,11 +1,9 @@
 const notificationnDefinition = (sequelize, DataTypes) => {
   const Notification = sequelize.define('Notification', {
-    title: DataTypes.STRING,
-    requester: DataTypes.STRING,
-    manager: DataTypes.STRING,
-    email: DataTypes.STRING,
-    status: DataTypes.STRING,
-    comment: DataTypes.STRING,
+    tripId: DataTypes.INTEGER,
+    receiverId: DataTypes.INTEGER,
+    description: DataTypes.STRING(500),
+    viewed: DataTypes.STRING,
     createdAt: { type: DataTypes.DATE },
     updatedAt: { type: DataTypes.DATE }
   }, {});

@@ -1,5 +1,6 @@
 import importQuery from './authHelpers';
 import importService from './emailService';
+import socketIo from "./socket";
 
 /**
  * This class contains all methods
@@ -9,58 +10,36 @@ import importService from './emailService';
  */
 class Notifications {
   /**
-   * This function will use insertNotification method to store into DB.
    *
-      const information = {
-        title: `REQUEST APPROVED`,
-        requester: req.user.username,
-        manager: req.user.username,
-        email: 'k.joshua855@gmail.com',
-        status: 'information.status',
-        comment: 'information.comment'
+      import notification from '../helpers/notifications';
+      const request = {
+        tripId: 20,
+        receiverId: 3,
+        username: req.user.username,
+        status: 'pending',
+        email: 'k.joshua855@gmail.com'
       };
-      await notification.sendNotificationToRequester(information);
+      await notification.sendNotification(request);
 
+   * This function will use insertNotification method to store into DB.
    * This function will use emailing method to send email to users.
-   * @param {object} information The user's request.
-   * @param {object} information. The response.
+   * @param {object} request The user's request.
+   * @param {object} request. The response.
    * @returns {object} The status and some data of the user.
    */
-  async sendNotificationToRequester(information) {
-    const requesterNotify = {
-      title: `REQUEST ${information.status}`,
-      requester: information.requester,
-      manager: information.manager,
-      email: `${information.email}`,
-      status: information.status,
-      comment: `${information.comment}`,
+  async sendNotification(request) {
+    const notificationDetail = {
+      tripId: request.tripId,
+      receiverId: request.receiverId,
+      description: `<span style='color: #7FD8A7 ;'>REQUEST ${request.status.toUpperCase()}</span> <br> 
+      <span style='color: #614e1f;'> Hello ${request.username} you have new notification for travel which is ${request.status} 
+      for more details clieck this link <span style='color: #044F72;'> http://localhost:1000/api/trips/${request.tripId}/ </span> </span><br><br>`,
+      username: request.username,
+      status: `REQUEST ${request.status}`
     };
-    const savedNotification = await importQuery.insertNotification(requesterNotify);
-    const description = `Hello ${information.requester} your request was ${information.status} by Manager ${information.requester} on ${new Date()}
-      for more details about your travel clieck link below http://localhost:1000/api/users/notifications/${savedNotification.id}/`;
-    importService.emailing(information.requester, 'requester.email(requesterNotify.email)', requesterNotify.title, description);
-  }
-
-  /**
-   * This function will use insertNotification method to store into DB.
-   * This function will use emailing method to send email to manager.
-   * @param {object} information The manager's response.
-   * @param {object} information. The response.
-   * @returns {object} The status and some data of the response.
-   */
-  async sendNotificationToManager(information) {
-    const managertNotify = {
-      title: `REQUEST ${information.status}`,
-      requester: information.requester,
-      manager: 'Manager',
-      email: information.email,
-      status: information.status,
-      comment: `${information.comment}`,
-    };
-    const savedNotification = await importQuery.insertNotification(managertNotify);
-    const description = `Hello Manager a client ${information.requester} has ${information.status} request on ${new Date()} 
-    for more details about this travel clieck link below http://localhost:1000/api/users/notifications/${savedNotification.id}/`;
-    importService.emailing(managertNotify.manager, 'manager.email(managertNotify.email)', managertNotify.title, description);
+    const savedData = await importQuery.insertNotification(notificationDetail);
+    socketIo.socket(notificationDetail.receiverId, 'notification', savedData.description);
+    await importService.emailing(request.username, request.email, notificationDetail.status.toUpperCase(), notificationDetail.description);
   }
 }
 

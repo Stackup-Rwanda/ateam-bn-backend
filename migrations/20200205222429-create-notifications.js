@@ -5,22 +5,16 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Notificati
     primaryKey: true,
     type: Sequelize.INTEGER
   },
-  title: {
-    type: Sequelize.STRING
+  tripId: {
+    type: Sequelize.INTEGER
   },
-  requester: {
-    type: Sequelize.STRING
+  receiverId: {
+    type: Sequelize.INTEGER
   },
-  manager: {
-    type: Sequelize.STRING
+  description: {
+    type: Sequelize.STRING(500)
   },
-  email: {
-    type: Sequelize.STRING
-  },
-  status: {
-    type: Sequelize.STRING
-  },
-  comment: {
+  viewed: {
     type: Sequelize.STRING
   },
   createdAt: {
