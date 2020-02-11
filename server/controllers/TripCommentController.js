@@ -49,11 +49,8 @@ class TripController {
    * @returns {object} The status and some data of the comment.
    */
   static async deleteComment(req, res) {
-    req.body.userId = req.user.id;
-    req.body.tripId = req.params.tripId;
-
-    if (!checkIdParams(req.body.userId) || !checkIdParams(req.body.tripId)) {
-      return res.status(404).json({
+    if (!checkIdParams(req.params.tripId) || !checkIdParams(req.params.commentId)) {
+      return res.status(400).json({
         status: res.statusCode,
         error: 'Sorry, The request contains bad data',
       });
@@ -74,12 +71,12 @@ class TripController {
       });
     }
 
-    const deletedComment = await commentHelper.deleteComment(req.params.commentId);
+    await commentHelper.deleteComment(req.params.commentId);
 
     return res.status(200).json({
       status: res.statusCode,
       message: 'Comment has deleted successfully.',
-      data: deletedComment
+      data: commentExist
     });
   }
 }

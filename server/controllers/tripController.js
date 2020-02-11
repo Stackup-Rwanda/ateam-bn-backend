@@ -14,7 +14,7 @@ class TripController {
    */
   static async oneWayTrip(req, res) {
     const { body } = req;
-    body.userId = 6;
+    body.userId = req.user.id;
     const tripExists = await tripHelpers.reasonsDate(body);
     if (tripExists) {
       return res.status(409).json({
