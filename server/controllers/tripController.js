@@ -14,7 +14,7 @@ class TripController {
    */
   static async oneWayTrip(req, res) {
     const { body } = req;
-    body.userId = 1;
+    const myuserId = req.user.id;
     const status1 = 'Pending';
     const newTrip = {
       tripType: body.tripType,
@@ -23,7 +23,7 @@ class TripController {
       date: body.date,
       reasons: body.reasons,
       accommodationId: body.accommodationId,
-      userId: body.userId,
+      userId: myuserId,
       status: status1
     };
     const { returnDate } = body;
