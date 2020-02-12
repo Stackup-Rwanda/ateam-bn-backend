@@ -19,12 +19,31 @@ describe('Test suite for approving/rejecting trip requests', () => {
     expect(res.body.data).to.be.an('object');
   });
 
+  it('should reject trip request if manager has user under his/her authority', async () => {
+    const res = await router().patch('/api/request/1/reject')
+      .set('token', token).send({ status: 'Rejected' });
+    expect(res.body).to.be.an('object');
+    expect(res.body.status).to.equals(200);
+    expect(res.body.message).to.be.a('string');
+    expect(res.body.message).to.equals('This trip request has been rejected');
+    expect(res.body.data).to.be.an('object');
+  });
+
   it('should not approve trip request with invalid http request', async () => {
     const res = await router().patch('/api/request/1/approve')
       .set('token', token).send({ status: 'Approve' });
     expect(res.body).to.be.an('object');
     expect(res.body.status).to.equals(400);
     expect(res.body.error).to.be.a('string');
+  });
+
+  it('should not reject trip request with invalid http request', async () => {
+    const res = await router().patch('/api/request/1/reject')
+      .set('token', token).send({ status: 'Reject' });
+    expect(res.body).to.be.an('object');
+    expect(res.body.status).to.equals(400);
+    expect(res.body.error).to.be.a('string');
+    expect(res.body.error).to.equals('allowed trip status is: Rejected');
   });
 
   it('should not approve trip request with no token', async () => {

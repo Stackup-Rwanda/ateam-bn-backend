@@ -5,7 +5,6 @@ import tripRoutes from './tripRoutes';
 import authRoutes from './authRoutes';
 import roleRoutes from './userRoleRoutes';
 import requestRoutes from './requestRoutes';
-import roleRoutes from './userRoleRoutes';
 
 const router = Router();
 
