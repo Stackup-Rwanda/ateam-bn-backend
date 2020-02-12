@@ -25,15 +25,13 @@ const commentDefinition = (sequelize, DataTypes) => {
       as: 'Trips',
       onDelete: 'CASCADE'
     });
-  };
-
-  Comment.associate = (models) => {
     Comment.belongsTo(models.User, {
       foreignKey: 'userId',
       as: 'Users',
       onDelete: 'CASCADE'
     });
   };
+
   return Comment;
 };
 

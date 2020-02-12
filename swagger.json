@@ -304,6 +304,92 @@
           }
         }
       }
+    },
+    "/Trips/{tripId}/Comment": {
+      "post": {
+        "tags": [
+          "Trip Comment"
+        ],
+        "summary": "create a trip comment",
+        "description": "User can create a trip comment, endpoint",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "data to pass in body, to create a comment",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/createComment"
+            }
+          },
+          {
+            "in": "path",
+            "name": "tripId",
+            "type": "integer",
+            "description": "parsing a Trip ID"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Comment has created successfully"
+          },
+          "400": {
+            "description": "comment is required / Sorry, The URL request contains bad data"
+          },
+          "404": {
+            "description": "Sorry, This trip does not exist."
+          }
+        }
+      }
+    },
+    "/Trips/{tripId}/Comments/{commentId}/delete": {
+      "delete": {
+        "tags": [
+          "Trip Comment"
+        ],
+        "summary": "delete commet",
+        "description": "User can delete a comment, endpoint",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "data to pass in URL to delete a comment",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/deleteComment"
+            }
+          },
+          {
+            "in": "path",
+            "name": "tripId",
+            "type": "integer",
+            "description": "parsing a Trip ID"
+          },
+          {
+            "in": "path",
+            "name": "commentId",
+            "type": "integer",
+            "description": "parsing a Comment ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment has deleted successfully."
+          },
+          "400": {
+            "description": "Sorry, the request contains bad data"
+          },
+          "404": {
+            "description": "Sorry, This trip does not exist./ Sorry, This comment does not exist."
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -442,6 +528,32 @@
         "preferredCurrency",
         "location"
       ]
+    },
+    "deleteComment": {
+      "type": "object",
+      "properties": {
+        "tripId": {
+          "type": "integer"
+        },
+        "commentId": {
+          "type": "integer"
+        }
+      }
+    },
+    "createComment": {
+      "type": "object",
+      "required": [
+        "password",
+        "confirmPassword"
+      ],
+      "properties": {
+        "password": {
+          "type": "string"
+        },
+        "confirmPassword": {
+          "type": "string"
+        }
+      }
     }
   }
 }
