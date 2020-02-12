@@ -1,5 +1,8 @@
 const up = (queryInterface) => queryInterface.bulkInsert('Trips', [{
   userId: 1,
+  name: 'john',
+  gender: 'male',
+  birthdate: '2020-05-04',
   tripType: 'One-way',
   from: 1,
   to: 2,

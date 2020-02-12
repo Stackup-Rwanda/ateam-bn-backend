@@ -13,6 +13,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Users', [{
   role: 'Broker',
   department: 'Cleaner',
   lineManager: 'MrNobody',
+  rememberMe: false,
   isVerified: false,
   createdAt: new Date(),
   updatedAt: new Date()
@@ -29,6 +30,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Users', [{
   role: 'Broker',
   department: 'Cleaner',
   lineManager: 'MrNobody',
+  rememberMe: false,
   isVerified: true,
   createdAt: '04/05/2020',
   updatedAt: '02/03/2010'

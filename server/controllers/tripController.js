@@ -17,6 +17,9 @@ class TripController {
     const myuserId = req.user.id;
     const status1 = 'Pending';
     const newTrip = {
+      name: body.name,
+      gender: body.gender,
+      birthdate: body.birthdate,
       tripType: body.tripType,
       from: body.from,
       to: body.to,
@@ -27,7 +30,6 @@ class TripController {
       status: status1
     };
     const { returnDate } = body;
-    console.log(returnDate);
     if (returnDate) {
       newTrip.returnDate = returnDate;
     }

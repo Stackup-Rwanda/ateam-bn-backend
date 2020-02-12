@@ -10,6 +10,18 @@ const up = (queryInterface, sequelize) => queryInterface.createTable('Trips', {
     type: sequelize.INTEGER,
     allowNull: true
   },
+  name: {
+    type: sequelize.STRING,
+    allowNull: true
+  },
+  gender: {
+    type: sequelize.STRING,
+    allowNull: true
+  },
+  birthdate: {
+    type: sequelize.STRING,
+    allowNull: true
+  },
   tripType: {
     type: sequelize.STRING,
     allowNull: true

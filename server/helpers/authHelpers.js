@@ -32,6 +32,17 @@ class AuthHelpers {
   }
 
   /**
+   * Update a user's rememberMe state.
+   * @param {string} id The user's id.
+   * @param {string} state The user's rememberMe state.
+   * @returns {object} The user's data about update state.
+   */
+  static async updateRememberMe(id, state) {
+    const updatedState = await User.update({ rememberMe: state }, { where: { id } });
+    return updatedState;
+  }
+
+  /**
    * Finds the user's email if he/she exists.
    * @param {string} email users table field.
    * @returns {object} The users's data.

@@ -47,6 +47,9 @@ class TripHelpers {
     }, {
       fields: [
         'userId',
+        'name',
+        'gender',
+        'birthname',
         'tripType',
         'from',
         'to',

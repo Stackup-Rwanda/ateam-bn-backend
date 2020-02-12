@@ -8,6 +8,10 @@ import dateValidator from "../helpers/dateValidator";
 
 const schemas = {
   trip: Joi.object().keys({
+    name: Joi.string().required(),
+    gender: Joi.string().required(),
+    birthdate: Joi.date().iso().required(),
+    rememberMe: Joi.boolean().required(),
     tripType: Joi.string().required(),
     from: Joi.number().integer(),
     to: Joi.number().integer(),

@@ -7,32 +7,15 @@ import {
   incopreteWayTrip,
   incoDateWayTrip,
   incoloacationWayTrip,
-  incoAccommodationWayTrip
+  incoAccommodationWayTrip,
+  oneWayTrip2
 } from './mochData/trips';
 
 chai.use(chaiHttp);
 const router = () => chai.request(app);
-
+const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJkdW1teTJAZW1haWwucnciLCJyb2xlIjoiU3VwZXIgQWRtaW5pc3RyYXRvciIsImlhdCI6MTU4MDk1NzUwNH0.iOPzeyAUNCawgWmMfV9KCAbdAIpLdqHP8e9xVxZv6kA';
 
 describe('Test for create one way trip endpoint', () => {
-  let token;
-  beforeEach((done) => {
-    chai
-      .request(app)
-      .post('/api/auth/signin')
-      .send({
-        email: 'dummy2@email.rw',
-        password: '123456789'
-      }).then((res) => {
-        token = res.data.token;
-        console.log(res);
-        done();
-      })
-      .catch((err) => {
-        console.log(err);
-        done();
-      });
-  });
   it(
     'should create a new one way trip',
     mochaAsync(async () => {
@@ -109,4 +92,13 @@ describe('Test for create one way trip endpoint', () => {
       expect(res.body.error).to.be.a('string');
     })
   );
+  it('User should  be able to set if whether they want their profile to be remembered or not', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/Trip/One-Way')
+      .set('token', token)
+      .send(oneWayTrip2);
+    res.should.have.status(201);
+    res.body.should.be.an('object');
+  });
 });
