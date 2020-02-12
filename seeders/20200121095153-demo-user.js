@@ -4,7 +4,7 @@ const dummy1 = {
   name: 'Dummy',
   gender: 'Male',
   email: 'dummy@email.rw',
-  username: 'MrDummy',
+  username: 'Dummy',
   password: Hasher.hashPassword('123456789'),
   birthdate: new Date(),
   preferredLanguage: 'French',
