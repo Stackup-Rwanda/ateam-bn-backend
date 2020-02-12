@@ -1,4 +1,4 @@
-const up = (queryInterface, sequelize) => queryInterface.createTable('Accommodation', {
+const up = (queryInterface, sequelize) => queryInterface.createTable('Accommodations', {
   id: {
     allowNull: false,
     autoIncrement: true,
@@ -6,31 +6,41 @@ const up = (queryInterface, sequelize) => queryInterface.createTable('Accommodat
     type: sequelize.INTEGER
   },
   name: {
-    type: sequelize.STRING,
-    allowNull: false,
+    type: sequelize.STRING
   },
-  placeId: {
+  description: {
+    type: sequelize.STRING
+  },
+  image: {
+    type: sequelize.TEXT
+  },
+  locationId: {
     type: sequelize.INTEGER,
-    allowNull: false,
+    allowNull: false
   },
-  type: {
-    type: sequelize.STRING,
-    allowNull: false,
+  geoLocation: {
+    type: sequelize.STRING
   },
-  price: {
-    type: sequelize.STRING,
-    allowNull: false,
+  space: {
+    type: sequelize.STRING
+  },
+  cost: {
+    type: sequelize.STRING
+  },
+  highlights: {
+    type: sequelize.STRING
+  },
+  amenities: {
+    type: sequelize.STRING
   },
   createdAt: {
-    type: sequelize.DATE,
-    allowNull: false,
+    type: sequelize.DATE
   },
   updatedAt: {
-    type: sequelize.DATE,
-    allowNull: false,
+    type: sequelize.DATE
   }
 });
-const down = (queryInterface) => queryInterface.dropTable('Accommodation');
+const down = (queryInterface) => queryInterface.dropTable('Accommodations');
 
 export {
   up,

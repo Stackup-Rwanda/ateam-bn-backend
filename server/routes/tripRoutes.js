@@ -9,7 +9,7 @@ import tokenValidator from "../middlewares/tokenValidator";
 const router = Router();
 
 router.post(
-  '/Trip/One-Way', tokenValidator, tripValidator('trip', 'body'), tripChecker,
+  '/trip/', tokenValidator, tripValidator('trip', 'body'), tripChecker,
   asyncErrorHandler(TripController.oneWayTrip)
 );
 

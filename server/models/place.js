@@ -20,9 +20,9 @@ const placeDefinition = (sequelize, DataTypes) => {
     }
   }, {});
   Place.associate = (models) => {
-    Place.hasMany(models.Accommodation, {
-      foreignKey: 'placeId',
-      as: 'Place',
+    Place.hasMany(models.Accommodations, {
+      foreignKey: 'locationId',
+      as: 'accommodations',
       onDelete: 'CASCADE'
     });
   };

@@ -26,10 +26,17 @@ class TripController {
       userId: myuserId,
       status: status1
     };
-    const { returnDate } = body;
-    console.log(returnDate);
-    if (returnDate) {
+    const { returnDate, to } = body;
+    const cityNumber = to.length;
+
+    if (returnDate && cityNumber === 1) {
       newTrip.returnDate = returnDate;
+      newTrip.tripType = 'Return';
+    } else if (returnDate && cityNumber > 1) {
+      newTrip.returnDate = returnDate;
+      newTrip.tripType = 'Multi-city';
+    } else {
+      newTrip.tripType = 'One-way';
     }
     const saveTrip = await tripHelpers.saveTrip(newTrip);
 

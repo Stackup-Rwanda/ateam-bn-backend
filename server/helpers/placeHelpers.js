@@ -16,7 +16,7 @@ class PlaceHelpers {
      * @returns {object} Place data.
      */
   static async placeExist(place) {
-    const PlaceExist = await Place.findOne({
+    const PlaceExist = await Place.findAll({
       where: {
         id: place,
       }

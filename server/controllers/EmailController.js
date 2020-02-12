@@ -25,7 +25,9 @@ class EmailController {
    * @returns {object} The status and some data of the user.
    */
   static async sendResetPasswordEmail(req, res) {
-    const { email } = req.body;
+    const {
+      email
+    } = req.body;
     const userExist = await AuthHelpers.userExists('email', email);
     if (!userExist) {
       return res.status(404).json({
@@ -46,7 +48,7 @@ class EmailController {
     const url = `${resetPasswordURL}${userData.id}/${token}`;
     const subjectAndHhtmlBody = resetPasswordSubjectAndHtmlBoy(userData, url);
     const theMessage = sendEmailTemplate('support@borafoot.com', userData, subjectAndHhtmlBody);
-    await sgMail.send(theMessage);
+    sgMail.send(theMessage);
 
     res.status(200).json({
       status: res.statusCode,
@@ -67,12 +69,14 @@ class EmailController {
    * @returns {object} The status and some data of the user.
    */
   static async updatePassword(req, res) {
-    const { userExist } = req.body;
+    const {
+      userExist
+    } = req.body;
 
     await AuthHelpers.updateUserPassword(userExist.id, req.body);
     const subjectAndHhtmlBody = passwordResetWellSubjectAndHtmlBoy(userExist);
     const theMessage = sendEmailTemplate('support@borafoot.com', userExist, subjectAndHhtmlBody);
-    await sgMail.send(theMessage);
+    sgMail.send(theMessage);
 
     return res.status(200).json({
       status: res.statusCode,

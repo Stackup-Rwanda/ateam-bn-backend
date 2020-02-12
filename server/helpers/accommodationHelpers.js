@@ -1,7 +1,7 @@
 import models from '../models';
 
 const {
-  Accommodation
+  Accommodations
 } = models;
 
 /**
@@ -18,12 +18,12 @@ class AccommodationHelpers {
   static async accommodationInPlaceExist(accommodation) {
     const {
       id,
-      placeId
+      locationId
     } = accommodation;
-    const AccommodationExist = await Accommodation.findOne({
+    const AccommodationExist = await Accommodations.findOne({
       where: {
         id,
-        placeId
+        locationId
       }
     });
     return AccommodationExist;
@@ -35,17 +35,21 @@ class AccommodationHelpers {
      * @returns {object} Accommodation data.
      */
   static async saveAccommodation(accommodation) {
-    const acceptedAccommodation = await Accommodation.create({
+    const acceptedAccommodation = await Accommodations.create({
       ...accommodation,
       createdAt: new Date(),
       updatedAt: new Date()
     }, {
       fields: [
         'name',
-        'country',
-        'city',
-        'createAt',
-        'updatedAt'
+        'description',
+        'image',
+        'locationId',
+        'geoLocation',
+        'space',
+        'cost',
+        'highlights',
+        'amenities',
       ]
     });
 

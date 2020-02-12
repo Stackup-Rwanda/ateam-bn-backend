@@ -9,37 +9,31 @@ import {
   incoloacationWayTrip,
   incoAccommodationWayTrip
 } from './mochData/trips';
+import usersTester from './mochData/users';
 
 chai.use(chaiHttp);
 const router = () => chai.request(app);
 
+let mytoken;
 
 describe('Test for create one way trip endpoint', () => {
-  let token;
-  beforeEach((done) => {
-    chai
-      .request(app)
-      .post('/api/auth/signin')
-      .send({
-        email: 'dummy2@email.rw',
-        password: '123456789'
-      }).then((res) => {
-        token = res.data.token;
-        console.log(res);
-        done();
-      })
-      .catch((err) => {
-        console.log(err);
-        done();
-      });
-  });
+  it(
+    "should signin before making any request, to test it",
+    mochaAsync(async () => {
+      const res = await router()
+        .post('/api/auth/signin')
+        .send(usersTester[6]);
+      mytoken = res.body.data.token;
+    })
+  );
   it(
     'should create a new one way trip',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/Trip/One-Way')
-        .set('token', token)
+        .post('/api/trip')
+        .set('token', mytoken)
         .send(oneWayTrip);
+      console.log(res.body);
       expect(res.body.status).to.equal(201);
       expect(res.body).to.be.an('object');
       expect(res.body.message).to.be.equal('Trip was created successfully.');
@@ -50,8 +44,8 @@ describe('Test for create one way trip endpoint', () => {
     'should not create a new one way trip',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/Trip/One-Way')
-        .set('token', token)
+        .post('/api/trip')
+        .set('token', mytoken)
         .send(oneWayTrip);
       expect(res.body.status).to.equal(409);
       expect(res.body).to.be.an('object');
@@ -59,11 +53,11 @@ describe('Test for create one way trip endpoint', () => {
     })
   );
   it(
-    'should not create a new one way trip',
+    'should not create a new trip when data are incomplete',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/Trip/One-Way')
-        .set('token', token)
+        .post('/api/trip')
+        .set('token', mytoken)
         .send(incopreteWayTrip);
       expect(res.body.status).to.equal(422);
       expect(res.body).to.be.an('object');
@@ -71,41 +65,38 @@ describe('Test for create one way trip endpoint', () => {
     })
   );
   it(
-    'should not create a new one way trip if date is invalide',
+    'should not create a new trip if date is invalide',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/Trip/One-Way')
-        .set('token', token)
+        .post('/api/trip')
+        .set('token', mytoken)
         .send(incoDateWayTrip);
       expect(res.body.status).to.equal(422);
       expect(res.body).to.be.an('object');
-      expect(res.body.error).to.be.equal('This date is in the past, please choose a future date.');
       expect(res.body.error).to.be.a('string');
     })
   );
   it(
-    'should not create a new one way trip if location is invalide',
+    'should not create a new trip if location is invalide',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/Trip/One-Way')
-        .set('token', token)
+        .post('/api/trip')
+        .set('token', mytoken)
         .send(incoloacationWayTrip);
       expect(res.body.status).to.equal(422);
       expect(res.body).to.be.an('object');
-      expect(res.body.error).to.be.equal('choose proper location.');
       expect(res.body.error).to.be.a('string');
     })
   );
   it(
-    'should not create a new one way trip if accommodation is not from trip loacation',
+    'should not create a new trip if accommodation is not from trip loacation',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/Trip/One-Way')
-        .set('token', token)
+        .post('/api/trip')
+        .set('token', mytoken)
         .send(incoAccommodationWayTrip);
       expect(res.body.status).to.equal(422);
       expect(res.body).to.be.an('object');
-      expect(res.body.error).to.be.equal('choose proper accommodation.');
       expect(res.body.error).to.be.a('string');
     })
   );

@@ -13,7 +13,7 @@ const tripDefinition = (sequelize, DataTypes) => {
       allowNull: false,
     },
     to: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.ARRAY(DataTypes.INTEGER),
       allowNull: false,
     },
     date: {
@@ -47,6 +47,11 @@ const tripDefinition = (sequelize, DataTypes) => {
     Trip.belongsTo(models.User, {
       foreignKey: 'userId',
       as: 'Users',
+      onDelete: 'CASCADE'
+    });
+    Trip.belongsTo(models.User, {
+      foreignKey: 'accommodationId',
+      as: 'Accommodations',
       onDelete: 'CASCADE'
     });
   };

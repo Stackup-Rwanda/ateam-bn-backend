@@ -4,18 +4,18 @@ import tripHelpers from '../helpers/tripHelpers';
 import placeHelpers from '../helpers/placeHelpers';
 import AccommodationHelpers from "../helpers/accommodationHelpers";
 
-import dateValidator from "../helpers/dateValidator";
+import { dateValidator, returnDate } from "../helpers/dateValidator";
 
 const schemas = {
   trip: Joi.object().keys({
-    tripType: Joi.string().required(),
+    tripType: Joi.string().required().valid('One-way', 'Return', 'Multi-city'),
     from: Joi.number().integer(),
-    to: Joi.number().integer(),
+    to: Joi.array().items(Joi.number().integer()),
     reasons: Joi.string().required(),
     date: Joi.date().iso().required(),
     returnDate: Joi.date().iso(),
     accommodationId: Joi.number().integer().required(),
-    status: Joi.string().valid('pending', 'approved', 'rejected'),
+    status: Joi.string().valid('Pending', 'Approved', 'Rejected'),
   }),
 
 };
@@ -35,7 +35,6 @@ export const tripValidator = (schema, property) => {
         details
       } = error;
       const message = details.map((i) => i.message).join(',');
-      console.log('error', message);
       res.status(422).json({
         status: 422,
         error: message
@@ -49,20 +48,38 @@ export const tripChecker = async (req, res, next) => {
     body,
     user
   } = req;
+  const placesIds = body.to;
   const userId = user.id;
-  const tripExists = await tripHelpers.reasonsDate({ ...body, userId });
+  const tripExists = await tripHelpers.reasonsDate({
+    ...body,
+    userId
+  });
   const placeExistsFrom = await placeHelpers.placeExist(body.from);
   const placeExistsTo = await placeHelpers.placeExist(body.to);
   const isValideDate = dateValidator(body.date);
+  const isRtnDate = returnDate({ Rdate: body.returnDate, Sdate: body.date });
+  console.log(isRtnDate);
   const accommodation = {
     id: body.accommodationId,
-    placeId: body.to
+    locationId: placesIds
   };
   const accommo = await AccommodationHelpers.accommodationInPlaceExist(accommodation);
-  if (!placeExistsFrom || !placeExistsTo) {
+  if (!placeExistsFrom) {
     return res.status(422).json({
       status: 422,
       error: 'choose proper location.'
+    });
+  }
+  if (!placeExistsTo) {
+    return res.status(422).json({
+      status: 422,
+      error: 'choose proper location.'
+    });
+  }
+  if (isRtnDate) {
+    return res.status(422).json({
+      status: 422,
+      error: 'Your return date is lower then Travel date.'
     });
   }
   if (!accommo) {

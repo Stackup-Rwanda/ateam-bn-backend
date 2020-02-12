@@ -19,7 +19,7 @@ const up = (queryInterface, sequelize) => queryInterface.createTable('Trips', {
     allowNull: true
   },
   to: {
-    type: sequelize.INTEGER,
+    type: sequelize.ARRAY(sequelize.INTEGER),
     allowNull: true
   },
   date: {
