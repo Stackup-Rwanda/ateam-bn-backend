@@ -1,11 +1,13 @@
 import tokenHelper from './TokenHelper';
 
-const responses = (code, response, data) => {
+const responses = async (code, response, data) => {
+  const { id } = data;
   response.status(code).send({
     status: code,
     message: `welcome ${data.name}`,
     data: {
-      token: tokenHelper.generateToken(data.id, data.username, data.email, data.role)
+      id,
+      token: await tokenHelper.generateToken(data.id, data.username, data.email, data.role)
     }
   });
 };

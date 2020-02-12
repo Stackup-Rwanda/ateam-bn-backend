@@ -19,6 +19,13 @@ const userDefinition = (sequelize, DataTypes) => {
     provider: { type: DataTypes.STRING }
   }, {});
 
+  User.associate = (models) => {
+    User.hasMany(models.Trip, {
+      foreignKey: 'userId',
+      as: 'Trips',
+      onDelete: 'CASCADE',
+    });
+  };
   return User;
 };
 

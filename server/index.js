@@ -1,16 +1,19 @@
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import dotenv from 'dotenv';
+import bodyParse from 'body-parser';
 import apiDocumentation from '../swagger.json';
 import allRoutes from './routes/allRoutes';
 import "./middlewares/fbStrategy";
 import "./middlewares/googleStrategy";
 import authRoutes from "./routes/authRoutes";
 
+
 dotenv.config();
 
 const app = express();
 
+app.use(bodyParse.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
