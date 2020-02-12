@@ -9,7 +9,7 @@ import checkIdParams from '../helpers/CheckParams';
  */
 class TripCommentController {
   /**
-   * This method create on a trip request.
+   * This method create a trip comment request.
    * @param {object} req The user's request.
    * @param {object} res The response.
    * @returns {object} The status and some data of the comment.
@@ -18,7 +18,7 @@ class TripCommentController {
     if (!checkIdParams(req.params.tripId)) {
       return res.status(400).json({
         status: res.statusCode,
-        error: 'Sorry, The URL request contains bad data',
+        error: 'Sorry, The request contains bad data',
       });
     }
 
@@ -37,33 +37,90 @@ class TripCommentController {
 
     return res.status(201).json({
       status: res.statusCode,
-      message: 'Comment has created successfully',
+      message: 'Comment has been created successfully',
       data: savedComment
     });
   }
 
   /**
-   * This method create on a trip request.
+   * This method retrieve all trip comment.
    * @param {object} req The user's request.
    * @param {object} res The response.
    * @returns {object} The status and some data of the comment.
    */
-  static async deleteComment(req, res) {
-    if (!checkIdParams(req.params.tripId) || !checkIdParams(req.params.commentId)) {
+  static async getUserTripComments(req, res) {
+    if (!checkIdParams(req.params.tripId)) {
       return res.status(400).json({
         status: res.statusCode,
         error: 'Sorry, The request contains bad data',
       });
     }
 
-    const tripExists = await tripHelpers.userTripExists(req.params.tripId, req.user.id);
-    const commentExist = await commentHelper.userCommentExists(req.params.commentId, req.user.id);
-    if (!tripExists) {
+    const tripCommentsExists = await commentHelper.userTripComments(req.params.tripId, req.user.id);
+    if (!tripCommentsExists.length) {
       return res.status(404).json({
         status: res.statusCode,
-        error: 'Sorry, This trip does not exist.'
+        error: 'Sorry, This trip does not have any comment.'
       });
     }
+
+    return res.status(200).json({
+      status: res.statusCode,
+      message: 'Trip comments has been found successfully',
+      data: tripCommentsExists
+    });
+  }
+
+  /**
+   * This method update a trip comment.
+   * @param {object} req The user's request.
+   * @param {object} res The response.
+   * @returns {object} The status and some data of an updated comment.
+   */
+  static async updateComment(req, res) {
+    if (!checkIdParams(req.params.commentId)) {
+      return res.status(400).json({
+        status: res.statusCode,
+        error: 'Sorry, The request contains bad data',
+      });
+    }
+
+    const commentExist = await commentHelper.userCommentExists(req.params.commentId, req.user.id);
+    if (!commentExist) {
+      return res.status(404).json({
+        status: res.statusCode,
+        error: 'Sorry, This comment does not exist.'
+      });
+    }
+
+    await commentHelper.updateComment(req.params.commentId, req.body);
+
+    return res.status(200).json({
+      status: res.statusCode,
+      message: 'Comment has been updated successfully.',
+      data: {
+        id: commentExist.id,
+        tripId: commentExist.tripId,
+        comment: req.body.comment
+      }
+    });
+  }
+
+  /**
+   * This method delete a trip comment.
+   * @param {object} req The user's request.
+   * @param {object} res The response.
+   * @returns {object} The status and some data of deleted comment.
+   */
+  static async deleteComment(req, res) {
+    if (!checkIdParams(req.params.commentId)) {
+      return res.status(400).json({
+        status: res.statusCode,
+        error: 'Sorry, The request contains bad data',
+      });
+    }
+
+    const commentExist = await commentHelper.userCommentExists(req.params.commentId, req.user.id);
     if (!commentExist) {
       return res.status(404).json({
         status: res.statusCode,
@@ -75,7 +132,7 @@ class TripCommentController {
 
     return res.status(200).json({
       status: res.statusCode,
-      message: 'Comment has deleted successfully.',
+      message: 'Comment has been deleted successfully.',
       data: commentExist
     });
   }

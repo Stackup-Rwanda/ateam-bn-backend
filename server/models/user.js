@@ -53,9 +53,6 @@ const userDefinition = (sequelize, DataTypes) => {
       as: 'Trips',
       onDelete: 'CASCADE',
     });
-  };
-
-  User.associate = (models) => {
     User.hasMany(models.Comment, {
       foreignKey: 'userId',
       as: 'Comments',

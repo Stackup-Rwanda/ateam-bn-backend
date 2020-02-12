@@ -14,8 +14,21 @@ router
     asyncErrorHandler(TripCommentController.saveComment)
   )
 
+  .get(
+    '/Trips/:tripId/Comments',
+    tokenValidator,
+    asyncErrorHandler(TripCommentController.getUserTripComments)
+  )
+
+  .patch(
+    '/Comments/:commentId/update',
+    tokenValidator,
+    TripCommentValidator.newComment,
+    asyncErrorHandler(TripCommentController.updateComment)
+  )
+
   .delete(
-    '/Trips/:tripId/Comments/:commentId/delete',
+    '/Comments/:commentId/delete',
     tokenValidator,
     asyncErrorHandler(TripCommentController.deleteComment)
   );

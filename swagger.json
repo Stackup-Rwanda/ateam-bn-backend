@@ -9,7 +9,7 @@
       "email": "the-a-team@gmail.com"
     }
   },
-  "host": "ateam-bn-backend-staging.herokuapp.com",
+  "host": "localhost:30003",
   "basePath": "/api",
   "tags": [
     {
@@ -329,18 +329,26 @@
             }
           },
           {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token identify that a user has signed in"
+          },
+          {
             "in": "path",
             "name": "tripId",
             "type": "integer",
+            "required": true,
             "description": "parsing a Trip ID"
           }
         ],
         "responses": {
           "201": {
-            "description": "Comment has created successfully"
+            "description": "Comment has been created successfully"
           },
           "400": {
-            "description": "comment is required / Sorry, The URL request contains bad data"
+            "description": "comment is required / Sorry, The request contains bad data"
           },
           "404": {
             "description": "Sorry, This trip does not exist."
@@ -348,7 +356,94 @@
         }
       }
     },
-    "/Trips/{tripId}/Comments/{commentId}/delete": {
+    "/Comments/{commentId}/update": {
+      "patch": {
+        "tags": [
+          "Trip Comment"
+        ],
+        "summary": "update a trip comment",
+        "description": "User can update a trip comment, endpoint",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "data to pass in body, to update a comment",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/updateComment"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token identify that a user has signed in"
+          },
+          {
+            "in": "path",
+            "name": "commentId",
+            "type": "integer",
+            "required": true,
+            "description": "parsing a Comment ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment has been updated successfully"
+          },
+          "400": {
+            "description": "comment is required / Sorry, The request contains bad data"
+          },
+          "404": {
+            "description": "Sorry, This comment does not exist."
+          }
+        }
+      }
+    },
+    "/Trips/{tripId}/Comments": {
+      "get": {
+        "tags": [
+          "Trip Comment"
+        ],
+        "summary": "get commets",
+        "description": "User may get all comments, endpoint",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token identify that a user has signed in"
+          },
+          {
+            "in": "path",
+            "name": "tripId",
+            "type": "integer",
+            "required": true,
+            "description": "parsing a Trip ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trip comments has been found successfully"
+          },
+          "400": {
+            "description": "Sorry, the request contains bad data"
+          },
+          "404": {
+            "description": "Sorry, This trip does not exist."
+          }
+        }
+      }
+    },
+    "/Comments/{commentId}/delete": {
       "delete": {
         "tags": [
           "Trip Comment"
@@ -357,36 +452,29 @@
         "description": "User can delete a comment, endpoint",
         "parameters": [
           {
-            "in": "body",
-            "name": "body",
-            "description": "data to pass in URL to delete a comment",
+            "name": "token",
+            "in": "header",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/deleteComment"
-            }
-          },
-          {
-            "in": "path",
-            "name": "tripId",
-            "type": "integer",
-            "description": "parsing a Trip ID"
+            "type": "string",
+            "description": "token identify that a user has signed in"
           },
           {
             "in": "path",
             "name": "commentId",
             "type": "integer",
+            "required": true,
             "description": "parsing a Comment ID"
           }
         ],
         "responses": {
           "200": {
-            "description": "Comment has deleted successfully."
+            "description": "Comment has been deleted successfully."
           },
           "400": {
             "description": "Sorry, the request contains bad data"
           },
           "404": {
-            "description": "Sorry, This trip does not exist./ Sorry, This comment does not exist."
+            "description": "Sorry, This comment does not exist."
           }
         }
       }
@@ -529,28 +617,24 @@
         "location"
       ]
     },
-    "deleteComment": {
-      "type": "object",
-      "properties": {
-        "tripId": {
-          "type": "integer"
-        },
-        "commentId": {
-          "type": "integer"
-        }
-      }
-    },
     "createComment": {
       "type": "object",
       "required": [
-        "password",
-        "confirmPassword"
+        "comment"
       ],
       "properties": {
-        "password": {
+        "comment": {
           "type": "string"
-        },
-        "confirmPassword": {
+        }
+      }
+    },
+    "updateComment": {
+      "type": "object",
+      "required": [
+        "comment"
+      ],
+      "properties": {
+        "comment": {
           "type": "string"
         }
       }
