@@ -7,7 +7,7 @@ import checkIdParams from '../helpers/CheckParams';
  * required to handle
  * comment endpoints' request.
  */
-class TripController {
+class TripCommentController {
   /**
    * This method create on a trip request.
    * @param {object} req The user's request.
@@ -81,4 +81,4 @@ class TripController {
   }
 }
 
-export default TripController;
+export default TripCommentController;

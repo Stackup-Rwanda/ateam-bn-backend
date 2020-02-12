@@ -10,7 +10,7 @@ router
   .post(
     '/Trips/:tripId/Comment',
     tokenValidator,
-    TripCommentValidator.NewComment,
+    TripCommentValidator.newComment,
     asyncErrorHandler(TripCommentController.saveComment)
   )
 

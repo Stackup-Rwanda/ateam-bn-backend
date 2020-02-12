@@ -14,7 +14,7 @@ class CommentValidator {
    * @param {object} next The response.
    * @returns {object} The status and some data of the user.
    */
-  static NewComment(req, res, next) {
+  static newComment(req, res, next) {
     const schema = Joi.object().keys({
       comment: Joi.string().min(2).required()
     });
