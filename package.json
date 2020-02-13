@@ -4,7 +4,7 @@
   "description": "We make company global travel and accommodation easy and convenient for the strong workforce of savvy members of staff, by leveraging the modern web.",
   "main": "index.js",
   "scripts": {
-    "test": "npm run droptables:test && npm run createtables:test && npm run seed:test && cross-env NODE_ENV=test nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --timeout 100000 --exit",
+    "test": "npm run droptables:test && npm run createtables:test && npm run seed:test && cross-env NODE_ENV=test nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --timeout 30000 --exit",
     "server": "nodemon --exec babel-node ./server/index.js",
     "start": "cross-env NODE_ENV=production npx sequelize-cli db:migrate && cross-env NODE_ENV=production babel-node ./server/index.js",
     "createtables:dev": "npx sequelize db:migrate",

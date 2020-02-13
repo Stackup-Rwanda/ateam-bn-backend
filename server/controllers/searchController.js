@@ -1,6 +1,9 @@
+import Sequelize from 'sequelize';
 import models from '../models';
 
+const { Op } = Sequelize;
 const { Trip } = models;
+
 const notFound = (noData, res) => {
   if (noData.length < 1) {
     res.status(404).send({
@@ -10,46 +13,25 @@ const notFound = (noData, res) => {
   }
 };
 const searchData = async (req, res) => {
-  try {
-    const requestId = req.body.id;
-    const requestStatus = req.body.status;
-    const requestOwner = req.body.userId;
-    const requestDestination = req.body.to;
-    const requestOrigin = req.body.from;
+  const request = req.body.search;
+  const findRequest = await Trip.findAll({
+    where: {
+      [Op.or]: [
+        { id: parseInt(request, 10) },
+        { userId: parseInt(request, 10) },
+        { from: parseInt(request, 10) },
+        { to: parseInt(request, 10) }
+      ]
+    }
 
-    if (requestStatus) {
-      const findByStatus = await Trip.findAll({
-        where: { status: requestStatus.charAt(0).toUpperCase() + requestStatus.slice(1) }
-      });
-      res.status(200).send({
-        status: 200,
-        data: { findByStatus }
-      });
-    }
-    if (requestId) {
-      const findById = await Trip.findAll({ where: { id: parseInt(requestId, 10) } });
-      notFound(findById, res);
-      res.status(200).send(findById);
-    }
-    if (requestOwner) {
-      const findByOwner = await Trip.findAll({ where: { userId: parseInt(requestOwner, 10) } });
-      notFound(findByOwner, res);
-      res.status(200).send(findByOwner);
-    }
-    if (requestDestination) {
-      const findByDestination = await Trip.findAll({
-        where: { to: parseInt(requestDestination, 10) }
-      });
-      notFound(findByDestination, res);
-      res.status(200).send(findByDestination);
-    }
-    if (requestOrigin) {
-      const findByOrigin = await Trip.findAll({ where: { from: parseInt(requestOrigin, 10) } });
-      notFound(findByOrigin, res);
-      res.status(200).send(findByOrigin);
-    }
-  } catch (error) {
-    return res.status(400).send(error.message);
+  });
+
+  if (request) {
+    notFound(findRequest, res);
+    res.status(200).send({
+      status: 200,
+      data: { findRequest }
+    });
   }
 };
 
