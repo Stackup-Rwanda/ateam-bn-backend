@@ -229,7 +229,7 @@ describe('Test for Creating a trip comment, endpoint', () => {
     "should not delete a trip comment, because of unknown trip comment id",
     mochaAsync(async () => {
       const res = await router()
-        .delete(`/api/Comments/${savedComment.id}/delete`)
+        .delete(`/api/Comments/10000/delete`)
         .set('token', userToken);
       expect(res.body.status).to.equal(404);
       expect(res.body).to.be.an('object');

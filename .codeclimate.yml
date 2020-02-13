@@ -27,4 +27,5 @@ checks:
   similar-code:
     enabled: false # language-specific defaults. an override will affect all languages.
   identical-code:
-    enabled: false # language-specific defaults. an override will affect all languages.
+    config:
+      threshold: # language-specific defaults. an override will affect all languages.
