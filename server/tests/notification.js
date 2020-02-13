@@ -4,16 +4,8 @@ import importQuery from '../helpers/authHelpers';
 import importService from '../helpers/emailService';
 
 describe('testing notification function', () => {
-  const request = {
-    tripId: 2,
-    receiverId: 3,
-    description: 'this is description',
-    username: 'username',
-    status: `REQUEST APPROVED`
-  };
-
   it('this function should insert notification into database', async () => {
-    const data = await importQuery.insertNotification(request);
+    const data = await importQuery.insertNotification(1, 1, 'This is description');
     expect(data).to.be.a('object');
   });
 
@@ -22,7 +14,7 @@ describe('testing notification function', () => {
     expect(data).to.be.a('object');
   });
 
-  it('this function should display notification in real time with right receipt', async () => {
+  it('this function should display notification in real time with right receipt via Barefoot Nomad application', async () => {
     const data = await socketIo.socket('3', 'notification', 'This is description');
     expect(data).to.be.a('object');
   });

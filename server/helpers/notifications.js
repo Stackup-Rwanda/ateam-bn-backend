@@ -1,6 +1,6 @@
+import socketIo from "./socket";
 import importQuery from './authHelpers';
 import importService from './emailService';
-import socketIo from "./socket";
 
 /**
  * This class contains all methods
@@ -14,32 +14,28 @@ class Notifications {
       import notification from '../helpers/notifications';
       const request = {
         tripId: 20,
-        receiverId: 3,
-        username: req.user.username,
-        status: 'pending',
-        email: 'k.joshua855@gmail.com'
+        action: 'pending',
       };
       await notification.sendNotification(request);
 
    * This function will use insertNotification method to store into DB.
    * This function will use emailing method to send email to users.
-   * @param {object} request The user's request.
-   * @param {object} request. The response.
+   * @param {object} notification The user's request.
+   * @param {object} notification. The response.
    * @returns {object} The status and some data of the user.
    */
-  async sendNotification(request) {
-    const notificationDetail = {
-      tripId: request.tripId,
-      receiverId: request.receiverId,
-      description: `<span style='color: #7FD8A7 ;'>REQUEST ${request.status.toUpperCase()}</span> <br> 
-      <span style='color: #614e1f;'> Hello ${request.username} you have new notification for travel which is ${request.status} 
-      for more details clieck this link <span style='color: #044F72;'> http://localhost:1000/api/trips/${request.tripId}/ </span> </span><br><br>`,
-      username: request.username,
-      status: `REQUEST ${request.status}`
-    };
-    const savedData = await importQuery.insertNotification(notificationDetail);
-    socketIo.socket(notificationDetail.receiverId, 'notification', savedData.description);
-    await importService.emailing(request.username, request.email, notificationDetail.status.toUpperCase(), notificationDetail.description);
+  async sendNotification(notification) {
+    const retrievedTrip = await importQuery.retrieveTrip(notification.tripId);
+    const receiverId = await importQuery.userDetails(retrievedTrip.userId);
+    const description = `<span style='color: #7FD8A7 ;'>REQUEST ${notification.action.toUpperCase()}</span> <br> 
+      <span style='color: #614e1f;'> Hello, you have new notification for travel which is ${notification.action} for more details
+       clieck this link <span style='color: #044F72;'> http://localhost:1000/api/trips/${notification.tripId}/ </span> </span><br><br>`;
+
+    if (notification.action === 'commentbyManager' || notification.action === 'Approved' || notification.action === 'Rejected') {
+      socketIo.socket(retrievedTrip.userId, 'notification', description);
+      await importQuery.insertNotification(notification.tripId, retrievedTrip.userId, description);
+      await importService.emailing(receiverId.username, receiverId.email, notification.action.toUpperCase(), description);
+    }
   }
 }
 
