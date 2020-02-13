@@ -6,7 +6,7 @@ import http from 'http';
 import app from '../index';
 import strategyGenerator from '../helpers/strategyHelper';
 
-http.createServer(app).listen(3000);
+http.createServer(app).listen(5000);
 dotenv.config();
 const router = () => chai.request(app);
 chai.should();
@@ -94,7 +94,11 @@ describe('User login via facebook', () => {
         .req((req) => {
           req.session = {};
         })
-        .authenticate({ prompt: 'select_account', loginHint: 'izabayojonas12@gmail.com', accessType: 'offline' });
+        .authenticate({
+          prompt: 'select_account',
+          loginHint: 'izabayojonas12@gmail.com',
+          accessType: 'offline'
+        });
     });
 
     it('should be redirected', () => {
@@ -124,7 +128,9 @@ describe('User login via facebook', () => {
     });
 
     it('should be redirected', () => {
-      expect(url).to.equal('https://accounts.google.com/o/oauth2/v2/auth?display=touch&response_type=code&client_id=836856073443143');
+      expect(url).to.equal(
+        'https://accounts.google.com/o/oauth2/v2/auth?display=touch&response_type=code&client_id=836856073443143'
+      );
     });
   });
 });

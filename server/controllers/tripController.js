@@ -14,15 +14,8 @@ class TripController {
    */
   static async oneWayTrip(req, res) {
     const { body } = req;
-    body.userId = 1;
-    const status1 = 'pending';
-    const tripExists = await tripHelpers.reasonsDate(body);
-    if (tripExists) {
-      return res.status(409).json({
-        status: 409,
-        error: 'This trip already exists, use another reasons or date.'
-      });
-    }
+    const myuserId = req.user.id;
+    const status1 = 'Pending';
     const newTrip = {
       tripType: body.tripType,
       from: body.from,
@@ -30,9 +23,14 @@ class TripController {
       date: body.date,
       reasons: body.reasons,
       accommodationId: body.accommodationId,
-      userId: body.userId,
+      userId: myuserId,
       status: status1
     };
+    const { returnDate } = body;
+    console.log(returnDate);
+    if (returnDate) {
+      newTrip.returnDate = returnDate;
+    }
     const saveTrip = await tripHelpers.saveTrip(newTrip);
 
     return res.status(201).json({

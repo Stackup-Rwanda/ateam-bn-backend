@@ -26,5 +26,5 @@ router
   .get('/auth/google/callback', passport.authenticate('google', { session: false }), asyncErrorHandler(googleAuth))
   .get('/auth/facebook', passport.authenticate('facebook'))
   .get('/auth/facebook/callback', passport.authenticate('facebook', { session: false }), asyncErrorHandler(storeAuth))
-  .get('/search', importedTokenValidator, asyncErrorHandler(searchData));
+  .get('/search/request', importedTokenValidator, asyncErrorHandler(searchData));
 export default router;
