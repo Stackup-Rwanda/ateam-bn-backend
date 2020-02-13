@@ -9,7 +9,7 @@
       "email": "the-a-team@gmail.com"
     }
   },
-  "host": "localhost:30003",
+  "host": "ateam-bn-backend-staging.herokuapp.com",
   "basePath": "/api",
   "tags": [
     {

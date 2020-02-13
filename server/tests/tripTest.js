@@ -15,7 +15,7 @@ describe('Test for create one way trip endpoint', () => {
     'should create a new one way trip',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/Trip/One-Way')
+        .post('/api/trip/')
         .send(oneWayTrip);
       expect(res.body.status).to.equal(201);
       expect(res.body).to.be.an('object');
@@ -27,7 +27,7 @@ describe('Test for create one way trip endpoint', () => {
     'should not create a new one way trip',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/Trip/One-Way')
+        .post('/api/trip/')
         .send(oneWayTrip);
       expect(res.body.status).to.equal(409);
       expect(res.body).to.be.an('object');
@@ -38,7 +38,7 @@ describe('Test for create one way trip endpoint', () => {
     'should not create a new one way trip',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/Trip/One-Way')
+        .post('/api/trip/')
         .send(incopreteWayTrip);
       expect(res.body.status).to.equal(422);
       expect(res.body).to.be.an('object');

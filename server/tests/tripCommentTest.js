@@ -38,7 +38,7 @@ describe('Test for Creating a trip comment, endpoint', () => {
     'should create a new one way trip, to test it',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/Trip/One-Way')
+        .post('/api/trip/')
         .set('token', userToken)
         .send(jajaTrip);
       savedTrip = res.body.data;
@@ -49,7 +49,7 @@ describe('Test for Creating a trip comment, endpoint', () => {
     "should create a trip comment",
     mochaAsync(async () => {
       const res = await router()
-        .post(`/api/Trips/${savedTrip.id}/Comment`)
+        .post(`/api/trips/${savedTrip.id}/comment`)
         .set('token', userToken)
         .send({ comment: 'First Comment' });
       savedComment = res.body.data;
@@ -64,7 +64,7 @@ describe('Test for Creating a trip comment, endpoint', () => {
     "should not create a trip comment, because of bad data",
     mochaAsync(async () => {
       const res = await router()
-        .post(`/api/Trips/${savedTrip.id}/Comment`)
+        .post(`/api/trips/${savedTrip.id}/comment`)
         .set('token', userToken);
       expect(res.body.status).to.equal(400);
       expect(res.body).to.be.an('object');
@@ -76,7 +76,7 @@ describe('Test for Creating a trip comment, endpoint', () => {
     "should not create a trip comment, because of bad data in URL",
     mochaAsync(async () => {
       const res = await router()
-        .post(`/api/Trips/  ${savedTrip.id}/Comment`)
+        .post(`/api/trips/  ${savedTrip.id}/comment`)
         .set('token', userToken)
         .send({ comment: 'First Comment' });
       expect(res.body.status).to.equal(400);
@@ -89,7 +89,7 @@ describe('Test for Creating a trip comment, endpoint', () => {
     "should not create a trip comment, because of bad URL (contains string)",
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/Trips/3sfa24/Comment')
+        .post('/api/trips/3sfa24/comment')
         .set('token', userToken)
         .send({ comment: 'First Comment' });
       expect(res.body.status).to.equal(400);
@@ -102,7 +102,7 @@ describe('Test for Creating a trip comment, endpoint', () => {
     "should not create a trip comment, because of unknown trip id",
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/Trips/100000/Comment')
+        .post('/api/trips/100000/comment')
         .set('token', userToken)
         .send({ comment: 'First Comment' });
       expect(res.body.status).to.equal(404);
@@ -115,7 +115,7 @@ describe('Test for Creating a trip comment, endpoint', () => {
     "should update a trip comment",
     mochaAsync(async () => {
       const res = await router()
-        .patch(`/api/Comments/${savedComment.id}/update`)
+        .patch(`/api/comments/${savedComment.id}/update`)
         .set('token', userToken)
         .send({ comment: 'updated Comment' });
       expect(res.body.status).to.equal(200);
@@ -129,8 +129,9 @@ describe('Test for Creating a trip comment, endpoint', () => {
     "should not update a trip comment, because of bad data",
     mochaAsync(async () => {
       const res = await router()
-        .patch(`/api/Comments/${savedComment.id}/update`)
-        .set('token', userToken);
+        .patch(`/api/comments/${savedComment.id}/update`)
+        .set('token', userToken)
+        .send({ comments: 'updated bad data' });
       expect(res.body.status).to.equal(400);
       expect(res.body).to.be.an('object');
       expect(res.body.error).to.be.a('string');
@@ -141,7 +142,7 @@ describe('Test for Creating a trip comment, endpoint', () => {
     "should not update a trip comment, because of bad data in URL (contains some space)",
     mochaAsync(async () => {
       const res = await router()
-        .patch(`/api/Comments/  ${savedComment.id}/update`)
+        .patch(`/api/comments/  ${savedComment.id}/update`)
         .set('token', userToken)
         .send({ comment: 'updated Comment' });
       expect(res.body.status).to.equal(400);
@@ -154,7 +155,7 @@ describe('Test for Creating a trip comment, endpoint', () => {
     "should not update a trip comment, because of unknown trip comment id",
     mochaAsync(async () => {
       const res = await router()
-        .patch(`/api/Comments/10000000/update`)
+        .patch(`/api/comments/10000000/update`)
         .set('token', userToken)
         .send({ comment: 'updated Comment' });
       expect(res.body.status).to.equal(404);
@@ -167,7 +168,7 @@ describe('Test for Creating a trip comment, endpoint', () => {
     "should retrieve all trip comments",
     mochaAsync(async () => {
       const res = await router()
-        .get(`/api/Trips/${savedTrip.id}/Comments`)
+        .get(`/api/trips/${savedTrip.id}/comments`)
         .set('token', userToken);
       expect(res.body.status).to.equal(200);
       expect(res.body).to.be.an('object');
@@ -180,7 +181,7 @@ describe('Test for Creating a trip comment, endpoint', () => {
     "should not retrieve trip comments, because of bad data in URL (contains some space)",
     mochaAsync(async () => {
       const res = await router()
-        .get(`/api/Trips/  ${savedTrip.id}/Comments`)
+        .get(`/api/trips/  ${savedTrip.id}/comments`)
         .set('token', userToken);
       expect(res.body.status).to.equal(400);
       expect(res.body).to.be.an('object');
@@ -192,7 +193,7 @@ describe('Test for Creating a trip comment, endpoint', () => {
     "should not retrieve trip comments, because of unknown trip comment id",
     mochaAsync(async () => {
       const res = await router()
-        .get(`/api/Trips/900000/Comments`)
+        .get(`/api/trips/900000/comments`)
         .set('token', userToken);
       expect(res.body.status).to.equal(404);
       expect(res.body).to.be.an('object');
@@ -204,7 +205,7 @@ describe('Test for Creating a trip comment, endpoint', () => {
     "should delete a trip comment",
     mochaAsync(async () => {
       const res = await router()
-        .delete(`/api/Comments/${savedComment.id}/delete`)
+        .delete(`/api/comments/${savedComment.id}/delete`)
         .set('token', userToken);
       expect(res.body.status).to.equal(200);
       expect(res.body).to.be.an('object');
@@ -217,7 +218,7 @@ describe('Test for Creating a trip comment, endpoint', () => {
     "should not delete a trip comment, because of bad data in URL (contains some space)",
     mochaAsync(async () => {
       const res = await router()
-        .delete(`/api/Comments/  ${savedComment.id}/delete`)
+        .delete(`/api/comments/  ${savedComment.id}/delete`)
         .set('token', userToken);
       expect(res.body.status).to.equal(400);
       expect(res.body).to.be.an('object');
@@ -229,7 +230,7 @@ describe('Test for Creating a trip comment, endpoint', () => {
     "should not delete a trip comment, because of unknown trip comment id",
     mochaAsync(async () => {
       const res = await router()
-        .delete(`/api/Comments/10000/delete`)
+        .delete(`/api/comments/10000/delete`)
         .set('token', userToken);
       expect(res.body.status).to.equal(404);
       expect(res.body).to.be.an('object');

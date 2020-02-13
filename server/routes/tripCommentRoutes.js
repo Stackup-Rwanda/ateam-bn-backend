@@ -8,27 +8,27 @@ const router = Router();
 
 router
   .post(
-    '/Trips/:tripId/Comment',
+    '/trips/:tripId/comment',
     tokenValidator,
     TripCommentValidator.newComment,
     asyncErrorHandler(TripCommentController.saveComment)
   )
 
   .get(
-    '/Trips/:tripId/Comments',
+    '/trips/:tripId/comments',
     tokenValidator,
     asyncErrorHandler(TripCommentController.getUserTripComments)
   )
 
   .patch(
-    '/Comments/:commentId/update',
+    '/comments/:commentId/update',
     tokenValidator,
     TripCommentValidator.newComment,
     asyncErrorHandler(TripCommentController.updateComment)
   )
 
   .delete(
-    '/Comments/:commentId/delete',
+    '/comments/:commentId/delete',
     tokenValidator,
     asyncErrorHandler(TripCommentController.deleteComment)
   );
