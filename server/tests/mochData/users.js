@@ -61,5 +61,5 @@ export default [
   {
     email: 'dummy3@email.rw',
     password: '123456789'
-  }
+  },
 ];

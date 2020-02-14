@@ -25,6 +25,6 @@ checks:
     config:
       threshold: 10
   similar-code:
-    enabled: false
+    enabled: false # language-specific defaults. an override will affect all languages.
   identical-code:
-    enabled: false
+    enabled: false # language-specific defaults. an override will affect all languages.
