@@ -98,7 +98,7 @@
 	<script type="text/javascript">
 		const clientSocket = io();
 		clientSocket.connect('http://localhost:3000');
-		clientSocket.emit('realReceipt', 3);
+		clientSocket.emit('realReceipt', 1);
 		clientSocket.on('notification', data => {
 			const realTimeNotification = [];
 			realTimeNotification.push(data);
