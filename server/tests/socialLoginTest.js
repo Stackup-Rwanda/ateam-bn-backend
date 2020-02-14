@@ -128,9 +128,7 @@ describe('User login via facebook', () => {
     });
 
     it('should be redirected', () => {
-      expect(url).to.equal(
-        'https://accounts.google.com/o/oauth2/v2/auth?display=touch&response_type=code&client_id=836856073443143'
-      );
+      expect(url).to.equal('https://accounts.google.com/o/oauth2/v2/auth?display=touch&response_type=code&client_id=836856073443143');
     });
   });
 });

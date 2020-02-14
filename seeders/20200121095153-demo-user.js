@@ -26,7 +26,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Users', [{
   preferredLanguage: 'French',
   preferredCurrency: 'Euro',
   location: 'Paris',
-  role: 'Broker',
+  role: 'Super Administrator',
   department: 'Cleaner',
   lineManager: 3,
   isVerified: true,
