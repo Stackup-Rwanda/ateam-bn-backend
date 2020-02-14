@@ -12,7 +12,7 @@ const dummy1 = {
   location: 'Paris',
   role: 'Broker',
   department: 'Cleaner',
-  lineManager: 'MrNobody',
+  lineManager: 3,
   isVerified: false,
   createdAt: new Date(),
   updatedAt: new Date()
@@ -29,7 +29,7 @@ const dummy2 = {
   location: 'Paris',
   role: 'Super Administrator',
   department: 'Cleaner',
-  lineManager: 'MrNobody',
+  lineManager: 3,
   isVerified: true,
   createdAt: new Date(),
   updatedAt: new Date()
@@ -46,7 +46,7 @@ const dummy3 = {
   location: 'Paris',
   role: 'Travel Administrator',
   department: 'Cleaner',
-  lineManager: 'MrNobody',
+  lineManager: 3,
   isVerified: true,
   createdAt: new Date(),
   updatedAt: new Date()

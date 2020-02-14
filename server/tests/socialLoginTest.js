@@ -94,7 +94,11 @@ describe('User login via facebook', () => {
         .req((req) => {
           req.session = {};
         })
-        .authenticate({ prompt: 'select_account', loginHint: 'izabayojonas12@gmail.com', accessType: 'offline' });
+        .authenticate({
+          prompt: 'select_account',
+          loginHint: 'izabayojonas12@gmail.com',
+          accessType: 'offline'
+        });
     });
 
     it('should be redirected', () => {
