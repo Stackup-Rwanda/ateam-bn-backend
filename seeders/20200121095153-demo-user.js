@@ -46,7 +46,7 @@ const dummy3 = {
   location: 'Paris',
   role: 'Travel Administrator',
   department: 'Cleaner',
-  lineManager: 'MrNobody',
+  lineManager: 3,
   isVerified: true,
   createdAt: new Date(),
   updatedAt: new Date()
