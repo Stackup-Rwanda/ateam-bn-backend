@@ -19,8 +19,6 @@ const ownerVerifier = async (req, res, next) => {
       }
       res.status(401).json({ status: 401, error: 'unauthorized, profile not owned or token bears wrong data' });
     }
-    console.log(req.requesterEmail);
-
     res.status(401).json({ status: 401, error: 'User not recognised' });
   } catch (error) {
     res.status(400).json({ status: 400, error: 'Malformed security token, check token and try again' });

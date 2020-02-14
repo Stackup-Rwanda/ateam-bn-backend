@@ -1,6 +1,6 @@
 import TokenHelper from '../helpers/TokenHelper';
 import AuthHelpers from '../helpers/authHelpers';
-import sendmail from '../helpers/email';
+import { sendmail } from '../helpers/email';
 import passwordHashHelper from '../helpers/passwordHashHelper';
 /**
  * This class contains all methods
@@ -24,6 +24,8 @@ class AuthController {
         error: 'This user already exists, use another email or username'
       });
     }
+    req.body.role = 'Requester';
+    req.body.isVerified = false;
     const {
       username, email, role, isVerified, createdAt
     } = req.body;
