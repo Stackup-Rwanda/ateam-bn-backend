@@ -1,20 +1,32 @@
 const accommodationDefinition = (sequelize, DataTypes) => {
-  const Accommodation = sequelize.define('Accommodation', {
+  const Accommodations = sequelize.define('Accommodations', {
     name: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      type: DataTypes.STRING
     },
-    placeId: {
+    description: {
+      type: DataTypes.STRING
+    },
+    image: {
+      type: DataTypes.TEXT
+    },
+    locationId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: false
     },
-    type: {
-      type: DataTypes.STRING,
-      allowNull: false,
+    geoLocation: {
+      type: DataTypes.STRING
     },
-    price: {
-      type: DataTypes.STRING,
-      allowNull: false,
+    space: {
+      type: DataTypes.STRING
+    },
+    cost: {
+      type: DataTypes.STRING
+    },
+    highlights: {
+      type: DataTypes.STRING
+    },
+    amenities: {
+      type: DataTypes.STRING
     },
     createdAt: {
       type: DataTypes.DATE
@@ -23,14 +35,13 @@ const accommodationDefinition = (sequelize, DataTypes) => {
       type: DataTypes.DATE
     }
   }, {});
-  Accommodation.associate = (models) => {
-    Accommodation.belongsTo(models.Place, {
-      foreignKey: 'placeId',
-      as: 'Place',
+  Accommodations.associate = (models) => {
+    Accommodations.belongsTo(models.Place, {
+      foreignKey: 'locationId',
+      as: 'Places',
       onDelete: 'CASCADE'
     });
   };
-  return Accommodation;
+  return Accommodations;
 };
-
 export default accommodationDefinition;
