@@ -351,6 +351,53 @@
         }
       }
     },
+    
+ "/search/request": {
+  "post": {
+    "description": "A user can search his trip request and approval based on request id , request owner, destination, origin and request status ",
+    "summary": "search",
+    "tags": [
+      "Search"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "consumes": [
+      "application/json"
+    ],
+    "parameters": [{
+        "name": "token",
+        "in": "header",
+        "required": true,
+        "type": "string",
+        "description": "user token"
+      },
+      {
+        "name": "Body",
+        "in": "body",
+        "required": true,
+        "description": "data of a user, that will be searched",
+        "schema": {
+          "$ref": "#/definitions/searchRequest"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "requested data"
+      },
+      "400": {
+        "description": "token is malformed/invalid "
+      },
+      "401": {
+        "description": "the user is not logged in"
+      },
+      "404": {
+        "description": "request with given input is not available"
+      }
+    }
+  }
+},
     "/users/{username}/role": {
       "patch": {
         "description": "A super administrator can assign roles to users by using their email addresses",
@@ -403,6 +450,52 @@
           "404": {
             "description": "user with the provided username doesn't exist",
             "headers": {}
+          }
+        }
+      }
+    },
+    "/search/request/manager": {
+      "post": {
+        "description": "A manager can search his trip request and approval based on request id , request owner, destination, origin and request status ",
+        "summary": "search",
+        "tags": [
+          "Search"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [{
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "user token"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "data of a users, that will be searched",
+            "schema": {
+              "$ref": "#/definitions/searchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "requested data"
+          },
+          "400": {
+            "description": "token is malformed/invalid "
+          },
+          "401": {
+            "description": "the user is not logged in"
+          },
+          "404": {
+            "description": "request with given input is not available"
           }
         }
       }
@@ -864,6 +957,17 @@
       "required": [
         "role"
       ]
+    },
+    "searchRequest": {
+      "type": "object",
+      "required": [
+        "search"
+      ],
+      "properties": {
+        "search": {
+          "type": "string"
+        }
+      }
     },
     "approvalRequest": {
       "type": "object",

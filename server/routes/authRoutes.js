@@ -10,7 +10,8 @@ import userIdExistMiddleware from '../middlewares/UserIdExistMiddleware';
 import { googleAuth, storeAuth } from '../controllers/socialController';
 import { signUp, signIn } from '../middlewares/authValidator';
 import importedTokenValidator from '../middlewares/tokenValidator';
-
+import { searchData, managerSearch } from '../controllers/searchController';
+import isManager from '../middlewares/isManager';
 
 const router = Router();
 router.use(passport.initialize());
@@ -25,6 +26,8 @@ router
   .get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
   .get('/auth/google/callback', passport.authenticate('google', { session: false }), asyncErrorHandler(googleAuth))
   .get('/auth/facebook', passport.authenticate('facebook'))
-  .get('/auth/facebook/callback', passport.authenticate('facebook', { session: false }), asyncErrorHandler(storeAuth));
+  .get('/auth/facebook/callback', passport.authenticate('facebook', { session: false }), asyncErrorHandler(storeAuth))
+  .post('/search/request', importedTokenValidator, asyncErrorHandler(searchData))
+  .post('/search/request/manager', importedTokenValidator, isManager, asyncErrorHandler(managerSearch));
 
 export default router;
