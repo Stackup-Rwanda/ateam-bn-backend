@@ -12,7 +12,7 @@ const dummy1 = {
   location: 'Paris',
   role: 'Broker',
   department: 'Cleaner',
-  lineManager: 'MrNobody',
+  lineManager: 3,
   isVerified: false,
   createdAt: new Date(),
   updatedAt: new Date()
@@ -29,7 +29,7 @@ const dummy2 = {
   location: 'Paris',
   role: 'Super Administrator',
   department: 'Cleaner',
-  lineManager: 'MrNobody',
+  lineManager: 4,
   isVerified: true,
   createdAt: new Date(),
   updatedAt: new Date()
@@ -46,12 +46,29 @@ const dummy3 = {
   location: 'Paris',
   role: 'Travel Administrator',
   department: 'Cleaner',
-  lineManager: 'MrNobody',
+  lineManager: 3,
   isVerified: true,
   createdAt: new Date(),
   updatedAt: new Date()
 };
-const up = (queryInterface) => queryInterface.bulkInsert('Users', [dummy1, dummy2, dummy3]);
+const dummy4 = {
+  name: 'Dummy4',
+  gender: 'Male',
+  email: 'k.joshua855@gmail.com',
+  username: 'byiringiro joshua k.joshua',
+  password: Hasher.hashPassword('123456789'),
+  birthdate: new Date(),
+  preferredLanguage: 'French',
+  preferredCurrency: 'Euro',
+  location: 'Paris',
+  role: 'Travel Administrator',
+  department: 'Cleaner',
+  lineManager: 4,
+  isVerified: true,
+  createdAt: new Date(),
+  updatedAt: new Date()
+};
+const up = (queryInterface) => queryInterface.bulkInsert('Users', [dummy1, dummy2, dummy3, dummy4]);
 
 const down = (queryInterface) => queryInterface.bulkDelete('Users', null, {});
 

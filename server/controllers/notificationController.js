@@ -10,7 +10,7 @@ class NotificationController {
      * @returns {object} The status and message.
      * */
   static async userNotification(req, res) {
-    res.sendFile(`/notification.html`, { root: 'UI/html' });
+    return res.sendFile(`/notification.html`, { root: 'UI/html' });
   }
 }
 

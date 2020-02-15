@@ -26,6 +26,13 @@
 		}
 
 
+		header .bell input {
+			width: 25px;
+			height: 10px;
+			color: #B2B2B2;
+			background-color: #C0E5F0;
+		}
+
 		header .bell {
 			text-align: center;
 			font-size: 25px;
@@ -79,7 +86,7 @@
 	<header>
 		<div class="container">
 			<div class="bell">
-				<i id="iconBell" class="fa fa-bell" aria-hidden="true"></i>
+				<input id="receiverId"><i id="iconBell" class="fa fa-bell" aria-hidden="true"></i>
 			</div>
 			<div class="bel">
 				<i id="iconBel" class="fa fa-bell" aria-hidden="true"></i>
@@ -96,32 +103,43 @@
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 	<script type="text/javascript">
-		const clientSocket = io();
-		clientSocket.connect('http://localhost:3000');
-		clientSocket.emit('realReceipt', 1);
-		clientSocket.on('notification', data => {
-			const realTimeNotification = [];
-			realTimeNotification.push(data);
-			var mainList = document.getElementById("body");
-			for (var i = 0; i < realTimeNotification.length; i++) {
-				var item = realTimeNotification[i];
-				var elem = document.createElement("li");
-				elem.innerHTML = item;
-				mainList.appendChild(elem);
-			}
-		});
+		// const realReceiverId = document.getElementById('receiverId').value;
+		// console.log(realReceiverId);
+		// const clientSocket = io();
+		// clientSocket.connect('https://localhost:3000');
+		// clientSocket.connect('https://ateam-bn-backend-staging.herokuapp.com');
+
+		// clientSocket.on('realReceId', id => {
+		// 	clientSocket.emit('realReceipt', id);
+		// });
+
+		// clientSocket.on('notification', data => {
+		// 	const realTimeNotification = [];
+		// 	realTimeNotification.push(data);
+		// 	var mainList = document.getElementById("body");
+		// 	for (var i = 0; i < realTimeNotification.length; i++) {
+		// 		var item = realTimeNotification[i];
+		// 		var elem = document.createElement("li");
+		// 		elem.innerHTML = item;
+		// 		mainList.appendChild(elem);
+		// 	}
+		// });
 
 	</script>
 	<script type="text/javascript">
+
+		const clientSocket = io();
+		const panel = document.querySelector('.panel');
 		const icon = document.getElementById('iconBell');
 		const iconII = document.getElementById('iconBel');
 		const iconIII = document.getElementById('iconBe');
-		const panel = document.querySelector('.panel');
+		const realReceiverId = document.getElementById('receiverId');
 
 		const showNotificationPanel = () => {
 			icon.style.display = 'none';
 			iconII.style.display = 'block';
 			panel.style.display = 'block';
+			clientSocket.emit('realReceipt', realReceiverId.value);
 		};
 		icon.addEventListener('click', showNotificationPanel);
 
@@ -140,6 +158,22 @@
 			iconIII.style.display = 'none';
 		};
 		iconIII.addEventListener('click', showAgainNotificationPanel);
+
+		clientSocket.connect('https://localhost:3000');
+		clientSocket.connect('https://ateam-bn-backend-staging.herokuapp.com');
+
+		clientSocket.on('notification', data => {
+			const realTimeNotification = [];
+			realTimeNotification.push(data);
+			var mainList = document.getElementById("body");
+			for (var i = 0; i < realTimeNotification.length; i++) {
+				var item = realTimeNotification[i];
+				var elem = document.createElement("li");
+				elem.innerHTML = item;
+				mainList.appendChild(elem);
+			}
+		});
+
 	</script>
 </body>
 

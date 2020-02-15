@@ -41,7 +41,7 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Users', {
     type: Sequelize.STRING
   },
   lineManager: {
-    type: Sequelize.STRING
+    type: Sequelize.INTEGER
   },
   isVerified: {
     type: Sequelize.BOOLEAN

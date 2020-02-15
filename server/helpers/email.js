@@ -70,4 +70,17 @@ const userRoleNotification = async (email, name, role) => {
   );
 };
 
-export { sendmail, userRoleNotification };
+const eventNotification = async (email, name, url, description) => {
+  messageGenerator(
+    email,
+    name,
+    `${description}`,
+    'For More Details Click Button Below',
+    'Click Me',
+    `${url}`,
+    'REQUEST STATUS',
+    'Thank You',
+  );
+};
+
+export { sendmail, userRoleNotification, eventNotification };

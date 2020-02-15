@@ -1,6 +1,6 @@
 import socketIo from "./socket";
 import importQuery from './authHelpers';
-import importService from './emailService';
+import { eventNotification } from './email';
 
 /**
  * This class contains all methods
@@ -20,12 +20,14 @@ class Notifications {
     const retrievedTrip = await importQuery.retrieveTrip(tripId);
     const requester = await importQuery.userDetails(retrievedTrip.userId);
     const manager = await importQuery.userDetails(requester.lineManager);
+    const url = `https://ateam-bn-backend-staging.herokuapp.com/api/trips/${tripId}/`;
     const status = `REQUEST ${action.toUpperCase()}`;
-    const description = `<span style='color: #7FD8A7 ;'>${status}</span> <br> 
+    const appNotification = `<span style='color: #7FD8A7 ;'>${status}</span> <br> 
       <span style='color: #614e1f;'> Hello, you have new notification for travel which is ${action} for more details
-       clieck this link <span style='color: #044F72;'> https://ateam-bn-backend-staging.herokuapp.com/api/trips/${tripId}/ </span> </span><br><br>`;
-
-    const actions = ['created', 'edited', 'rejected', 'approved', 'commentbyRequester', 'commentbyManager'];
+       clieck the link <span style='color: #044F72;'><a href=${url}>${retrievedTrip.tripType}  Request</a> </span> </span><br><br>`;
+    const emailNotification = `<span style='color: #7FD8A7 ;'>${status}</span> <br> 
+      <span style='color: #614e1f;'> Hello, you have new notification for travel which is ${action} </span><br><br>`;
+    const actions = ['Pending', 'Edited', 'CommentbyRequester', 'Rejected', 'Approved', 'CommentbyManager'];
     if (!(actions.includes(action))) {
       return res.status(400).json({
         status: 400,
@@ -33,17 +35,16 @@ class Notifications {
       });
     }
 
-    if (action === 'commentbyManager' || action === 'approved' || action === 'rejected') {
-      socketIo.socket(requester.id, 'notification', description);
-      await importQuery.insertNotification(tripId, requester.id, description);
-      await importService.emailing(requester.username, requester.email, status, description);
+    if (action === 'CommentbyManager' || action === 'Approved' || action === 'Rejected') {
+      socketIo.socket(requester.id, 'notification', appNotification);
+      await importQuery.insertNotification(tripId, requester.id, appNotification);
+      await eventNotification(requester.email, requester.username, url, emailNotification);
     } else {
-      socketIo.socket(manager.id, 'notification', description);
-      await importQuery.insertNotification(tripId, manager.id, description);
-      await importService.emailing(manager.username, manager.email, status, description);
+      socketIo.socket(manager.id, 'notification', appNotification);
+      await importQuery.insertNotification(tripId, manager.id, appNotification);
+      await eventNotification(manager.email, manager.username, url, emailNotification);
     }
   }
 }
-
 const exportNotifications = new Notifications();
 export default exportNotifications;

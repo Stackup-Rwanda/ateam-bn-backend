@@ -1,5 +1,5 @@
 const accommodationDefinition = (sequelize, DataTypes) => {
-  const Accommodations = sequelize.define('Accommodations', {
+  const Accommodation = sequelize.define('Accommodations', {
     name: {
       type: DataTypes.STRING
     },
@@ -35,13 +35,14 @@ const accommodationDefinition = (sequelize, DataTypes) => {
       type: DataTypes.DATE
     }
   }, {});
-  Accommodations.associate = (models) => {
-    Accommodations.belongsTo(models.Place, {
+  Accommodation.associate = (models) => {
+    Accommodation.belongsTo(models.Place, {
       foreignKey: 'locationId',
-      as: 'Places',
+      as: 'places',
       onDelete: 'CASCADE'
     });
   };
-  return Accommodations;
+  return Accommodation;
 };
+
 export default accommodationDefinition;

@@ -25,7 +25,9 @@ class EmailController {
    * @returns {object} The status and some data of the user.
    */
   static async sendResetPasswordEmail(req, res) {
-    const { email } = req.body;
+    const {
+      email
+    } = req.body;
     const userExist = await AuthHelpers.userExists('email', email);
     if (!userExist) {
       return res.status(404).json({
@@ -67,7 +69,9 @@ class EmailController {
    * @returns {object} The status and some data of the user.
    */
   static async updatePassword(req, res) {
-    const { userExist } = req.body;
+    const {
+      userExist
+    } = req.body;
 
     await AuthHelpers.updateUserPassword(userExist.id, req.body);
     const subjectAndHhtmlBody = passwordResetWellSubjectAndHtmlBoy(userExist);
