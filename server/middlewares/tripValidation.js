@@ -8,10 +8,13 @@ import { dateValidator, returnDate } from "../helpers/dateValidator";
 
 const schemas = {
   trip: Joi.object().keys({
+    name: Joi.string().required(),
+    passportId: Joi.string().required().min(8).max(8)
+      .alphanum(),
+    reasons: Joi.string().required(),
     tripType: Joi.string().required().valid('One-way', 'Return', 'Multi-city'),
     from: Joi.number().integer(),
     to: Joi.array().items(Joi.number().integer()),
-    reasons: Joi.string().required(),
     date: Joi.date().iso().required(),
     returnDate: Joi.date().iso(),
     accommodationId: Joi.number().integer().required(),

@@ -22,6 +22,9 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Users', {
   password: {
     type: Sequelize.STRING
   },
+  passportId: {
+    type: Sequelize.STRING
+  },
   birthdate: {
     type: Sequelize.DATE
   },
@@ -42,6 +45,9 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Users', {
   },
   lineManager: {
     type: Sequelize.INTEGER
+  },
+  rememberMe: {
+    type: Sequelize.BOOLEAN
   },
   isVerified: {
     type: Sequelize.BOOLEAN

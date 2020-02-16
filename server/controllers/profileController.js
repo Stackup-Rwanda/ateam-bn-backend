@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 import models from '../models';
 import imageUploader from '../helpers/imageUploader';
+import AuthHelpers from '../helpers/authHelpers';
 
 const { User } = models;
 
@@ -65,7 +66,23 @@ const editProfile = async (req, res) => {
   }
 };
 
-export {
-  viewProfile,
-  editProfile
+const rememberProfile = async (req, res) => {
+  const userId = req.user.id;
+  const { state } = req.params;
+  if (state === 'true' || state === 'false') {
+    await AuthHelpers.UpdateRememberMe(userId, state);
+    return res.status(200).json({
+      status: 200,
+      message:
+        state === 'true'
+          ? 'your profile will be remembered on your next request initiation'
+          : 'your profile will not be remembered on your next request initiation'
+    });
+  }
+  return res.status(400).json({
+    status: 400,
+    message: 'Wrong parameter, please provide true or false as parameters.'
+  });
 };
+
+export { viewProfile, editProfile, rememberProfile };

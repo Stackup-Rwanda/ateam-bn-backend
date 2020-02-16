@@ -36,6 +36,17 @@ class AuthHelpers {
   }
 
   /**
+   * Update a user's password.
+   * @param {integer} id The user's id.
+   * @param {string} state The user's username.
+   * @returns {object} The user's data about update password.
+   */
+  static async UpdateRememberMe(id, state) {
+    const updatedUser = await User.update({ rememberMe: state }, { where: { id } });
+    return updatedUser;
+  }
+
+  /**
    * Finds the user's email if he/she exists.
    * @param {string} email users table field.
    * @returns {object} The users's data.
@@ -57,7 +68,7 @@ class AuthHelpers {
       },
       {
         fields: [
-          'name', 'gender', 'email', 'username', 'password', 'birthdate', 'preferredLanguage', 'preferredCurrency', 'locationId', 'role', 'department', 'lineManager', 'isVerified', 'createAt', 'updatedAt'
+          'name', 'gender', 'email', 'username', 'password', 'pasportId', 'birthdate', 'preferredLanguage', 'preferredCurrency', 'location', 'role', 'department', 'lineManager', 'isVerified', 'rememberMe', 'createAt', 'updatedAt'
         ]
       }
     );
@@ -92,6 +103,7 @@ class AuthHelpers {
         email: user.emails[0].value,
         username: user.username,
         password: user.password,
+        passportId: user.passportId,
         birthdate: user.birthdate,
         preferredLanguage: user.preferredLanguage,
         preferredCurrency: user.preferredLanguage,

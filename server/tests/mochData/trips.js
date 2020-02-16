@@ -1,6 +1,8 @@
 const dateString = new Date((new Date()).getTime() + (10 * 86400000));
 
 export const oneWayTrip = {
+  name: 'john',
+  passportId: 'pc123456',
   tripType: 'One-way',
   from: 1,
   to: [2],
@@ -8,7 +10,26 @@ export const oneWayTrip = {
   reasons: 'being a you director',
   accommodationId: 2,
 };
+export const rememberTrip = {
+  name: 'john',
+  passportId: 'pc123456',
+  tripType: 'One-way',
+  from: 1,
+  to: [2, 1],
+  date: '2020-05-13',
+  reasons: 'being a you director',
+  accommodationId: 2,
+};
+export const rememberTrip2 = {
+  tripType: 'One-way',
+  from: 1,
+  to: [2, 1],
+  date: '2020-05-14',
+  accommodationId: 2,
+};
 export const incopreteWayTrip = {
+  name: 'paul',
+  passportId: 'pc123456',
   tripType: 'One-way',
   from: 1,
   to: [2],
@@ -16,6 +37,8 @@ export const incopreteWayTrip = {
   accommodationId: 2,
 };
 export const incoDateWayTrip = {
+  name: 'jay',
+  passportId: 'pc123456',
   tripType: 'One-way',
   from: 1,
   to: [2],
@@ -23,6 +46,8 @@ export const incoDateWayTrip = {
   accommodationId: 2,
 };
 export const incoloacationWayTrip = {
+  name: 'kay',
+  passportId: 'pc123456',
   tripType: 'One-way',
   from: 30000,
   to: [10000],
@@ -31,6 +56,8 @@ export const incoloacationWayTrip = {
 };
 
 export const incoAccommodationWayTrip = {
+  name: 'Ben',
+  passportId: 'pc123456',
   tripType: 'One-way',
   from: 30000,
   to: [10000],
@@ -39,6 +66,8 @@ export const incoAccommodationWayTrip = {
 };
 
 export const twoWayTrip = {
+  name: 'johnPaul',
+  passportId: 'pc123456',
   tripType: 'Return',
   from: 1,
   to: [2],
@@ -49,6 +78,8 @@ export const twoWayTrip = {
 };
 
 export const invalideDateTrip = {
+  name: 'peter',
+  passportId: 'pc123456',
   tripType: 'Return',
   from: 1,
   to: [2, 3],
