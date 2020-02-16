@@ -11,7 +11,7 @@ export default [
     location: 'Kibagabaga',
     role: 'Architect',
     department: 'Construction',
-    lineManager: 'Igor The G'
+    lineManager: '1'
   }, {
     name: 'Dummy',
     gender: 'Male',
@@ -37,7 +37,7 @@ export default [
     location: 'Kibagabaga',
     role: 'Architect',
     department: 'Construction',
-    lineManager: 'Igor The G'
+    lineManager: '4'
   }, {
     password: 'abcd123456789',
     confirmPassword: 'abcd123456789',

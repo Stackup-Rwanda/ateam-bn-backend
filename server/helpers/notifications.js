@@ -26,8 +26,8 @@ class Notifications {
       <span style='color: #614e1f;'> Hello, you have new notification for travel which is ${action} for more details
        clieck the link <span style='color: #044F72;'><a href=${url}>${retrievedTrip.tripType}  Request</a> </span> </span><br><br>`;
     const emailNotification = `<span style='color: #7FD8A7 ;'>${status}</span> <br> 
-      <span style='color: #614e1f;'> Hello, you have new notification for travel which is ${action} </span><br><br>`;
-    const actions = ['Pending', 'Edited', 'CommentbyRequester', 'Rejected', 'Approved', 'CommentbyManager'];
+      <span style='color: #614e1f;'> Hello, you have new notification about a travel which has ${action} </span><br><br>`;
+    const actions = ['Pending', 'Edited', 'Commented by Requester', 'Rejected', 'Approved', 'Commented by Manager'];
     if (!(actions.includes(action))) {
       return res.status(400).json({
         status: 400,
@@ -35,7 +35,7 @@ class Notifications {
       });
     }
 
-    if (action === 'CommentbyManager' || action === 'Approved' || action === 'Rejected') {
+    if (action === 'Commented by Manager' || action === 'Approved' || action === 'Rejected') {
       socketIo.socket(requester.id, 'notification', appNotification);
       await importQuery.insertNotification(tripId, requester.id, appNotification);
       await eventNotification(requester.email, requester.username, url, emailNotification);

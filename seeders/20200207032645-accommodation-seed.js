@@ -3,7 +3,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Accommodations', [
     name: 'Karen Hotel',
     description: 'Only goats are accepted here',
     image: 'no image',
-    locationId: 3,
+    locationId: 1,
     geoLocation: '31.0349523, 34.2346914',
     space: '5 rooms available',
     cost: '200.000 frw',

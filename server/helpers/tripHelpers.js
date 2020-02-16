@@ -1,7 +1,7 @@
 import models from '../models';
 
 const {
-  Trip
+  Trip, User
 } = models;
 
 /**
@@ -10,6 +10,32 @@ const {
  * the trip data
  */
 class TripHelpers {
+  /**
+   * Finds if a user has trip.
+   * @param {string} tripId trip id.
+   * @param {string} id userId.
+   * @param {string} role user role.
+   * @returns {object} The trip's data.
+   */
+  static async tripExists(tripId, { id, role }) {
+    const trip = await Trip.findOne({
+      where: { id: tripId },
+      include: [{
+        model: User,
+        as: 'Users',
+        attributes: ['id', 'role', 'lineManager'],
+      }]
+    });
+
+    if (!trip) return false;
+
+    const { lineManager } = trip.Users;
+    const userId = trip.Users.id;
+    if ((userId === id) || (role === 'Manager' && lineManager === id)) return true;
+
+    return 'Forbidden';
+  }
+
   /**
      * Finds a trip by reasons and date.
      * @param {string} trip a trip data.

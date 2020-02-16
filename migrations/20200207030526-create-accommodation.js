@@ -7,7 +7,7 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Accommodat
   },
   name: { type: Sequelize.STRING },
   description: { type: Sequelize.STRING },
-  image: { type: Sequelize.STRING },
+  image: { type: Sequelize.TEXT },
   locationId: { type: Sequelize.INTEGER },
   geoLocation: { type: Sequelize.STRING },
   space: { type: Sequelize.STRING },

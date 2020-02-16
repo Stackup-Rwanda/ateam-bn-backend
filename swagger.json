@@ -280,13 +280,59 @@
             "description": "parsing a username"
           },
           {
-            "name": "Body",
-            "in": "body",
+            "in": "formData",
+            "name": "image",
+            "type": "file",
+            "description": "profile photo"
+          },
+          {
+            "in": "formData",
+            "name": "cover",
+            "type": "file",
+            "description": "cover photo"
+          },
+          {
+            "in": "formData",
             "required": true,
-            "description": "user is able to update his/her profile details",
-            "schema": {
-              "$ref": "#/definitions/profileUpdate"
-            }
+            "name": "name",
+            "type": "string",
+            "description": "name"
+          },
+          {
+            "in": "formData",
+            "required": true,
+            "name": "birthdate",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "required": true,
+            "name": "gender",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "required": true,
+            "name": "preferredLanguage",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "required": true,
+            "name": "preferredCurrency",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "required": true,
+            "name": "location",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "required": true,
+            "name": "location",
+            "type": "string"
           }
         ],
         "responses": {
@@ -405,6 +451,223 @@
           },
           "403": {
             "description": "You are not authorized to approve this request"
+          }
+        }
+      }
+    },
+    "/trip/": {
+      "post": {
+        "tags": [
+          "Trip"
+        ],
+        "summary": "Trip creation",
+        "description": "User can create a trip (One Way Trip, Return Trip and choose Multiple City on a trip)",
+        "parameters": [{
+            "in": "body",
+            "name": "body",
+            "description": "data needed to create a trip",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TripCreation"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token identify that a user has signed in"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Trip was created successfully."
+          },
+          "422": {
+            "description": "bad data"
+          },
+          "409": {
+            "description": "This trip already exists, use another reasons or date."
+          }
+        }
+      }
+    },
+    "/trips/{tripId}/comment": {
+      "post": {
+        "tags": [
+          "Trip Comment"
+        ],
+        "summary": "create a trip comment",
+        "description": "User can create a trip comment, endpoint",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "data to pass in body, to create a comment",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/createComment"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token identify that a user has signed in"
+          },
+          {
+            "in": "path",
+            "name": "tripId",
+            "type": "integer",
+            "required": true,
+            "description": "parsing a Trip ID"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Comment has been created successfully"
+          },
+          "400": {
+            "description": "comment is required / Sorry, The request contains bad data"
+          },
+          "403": {
+            "description": "Sorry, You are not allowed to comment on This trip."
+          },
+          "404": {
+            "description": "Sorry, This trip does not exist."
+          }
+        }
+      }
+    },
+    "/comments/{commentId}/update": {
+      "patch": {
+        "tags": [
+          "Trip Comment"
+        ],
+        "summary": "update a trip comment",
+        "description": "User can update a trip comment, endpoint",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "data to pass in body, to update a comment",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/updateComment"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token identify that a user has signed in"
+          },
+          {
+            "in": "path",
+            "name": "commentId",
+            "type": "integer",
+            "required": true,
+            "description": "parsing a Comment ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment has been updated successfully."
+          },
+          "400": {
+            "description": "comment is required / Sorry, The request contains bad data"
+          },
+          "404": {
+            "description": "Sorry, The comment not found."
+          }
+        }
+      }
+    },
+    "/trips/{tripId}/comments": {
+      "get": {
+        "tags": [
+          "Trip Comment"
+        ],
+        "summary": "get commets",
+        "description": "User may get all comments, endpoint",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token identify that a user has signed in"
+          },
+          {
+            "in": "path",
+            "name": "tripId",
+            "type": "integer",
+            "required": true,
+            "description": "parsing a Trip ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trip comments has been found successfully"
+          },
+          "400": {
+            "description": "Sorry, the request contains bad data"
+          },
+          "403": {
+            "description": "Sorry, You are not allowed to see the comments of This trip."
+          },
+          "404": {
+            "description": "Sorry, This trip does not exist. / Sorry, This trip does not have any comment."
+          }
+        }
+      }
+    },
+    "/comments/{commentId}/delete": {
+      "delete": {
+        "tags": [
+          "Trip Comment"
+        ],
+        "summary": "delete commet",
+        "description": "User can delete a comment, endpoint",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token identify that a user has signed in"
+          },
+          {
+            "in": "path",
+            "name": "commentId",
+            "type": "integer",
+            "required": true,
+            "description": "parsing a Comment ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Comment has been deleted successfully."
+          },
+          "400": {
+            "description": "Sorry, the request contains bad data"
+          },
+          "404": {
+            "description": "Sorry, The comment not found."
           }
         }
       }
@@ -569,6 +832,72 @@
       ],
       "properties": {
         "status": {
+          "type": "string"
+        }
+      }
+    },
+    "TripCreation": {
+      "title": "create a trip",
+      "type": "object",
+      "required": [
+        "tripType",
+        "from",
+        "to",
+        "date",
+        "reasons",
+        "accommodationId"
+      ],
+      "properties": {
+        "tripType": {
+          "type": "string"
+        },
+        "from": {
+          "type": "integer"
+        },
+        "to": {
+          "type": "integer"
+        },
+        "date": {
+          "type": "date"
+        },
+        "reasons": {
+          "type": "string"
+        },
+        "returnDate": {
+          "type": "date"
+        },
+        "accommodationId": {
+          "type": "integer"
+        }
+      },
+      "example": {
+        "tripType": "Return",
+        "from": 1,
+        "to": [2,1],
+        "date": "2020-02-20",
+        "reasons": "my reason of this trip",
+        "returnDate": "2020-02-23",
+        "accommodationId": 1
+      }
+    },
+    "createComment": {
+      "type": "object",
+      "required": [
+        "comment"
+      ],
+      "properties": {
+        "comment": {
+          "type": "string"
+        }
+      }
+    },
+    "updateComment": {
+      "type": "object",
+      "required": [
+        "comment"
+      ],
+      "properties": {
+        "comment": {
           "type": "string"
         }
       }

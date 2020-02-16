@@ -5,6 +5,7 @@ import authRoutes from './authRoutes';
 import notificationRoute from './notificationRoute';
 import roleRoutes from './userRoleRoutes';
 import requestRoutes from './requestRoutes';
+import tripCommentRoutes from './tripCommentRoutes';
 
 const router = Router();
 
@@ -15,7 +16,7 @@ router.use(profileRoute);
 router.use(notificationRoute);
 router.use(roleRoutes);
 router.use(requestRoutes);
-router.use(roleRoutes);
+router.use(tripCommentRoutes);
 
 router.use(requestRoutes);
 router.use(roleRoutes);
