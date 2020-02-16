@@ -2,12 +2,15 @@ const placeDefinition = (sequelize, DataTypes) => {
   const Place = sequelize.define('Place', {
     name: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     country: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     city: {
       type: DataTypes.STRING,
+      allowNull: false,
     },
     createdAt: {
       type: DataTypes.DATE
@@ -19,10 +22,11 @@ const placeDefinition = (sequelize, DataTypes) => {
   Place.associate = (models) => {
     Place.hasMany(models.Accommodations, {
       foreignKey: 'locationId',
-      as: 'Places',
+      as: 'accommodations',
       onDelete: 'CASCADE'
     });
   };
   return Place;
 };
+
 export default placeDefinition;

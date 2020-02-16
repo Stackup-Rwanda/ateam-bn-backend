@@ -6,10 +6,10 @@ import bcrypt from 'bcrypt';
  */
 class Hasher {
   /**
-   * Hashs the password.
-   * @param {string} password The user's password.
-   * @returns {string} The users's hashed password.
-   */
+     * Hashs the password.
+     * @param {string} password The user's password.
+     * @returns {string} The users's hashed password.
+     */
   static hashPassword(password) {
     return bcrypt.hashSync(password, 10);
   }
