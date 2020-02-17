@@ -16,5 +16,7 @@ router.use(roleRoutes);
 router.use(requestRoutes);
 router.use(roleRoutes);
 
+router.use(requestRoutes);
+router.use(roleRoutes);
 
 export default router;

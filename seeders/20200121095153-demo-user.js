@@ -26,7 +26,7 @@ const dummy2 = {
   birthdate: new Date(),
   preferredLanguage: 'French',
   preferredCurrency: 'Euro',
-  locationId: 1,
+  locationId: 3,
   role: 'Super Administrator',
   department: 'Cleaner',
   lineManager: 3,

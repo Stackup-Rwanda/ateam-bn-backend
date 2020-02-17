@@ -2,19 +2,8 @@ import importQuery from './authHelpers';
 import importService from './emailService';
 
 /**
- * This class contains all methods
- * Those stuff below will be called in controller.
- * const clientNotify = {
-      title: 'REQUEST APPROVED', // req.request.title
-      description: `Hello Joshua your request was approved successfully, you will have travel on Mon 23 Feb 2020 at 16:30`, // req.request.description
-      email: 'k.joshua855@gmail.com', // req.request.email
-      requester: 'Joshua', // req.request.username
-      manager: 'agent Moriah', // req.request.agent
-    };
-  *  await notification.createNotification(clientNotify);
-
- * required to handle
- * viewing notification with app and send notification to email with app.
+ * This class will contain all methods
+ * related to the notification tasks
  */
 class Notifications {
   /**

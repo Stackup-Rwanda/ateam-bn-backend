@@ -164,7 +164,8 @@
         ],
         "summary": "Reset password",
         "description": "User can reset password, endpoint",
-        "parameters": [{
+        "parameters": [
+          {
             "in": "body",
             "name": "body",
             "description": "New password and confirmation password for a user",
@@ -214,7 +215,8 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [{
+        "parameters": [
+          {
             "name": "token",
             "in": "header",
             "required": true,
@@ -254,7 +256,8 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [{
+        "parameters": [
+          {
             "name": "token",
             "in": "header",
             "required": true,
@@ -305,7 +308,8 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [{
+        "parameters": [
+          {
             "name": "token",
             "in": "header",
             "required": true,
