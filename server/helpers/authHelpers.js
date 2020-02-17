@@ -1,7 +1,7 @@
 import models from '../models';
 import Hasher from './passwordHashHelper';
 
-const { User, Token } = models;
+const { User, Token, Notification } = models;
 /**
  * This class contains
  * all methods required to save/edit/retrieve/delete
@@ -53,7 +53,7 @@ class AuthHelpers {
       },
       {
         fields: [
-          'name', 'gender', 'email', 'username', 'password', 'birthdate', 'preferredLanguage', 'preferredCurrency', 'location', 'role', 'department', 'lineManager', 'isVerified', 'createAt', 'updatedAt'
+          'name', 'gender', 'email', 'username', 'password', 'birthdate', 'preferredLanguage', 'preferredCurrency', 'locationId', 'role', 'department', 'lineManager', 'isVerified', 'createAt', 'updatedAt'
         ]
       }
     );
@@ -118,6 +118,23 @@ class AuthHelpers {
    */
   static async deleteValidToken(validtoken) {
     await Token.destroy({ where: { value: validtoken } });
+  }
+
+  /**
+   * insert notification into Notification table in the DB.
+   * @param {clientNotification} clientNotification after user request.
+   * @returns {clientNotification} The user notification will stored.
+   */
+  static async insertNotification(clientNotification) {
+    await Notification.create({
+      title: clientNotification.title,
+      description: clientNotification.description,
+      email: clientNotification.email,
+      requester: clientNotification.requester,
+      manager: clientNotification.manager,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    });
   }
 }
 export default AuthHelpers;

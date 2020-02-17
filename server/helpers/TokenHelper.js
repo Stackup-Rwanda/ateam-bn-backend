@@ -9,8 +9,9 @@ dotenv.config();
 
 /**
  * This class contains.
- * two methods, one to help hashing password (hashPassword).
- * and the second to retrieve hashed password.
+ * three methods, one to help hashing password (hashPassword).
+ * other the second to retrieve hashed password.
+ * and the lastone for generating token.
  */
 class TokenHelper {
   /**

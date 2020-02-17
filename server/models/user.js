@@ -24,8 +24,8 @@ const userDefinition = (sequelize, DataTypes) => {
     preferredCurrency: {
       type: DataTypes.STRING
     },
-    location: {
-      type: DataTypes.STRING
+    locationId: {
+      type: DataTypes.INTEGER
     },
     role: {
       type: DataTypes.STRING
@@ -52,6 +52,12 @@ const userDefinition = (sequelize, DataTypes) => {
       foreignKey: 'userId',
       as: 'Trips',
       onDelete: 'CASCADE',
+    });
+  };
+
+  User.associate = (models) => {
+    User.hasMany(models.User, {
+      foreignKey: 'lineManager', as: 'Users', onDelete: 'CASCADE'
     });
   };
   return User;
