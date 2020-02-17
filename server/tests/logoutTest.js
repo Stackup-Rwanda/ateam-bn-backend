@@ -6,8 +6,17 @@ import token from './mochData/token';
 chai.use(chaiHttp);
 const router = () => chai.request(app);
 describe('my Testing suite', () => {
-  const validtoken = token.validToken;
+  let validtoken;
   const Unexistuser = token.UnExistUser;
+  it('login in manzi before signin out', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/auth/signin')
+      .send({ email: 'butirigimanzi@gmail.com', password: '123456789' });
+    validtoken = res.body.data.token;
+    res.should.have.status(200);
+    res.body.should.be.an('object');
+  });
   it('users should be able to logout from application', (done) => {
     router()
       .get('/api/auth/logout')

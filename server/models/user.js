@@ -1,50 +1,24 @@
 const userDefinition = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    name: {
-      type: DataTypes.STRING
-    },
-    gender: {
-      type: DataTypes.STRING
-    },
-    email: {
-      type: DataTypes.STRING
-    },
-    username: {
-      type: DataTypes.STRING
-    },
-    password: {
-      type: DataTypes.STRING
-    },
-    birthdate: {
-      type: DataTypes.DATE
-    },
-    preferredLanguage: {
-      type: DataTypes.STRING
-    },
-    preferredCurrency: {
-      type: DataTypes.STRING
-    },
-    locationId: {
-      type: DataTypes.INTEGER
-    },
-    role: {
-      type: DataTypes.STRING
-    },
-    department: {
-      type: DataTypes.STRING
-    },
-    lineManager: {
-      type: DataTypes.INTEGER
-    },
-    isVerified: {
-      type: DataTypes.BOOLEAN
-    },
-    createdAt: {
-      type: DataTypes.DATE
-    },
-    updatedAt: {
-      type: DataTypes.DATE
-    }
+    name: { type: DataTypes.STRING },
+    gender: { type: DataTypes.STRING },
+    email: { type: DataTypes.STRING },
+    username: { type: DataTypes.STRING },
+    password: { type: DataTypes.STRING },
+    birthdate: { type: DataTypes.DATE },
+    preferredLanguage: { type: DataTypes.STRING },
+    preferredCurrency: { type: DataTypes.STRING },
+    locationId: { type: DataTypes.INTEGER },
+    role: { type: DataTypes.STRING },
+    department: { type: DataTypes.STRING },
+    lineManager: { type: DataTypes.INTEGER },
+    isVerified: { type: DataTypes.BOOLEAN },
+    profilePhoto: { type: DataTypes.STRING },
+    coverPhoto: { type: DataTypes.STRING },
+    createdAt: { type: DataTypes.DATE },
+    updatedAt: { type: DataTypes.DATE },
+    social_id: { type: DataTypes.STRING },
+    provider: { type: DataTypes.STRING }
   }, {});
 
   User.associate = (models) => {

@@ -68,7 +68,44 @@ const dummy4 = {
   createdAt: new Date(),
   updatedAt: new Date()
 };
-const up = (queryInterface) => queryInterface.bulkInsert('Users', [dummy1, dummy2, dummy3, dummy4]);
+
+const manzi = {
+  name: 'Butirigitwa Manzi',
+  gender: 'Male',
+  email: 'butirigimanzi@gmail.com',
+  username: 'manzi',
+  password: Hasher.hashPassword('123456789'),
+  birthdate: new Date(),
+  preferredLanguage: 'French',
+  preferredCurrency: 'Euro',
+  locationId: 1,
+  role: 'Requester',
+  department: 'Cleaner',
+  lineManager: 3,
+  isVerified: true,
+  createdAt: new Date(),
+  updatedAt: new Date()
+};
+
+const jimmyKay = {
+  name: 'Jimmy Kaykay',
+  gender: 'Male',
+  email: 'JkayOne2@gmail.com',
+  username: 'kay',
+  password: Hasher.hashPassword('123456789'),
+  birthdate: new Date(),
+  preferredLanguage: 'French',
+  preferredCurrency: 'Euro',
+  locationId: 1,
+  role: 'Requester',
+  department: 'Cleaner',
+  lineManager: 3,
+  isVerified: true,
+  createdAt: new Date(),
+  updatedAt: new Date()
+};
+
+const up = (queryInterface) => queryInterface.bulkInsert('Users', [dummy1, dummy2, dummy3, dummy4, manzi, jimmyKay]);
 
 const down = (queryInterface) => queryInterface.bulkDelete('Users', null, {});
 
