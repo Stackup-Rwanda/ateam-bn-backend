@@ -76,8 +76,8 @@ const dummy4 = {
 const dummy5 = {
   name: 'Dummy4',
   gender: 'Male',
-  email: 'k.joshua855@gmail.com',
-  username: 'byiringiro joshua k.joshua',
+  email: 'k.joshua800@gmail.com',
+  username: 'byiringiro',
   password: Hasher.hashPassword('123456789'),
   birthdate: new Date(),
   preferredLanguage: 'French',

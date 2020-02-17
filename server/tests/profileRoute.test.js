@@ -31,7 +31,6 @@ const updatedInvalidJimmy = {
   image: `${__dirname}/./mochData/profile.jpg`
 };
 
-
 describe('running profile route tests', () => {
   it('User should login before viewing a profile', async () => {
     const res = await chai

@@ -12,6 +12,9 @@ const placeDefinition = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    visitedtimes: {
+      type: DataTypes.INTEGER
+    },
     createdAt: {
       type: DataTypes.DATE
     },

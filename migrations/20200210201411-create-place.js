@@ -18,6 +18,10 @@ const up = (queryInterface, sequelize) => queryInterface.createTable('Places', {
     type: sequelize.STRING,
     allowNull: false,
   },
+  visitedtimes: {
+    type: sequelize.INTEGER,
+    defaultValue: 0
+  },
   createdAt: {
     allowNull: false,
     type: sequelize.DATE
