@@ -58,7 +58,6 @@ export const tripChecker = async (req, res, next) => {
   const placeExistsTo = await placeHelpers.placeExist(body.to);
   const isValideDate = dateValidator(body.date);
   const isRtnDate = returnDate({ Rdate: body.returnDate, Sdate: body.date });
-  console.log(isRtnDate);
   const accommodation = {
     id: body.accommodationId,
     locationId: placesIds

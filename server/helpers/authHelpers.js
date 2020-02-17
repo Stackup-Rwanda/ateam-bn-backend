@@ -31,6 +31,7 @@ class AuthHelpers {
   static async updateUserPassword(id, { password }) {
     const hashedPwd = Hasher.hashPassword(password);
     const updatedUser = await User.update({ password: hashedPwd }, { where: { id } });
+    await Token.destroy({ where: { userId: id } });
     return updatedUser;
   }
 
@@ -56,7 +57,7 @@ class AuthHelpers {
       },
       {
         fields: [
-          'name', 'gender', 'email', 'username', 'password', 'birthdate', 'preferredLanguage', 'preferredCurrency', 'location', 'role', 'department', 'lineManager', 'isVerified', 'createAt', 'updatedAt'
+          'name', 'gender', 'email', 'username', 'password', 'birthdate', 'preferredLanguage', 'preferredCurrency', 'locationId', 'role', 'department', 'lineManager', 'isVerified', 'createAt', 'updatedAt'
         ]
       }
     );

@@ -33,7 +33,6 @@ describe('Test for create one way trip endpoint', () => {
         .post('/api/trip')
         .set('token', mytoken)
         .send(oneWayTrip);
-      console.log(res.body);
       expect(res.body.status).to.equal(201);
       expect(res.body).to.be.an('object');
       expect(res.body.message).to.be.equal('Trip was created successfully.');

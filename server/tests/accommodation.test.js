@@ -7,9 +7,19 @@ import accommodationFiles from './mochData/accommodationFiles';
 chai.use(chaiHttp);
 chai.should();
 
-const travelAdmniToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJNckR1bW15MyIsImVtYWlsIjoiZHVtbXkzQGVtYWlsLnJ3Iiwicm9sZSI6IlRyYXZlbCBBZG1pbmlzdHJhdG9yIiwiaXNWZXJpZmllZCI6dHJ1ZSwiaWF0IjoxNTgxNTE4ODMxfQ.TXaSaJW7d5ckEHbVzA2OQlMwT8jbDqX01KE5x0rvVXc';
+let travelAdmniToken;
 
 describe('Accommodation Tests', () => {
+  it('Travel administrator login request', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/auth/signin')
+      .send({ email: 'dummy3@email.rw', password: '123456789' });
+    travelAdmniToken = res.body.data.token;
+    res.should.have.status(200);
+    res.body.should.be.an('object');
+  });
+
   it('user should be able to add an accommodation with an image', async () => {
     const res = await chai
       .request(app)
