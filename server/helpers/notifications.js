@@ -21,12 +21,12 @@ class Notifications {
     const requester = await importQuery.userDetails(retrievedTrip.userId);
     const manager = await importQuery.userDetails(requester.lineManager);
     const url = `https://ateam-bn-backend-staging.herokuapp.com/api/trips/${tripId}/`;
-    const status = `REQUEST ${action.toUpperCase()}`;
+    const status = `REQUEST is ${action.toUpperCase()}`;
     const appNotification = `<span style='color: #7FD8A7 ;'>${status}</span> <br> 
       <span style='color: #614e1f;'> Hello, you have new notification for travel which is ${action} for more details
        clieck the link <span style='color: #044F72;'><a href=${url}>${retrievedTrip.tripType}  Request</a> </span> </span><br><br>`;
     const emailNotification = `<span style='color: #7FD8A7 ;'>${status}</span> <br> 
-      <span style='color: #614e1f;'> Hello, you have new notification for travel which is ${action} </span><br><br>`;
+      <span style='color: #614e1f;'> Hello, You have new notification for travel request which is <span style='color: #7FD8A7 ;'> ${action} </span> </span>`;
     const actions = ['Pending', 'Edited', 'CommentbyRequester', 'Rejected', 'Approved', 'CommentbyManager'];
     if (!(actions.includes(action))) {
       return res.status(400).json({

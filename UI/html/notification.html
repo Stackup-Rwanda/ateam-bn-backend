@@ -103,30 +103,6 @@
 	</div>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 	<script type="text/javascript">
-		// const realReceiverId = document.getElementById('receiverId').value;
-		// console.log(realReceiverId);
-		// const clientSocket = io();
-		// clientSocket.connect('https://localhost:3000');
-		// clientSocket.connect('https://ateam-bn-backend-staging.herokuapp.com');
-
-		// clientSocket.on('realReceId', id => {
-		// 	clientSocket.emit('realReceipt', id);
-		// });
-
-		// clientSocket.on('notification', data => {
-		// 	const realTimeNotification = [];
-		// 	realTimeNotification.push(data);
-		// 	var mainList = document.getElementById("body");
-		// 	for (var i = 0; i < realTimeNotification.length; i++) {
-		// 		var item = realTimeNotification[i];
-		// 		var elem = document.createElement("li");
-		// 		elem.innerHTML = item;
-		// 		mainList.appendChild(elem);
-		// 	}
-		// });
-
-	</script>
-	<script type="text/javascript">
 
 		const clientSocket = io();
 		const panel = document.querySelector('.panel');
@@ -139,7 +115,7 @@
 			icon.style.display = 'none';
 			iconII.style.display = 'block';
 			panel.style.display = 'block';
-			clientSocket.emit('realReceipt', realReceiverId.value);
+			clientSocket.emit('realReceipt', realReceiverId.value || 0);
 		};
 		icon.addEventListener('click', showNotificationPanel);
 
@@ -162,6 +138,18 @@
 		clientSocket.connect('https://localhost:3000');
 		clientSocket.connect('https://ateam-bn-backend-staging.herokuapp.com');
 
+		clientSocket.on('fechedUserNotification', userData => {
+			const notificationsList = [];
+			var List = document.getElementById("body");
+			for (var i = 0; i < userData.length; i++) {
+				var item = userData[i].description;
+				var elem = document.createElement("li");
+				elem.innerHTML = item;
+				List.appendChild(elem);
+			}
+
+		});
+
 		clientSocket.on('notification', data => {
 			const realTimeNotification = [];
 			realTimeNotification.push(data);
@@ -170,9 +158,10 @@
 				var item = realTimeNotification[i];
 				var elem = document.createElement("li");
 				elem.innerHTML = item;
-				mainList.appendChild(elem);
+				mainList.prepend(elem);
 			}
 		});
+
 
 	</script>
 </body>

@@ -4,6 +4,7 @@ import serverSocket from 'socket.io';
 import swaggerUi from 'swagger-ui-express';
 import allRoutes from './routes/allRoutes';
 import apiDocumentation from '../swagger.json';
+import userNotification from './helpers/authHelpers';
 import "./middlewares/fbStrategy";
 import "./middlewares/googleStrategy";
 
@@ -33,6 +34,9 @@ io.on('connection', (socket) => {
   console.log('socket Connection is successfully');
   socket.on('realReceipt', (data) => {
     socket.join(data);
+    userNotification.retrieveOneNotificationById(data).then((userNotifications) => {
+      socket.emit('fechedUserNotification', userNotifications);
+    });
   });
 });
 

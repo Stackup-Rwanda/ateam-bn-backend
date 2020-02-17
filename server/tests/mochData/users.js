@@ -15,7 +15,7 @@ export default [
   }, {
     name: 'Dummy',
     gender: 'Male',
-    email: 'dummy@email.rw',
+    email: 'dummy2@email.rw',
     username: 'MrDummy',
     password: '123456789',
     birthdate: new Date(),

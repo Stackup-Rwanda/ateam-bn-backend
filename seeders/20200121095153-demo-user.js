@@ -9,8 +9,8 @@ const dummy1 = {
   birthdate: new Date(),
   preferredLanguage: 'French',
   preferredCurrency: 'Euro',
-  location: 'Paris',
-  role: 'Broker',
+  locationId: 1,
+  role: 'Requester',
   department: 'Cleaner',
   lineManager: 3,
   isVerified: false,
@@ -26,15 +26,32 @@ const dummy2 = {
   birthdate: new Date(),
   preferredLanguage: 'French',
   preferredCurrency: 'Euro',
-  location: 'Paris',
+  locationId: 3,
   role: 'Super Administrator',
   department: 'Cleaner',
-  lineManager: 4,
+  lineManager: 5,
+  isVerified: true,
+  createdAt: '04/05/2020',
+  updatedAt: '02/03/2010'
+};
+const dummy3 = {
+  name: 'Igor Jean-Luc',
+  gender: 'Male',
+  email: 'nigorjeanluc@gmail.com',
+  username: 'Runyamahe',
+  password: Hasher.hashPassword('secret123'),
+  birthdate: new Date(),
+  preferredLanguage: 'French',
+  preferredCurrency: 'Euro',
+  locationId: 1,
+  role: 'Manager',
+  department: 'Cleaner',
+  lineManager: 3,
   isVerified: true,
   createdAt: new Date(),
   updatedAt: new Date()
 };
-const dummy3 = {
+const dummy4 = {
   name: 'Dummy3',
   gender: 'Male',
   email: 'dummy3@email.rw',
@@ -43,7 +60,7 @@ const dummy3 = {
   birthdate: new Date(),
   preferredLanguage: 'French',
   preferredCurrency: 'Euro',
-  location: 'Paris',
+  locationId: 1,
   role: 'Travel Administrator',
   department: 'Cleaner',
   lineManager: 3,
@@ -51,7 +68,8 @@ const dummy3 = {
   createdAt: new Date(),
   updatedAt: new Date()
 };
-const dummy4 = {
+
+const dummy5 = {
   name: 'Dummy4',
   gender: 'Male',
   email: 'k.joshua855@gmail.com',
@@ -60,15 +78,50 @@ const dummy4 = {
   birthdate: new Date(),
   preferredLanguage: 'French',
   preferredCurrency: 'Euro',
-  location: 'Paris',
+  locationId: 1,
   role: 'Travel Administrator',
   department: 'Cleaner',
-  lineManager: 4,
+  lineManager: 5,
   isVerified: true,
   createdAt: new Date(),
   updatedAt: new Date()
 };
-const up = (queryInterface) => queryInterface.bulkInsert('Users', [dummy1, dummy2, dummy3, dummy4]);
+
+const manzi = {
+  name: 'Butirigitwa Manzi',
+  gender: 'Male',
+  email: 'butirigimanzi@gmail.com',
+  username: 'manzi',
+  password: Hasher.hashPassword('123456789'),
+  birthdate: new Date(),
+  preferredLanguage: 'French',
+  preferredCurrency: 'Euro',
+  locationId: 1,
+  role: 'Requester',
+  department: 'Cleaner',
+  lineManager: 3,
+  isVerified: true,
+  createdAt: new Date(),
+  updatedAt: new Date()
+};
+const jimmyKay = {
+  name: 'jimmyKay',
+  gender: 'Male',
+  email: 'JkayOne2@gmail.com',
+  username: 'kay',
+  password: Hasher.hashPassword('123456789'),
+  birthdate: new Date(),
+  preferredLanguage: 'French',
+  preferredCurrency: 'Euro',
+  locationId: 1,
+  role: 'Requester',
+  department: 'Cleaner',
+  lineManager: 3,
+  isVerified: true,
+  createdAt: new Date(),
+  updatedAt: new Date()
+};
+const up = (queryInterface) => queryInterface.bulkInsert('Users', [dummy1, dummy2, dummy3, dummy4, dummy5, manzi, jimmyKay]);
 
 const down = (queryInterface) => queryInterface.bulkDelete('Users', null, {});
 

@@ -5,13 +5,33 @@ import index from '../index';
 chai.use(http);
 chai.should();
 
-const superAdminDummy2Token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJkdW1teTJAZW1haWwucnciLCJyb2xlIjoiU3VwZXIgQWRtaW5pc3RyYXRvciIsImlhdCI6MTU4MDk1NzUwNH0.iOPzeyAUNCawgWmMfV9KCAbdAIpLdqHP8e9xVxZv6kA';
-const notAdminValidToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQnV0aXJpZ2l0d2EgTWFuemkiLCJ1c2VybmFtZSI6Im1hbnppIiwiZW1haWwiOiJtYW56aUBnbWFpbC5jb20iLCJpYXQiOjE1ODA4MjA1MTZ9.jPcc3YOJCGZaq-3Y-hQNQG_VlzijnocglCg5b0twHYA';
+let superAdminDummy2Token;
+let notAdminValidToken;
 const invalidToken = 'eyJhbGciOiJIUzi1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQnV0aXJpZ2l0d2EgTWFuemkiLCJ1c2VybmFtZSI6Im1hbnppIiwiZW1haWwiOiJtYW56aUBnbWFpbC5jb20iLCJpYXQiOjE1ODA4MjA1MTZ9.jPcc3YOJCGZaq-3Y-hQNQG_VlzijnocglCg5b0twHYA';
 const validRole = { role: 'Requester' };
 const invalidRole = { role: 'Rqstr' };
 
 describe('running user role update route tests', () => {
+  it('Super administrator login request', async () => {
+    const result = await chai
+      .request(index)
+      .post('/api/auth/signin')
+      .send({ email: 'dummy2@email.rw', password: '123456789' });
+    superAdminDummy2Token = result.body.data.token;
+    result.should.have.status(200);
+    result.body.should.be.an('object');
+  });
+
+  it('non super administrator user login', async () => {
+    const result = await chai
+      .request(index)
+      .post('/api/auth/signin')
+      .send({ email: 'butirigimanzi@gmail.com', password: '123456789' });
+    notAdminValidToken = result.body.data.token;
+    result.should.have.status(200);
+    result.body.should.be.an('object');
+  });
+
   it('a signed in super admin should be able to update a particular user role ', async () => {
     const result = await chai
       .request(index)

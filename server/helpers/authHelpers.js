@@ -31,6 +31,7 @@ class AuthHelpers {
   static async updateUserPassword(id, { password }) {
     const hashedPwd = Hasher.hashPassword(password);
     const updatedUser = await User.update({ password: hashedPwd }, { where: { id } });
+    await Token.destroy({ where: { userId: id } });
     return updatedUser;
   }
 
@@ -56,7 +57,7 @@ class AuthHelpers {
       },
       {
         fields: [
-          'name', 'gender', 'email', 'username', 'password', 'birthdate', 'preferredLanguage', 'preferredCurrency', 'location', 'role', 'department', 'lineManager', 'isVerified', 'createAt', 'updatedAt'
+          'name', 'gender', 'email', 'username', 'password', 'birthdate', 'preferredLanguage', 'preferredCurrency', 'locationId', 'role', 'department', 'lineManager', 'isVerified', 'createAt', 'updatedAt'
         ]
       }
     );
@@ -160,6 +161,16 @@ class AuthHelpers {
   static async userDetails(userId) {
     const userData = await User.findOne({ where: { id: userId } });
     return userData;
+  }
+
+  /**
+    * Finds the user's details from user table in database.
+    * @param {integer} argument userId table field.
+    * @returns {object} The user's details.
+    */
+  static async retrieveOneNotificationById(argument) {
+    const userNotification = await Notification.findAll({ where: { receiverId: argument } }).then((userNotify) => userNotify);
+    return userNotification;
   }
 }
 export default AuthHelpers;

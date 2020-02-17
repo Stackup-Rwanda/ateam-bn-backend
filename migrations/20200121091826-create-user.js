@@ -31,8 +31,8 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Users', {
   preferredCurrency: {
     type: Sequelize.STRING
   },
-  location: {
-    type: Sequelize.STRING
+  locationId: {
+    type: Sequelize.INTEGER
   },
   role: {
     type: Sequelize.STRING
@@ -45,6 +45,12 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Users', {
   },
   isVerified: {
     type: Sequelize.BOOLEAN
+  },
+  profilePhoto: {
+    type: Sequelize.STRING
+  },
+  coverPhoto: {
+    type: Sequelize.STRING
   },
   createdAt: {
     allowNull: false,
