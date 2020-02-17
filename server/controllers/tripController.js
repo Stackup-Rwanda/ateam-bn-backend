@@ -1,4 +1,5 @@
 import tripHelpers from '../helpers/tripHelpers';
+import notification from '../helpers/notifications';
 
 /**
  * This class contains all methods
@@ -39,7 +40,7 @@ class TripController {
       newTrip.tripType = 'One-way';
     }
     const saveTrip = await tripHelpers.saveTrip(newTrip);
-
+    await notification.sendNotification(saveTrip.id, status1, res);
     return res.status(201).json({
       status: 201,
       message: 'Trip was created successfully.',

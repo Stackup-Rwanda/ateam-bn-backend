@@ -11,7 +11,8 @@
   },
   "host": "ateam-bn-backend-staging.herokuapp.com",
   "basePath": "/api",
-  "tags": [{
+  "tags": [
+    {
       "name": "User",
       "description": " User endpoints :: This endpoint will handle user wrong request"
     },
@@ -54,15 +55,17 @@
         ],
         "summary": "Signup with application",
         "description": "Now by the use of this POST endpoint user Should be able to create account with Barefoot Nomad application",
-        "parameters": [{
-          "in": "body",
-          "name": "body",
-          "description": "Create user account: User credentials needed to be used for signup",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/Signup"
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Create user account: User credentials needed to be used for signup",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Signup"
+            }
           }
-        }],
+        ],
         "responses": {
           "201": {
             "description": "User was created successfully"
@@ -83,15 +86,17 @@
         ],
         "summary": "Signin with application",
         "description": "Now by the use of this POST endpoint user Should be able to signin into his/her account with  Barefoot Nomad  application",
-        "parameters": [{
-          "in": "body",
-          "name": "body",
-          "description": "signin into user account: Correct user credentials needed to be used for login",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/signin"
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "signin into user account: Correct user credentials needed to be used for login",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/signin"
+            }
           }
-        }],
+        ],
         "responses": {
           "200": {
             "description": "Authorizeduser: successfully logged In"
@@ -114,12 +119,14 @@
             "description": " OK : Logout successfully"
           }
         },
-        "parameters": [{
-          "in": "header",
-          "name": "token",
-          "description": " This is user token which must be deleted directly when logged out from application",
-          "type": "string"
-        }]
+        "parameters": [
+          {
+            "in": "header",
+            "name": "token",
+            "description": " This is user token which must be deleted directly when logged out from application",
+            "type": "string"
+          }
+        ]
       }
     },
     "/auth/reset-password": {
@@ -135,15 +142,17 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [{
-          "in": "body",
-          "name": "body",
-          "description": "User email to be used for resetting password",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/SendEmail"
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "User email to be used for resetting password",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SendEmail"
+            }
           }
-        }],
+        ],
         "responses": {
           "200": {
             "description": "The email has been sent successfully."

@@ -29,7 +29,7 @@ const dummy2 = {
   locationId: 3,
   role: 'Super Administrator',
   department: 'Cleaner',
-  lineManager: 3,
+  lineManager: 5,
   isVerified: true,
   createdAt: '04/05/2020',
   updatedAt: '02/03/2010'
@@ -69,6 +69,24 @@ const dummy4 = {
   updatedAt: new Date()
 };
 
+const dummy5 = {
+  name: 'Dummy4',
+  gender: 'Male',
+  email: 'k.joshua855@gmail.com',
+  username: 'byiringiro joshua k.joshua',
+  password: Hasher.hashPassword('123456789'),
+  birthdate: new Date(),
+  preferredLanguage: 'French',
+  preferredCurrency: 'Euro',
+  locationId: 1,
+  role: 'Travel Administrator',
+  department: 'Cleaner',
+  lineManager: 5,
+  isVerified: true,
+  createdAt: new Date(),
+  updatedAt: new Date()
+};
+
 const manzi = {
   name: 'Butirigitwa Manzi',
   gender: 'Male',
@@ -86,9 +104,8 @@ const manzi = {
   createdAt: new Date(),
   updatedAt: new Date()
 };
-
 const jimmyKay = {
-  name: 'Jimmy Kaykay',
+  name: 'jimmyKay',
   gender: 'Male',
   email: 'JkayOne2@gmail.com',
   username: 'kay',
@@ -104,8 +121,7 @@ const jimmyKay = {
   createdAt: new Date(),
   updatedAt: new Date()
 };
-
-const up = (queryInterface) => queryInterface.bulkInsert('Users', [dummy1, dummy2, dummy3, dummy4, manzi, jimmyKay]);
+const up = (queryInterface) => queryInterface.bulkInsert('Users', [dummy1, dummy2, dummy3, dummy4, dummy5, manzi, jimmyKay]);
 
 const down = (queryInterface) => queryInterface.bulkDelete('Users', null, {});
 

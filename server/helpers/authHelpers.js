@@ -1,7 +1,10 @@
 import models from '../models';
 import Hasher from './passwordHashHelper';
 
-const { User, Token, Notification } = models;
+const {
+  User, Token, Notification, Trip
+} = models;
+
 /**
  * This class contains
  * all methods required to save/edit/retrieve/delete
@@ -123,19 +126,41 @@ class AuthHelpers {
 
   /**
    * insert notification into Notification table in the DB.
-   * @param {clientNotification} clientNotification after user request.
-   * @returns {clientNotification} The user notification will stored.
+   * @param {integer} trip after user request.
+   * @param {integer} receiver after user request.
+   * @param {string} desc after user request.
+   * @returns {object} The user notification will stored.
    */
-  static async insertNotification(clientNotification) {
-    await Notification.create({
-      title: clientNotification.title,
-      description: clientNotification.description,
-      email: clientNotification.email,
-      requester: clientNotification.requester,
-      manager: clientNotification.manager,
+  static async insertNotification(trip, receiver, desc) {
+    const createdNotification = await Notification.create({
+      tripId: trip,
+      receiverId: receiver,
+      description: desc,
+      viewed: false,
       createdAt: new Date(),
       updatedAt: new Date()
     });
+    return createdNotification;
+  }
+
+  /**
+   * retrieve Trip from Trip table in the DB.
+   * @param {integer} tripId after user request.
+   * @returns {object} The Trip will retrieved.
+   */
+  static async retrieveTrip(tripId) {
+    const findTrip = Trip.findOne({ where: { id: tripId } });
+    return findTrip;
+  }
+
+  /**
+   * Finds the user's details from user table in database.
+   * @param {integer} userId userId table field.
+   * @returns {object} The user's details.
+   */
+  static async userDetails(userId) {
+    const userData = await User.findOne({ where: { id: userId } });
+    return userData;
   }
 }
 export default AuthHelpers;

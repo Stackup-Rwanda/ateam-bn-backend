@@ -38,7 +38,7 @@ const up = (queryInterface, sequelize) => queryInterface.createTable('Trips', {
     type: sequelize.INTEGER,
   },
   status: {
-    type: sequelize.ENUM('Pending', 'Approved', 'Rejected'),
+    type: sequelize.STRING,
     defaultValue: 'Pending'
   },
   createdAt: {

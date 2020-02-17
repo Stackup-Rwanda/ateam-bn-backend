@@ -1,3 +1,4 @@
+import notification from '../helpers/notifications';
 import RequestHelper from '../helpers/requestHelper';
 import users from '../helpers/authHelpers';
 
@@ -28,10 +29,12 @@ class RequestController {
 
     if (user.lineManager === manager.id) {
       await RequestHelper.updateStatus(req.body.status, parseInt(req.params.id, 10));
+      const trip = await RequestHelper.findRequest('id', parseInt(req.params.id, 10));
+      await notification.sendNotification(trip.id, trip.status, res);
       return res.status(200).json({
         status: 200,
         message: 'This trip request was successfully approved',
-        data: await RequestHelper.findRequest('id', parseInt(req.params.id, 10))
+        data: trip
       });
     }
 
@@ -62,10 +65,12 @@ class RequestController {
 
     if (user.lineManager === manager.id) {
       await RequestHelper.updateStatus(req.body.status, parseInt(req.params.id, 10));
+      const trip = await RequestHelper.findRequest('id', parseInt(req.params.id, 10));
+      await notification.sendNotification(trip.id, trip.status, res);
       return res.status(200).json({
         status: 200,
         message: 'This trip request has been rejected',
-        data: await RequestHelper.findRequest('id', parseInt(req.params.id, 10))
+        data: trip
       });
     }
 

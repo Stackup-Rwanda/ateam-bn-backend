@@ -3,7 +3,7 @@ import Joi from '@hapi/joi';
 const validate = (req, res, next) => {
   const Schema = Joi.object().keys({
     role: Joi.string().trim()
-      .required().pattern(new RegExp('^Super Administrator$|^Travel Administrator$|^Travel Team Member$|^Manager$|^Requester$'))
+      .required().pattern(new RegExp('^Super Administrator$|^Travel Administrator$|^Travel Team Member$|^Manager$|^Requester$', 'i'))
   });
   const result = Schema.validate({ role: req.body.role }, {
     abortEarly: false
