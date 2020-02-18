@@ -5,7 +5,7 @@ export const dateValidator = (d) => {
   return false;
 };
 
-export const returnDate = ({ dateR, dateS }) => {
+export const returnDate = (dateR, dateS) => {
   const Rdate = new Date(dateR);
   const Sdate = new Date(dateS);
   let isvalid = false;

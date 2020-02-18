@@ -37,10 +37,10 @@ const editProfile = async (req, res) => {
   let coverLink = null;
   try {
     if (req.imageIsUploadable) {
-      profileImageLink = await imageUploader(req.files.image, res);
+      profileImageLink = await imageUploader(req.files.image);
     }
     if (req.coverIsUploadable) {
-      coverLink = await imageUploader(req.files.cover, res);
+      coverLink = await imageUploader(req.files.cover);
     }
     await User.update(
       {
