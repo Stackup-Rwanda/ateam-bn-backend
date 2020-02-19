@@ -26,7 +26,7 @@ class Notifications {
       <span style='color: #614e1f;'> Hello, you have new notification for travel which is ${action} for more details
        clieck the link <span style='color: #044F72;'><a href=${url}>${retrievedTrip.tripType}  Request</a> </span> </span><br><br>`;
     const emailNotification = `<span style='color: #7FD8A7 ;'>${status}</span> <br> 
-      <span style='color: #614e1f;'> Hello, you have new notification about a travel which has ${action} </span><br><br>`;
+      <span style='color: #614e1f;'> Hello, You have new notification for travel request which is <span style='color: #7FD8A7 ;'> ${action} </span> </span>`;
     const actions = ['Pending', 'Edited', 'Commented by Requester', 'Rejected', 'Approved', 'Commented by Manager'];
     if (!(actions.includes(action))) {
       return res.status(400).json({
