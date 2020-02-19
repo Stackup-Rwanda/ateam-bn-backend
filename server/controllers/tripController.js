@@ -15,6 +15,7 @@ class TripController {
    */
   static async oneWayTrip(req, res) {
     const { body } = req;
+    console.log(req.user.id);
     const myuserId = req.user.id;
     const status1 = 'Pending';
     const newTrip = {
