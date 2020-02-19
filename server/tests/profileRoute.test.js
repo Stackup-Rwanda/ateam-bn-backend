@@ -8,6 +8,9 @@ chai.should();
 let jimmyToken;
 const wrongToken = 'eyJhbGciOijIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmltbXkgS2F5a2F5IiwidXNlcm5hbWUiOiJrYXkiLCJlbWFpbCI6IkprYXlAZ21haWwuY29tIiwiaWF0IjoxNTgwODIwNzM3fQ.jCVUdtDEMpcyliUcuwxGixSn2dcqoJ6xLaXEFswHfFI';
 const karenToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiR2lyYW1hdGEgS2FyZW4iLCJ1c2VybmFtZSI6ImtnaXIiLCJlbWFpbCI6IkthcmVuQGdtYWlsLmNvbSIsImlhdCI6MTU4MDgyMTI3OH0.AR-FqtlZ5-MnWqWZS-R-zjsiq6ingBz8b0RwvZ_GUSk';
+
+let token1;
+let token;
 const updatedJimmy = {
   name: "Jimmy Manzi",
   birthdate: "12/22/2019",
@@ -201,4 +204,44 @@ describe('running profile route tests', () => {
     result.should.have.status(400);
     result.body.should.have.property('error');
   });
+});
+
+describe('remember profile test', () => {
+  it('Travel administrator login request', async () => {
+    const res = await chai
+      .request(index)
+      .post('/api/auth/signin')
+      .send({ email: 'dummy3@email.rw', password: '123456789' });
+    token1 = res.body.data.token;
+    res.should.have.status(200);
+    res.body.should.be.an('object');
+  });
+  it('Travel administrator login request', async () => {
+    const res = await chai
+      .request(index)
+      .post('/api/auth/signin')
+      .send({ email: 'nigorjeanluc@gmail.com', password: 'secret123' });
+    token = res.body.data.token;
+    res.should.have.status(200);
+    res.body.should.be.an('object');
+  });
+  it('user should be able to set if whether s/he wants his/her profile to be remembered on his next travel equest initiation', async () => {
+    const result = await chai
+      .request(index)
+      .post('/api/profile/rememberMe/true')
+      .send()
+      .set('token', token1);
+    result.should.have.status(200);
+    result.body.should.have.property('message', 'your profile will be remembered on your next request initiation');
+  });
+  it('user should be able to set whether they do not want their profile  to be remembered on their next travel equest initiation',
+    async () => {
+      const result = await chai
+        .request(index)
+        .post('/api/profile/rememberMe/false')
+        .send()
+        .set('token', token);
+      result.should.have.status(200);
+      result.body.should.have.property('message', 'your profile will not be remembered on your next request initiation');
+    });
 });

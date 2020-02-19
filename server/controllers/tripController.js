@@ -18,6 +18,8 @@ class TripController {
     const myuserId = req.user.id;
     const status1 = 'Pending';
     const newTrip = {
+      name: body.name,
+      passportId: body.passportId,
       tripType: body.tripType,
       from: body.from,
       to: body.to,

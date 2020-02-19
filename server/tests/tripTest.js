@@ -9,13 +9,19 @@ import {
   incoloacationWayTrip,
   incoAccommodationWayTrip,
   twoWayTrip,
-  twoWayTripMultipleCity
+  twoWayTripMultipleCity,
+  rememberTrip2,
+  rememberTrip
 } from './mochData/trips';
 import usersTester from './mochData/users';
 
 chai.use(chaiHttp);
+chai.should();
+
 const router = () => chai.request(app);
 
+let tokenTrue;
+let tokenFalse;
 let mytoken;
 
 describe('Test for create one way trip endpoint', () => {
@@ -174,4 +180,43 @@ describe('Test for Trip Stats endpoint', () => {
       expect(res.body.data).to.contain.keys('lastDays', 'lastWeeks', 'lastWMonths', 'dateRange');
     })
   );
+});
+
+describe('remembered profile tests', () => {
+  it('Travel administrator login request', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/auth/signin')
+      .send({ email: 'dummy2@email.rw', password: '123456789' });
+    tokenTrue = res.body.data.token;
+    res.should.have.status(200);
+    res.body.should.be.an('object');
+  });
+  it('Travel administrator login request', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/auth/signin')
+      .send({ email: 'nigorjeanluc@gmail.com', password: 'secret123' });
+    tokenFalse = res.body.data.token;
+    res.should.have.status(200);
+    res.body.should.be.an('object');
+  });
+  it(' profile of user should be remembered on the next request initiation ', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/trip')
+      .set('token', tokenTrue)
+      .send(rememberTrip2);
+    res.should.have.status(201);
+    res.body.should.be.an('object');
+  });
+  it('user should be able to create a trip when rememberMe is false', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/trip')
+      .set('token', tokenFalse)
+      .send(rememberTrip);
+    res.should.have.status(201);
+    res.body.should.be.an('object');
+  });
 });

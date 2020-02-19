@@ -73,6 +73,8 @@ class TripHelpers {
     }, {
       fields: [
         'userId',
+        'name',
+        'passportId',
         'tripType',
         'from',
         'to',

@@ -671,7 +671,47 @@
           }
         }
       }
-    }
+    },
+    "/profile/rememberMe/:state": {
+      "post": {
+        "description": "A user should be able to set their profile info to be remembered or not on their next travel request",
+        "summary": "remember a use's profile",
+        "tags": [
+          "Remember profile"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [{
+            "name": "token",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": ""
+          },
+          {
+            "in": "path",
+            "name": "state",
+            "type": "string",
+            "description": "remember or not value"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "your profile will be remembered on your next request initiation"
+          },
+          "404": {
+            "description": "cannot remember profle without data"
+          },
+          "401": {
+            "description": "Already logged out. Sign in and try again. / User not recognised. Please create account and try again."
+          },
+          "400": {
+            "description": "Wrong parameter, please provide true or false as parameters. / Malformed/ Incorrect security token ! Check token and try again."
+          }
+        }
+      }
+    } 
   },
   "definitions": {
     "Signup": {

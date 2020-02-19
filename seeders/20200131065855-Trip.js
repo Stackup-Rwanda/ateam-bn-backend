@@ -1,5 +1,7 @@
 const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
   {
+    name: 'john',
+    passportId: 'PC234567',
     userId: 1,
     tripType: 'One-way',
     from: 1,
@@ -13,19 +15,23 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
     updatedAt: new Date()
   },
   {
+    name: 'john',
+    passportId: 'PC234567',
     userId: 2,
     tripType: 'One-way',
     from: 1,
     to: [2, 1],
     date: new Date(),
     returnDate: null,
-    reasons: 'being a mannager',
+    reasons: 'visiting hawai',
     accommodationId: 1,
     status: 'Pending',
     createdAt: new Date(),
     updatedAt: new Date()
   },
   {
+    name: 'paul',
+    passportId: 'PC234567',
     userId: 1,
     tripType: 'One-way',
     from: 1,
@@ -39,6 +45,8 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
     updatedAt: new Date()
   },
   {
+    name: 'john',
+    passportId: 'PC234567',
     userId: 4,
     tripType: 'One-way',
     from: 1,
@@ -52,6 +60,8 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
     updatedAt: new Date()
   },
   {
+    name: 'john',
+    passportId: 'PC234567',
     userId: 1,
     tripType: 'One-way',
     from: 1,
@@ -65,6 +75,8 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
     updatedAt: new Date()
   },
   {
+    name: 'john',
+    passportId: 'PC234567',
     userId: 2,
     tripType: 'One-way',
     from: 1,
@@ -78,6 +90,8 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
     updatedAt: new Date()
   },
   {
+    name: 'john',
+    passportId: 'PC234567',
     userId: 2,
     tripType: 'One-way',
     from: 1,
@@ -85,6 +99,21 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
     date: new Date(),
     returnDate: null,
     reasons: 'being a mannager',
+    accommodationId: 1,
+    status: 'Pending',
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    name: 'john',
+    passportId: 'PC234567',
+    userId: 3,
+    tripType: 'One-way',
+    from: 1,
+    to: [2, 1],
+    date: new Date(),
+    returnDate: null,
+    reasons: 'visiting hawai',
     accommodationId: 1,
     status: 'Pending',
     createdAt: new Date(),

@@ -27,6 +27,7 @@ class AuthController {
     }
     req.body.role = 'Requester';
     req.body.isVerified = false;
+    req.body.rememberMe = false;
     const {
       username, email, role, isVerified, createdAt
     } = req.body;
@@ -41,7 +42,6 @@ class AuthController {
       }
     });
   }
-
 
   /**
    * This method handle the signup request.

@@ -8,6 +8,7 @@ export default [
     birthdate: '2002-07-02',
     preferredLanguage: 'French',
     preferredCurrency: 'Dollars',
+    rememberMe: 'false',
     location: 'Kibagabaga',
     role: 'Architect',
     department: 'Construction',
@@ -21,6 +22,7 @@ export default [
     birthdate: new Date(),
     preferredLanguage: 'French',
     preferredCurrency: 'Euro',
+    rememberMe: 'false',
     location: 'Paris',
     role: 'Broker',
     department: 'Cleaner',
@@ -35,6 +37,7 @@ export default [
     preferredLanguage: 'French',
     preferredCurrency: 'Dollars',
     location: 'Kibagabaga',
+    rememberMe: 'false',
     role: 'Architect',
     department: 'Construction',
     lineManager: '4'

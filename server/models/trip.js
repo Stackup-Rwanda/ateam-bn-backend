@@ -4,6 +4,14 @@ const tripDefinition = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    passportId: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     tripType: {
       type: DataTypes.STRING,
       allowNull: false,
