@@ -10,7 +10,6 @@ import {
   incoAccommodationWayTrip,
   twoWayTrip,
   twoWayTripMultipleCity,
-  rememberTrip2,
   rememberTrip
 } from './mochData/trips';
 import usersTester from './mochData/users';
@@ -206,7 +205,8 @@ describe('remembered profile tests', () => {
       .request(app)
       .post('/api/trip')
       .set('token', tokenTrue)
-      .send(rememberTrip2);
+      .send(rememberTrip);
+    console.log(res.body);
     res.should.have.status(201);
     res.body.should.be.an('object');
   });

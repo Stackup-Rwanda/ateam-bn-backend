@@ -51,7 +51,7 @@ const sendmail = async (email, name) => {
     'Welcome, this is Barefoot Nomad',
     'Please confirm your email',
     'Confirm email',
-    `https://ateam-bn-backend-staging.herokuapp.com/user/${email}/confirm`,
+    `https://ateam-bn-backend-staging.herokuapp.com/api/user/${email}/confirm`,
     'Barefoot Nomad Confirmation mail',
     `${name}Welcome to Barefoot nomad, please confirm your mail to get started`
   );
