@@ -10,6 +10,12 @@ const up = (queryInterface) => queryInterface.bulkInsert('Places', [{
   city: 'new york',
   createdAt: new Date(),
   updatedAt: new Date()
+}, {
+  name: 'paris branch',
+  country: 'France',
+  city: 'paris',
+  createdAt: new Date(),
+  updatedAt: new Date()
 }]);
 
 const down = (queryInterface) => queryInterface.bulkDelete('Places', null, {});

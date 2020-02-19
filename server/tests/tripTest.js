@@ -7,7 +7,9 @@ import {
   incopreteWayTrip,
   incoDateWayTrip,
   incoloacationWayTrip,
-  incoAccommodationWayTrip
+  incoAccommodationWayTrip,
+  twoWayTrip,
+  twoWayTripMultipleCity
 } from './mochData/trips';
 import usersTester from './mochData/users';
 
@@ -97,6 +99,79 @@ describe('Test for create one way trip endpoint', () => {
       expect(res.body.status).to.equal(422);
       expect(res.body).to.be.an('object');
       expect(res.body.error).to.be.a('string');
+    })
+  );
+  it(
+    'should create a new one way trip',
+    mochaAsync(async () => {
+      const res = await router()
+        .post('/api/trip')
+        .set('token', mytoken)
+        .send(twoWayTrip);
+      expect(res.body.status).to.equal(201);
+      expect(res.body).to.be.an('object');
+      expect(res.body.message).to.be.a('string');
+    })
+  );
+  it(
+    'should create a new one way trip',
+    mochaAsync(async () => {
+      const res = await router()
+        .post('/api/trip')
+        .set('token', mytoken)
+        .send(twoWayTripMultipleCity);
+      expect(res.body.status).to.equal(201);
+      expect(res.body).to.be.an('object');
+      expect(res.body.message).to.be.a('string');
+    })
+  );
+});
+
+describe('Test for Trip Stats endpoint', () => {
+  it(
+    'should get all trip stats',
+    mochaAsync(async () => {
+      const res = await router()
+        .post('/api/trip/stats')
+        .set('token', mytoken);
+      expect(res.body.status).to.equal(200);
+      expect(res.body).to.be.an('object');
+    })
+  );
+  it(
+    'should get error on trip stats when wrong fields are provided',
+    mochaAsync(async () => {
+      const res = await router()
+        .post('/api/trip/stats')
+        .set('token', mytoken)
+        .send({ myend: '2020-01-20', mystart: '2020-01-20' });
+      expect(res.body.status).to.equal(422);
+      expect(res.body).to.be.an('object');
+      expect(res.body.error).to.be.a('string');
+    })
+  );
+  it(
+    'should get error on trip stats when wrong date range',
+    mochaAsync(async () => {
+      const res = await router()
+        .post('/api/trip/stats')
+        .set('token', mytoken)
+        .send({ endDate: '2020-01-20', startDate: '2020-01-25' });
+      expect(res.body.status).to.equal(422);
+      expect(res.body).to.be.an('object');
+      expect(res.body.error).to.be.a('string');
+    })
+  );
+  it(
+    'should get trip stats with 4 element in the data',
+    mochaAsync(async () => {
+      const res = await router()
+        .post('/api/trip/stats')
+        .set('token', mytoken)
+        .send({ endDate: '2020-01-20', startDate: '2020-01-01' });
+      expect(res.body.status).to.equal(200);
+      expect(res.body).to.be.an('object');
+      expect(res.body.data).to.contain.keys('lastDays', 'lastWeeks', 'lastWMonths', 'dateRange');
     })
   );
 });

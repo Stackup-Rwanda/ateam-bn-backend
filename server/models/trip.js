@@ -54,6 +54,11 @@ const tripDefinition = (sequelize, DataTypes) => {
       as: 'Accommodations',
       onDelete: 'CASCADE'
     });
+    Trip.hasMany(models.Comment, {
+      foreignKey: 'tripId',
+      as: 'Comments',
+      onDelete: 'CASCADE',
+    });
   };
   return Trip;
 };

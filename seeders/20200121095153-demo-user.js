@@ -86,7 +86,74 @@ const dummy5 = {
   createdAt: new Date(),
   updatedAt: new Date()
 };
-
+const dummy6jajaManager = {
+  name: 'Dummy6',
+  gender: 'Male',
+  email: 'jajajaden01@gmail.com',
+  username: 'dummy6jajaManager',
+  password: Hasher.hashPassword('123456789'),
+  birthdate: new Date(),
+  preferredLanguage: 'French',
+  preferredCurrency: 'Euro',
+  locationId: 1,
+  role: 'Manager',
+  department: 'Cleaner',
+  lineManager: 0,
+  isVerified: true,
+  createdAt: new Date(),
+  updatedAt: new Date()
+};
+const dummy7jajaManager = {
+  name: 'Dummy7',
+  gender: 'Male',
+  email: 'dummy7jaja@email.rw',
+  username: 'dummy7jajaManager',
+  password: Hasher.hashPassword('123456789'),
+  birthdate: new Date(),
+  preferredLanguage: 'French',
+  preferredCurrency: 'Euro',
+  locationId: 1,
+  role: 'Manager',
+  department: 'Cleaner',
+  lineManager: 0,
+  isVerified: true,
+  createdAt: new Date(),
+  updatedAt: new Date()
+};
+const dummy8jajaRequester = {
+  name: 'Dummy8',
+  gender: 'Male',
+  email: 'dummy8jaja@email.rw',
+  username: 'dummy8jajaRequester',
+  password: Hasher.hashPassword('123456789'),
+  birthdate: new Date(),
+  preferredLanguage: 'French',
+  preferredCurrency: 'Euro',
+  locationId: 1,
+  role: 'Requester',
+  department: 'Cleaner',
+  lineManager: 6,
+  isVerified: true,
+  createdAt: new Date(),
+  updatedAt: new Date()
+};
+const dummy9jajaRequester = {
+  name: 'Dummy9',
+  gender: 'Male',
+  email: 'dummy9jaja@email.rw',
+  username: 'dummy9jajaRequester',
+  password: Hasher.hashPassword('123456789'),
+  birthdate: new Date(),
+  preferredLanguage: 'French',
+  preferredCurrency: 'Euro',
+  locationId: 1,
+  role: 'Requester',
+  department: 'Cleaner',
+  lineManager: 6,
+  isVerified: true,
+  createdAt: new Date(),
+  updatedAt: new Date()
+};
 const manzi = {
   name: 'Butirigitwa Manzi',
   gender: 'Male',
@@ -121,7 +188,7 @@ const jimmyKay = {
   createdAt: new Date(),
   updatedAt: new Date()
 };
-const up = (queryInterface) => queryInterface.bulkInsert('Users', [dummy1, dummy2, dummy3, dummy4, dummy5, manzi, jimmyKay]);
+const up = (queryInterface) => queryInterface.bulkInsert('Users', [dummy1, dummy2, dummy3, dummy4, dummy5, dummy6jajaManager, dummy7jajaManager, dummy8jajaRequester, dummy9jajaRequester, manzi, jimmyKay]);
 
 const down = (queryInterface) => queryInterface.bulkDelete('Users', null, {});
 
