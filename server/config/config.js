@@ -7,7 +7,8 @@ const generateCredentials = (database, host) => ({
   password: process.env.DB_PASSWORD,
   database,
   host,
-  dialect: 'postgres'
+  dialect: 'postgres',
+  logging: false
 });
 
 const development = generateCredentials(process.env.DEVELOP_DB_NAME, process.env.HOST);

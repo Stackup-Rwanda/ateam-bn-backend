@@ -1,7 +1,7 @@
 import models from '../models';
 
 const {
-  Accommodations
+  Accommodations, feedbacks
 } = models;
 
 /**
@@ -54,6 +54,26 @@ class AccommodationHelpers {
     });
 
     return acceptedAccommodation;
+  }
+
+  /**
+     * Saves a feedback in the DB.
+     * @param {object} feedback The request sent by a user.
+     * @returns {object} Accommodation data.
+     */
+  static async saveFeedback(feedback) {
+    const accommodationFeedback = await feedbacks.create({
+      ...feedback,
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }, {
+      fields: [
+        'userId',
+        'accommodationId',
+        'feedback'
+      ]
+    });
+    return accommodationFeedback;
   }
 }
 

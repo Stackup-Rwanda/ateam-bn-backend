@@ -37,6 +37,16 @@ const userDefinition = (sequelize, DataTypes) => {
       as: 'Notifications',
       onDelete: 'CASCADE'
     });
+    User.hasMany(models.Feedbacks, {
+      foreignKey: 'userId',
+      as: 'Feedbacks',
+      onDelete: 'CASCADE',
+    });
+    User.hasMany(models.Comment, {
+      foreignKey: 'userId',
+      as: 'Comments',
+      onDelete: 'CASCADE',
+    });
   };
 
   User.associate = (models) => {
