@@ -9,7 +9,7 @@
       "email": "the-a-team@gmail.com"
     }
   },
-  "host": "ateam-bn-backend-staging.herokuapp.com",
+  "host": "https://ateam-bn-backend-staging.herokuapp.com",
   "basePath": "/api",
   "tags": [
     {
@@ -516,6 +516,54 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/approvalRequest"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "parsing a trip id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "This trip request was successfully approved"
+          },
+          "400": {
+            "description": "Please provide a authentic request"
+          },
+          "401": {
+            "description": "Please provide a token first"
+          },
+          "403": {
+            "description": "You are not authorized to approve this request"
+          }
+        }
+      }
+    },
+    "/request/{id}/reject": {
+      "patch": {
+        "tags": [
+          "Reject Trip Request"
+        ],
+        "summary": "Manager can reject a trip request",
+        "description": "Manager can reject trip request done by users under his/her authority",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Reject a request: update the status of the trip",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/rejectRequest"
             }
           },
           {
@@ -1098,6 +1146,51 @@
           }
         }
       }
+    },
+    "/ratings/{id}": {
+      "patch": {
+        "tags": [
+          "Rate an accommodation"
+        ],
+        "summary": "User can rate an accommodation",
+        "description": "User can rate an accommodation according to the hospitality obtained from there",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "to rate an accommodation, the user send stars varying from 1 to 5 stars",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/rateAccommodation"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": ""
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "parsing a accommodation id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "You have successfully rated the accommodation, the rate is decimal now"
+          },
+          "400": {
+            "description": "Please provide a authentic accomodation"
+          },
+          "401": {
+            "description": "Please provide a token first"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1142,8 +1235,8 @@
         "preferredCurrency": {
           "type": "string"
         },
-        "location": {
-          "type": "string"
+        "locationId": {
+          "type": "integer"
         },
         "role": {
           "type": "string"
@@ -1152,7 +1245,7 @@
           "type": "string"
         },
         "lineManager": {
-          "type": "string"
+          "type": "integer"
         }
       }
     },
@@ -1274,6 +1367,17 @@
         }
       }
     },
+    "rejectRequest": {
+      "type": "object",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "status": {
+          "type": "string"
+        }
+      }
+    },
     "TripCreation": {
       "title": "create a trip",
       "example": {
@@ -1359,6 +1463,17 @@
       "required": [
         "viewed"
       ]
+    },
+    "rateAccommodation": {
+      "type": "object",
+      "required": [
+        "stars"
+      ],
+      "properties": {
+        "stars": {
+          "type": "integer"
+        }
+      }
     }
   }
 }

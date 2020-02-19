@@ -31,7 +31,7 @@ const dummy2 = {
   role: 'Super Administrator',
   rememberMe: true,
   department: 'Cleaner',
-  lineManager: 5,
+  lineManager: 3,
   isVerified: true,
   createdAt: '04/05/2020',
   updatedAt: '02/03/2010'
@@ -86,7 +86,7 @@ const dummy5 = {
   role: 'Travel Administrator',
   rememberMe: false,
   department: 'Cleaner',
-  lineManager: 5,
+  lineManager: 3,
   isVerified: true,
   createdAt: new Date(),
   updatedAt: new Date()
@@ -103,7 +103,7 @@ const dummy6jajaManager = {
   locationId: 1,
   role: 'Manager',
   department: 'Cleaner',
-  lineManager: 0,
+  lineManager: 3,
   isVerified: true,
   createdAt: new Date(),
   updatedAt: new Date()
@@ -120,7 +120,7 @@ const dummy7jajaManager = {
   locationId: 1,
   role: 'Manager',
   department: 'Cleaner',
-  lineManager: 0,
+  lineManager: 3,
   isVerified: true,
   createdAt: new Date(),
   updatedAt: new Date()
@@ -137,7 +137,7 @@ const dummy8jajaRequester = {
   locationId: 1,
   role: 'Requester',
   department: 'Cleaner',
-  lineManager: 6,
+  lineManager: 3,
   isVerified: true,
   createdAt: new Date(),
   updatedAt: new Date()
@@ -154,7 +154,7 @@ const dummy9jajaRequester = {
   locationId: 1,
   role: 'Requester',
   department: 'Cleaner',
-  lineManager: 6,
+  lineManager: 3,
   isVerified: true,
   createdAt: new Date(),
   updatedAt: new Date()
