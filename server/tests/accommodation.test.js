@@ -8,6 +8,7 @@ chai.use(chaiHttp);
 chai.should();
 
 let travelAdmniToken;
+let tokenTrue;
 
 describe('Accommodation Tests', () => {
   it('Travel administrator login request', async () => {
@@ -71,5 +72,41 @@ describe('Accommodation Tests', () => {
       .set('token', travelAdmniToken);
     res.should.have.status(415);
     res.body.should.have.property('error');
+  });
+  it('Travel administrator login request', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/auth/signin')
+      .send({ email: 'dummy2@email.rw', password: '123456789' });
+    tokenTrue = res.body.data.token;
+    res.should.have.status(200);
+    res.body.should.be.an('object');
+  });
+  it('user should be able to give feedback on accommodation they have been to.', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/accommodation/feedback/1')
+      .set('token', tokenTrue)
+      .send('good room service');
+    res.should.have.status(201);
+    res.body.should.be.an('object');
+  });
+  it('an message should be provided to the user if their feedback was not savedaccommodationId.', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/accommodation/feedback/l')
+      .set('token', tokenTrue)
+      .send('good room service');
+    res.should.have.status(400);
+    res.body.should.be.an('object');
+  });
+  it('an message should be provided to the user if their feedback was not saved(userId).', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/accommodation/feedback/1')
+      .set('token', tokenTrue)
+      .send({ feedback: '%$one two three $%' });
+    res.should.have.status(500);
+    res.body.should.be.an('object');
   });
 });

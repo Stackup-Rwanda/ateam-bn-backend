@@ -1,8 +1,7 @@
+import { Op } from 'sequelize';
 import models from '../models';
 
-const {
-  Trip, User
-} = models;
+const { Trip, User } = models;
 
 /**
  * This class contains
@@ -20,33 +19,52 @@ class TripHelpers {
   static async tripExists(tripId, { id, role }) {
     const trip = await Trip.findOne({
       where: { id: tripId },
-      include: [{
-        model: User,
-        as: 'Users',
-        attributes: ['id', 'role', 'lineManager'],
-      }]
+      include: [
+        {
+          model: User,
+          as: 'Users',
+          attributes: ['id', 'role', 'lineManager']
+        }
+      ]
     });
 
     if (!trip) return false;
 
     const { lineManager } = trip.Users;
     const userId = trip.Users.id;
-    if ((userId === id) || (role === 'Manager' && lineManager === id)) return true;
+    if (userId === id || (role === 'Manager' && lineManager === id)) return true;
 
     return 'Forbidden';
   }
 
   /**
-     * Finds a trip by reasons and date.
-     * @param {string} trip a trip data.
-     * @returns {object} trip data.
-     */
+   * Finds a trip by status of trip and date.
+   * @param {integer} id The request sent by a user.
+   * @param {integer} accomId The request sent by a user.
+   * @returns {object} Accommodation data.
+   */
+  static async findTrip(id, accomId) {
+    const foundTrip = await Trip.findOne({
+      where: {
+        userId: id,
+        accommodationId: accomId,
+        status: 'Approved',
+        date: {
+          [Op.lt]: new Date()
+        }
+      }
+    });
+    return foundTrip;
+  }
+
+  /**
+   * Finds a trip by reasons and date.
+   * @param {string} trip a trip data.
+   * @returns {object} trip data.
+   */
   static async reasonsDate(trip) {
     const {
-      userId,
-      reasons,
-      to,
-      date
+      userId, reasons, to, date
     } = trip;
     const newDate = new Date(date);
     const tripExist = await Trip.findOne({
@@ -61,32 +79,35 @@ class TripHelpers {
   }
 
   /**
-     * Saves a trip in the DB.
-     * @param {object} trip The request sent by a user.
-     * @returns {object} trip data.
-     */
+   * Saves a trip in the DB.
+   * @param {object} trip The request sent by a user.
+   * @returns {object} trip data.
+   */
   static async saveTrip(trip) {
-    const acceptedTrip = await Trip.create({
-      ...trip,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }, {
-      fields: [
-        'userId',
-        'name',
-        'passportId',
-        'tripType',
-        'from',
-        'to',
-        'date',
-        'reasons',
-        'accommodationId',
-        'returnDate',
-        'status',
-        'createAt',
-        'updatedAt'
-      ]
-    });
+    const acceptedTrip = await Trip.create(
+      {
+        ...trip,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      {
+        fields: [
+          'userId',
+          'name',
+          'passportId',
+          'tripType',
+          'from',
+          'to',
+          'date',
+          'reasons',
+          'accommodationId',
+          'returnDate',
+          'status',
+          'createAt',
+          'updatedAt'
+        ]
+      }
+    );
 
     return acceptedTrip;
   }

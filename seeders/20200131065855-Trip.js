@@ -25,7 +25,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
     returnDate: null,
     reasons: 'visiting hawai',
     accommodationId: 1,
-    status: 'Pending',
+    status: 'Approved',
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -81,11 +81,11 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
     tripType: 'One-way',
     from: 1,
     to: [2, 1],
-    date: new Date(),
+    date: '2020-02-21',
     returnDate: null,
     reasons: 'being a mannager',
     accommodationId: 1,
-    status: 'Pending',
+    status: 'Approved',
     createdAt: new Date(),
     updatedAt: new Date()
   },
