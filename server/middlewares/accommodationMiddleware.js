@@ -1,9 +1,32 @@
+import models from '../models';
 import tripHelper from '../helpers/tripHelpers';
 
+const { Accommodations } = models;
+
 /**
- * This class contains methods that handles the feedback on accommodation
+ * This class contains
+ * all methods required to validate feedback and reaction about accommodation
+ * the Accommodation data
  */
-class allowFeedback {
+class accommodationMiddleware {
+  /**
+   * This method validates the accommodation Id.
+   * @param {object} req The user's request.
+   * @param {object} res The response.
+   * @param {object} next cal.
+   * @returns {object} The message.
+   */
+  static async validateAccommodationId(req, res, next) {
+    const foundAccommodation = await Accommodations.findOne({ where: { id: req.params.accommodationId } });
+    if (!foundAccommodation) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Accommodation does not exist'
+      });
+    }
+    next();
+  }
+
   /**
    * This method handles the feedback on accommodation request.
    * @param {object} req The user's request.
@@ -40,5 +63,4 @@ class allowFeedback {
     next();
   }
 }
-
-export default allowFeedback;
+export default accommodationMiddleware;

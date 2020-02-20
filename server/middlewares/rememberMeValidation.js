@@ -8,7 +8,7 @@ const { Trip } = models;
  */
 class rememberMeValidation {
   /**
-   * This method handle the signup request.
+   * This method handles the travel profile request.
    * @param {object} req The user's request.
    * @param {object} res The response.
    * @param {object} next cal.
