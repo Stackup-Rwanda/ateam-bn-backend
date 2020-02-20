@@ -23,9 +23,9 @@ class rememberMeValidation {
         },
         order: [['createdAt', 'DESC']]
       });
-      req.body.name = foundUsers[0].dataValues.name;
-      req.body.reasons = foundUsers[0].dataValues.reasons;
-      req.body.passportId = foundUsers[0].dataValues.passportId;
+      req.body.name = foundUsers[0].name;
+      req.body.reasons = foundUsers[0].reasons;
+      req.body.passportId = foundUsers[0].passportId;
       next();
     } else {
       next();

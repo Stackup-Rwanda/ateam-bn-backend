@@ -27,10 +27,6 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Notificati
   }
 });
 
-
 const down = (queryInterface) => queryInterface.dropTable('Notifications');
 
-export {
-  up,
-  down
-};
+export { up, down };
