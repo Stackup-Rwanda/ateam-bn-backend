@@ -10,12 +10,13 @@ v2.config({
 });
 
 const uploadToCloudinary = async (image) => {
+  console.log(image);
   try {
     const result = await v2.uploader.upload(image.path);
     const { url } = result;
     return url;
   } catch (error) {
-    const customError = `${error.message} '${image.originalFilename}'`;
+    const customError = `${error} '${image.originalFilename}'`;
     throw customError;
   }
 };

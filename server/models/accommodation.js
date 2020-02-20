@@ -42,6 +42,11 @@ const accommodationDefinition = (sequelize, DataTypes) => {
       as: 'places',
       onDelete: 'CASCADE'
     });
+    Accommodation.hasMany(models.Room, {
+      foreignKey: 'accommodationId',
+      as: 'Rooms',
+      onDelete: 'CASCADE',
+    });
   };
   Accommodation.associate = (models) => {
     Accommodation.hasMany(models.feedbacks, {

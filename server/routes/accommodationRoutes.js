@@ -5,6 +5,12 @@ import isTokenValid from '../middlewares/tokenValidator';
 import isTravelAdmin from '../middlewares/isTravelAdmin';
 import check from '../middlewares/accommodationFound';
 import validateAccommodation from '../middlewares/validateAccommodations';
+import { createRoom, retrieveRooms } from '../controllers/roomController';
+import asyncErrorHandler from '../helpers/asyncErrorHandler';
+import { validateImage, ValidateBody } from '../middlewares/roomValidation';
+import isManager from '../middlewares/isManager';
+import bookingRoom from '../controllers/bookingContoller';
+import { isBooked, ValidateBooking, dateChecker } from '../middlewares/bookingValidation';
 
 const router = Router();
 const multipart = multiparty();
@@ -28,5 +34,8 @@ router.patch(
   multipart,
   validateAccommodation,
   accommodation.editAccommodation
-);
+)
+  .post('/room', isTokenValid, isManager, multipart, ValidateBody("room", "body"), validateImage, asyncErrorHandler(createRoom))
+  .get('/room', isTokenValid, asyncErrorHandler(retrieveRooms))
+  .post('/room/book', isTokenValid, ValidateBooking("booking", "body"), dateChecker, isBooked, asyncErrorHandler(bookingRoom));
 export default router;
