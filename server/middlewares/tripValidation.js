@@ -60,7 +60,7 @@ export const tripChecker = async (req, res, next) => {
   const placeExistsFrom = await placeHelpers.placeExist(body.from);
   const placeExistsTo = await placeHelpers.placeExist(body.to);
   const isValideDate = dateValidator(body.date);
-  const isRtnDate = returnDate({ Rdate: body.returnDate, Sdate: body.date });
+  const isRtnDate = returnDate(body.returnDate, body.date);
   const accommodation = {
     id: body.accommodationId,
     locationId: placesIds
@@ -96,7 +96,7 @@ export const tripChecker = async (req, res, next) => {
       error: 'This date is in the past, please choose a future date.'
     });
   }
-  if (tripExists) {
+  if (tripExists && req.method !== 'PUT') {
     return res.status(409).json({
       status: 409,
       error: 'This trip already exists, use another reasons or date.'

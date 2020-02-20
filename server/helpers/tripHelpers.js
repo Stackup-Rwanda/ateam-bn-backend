@@ -111,6 +111,36 @@ class TripHelpers {
 
     return acceptedTrip;
   }
+
+  /**
+     * Updates a trip in the DB.
+     * @param {object} trip The request sent by a user.
+     * @param {object} tripId id of the trip to be updated.
+     * @returns {object} udpated trip data.
+  */
+  static async updateTrip(trip, tripId) {
+    trip.updatedAt = new Date();
+    try {
+      const updated = await Trip.update(
+        {
+          tripType: trip.tripType,
+          from: trip.from,
+          to: trip.to,
+          date: trip.date,
+          returnDate: trip.returnDate,
+          reasons: trip.reasons,
+          accommodationId: trip.accommodationId,
+          status: trip.status
+        },
+        {
+          where: { id: tripId }
+        }
+      );
+      return updated;
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 export default TripHelpers;

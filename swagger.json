@@ -548,14 +548,22 @@
         }
       }
     },
-    "/trip/": {
+    "/trip": {
       "post": {
         "tags": [
           "Trip"
         ],
         "summary": "Trip creation",
         "description": "User can create a trip (One Way Trip, Return Trip and choose Multiple City on a trip)",
-        "parameters": [{
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token identify that a user has signed in"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "data needed to create a trip",
@@ -563,13 +571,52 @@
             "schema": {
               "$ref": "#/definitions/TripCreation"
             }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Trip was created successfully."
           },
+          "422": {
+            "description": "bad data"
+          },
+          "409": {
+            "description": "This trip already exists, use another reasons or date."
+          }
+        }
+      }
+    },
+    "/trip/{id}":
+    {
+      "put": {
+        "tags": [
+          "Trip"
+        ],
+        "summary": "Trip creation",
+        "description": "User can update a trip request if it is still open/Pending",
+        "parameters": [
           {
             "name": "token",
             "in": "header",
             "required": true,
             "type": "string",
             "description": "token identify that a user has signed in"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "description": "id of the trip request"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "data needed to create a trip",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TripCreation"
+            }
           }
         ],
         "responses": {
@@ -1202,6 +1249,17 @@
     },
     "TripCreation": {
       "title": "create a trip",
+      "example": {
+        "name": "Jay Lenno",
+        "passportId": "PC123487",
+        "tripType": "One-way",
+         "from": 1,
+         "to": [2, 1],
+         "date": "2050-09-13",
+         "returnDate": "2050-10-30",
+         "reasons": "hound issues",
+         "accommodationId": 2
+      },
       "type": "object",
       "required": [
         "tripType",
@@ -1233,15 +1291,6 @@
         "accommodationId": {
           "type": "integer"
         }
-      },
-      "example": {
-        "tripType": "Return",
-        "from": 1,
-        "to": [2,1],
-        "date": "2020-02-20",
-        "reasons": "my reason of this trip",
-        "returnDate": "2020-02-23",
-        "accommodationId": 1
       }
     },
     "createComment": {
