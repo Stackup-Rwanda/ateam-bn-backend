@@ -63,27 +63,24 @@ class TripController {
   }
 
   /**
-   * This method handle oneWayTrip request.
+   * This method handles all update_trip requests.
    * @param {object} req The user's request.
    * @param {object} res The response.
    * @returns {object} The status and some data of the trip.
    */
   static async editTrip(req, res) {
     const tripId = req.oldTrip.id;
-    const userId = req.user.id;
     const status = 'Pending';
     const {
-      tripType, from, to, date, reasons, accommodationId, returnDate
+      from, to, date, reasons, accommodationId, returnDate
     } = req.body;
     const cityNumber = to.length;
     let tripUpdate = {
-      tripType,
       from,
       to,
       date,
       reasons,
       accommodationId,
-      userId,
       status
     };
 
