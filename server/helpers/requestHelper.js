@@ -20,6 +20,17 @@ class RequestHelper {
 
   /**
    * Finds the request in the DB.
+   * @param {integer} accommodationId trip table's accommodation.
+   * @param {integer} userId trip table's user id value to be found.
+   * @returns {object} The notification's data.
+   */
+  static async findTripRequest(accommodationId, userId) {
+    const request = await Trip.findOne({ where: { accommodationId, userId } });
+    return request;
+  }
+
+  /**
+   * Finds the request in the DB.
    * @param {string} state notifications table field.
    * @param {string} id value to be found.
    * @returns {object} The notification's data.

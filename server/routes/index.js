@@ -7,6 +7,7 @@ import requestRoutes from './requestRoutes';
 import notificationRoute from './notificationRoute';
 import tripCommentRoutes from './tripCommentRoutes';
 import locationRoute from './locationRoute';
+import ratingRoutes from './ratingRoutes';
 
 const router = Router();
 
@@ -18,5 +19,6 @@ router.use(requestRoutes);
 router.use(notificationRoute);
 router.use(tripCommentRoutes);
 router.use(locationRoute);
+router.use(ratingRoutes);
 
 export default router;

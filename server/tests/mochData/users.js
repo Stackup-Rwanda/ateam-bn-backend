@@ -9,7 +9,7 @@ export default [
     preferredLanguage: 'French',
     preferredCurrency: 'Dollars',
     rememberMe: 'false',
-    location: 'Kibagabaga',
+    locationId: 1,
     role: 'Architect',
     department: 'Construction',
     lineManager: '1'
@@ -23,10 +23,10 @@ export default [
     preferredLanguage: 'French',
     preferredCurrency: 'Euro',
     rememberMe: 'false',
-    location: 'Paris',
+    locationId: 1,
     role: 'Broker',
     department: 'Cleaner',
-    lineManager: 'MrNobody'
+    lineManager: 3
   }, {
     name: 'Jaja Jaden',
     gender: 'Male',
@@ -36,11 +36,11 @@ export default [
     birthdate: '2002-07-02',
     preferredLanguage: 'French',
     preferredCurrency: 'Dollars',
-    location: 'Kibagabaga',
     rememberMe: 'false',
+    locationId: 1,
     role: 'Architect',
     department: 'Construction',
-    lineManager: '4'
+    lineManager: 3
   }, {
     password: 'abcd123456789',
     confirmPassword: 'abcd123456789',

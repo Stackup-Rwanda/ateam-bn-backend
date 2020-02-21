@@ -32,12 +32,24 @@ class AccommodationHelper {
           'cost',
           'highlights',
           'amenities',
+          'ratings',
           'createdAt',
           'updatedAt'
         ]
       }
     );
     return acceptedAccommodation;
+  }
+
+  /**
+     * Finds a Accommodation by reasons and date.
+   * @param {string} attr accommodations table field.
+   * @param {string} val value to be found.
+     * @returns {object} Accommodation data.
+     */
+  static async findAccommodation(attr, val) {
+    const AccommodationExist = await Accommodations.findOne({ where: { [attr]: val } });
+    return AccommodationExist;
   }
 }
 export default AccommodationHelper;
