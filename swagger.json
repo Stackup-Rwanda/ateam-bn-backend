@@ -941,18 +941,6 @@
           },
           {
             "in": "formData",
-            "name": "space",
-            "type": "string",
-            "description": "the space available in the accommodation"
-          },
-          {
-            "in": "formData",
-            "name": "cost",
-            "type": "string",
-            "description": "the cost of the accommodation"
-          },
-          {
-            "in": "formData",
             "name": "highlights",
             "type": "string",
             "description": "the highlights that happened"
@@ -982,9 +970,158 @@
             "headers": {}
           }
         }
+      },
+      "get": {
+        "description": "Travel Admin can view all accommodations",
+        "summary": "View all Accommodation",
+        "tags": ["Accommodation"],
+        "operationId": "ViewAccommodations",
+        "deprecated": false,
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "security token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all Accommodations",
+            "headers": {}
+          },
+          "401": {
+            "description": "You are not allowed to access this route",
+            "headers": {}
+          }
+        }
       }
     },
-    "/accomodation/react/:accommodationId": {
+    "/accommodation/{id}/edit": {
+      "patch": {
+        "description": "Travel Admin can edit an accommodation",
+        "summary": "Edit Accommodation",
+        "tags": ["Accommodation"],
+        "operationId": "EditAccommodation",
+        "deprecated": false,
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "security token"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "parsing an accommodation Id"
+          },
+          {
+            "in": "formData",
+            "name": "name",
+            "type": "string",
+            "description": "the name of the accommodation"
+          },
+          {
+            "in": "formData",
+            "name": "description",
+            "type": "string",
+            "description": "the description of the accommodation"
+          },
+          {
+            "in": "formData",
+            "name": "image",
+            "type": "file",
+            "description": "upload a picture"
+          },
+          {
+            "in": "formData",
+            "name": "locationId",
+            "type": "string",
+            "description": "the location of the accommodation"
+          },
+          {
+            "in": "formData",
+            "name": "geoLocation",
+            "type": "string",
+            "description": "the geoLocation of the accommodation"
+          },
+          {
+            "in": "formData",
+            "name": "highlights",
+            "type": "string",
+            "description": "the highlights that happened"
+          },
+          {
+            "in": "formData",
+            "name": "amenities",
+            "type": "string",
+            "description": "provide the amenities the accommodation provides"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Accommodation Successfully Updated",
+            "headers": {}
+          },
+          "400": {
+            "description": "Please select one or more pictures / token is malformed/invalid",
+            "headers": {}
+          },
+          "415": {
+            "description": "Please select the right type of image",
+            "headers": {}
+          },
+          "401": {
+            "description": "You are not allowed to access this route",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/accommodation/{id}/delete": {
+      "delete": {
+        "description": "Travel Admin can delete an accommodation",
+        "summary": "Delete Accommodation",
+        "tags": ["Accommodation"],
+        "operationId": "DeleteAccommodation",
+        "deprecated": false,
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "security token"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "parsing an accommodation Id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Accommodation Deleted Successfully",
+            "headers": {}
+          },
+          "401": {
+            "description": "You are not allowed to access this route",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/accomodation/react/{accommodationId}": {
       "post": {
         "tags": ["Accommodation"],
         "summary": "user react on accommodation",
@@ -1027,7 +1164,7 @@
         }
       }
     },
-    "/accommodation/feedback/:accommodationId": {
+    "/accommodation/feedback/{accommodationId}": {
       "post": {
         "tags": ["Accommodation"],
         "summary": "user give feedback on accommodation",
@@ -1534,16 +1671,16 @@
         }
       }
     },
-    "like/unlike accommodation": {
+    "accomodationReaction": {
       "type": "object",
       "required": ["reactionType"],
       "properties": {
-        "liked": {
+        "reactionType": {
           "type": "string"
         }
       }
     },
-    "give feedback on accommodation": {
+    "accomodationFeedback": {
       "type": "object",
       "required": ["feedback"],
       "properties": {

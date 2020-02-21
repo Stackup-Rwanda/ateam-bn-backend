@@ -13,24 +13,38 @@ dotenv.config();
 class Check {
   /**
    * This method handle the accommodation request.
+   * @param {object} id The notification's request.
    * @param {object} req The response.
-   *  @param {object} res The response.
+   * @returns {object} The status and some data of the accomodation.
+   */
+  static async NotificationFound(id, req) {
+    const exists = await Notification.findAll({
+      where: { id }
+    });
+    if (exists) {
+      req.oldNotification = exists;
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * This method handle the accommodation request.
+   * @param {object} req The notification's request.
+   * @param {object} res The response.
    * @param {object} next The response.
    * @returns {object} The status and some data of the accomodation.
    */
-  static async NotificationFound(req, res, next) {
-    const foundNotice = await Notification.findAll({
-      where: {
-        receiverId: req.user.id
+  static async CheckNotification(req, res, next) {
+    let { id } = req.params;
+    if (!Number.isNaN(Number(id))) {
+      id = parseInt(id, 10);
+      if (await Check.NotificationFound(id, req)) {
+        return next();
       }
-    });
-    if (foundNotice.length === 0) {
-      return res.status(404).json({
-        status: 404,
-        error: 'You dont have any notifications'
-      });
+      return res.status(404).json({ status: 404, error: `Notifications not found` });
     }
-    next();
+    return res.status(400).json({ status: 400, error: `malformed notification id ${id}` });
   }
 }
 export default Check;

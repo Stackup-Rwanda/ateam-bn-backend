@@ -3,7 +3,9 @@
 import accommodationHelper from '../helpers/accommodationHelper';
 import accommodationHelpers from '../helpers/accommodationHelpers';
 import picture from '../helpers/uploadImage';
+import models from '../models';
 
+const { Accommodations } = models;
 /**
  * This class contains all methods
  * required to handle
@@ -32,19 +34,17 @@ class AccommodationController {
           description,
           locationId,
           geoLocation,
-          space,
-          cost,
           highlights,
           amenities
         } = req.body;
+        const createdBy = req.user.id;
         const datas = await accommodationHelper.saveAccommodation({
+          createdBy,
           name,
           description,
           image,
           locationId,
           geoLocation,
-          space,
-          cost,
           highlights,
           amenities
         });
@@ -52,13 +52,12 @@ class AccommodationController {
           status: 201,
           message: 'Accommodation Successfully Supplied',
           data: {
+            createdBy: datas.createdBy,
             name: datas.name,
             description: datas.description,
             image: datas.image,
             locationId: datas.locationId,
             geoLocation: datas.geoLocation,
-            space: datas.space,
-            cost: datas.cost,
             highlights: datas.highlights,
             amenities: datas.amenities,
             createdAt: datas.createdAt,
@@ -76,6 +75,7 @@ class AccommodationController {
 
   /**
    * This method handles the feedback on accommodation.
+   * This method handle the accommodation request.
    * @param {object} req The accommodation's request.
    * @param {object} res The response.
    * @returns {object} The status and some data of the accomodation.
@@ -172,6 +172,117 @@ class AccommodationController {
       },
       message: 'reaction deleted'
     });
+  }
+
+  /**
+   * This method handles the reaction on accommodation.
+   * @param {object} req The accommodation's request.
+   * @param {object} res The response.
+   * @returns {object} The s reaction and some data of the accomodation.
+   */
+  static async viewAll(req, res) {
+    const foundAccommodation = await Accommodations.findAll();
+    if (foundAccommodation.length === 0) {
+      return res.status(404).json({
+        status: 404,
+        error: 'You dont have any Accommodations'
+      });
+    }
+    res.status(200).json({
+      status: 200,
+      data: foundAccommodation
+    });
+  }
+
+  /**
+   * This method handle the accommodation request.
+   * @param {object} req The accommodation's request.
+   * @param {object} res The response.
+   * @returns {object} The status and some data of the accomodation.
+   */
+  static async viewSpecific(req, res) {
+    const findSpecific = await Accommodations.findOne({
+      where: {
+        id: req.params.id
+      }
+    });
+    if (!findSpecific) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Accommodation not found'
+      });
+    }
+    res.status(200).json({
+      status: 200,
+      data: findSpecific
+    });
+  }
+
+  /**
+   * This method handle the accommodation request.
+   * @param {object} req The accommodation's request.
+   * @param {object} res The response.
+   * @returns {object} The status and some data of the accomodation.
+   */
+  static async DeleteOne(req, res) {
+    await Accommodations.destroy({ where: { id: req.params.id } }).then((id) => {
+      const status = id < 1 ? 404 : 200;
+      res.status(status).json({
+        status,
+        message: ` ${status === 404 ? 'No such accommodation found' : 'Accommodation Deleted Successfully'}`
+      });
+    });
+  }
+
+  /**
+   * This method handle the accommodation request.
+   * @param {object} req The accommodation's request.
+   * @param {object} res The response.
+   * @returns {object} The status and some data of the accomodation.
+   */
+  static async editAccommodation(req, res) {
+    try {
+      if (req.files && req.files.image) {
+        let image;
+        req.files.image.type || req.files.image.length
+          ? (image = await picture.uploader(req.files.image))
+          : res.status(400).json({ status: 400, error: 'Please select one or more pictures' });
+
+        !image || image.includes('null')
+          ? res.status(415).json({ status: 415, error: 'Please select the right type of image' })
+          : null;
+        const {
+          name,
+          description,
+          locationId,
+          geoLocation,
+          highlights,
+          amenities
+        } = req.body;
+        await Accommodations.update({
+          name,
+          description,
+          image,
+          locationId,
+          geoLocation,
+          highlights,
+          amenities
+        }, {
+          where: {
+            id: req.params.id
+          }
+        });
+        return res.status(200).json({
+          status: 200,
+          message: 'Accommodation Successfully Updated',
+        });
+      }
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        message: error.message
+      });
+    }
   }
 }
 export default AccommodationController;
