@@ -1,6 +1,7 @@
+import destination from '../helpers/destinationsHelper';
+import importQuery from '../helpers/authHelpers';
 import notification from '../helpers/notifications';
 import RequestHelper from '../helpers/requestHelper';
-import users from '../helpers/authHelpers';
 
 /**
  * This class contains all methods
@@ -24,12 +25,17 @@ class RequestController {
       });
     }
 
-    const user = await users.userExists('id', parseInt(requestExists.userId, 10));
-    const manager = await users.userExists('id', parseInt(req.userData.id, 10));
+    const user = await importQuery.userExists('id', parseInt(requestExists.userId, 10));
+    const manager = await importQuery.userExists('id', parseInt(req.userData.id, 10));
 
     if (user.lineManager === manager.id) {
       await RequestHelper.updateStatus(req.body.status, parseInt(req.params.id, 10));
       const trip = await RequestHelper.findRequest('id', parseInt(req.params.id, 10));
+      trip.to.map(async (placeId) => {
+        const location = await destination.findMatchLocations(placeId);
+        location.visitedtimes += 1;
+        await destination.updateVisitedTimes(location.visitedtimes, location.id);
+      });
       await notification.sendNotification(trip.id, trip.status, res);
       return res.status(200).json({
         status: 200,
@@ -60,8 +66,8 @@ class RequestController {
       });
     }
 
-    const user = await users.userExists('id', parseInt(requestExists.userId, 10));
-    const manager = await users.userExists('id', parseInt(req.userData.id, 10));
+    const user = await importQuery.userExists('id', parseInt(requestExists.userId, 10));
+    const manager = await importQuery.userExists('id', parseInt(req.userData.id, 10));
 
     if (user.lineManager === manager.id) {
       await RequestHelper.updateStatus(req.body.status, parseInt(req.params.id, 10));

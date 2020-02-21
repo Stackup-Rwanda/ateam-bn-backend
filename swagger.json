@@ -9,7 +9,7 @@
       "email": "the-a-team@gmail.com"
     }
   },
-  "host": "localhost:3000",
+  "host": "ateam-bn-backend-staging.herokuapp.com",
   "basePath": "/api",
   "tags": [
     {
@@ -351,53 +351,53 @@
         }
       }
     },
-    
- "/search/request": {
-  "post": {
-    "description": "A user can search his trip request and approval based on request id , request owner, destination, origin and request status ",
-    "summary": "search",
-    "tags": [
-      "Search"
-    ],
-    "produces": [
-      "application/json"
-    ],
-    "consumes": [
-      "application/json"
-    ],
-    "parameters": [{
-        "name": "token",
-        "in": "header",
-        "required": true,
-        "type": "string",
-        "description": "user token"
-      },
-      {
-        "name": "Body",
-        "in": "body",
-        "required": true,
-        "description": "data of a user, that will be searched",
-        "schema": {
-          "$ref": "#/definitions/searchRequest"
+    "/search/request": {
+      "post": {
+        "description": "A user can search his trip request and approval based on request id , request owner, destination, origin and request status ",
+        "summary": "search",
+        "tags": [
+          "Search"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "user token"
+          },
+          {
+            "name": "Body",
+            "in": "body",
+            "required": true,
+            "description": "data of a user, that will be searched",
+            "schema": {
+              "$ref": "#/definitions/searchRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "requested data"
+          },
+          "400": {
+            "description": "token is malformed/invalid "
+          },
+          "401": {
+            "description": "the user is not logged in"
+          },
+          "404": {
+            "description": "request with given input is not available"
+          }
         }
       }
-    ],
-    "responses": {
-      "200": {
-        "description": "requested data"
-      },
-      "400": {
-        "description": "token is malformed/invalid "
-      },
-      "401": {
-        "description": "the user is not logged in"
-      },
-      "404": {
-        "description": "request with given input is not available"
-      }
-    }
-  }
-},
+    },
     "/users/{username}/role": {
       "patch": {
         "description": "A super administrator can assign roles to users by using their email addresses",
@@ -467,7 +467,8 @@
         "consumes": [
           "application/json"
         ],
-        "parameters": [{
+        "parameters": [
+          {
             "name": "token",
             "in": "header",
             "required": true,
@@ -557,13 +558,6 @@
         "description": "User can create a trip (One Way Trip, Return Trip and choose Multiple City on a trip)",
         "parameters": [
           {
-            "name": "token",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "token identify that a user has signed in"
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "data needed to create a trip",
@@ -586,8 +580,7 @@
         }
       }
     },
-    "/trip/{id}":
-    {
+    "/trip/{id}": {
       "put": {
         "tags": [
           "Trip"
@@ -822,7 +815,8 @@
         "produces": [
           "application/json"
         ],
-        "parameters": [{
+        "parameters": [
+          {
             "name": "token",
             "in": "header",
             "type": "string",
@@ -852,222 +846,28 @@
         }
       }
     },
-    "/accommodation":{
-      "post": {
-        "description": "Travel Admin can create an accommodation",
-        "summary": "Create new Accommodation",
+    "/location/most-travelled-destination": {
+      "get": {
         "tags": [
-          "Accommodation"
+          "Most Travelled Destination"
         ],
-        "operationId": "CreateAccommodation",
-        "deprecated": false,
-        "produces": [
-          "application/json"
-        ],
-        "parameters":[
+        "summary": "users can view most travelled destination",
+        "description": "Users can view most travelled destination with extra information to help being clarity",
+        "parameters": [
           {
             "name": "token",
             "in": "header",
             "required": true,
             "type": "string",
-            "description": "security token"
-          },
-          {
-            "in": "formData",
-            "name": "name",
-            "type": "string",
-            "description": "the name of the accommodation"
-          },
-          {
-            "in": "formData",
-            "name": "description",
-            "type": "string",
-            "description": "the description of the accommodation"
-          },
-          {
-            "in": "formData",
-            "name": "image",
-            "type": "file",
-            "description": "upload a picture"
-          },
-          {
-            "in": "formData",
-            "name": "locationId",
-            "type": "string",
-            "description": "the location of the accommodation"
-          },
-          {
-            "in": "formData",
-            "name": "geoLocation",
-            "type": "string",
-            "description": "the geoLocation of the accommodation"
-          },
-          {
-            "in": "formData",
-            "name": "space",
-            "type": "string",
-            "description": "the space available in the accommodation"
-          },
-           {
-            "in": "formData",
-            "name": "cost",
-            "type": "string",
-            "description": "the cost of the accommodation"
-          },
-           {
-            "in": "formData",
-            "name": "highlights",
-            "type": "string",
-            "description": "the highlights that happened"
-          },
-           {
-            "in": "formData",
-            "name": "amenities",
-            "type": "string",
-            "description": "provide the amenities the accommodation provides"
+            "description": "users must parsing his/her token to get authenticate to view destination"
           }
         ],
-        "responses":{
-          "201":{
-            "description": "Accommodation Successfully Supplied",
-            "headers":{}
+        "responses": {
+          "200": {
+            "description": "`Hey username !! This is the most travelled destination ever`"
           },
-           "400":{
-            "description": "Please select one or more pictures / token is malformed/invalid",
-            "headers":{}
-          },
-           "415":{
-            "description": "Please select the right type of image",
-            "headers":{}
-          },
-           "401":{
-            "description": "You are not allowed to create an accommodation",
-            "headers":{}
-          }
-        }
-      }
-    },
-    "/notifications":{
-      "get":{
-        "description": "User can view all their notifications assigned to them",
-        "summary": "Viewing all Notifications",
-        "tags": [
-          "Notification"
-        ],
-        "operationId": "ViewNotification",
-        "deprecated": false,
-        "produces": [
-          "application/json"
-        ],
-        "parameters":[
-          {
-            "name": "token",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "security token"
-          }
-        ],
-        "responses":{
-          "200":{
-            "description": "Lists of all notifications",
-            "content": {},
-            "headers":{}
-          },
-          "404":{
-            "description": "You dont have any notifications",
-            "headers":{}
-          }
-        }
-      }
-    },
-    "/notifications/mark":{
-      "post":{
-        "description": "A user should be able to mark all notifications as read or unread",
-        "summary": " Mark notifications",
-        "tags": [
-          "Notification"
-        ],
-        "operationId": "markNotifications",
-        "deprecated": false,
-        "produces": [
-          "application/json"
-        ],
-        "parameters":[
-          {
-            "name": "token",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "security token"
-          },
-          {
-             "name": "Body",
-             "in": "body",
-             "required": true,
-             "description": "User is able to mark all notifications as read or unread",
-             "schema": {
-               "$ref": "#/definitions/markOne"
-             }
-           }
-        ],
-        "responses":{
-          "200":{
-            "description": "Notifications marked as read / Notifications marked as unread",
-            "headers":{}
-          },
-          "404":{
-            "description": "Notifications not found",
-            "headers":{}
-          }
-        }
-      }
-    },
-    "/notifications/{id}/mark":{
-       "post":{
-        "description": "A user should be able to mark a notification as read or unread",
-        "summary": " Mark notification",
-        "tags": [
-          "Notification"
-        ],
-        "operationId": "markNotification",
-        "deprecated": false,
-        "produces": [
-          "application/json"
-        ],
-        "parameters":[
-          {
-            "name": "token",
-            "in": "header",
-            "required": true,
-            "type": "string",
-            "description": "security token"
-          },
-           {
-             "in": "path",
-            "name": "id",
-            "type": "string",
-            "required": true,
-            "description": "parsing a notification id"
-          },
-          {
-             "name": "Body",
-             "in": "body",
-             "required": true,
-             "description": "User is able to mark a notification as read or unread",
-             "schema": {
-               "$ref": "#/definitions/markOne"
-             }
-           }
-        ],
-        "responses":{
-          "200":{
-            "description": "Notification marked as read / Notification marked as unread",
-            "headers":{}
-          },
-          "404":{
-            "description": "Notification not found",
-            "headers":{}
+          "404": {
+            "description": "`Hey username No centre travelled yet !!`"
           }
         }
       }
@@ -1253,12 +1053,15 @@
         "name": "Jay Lenno",
         "passportId": "PC123487",
         "tripType": "One-way",
-         "from": 1,
-         "to": [2, 1],
-         "date": "2050-09-13",
-         "returnDate": "2050-10-30",
-         "reasons": "hound issues",
-         "accommodationId": 2
+        "from": 1,
+        "to": [
+          2,
+          1
+        ],
+        "date": "2050-09-13",
+        "returnDate": "2050-10-30",
+        "reasons": "hound issues",
+        "accommodationId": 2
       },
       "type": "object",
       "required": [
@@ -1291,6 +1094,18 @@
         "accommodationId": {
           "type": "integer"
         }
+      },
+      "example": {
+        "tripType": "Return",
+        "from": 1,
+        "to": [
+          2,
+          1
+        ],
+        "date": "2020-02-20",
+        "reasons": "my reason of this trip",
+        "returnDate": "2020-02-23",
+        "accommodationId": 1
       }
     },
     "createComment": {
@@ -1331,4 +1146,4 @@
       ]
     }
   }
-}  
+}

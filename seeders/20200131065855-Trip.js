@@ -10,7 +10,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
     returnDate: null,
     reasons: 'being a mannager',
     accommodationId: 1,
-    status: 'Pending',
+    status: 'Approved',
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -55,7 +55,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
     returnDate: null,
     reasons: 'being a mannager',
     accommodationId: 1,
-    status: 'Pending',
+    status: 'Approved',
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -120,6 +120,8 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
     updatedAt: new Date()
   },
   {
+    name: 'john',
+    passportId: 'PC234567',
     userId: 8,
     tripType: 'One-way',
     from: 1,

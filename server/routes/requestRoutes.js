@@ -1,5 +1,4 @@
 import Router from 'express';
-
 import isManager from '../middlewares/isManager';
 import requestController from '../controllers/requestController';
 import { approveValidator, rejectValidator } from '../middlewares/statusValidation';

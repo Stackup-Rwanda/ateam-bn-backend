@@ -1,7 +1,6 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../index';
-
 import token from './mochData/mochToken';
 import otherTokens from './mochData/token';
 
