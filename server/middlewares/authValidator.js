@@ -9,7 +9,6 @@ const joiMessageFunction = (error, req, res, next) => {
   }
   return next();
 };
-
 const signUp = (req, res, next) => {
   const schema = Joi.object({
     name: validationObj({ 'string.required': 'name is required', 'string.base': 'Invalid type, your name must be a string', 'string.empty': 'Please enter your name' }),
@@ -21,17 +20,16 @@ const signUp = (req, res, next) => {
     birthdate: Joi.date().iso().required().messages({ 'date.base': 'Birthdate must be a date', 'date.format': 'your birthdate must be in the format YYYY-MM-DD' }),
     preferredLanguage: validationObj({ 'string.base': 'Invalid type, your preferred language must be a string', 'string.empty': 'Please enter your prefeered language' }),
     preferredCurrency: validationObj({ 'string.base': 'Invalid type, your preferred currency must be a string', 'string.empty': 'Please enter your preferred currency' }),
-    location: validationObj({ 'string.base': 'Invalid type, your location must be a string', 'string.empty': 'Please enter your location' }),
+    locationId: Joi.number().integer().required().messages({ 'number.base': 'Invalid type, your location id must be a integer', 'number.empty': 'Please enter your location id' }),
     role: validationObj({ 'string.base': 'Invalid type, your role must be a string', 'string.empty': 'Please enter your role' }),
     department: validationObj({ 'string.base': 'Invalid type, your department must be a string', 'string.empty': 'Please enter your department' }),
-    lineManager: Joi.number().integer().required().messages({ 'integer.base': 'Invalid type, your line manager must be an integer', 'integer.empty': 'Please enter your line manager' })
+    lineManager: Joi.number().integer().required().messages({ 'number.base': 'Invalid type, your line manager\'s id must be a integer', 'number.empty': 'Please enter your line manager\'s id' })
   });
   const { error } = schema.validate(req.body, {
     abortEarly: false
   });
   return joiMessageFunction(error, req, res, next);
 };
-
 const signIn = (req, res, next) => {
   const schema = Joi.object({
     email: validationObj({ 'string.required': 'email is required', 'string.base': 'Invalid type, your email must be a string', 'string.empty': 'Please enter your email' }),
@@ -42,7 +40,6 @@ const signIn = (req, res, next) => {
   });
   return joiMessageFunction(error, req, res, next);
 };
-
 export {
   signUp,
   signIn

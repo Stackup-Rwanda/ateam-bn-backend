@@ -3,6 +3,7 @@ import express from 'express';
 import serverSocket from 'socket.io';
 import swaggerUi from 'swagger-ui-express';
 import allRoutes from './routes/allRoutes';
+import userToNotifY from './helpers/socket';
 import apiDocumentation from '../swagger.json';
 import "./middlewares/fbStrategy";
 import "./middlewares/googleStrategy";
@@ -24,7 +25,6 @@ app.get('**', (req, res) => {
     data: `/api/documentation`
   });
 });
-
 const socketListen = app.listen(process.env.PORT, () => {
   console.log('server is running on port 3000');
 });
@@ -33,6 +33,7 @@ io.on('connection', (socket) => {
   console.log('socket Connection is successfully');
   socket.on('realReceipt', (data) => {
     socket.join(data);
+    userToNotifY.sock(data);
   });
 });
 

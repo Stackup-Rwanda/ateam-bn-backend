@@ -2,7 +2,6 @@ import dotenv from 'dotenv';
 import models from '../models';
 
 const { Notification } = models;
-
 dotenv.config();
 /**
  * This class contains all methods
@@ -69,6 +68,16 @@ class Notifications {
       status: 200,
       message: `Notifications marked as ${req.body.viewed}`
     });
+  }
+
+  /**
+     * This method handle the html file.
+     * @param {object} req The user's request.
+     * @param {object} res The user's response.
+     * @returns {object} The status and message.
+     * */
+  static async userNotification(req, res) {
+    return res.sendFile(`/notification.html`, { root: 'UI/html' });
   }
 }
 export default Notifications;

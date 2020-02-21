@@ -86,7 +86,7 @@
 	<header>
 		<div class="container">
 			<div class="bell">
-				<input id="receiverId"><i id="iconBell" class="fa fa-bell" aria-hidden="true"></i>
+				<input id="receiverId" required><i id="iconBell" class="fa fa-bell" aria-hidden="true"></i>
 			</div>
 			<div class="bel">
 				<i id="iconBel" class="fa fa-bell" aria-hidden="true"></i>
@@ -115,7 +115,7 @@
 			icon.style.display = 'none';
 			iconII.style.display = 'block';
 			panel.style.display = 'block';
-			clientSocket.emit('realReceipt', realReceiverId.value);
+			clientSocket.emit('realReceipt', realReceiverId.value || 0);
 		};
 		icon.addEventListener('click', showNotificationPanel);
 
@@ -124,6 +124,7 @@
 			panel.style.display = 'none';
 			iconII.style.display = 'none';
 			iconIII.style.display = 'block';
+			clientSocket.emit('realReceipt', realReceiverId.value || 0);
 		};
 		iconII.addEventListener('click', hideNotificationPanel);
 
@@ -132,11 +133,24 @@
 			panel.style.display = 'block';
 			iconII.style.display = 'block';
 			iconIII.style.display = 'none';
+			clientSocket.emit('realReceipt', realReceiverId.value || 0);
 		};
 		iconIII.addEventListener('click', showAgainNotificationPanel);
 
 		clientSocket.connect('https://localhost:3000');
 		clientSocket.connect('https://ateam-bn-backend-staging.herokuapp.com');
+
+		clientSocket.on('fechedUserNotification', userData => {
+			const notificationsList = [];
+			var List = document.getElementById("body");
+			for (var i = 0; i < userData.length; i++) {
+				var item = userData[i].description;
+				var elem = document.createElement("li");
+				elem.innerHTML = item;
+				List.appendChild(elem);
+			}
+
+		});
 
 		clientSocket.on('notification', data => {
 			const realTimeNotification = [];
@@ -146,9 +160,10 @@
 				var item = realTimeNotification[i];
 				var elem = document.createElement("li");
 				elem.innerHTML = item;
-				mainList.appendChild(elem);
+				mainList.prepend(elem);
 			}
 		});
+
 
 	</script>
 </body>
