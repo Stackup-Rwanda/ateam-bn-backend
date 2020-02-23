@@ -1,6 +1,5 @@
 import tripHelpers from '../helpers/tripHelpers';
 import notification from '../helpers/notifications';
-
 /**
  * This class contains all methods
  * required to handle
@@ -93,6 +92,26 @@ class TripController {
       data: updatedTrip
     });
   }
-}
 
+  /**
+   * This method handles all update_trip requests.
+   * @param {object} req The user's request.
+   * @param {object} res The response.
+   * @returns {object} The status and some data of the trip.
+   */
+  static async viewOneTrip(req, res) {
+    const { role, id } = req.user;
+    const foundTrip = req.oldTrip;
+    if (foundTrip.userId === id || role === 'Manager') {
+      return res.status(200).json({
+        status: 200,
+        data: foundTrip
+      });
+    }
+    res.status(401).json({
+      status: 401,
+      error: 'Unauthorized'
+    });
+  }
+}
 export default TripController;

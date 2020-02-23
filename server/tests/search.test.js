@@ -27,7 +27,7 @@ describe('running user search route', () => {
     'should not create a new trip if date is invalide',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/trip')
+        .post('/api/trips')
         .set('token', currentToken)
         .send({
 

@@ -21,6 +21,7 @@ const router = () => chai.request(app);
 
 let tokenFalse;
 let mytoken;
+let tokenTrue;
 const newTrip = {
   name: "Jay Lenno",
   passportId: "PC123487",
@@ -69,7 +70,7 @@ describe('Test for create one way trip endpoint', () => {
   );
   it('should create a new one way trip', mochaAsync(async () => {
     const res = await router()
-      .post('/api/trip')
+      .post('/api/trips')
       .set('token', mytoken)
       .send(oneWayTrip);
     res.should.have.status(201);
@@ -77,7 +78,7 @@ describe('Test for create one way trip endpoint', () => {
   }));
   it('should create a return trip', mochaAsync(async () => {
     const res = await router()
-      .post('/api/trip')
+      .post('/api/trips')
       .set('token', mytoken)
       .send(returnTrip);
     res.should.have.status(201);
@@ -87,7 +88,7 @@ describe('Test for create one way trip endpoint', () => {
     'should not create a new one way trip',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/trip')
+        .post('/api/trips')
         .set('token', mytoken)
         .send(oneWayTrip);
       expect(res.body.status).to.equal(409);
@@ -99,7 +100,7 @@ describe('Test for create one way trip endpoint', () => {
     'should not create a new trip when data are incomplete',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/trip')
+        .post('/api/trips')
         .set('token', mytoken)
         .send(incopreteWayTrip);
       expect(res.body.status).to.equal(422);
@@ -111,7 +112,7 @@ describe('Test for create one way trip endpoint', () => {
     'should not create a new trip if date is invalide',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/trip')
+        .post('/api/trips')
         .set('token', mytoken)
         .send(incoDateWayTrip);
       expect(res.body.status).to.equal(422);
@@ -123,7 +124,7 @@ describe('Test for create one way trip endpoint', () => {
     'should not create a new trip if location is invalide',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/trip')
+        .post('/api/trips')
         .set('token', mytoken)
         .send(incoloacationWayTrip);
       expect(res.body.status).to.equal(422);
@@ -135,7 +136,7 @@ describe('Test for create one way trip endpoint', () => {
     'should not create a new trip if accommodation is not from trip loacation',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/trip')
+        .post('/api/trips')
         .set('token', mytoken)
         .send(incoAccommodationWayTrip);
       expect(res.body.status).to.equal(422);
@@ -147,7 +148,7 @@ describe('Test for create one way trip endpoint', () => {
     'should create a new one way trip',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/trip')
+        .post('/api/trips')
         .set('token', mytoken)
         .send(twoWayTrip);
       expect(res.body.status).to.equal(201);
@@ -159,7 +160,7 @@ describe('Test for create one way trip endpoint', () => {
     'should create a new one way trip',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/trip')
+        .post('/api/trips')
         .set('token', mytoken)
         .send(twoWayTripMultipleCity);
       expect(res.body.status).to.equal(201);
@@ -174,7 +175,7 @@ describe('Test for Trip Stats endpoint', () => {
     'should get all trip stats',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/trip/stats')
+        .post('/api/trips/stats')
         .set('token', mytoken);
       expect(res.body.status).to.equal(200);
       expect(res.body).to.be.an('object');
@@ -184,7 +185,7 @@ describe('Test for Trip Stats endpoint', () => {
     'should get error on trip stats when wrong fields are provided',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/trip/stats')
+        .post('/api/trips/stats')
         .set('token', mytoken)
         .send({ myend: '2020-01-20', mystart: '2020-01-20' });
       expect(res.body.status).to.equal(422);
@@ -196,7 +197,7 @@ describe('Test for Trip Stats endpoint', () => {
     'should get error on trip stats when wrong date range',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/trip/stats')
+        .post('/api/trips/stats')
         .set('token', mytoken)
         .send({ endDate: '2020-01-20', startDate: '2020-01-25' });
       expect(res.body.status).to.equal(422);
@@ -208,7 +209,7 @@ describe('Test for Trip Stats endpoint', () => {
     'should get trip stats with 4 element in the data',
     mochaAsync(async () => {
       const res = await router()
-        .post('/api/trip/stats')
+        .post('/api/trips/stats')
         .set('token', mytoken)
         .send({ endDate: '2020-01-20', startDate: '2020-01-01' });
       expect(res.body.status).to.equal(200);
@@ -228,10 +229,19 @@ describe('remembered profile tests', () => {
     res.should.have.status(200);
     res.body.should.be.an('object');
   });
+  it('Travel administrator login request', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/auth/signin')
+      .send({ email: 'dummy2@email.rw', password: '123456789' });
+    tokenTrue = res.body.data.token;
+    res.should.have.status(200);
+    res.body.should.be.an('object');
+  });
   it('user should be able to create a trip when rememberMe is false', async () => {
     const res = await chai
       .request(app)
-      .post('/api/trip')
+      .post('/api/trips')
       .set('token', tokenFalse)
       .send(rememberTrip);
     res.should.have.status(201);
@@ -274,7 +284,7 @@ describe('Test for create one way trip endpoint', () => {
 
   it('user should be able to create a trip request', async () => {
     const result = await chai.request(app)
-      .post('/api/trip')
+      .post('/api/trips')
       .send(newTrip)
       .set('token', tripUpdateToken);
     tripId = result.body.data.id;
@@ -283,7 +293,7 @@ describe('Test for create one way trip endpoint', () => {
 
   it('users should be able to update their trip request', async () => {
     const result = await chai.request(app)
-      .put(`/api/trip/${tripId}`)
+      .put(`/api/trips/${tripId}`)
       .send(updatedTrip)
       .set('token', tripUpdateToken);
     result.should.have.status(201);
@@ -292,7 +302,7 @@ describe('Test for create one way trip endpoint', () => {
 
   it('should report a non existing trip request (trip with id not registered)', async () => {
     const result = await chai.request(app)
-      .put(`/api/trip/123`)
+      .put(`/api/trips/123`)
       .send(updatedTrip)
       .set('token', tripUpdateToken);
     result.should.have.status(404);
@@ -301,7 +311,7 @@ describe('Test for create one way trip endpoint', () => {
 
   it('should report malformed trip id in path (invalid id)', async () => {
     const result = await chai.request(app)
-      .put(`/api/trip/12xcx`)
+      .put(`/api/trips/12xcx`)
       .send(updatedTrip)
       .set('token', tripUpdateToken);
     result.should.have.status(400);
@@ -310,11 +320,11 @@ describe('Test for create one way trip endpoint', () => {
 
   it('users should not be able to update a not owned trip request', async () => {
     const result = await chai.request(app)
-      .put(`/api/trip/${tripId}`)
+      .put(`/api/trips/${tripId}`)
       .send(updatedTrip)
       .set('token', unauthorizedToken);
     result.should.have.status(401);
-    result.body.should.have.property('error', 'not authorized to edit this trip request');
+    result.body.should.have.property('error', 'not authorized to access this trip request');
   });
 
   it('manager approves trip request', async () => {
@@ -327,10 +337,19 @@ describe('Test for create one way trip endpoint', () => {
 
   it('users should not be able to update their trip request after they are approved or rejected', async () => {
     const result = await chai.request(app)
-      .put(`/api/trip/${tripId}`)
+      .put(`/api/trips/${tripId}`)
       .send(updatedTrip)
       .set('token', tripUpdateToken);
     result.should.have.status(400);
     result.body.should.have.property('error', 'You can only edit Pending trip requests');
+  });
+  it('Users should be not be able to see the requests if not requester/manager', async () => {
+    const id = 1;
+    const result = await chai
+      .request(app)
+      .get(`/api/trips/${id}`)
+      .set('token', tokenTrue);
+    result.should.have.status(401);
+    result.body.should.have.property('error');
   });
 });

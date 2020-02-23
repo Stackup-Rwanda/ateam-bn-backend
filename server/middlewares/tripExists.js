@@ -30,7 +30,7 @@ const isOwned = (req, res, next) => {
   if (oldTrip.userId === req.user.id) {
     return next();
   }
-  return res.status(401).json({ status: 401, error: 'not authorized to edit this trip request' });
+  return res.status(401).json({ status: 401, error: 'not authorized to access this trip request' });
 };
 
 const isEditable = (req, res, next) => {
