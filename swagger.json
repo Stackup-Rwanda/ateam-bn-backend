@@ -1425,6 +1425,141 @@
           }
         }
       }
+    },
+    "/room": {
+      "post": {
+        "description": "Manager can create a room",
+        "summary": "Create new room",
+        "tags": ["Room"],
+        "operationId": "CreateRoom",
+        "deprecated": false,
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "manager's token"
+          },
+          {
+            "in": "formData",
+            "name": "accommodationId",
+            "type": "integer",
+            "description": "the accommodation Id"
+          },
+          {
+            "in": "formData",
+            "name": "roomType",
+            "type": "string",
+            "description": "the type of the room"
+          },
+          {
+            "in": "formData",
+            "name": "amenities",
+            "type": "string",
+            "items":{
+              "type":"string"
+            },
+            "description": "Amenities or facilities for the room"
+          },
+          {
+            "in": "formData",
+            "name": "cost",
+            "type": "string",
+            "description": "the cost of the room"
+          },
+          {
+            "in": "formData",
+            "name": "image",
+            "type": "file",
+            "description": "the image of this room"
+          },
+          {
+            "in": "formData",
+            "name": "status",
+            "type": "string",
+            "description": "The status of the room i.e booked/available"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The room is successfully created",
+            "headers": {}
+          },
+          "400": {
+            "description": "provide the correct accommodation",
+            "headers": {}
+          },
+          "415": {
+            "description": "Please select the right type of image",
+            "headers": {}
+          },
+          "403": {
+            "description": "You are not allowed",
+            "headers": {}
+          }
+        }
+      },
+      "get": {
+        "description": "Retrieve all rooms",
+        "summary": "View all rooms available",
+        "tags": ["Rooms"],
+        "operationId": "ViewRooms",
+        "deprecated": false,
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "User's token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all Rooms",
+            "headers": {}
+          },
+          "400": {
+            "description": "Malformed/ Incorrect security token ! Check token and try again.",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/room/book": {
+      "post": {
+        "tags": ["Requester can book a room"],
+        "summary": "A Requester can book a room in a certain location",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Requester's data for booking a room",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/roomBooking"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Requester's token"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "you have successfully booked this room"
+          },
+          "400": {
+            "description": "Sorry, the room you requested does not exist"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1745,6 +1880,44 @@
         },
         "lineManager": {
           "type": "integer"
+        }
+      },
+      "create rooms": {
+        "type": "object",
+        "required": [
+          "search"
+        ],
+        "properties": {
+          "search": {
+            "type": "string"
+          },
+       "accommodationId": {
+            "type": "string"
+          },
+           "description": {
+            "type": "string"
+          },
+           "image": {
+            "type": "string"
+          },
+           "status": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "roomBooking": {
+      "type": "object",
+      "required": ["roomId", "from", "to"],
+      "properties": {
+        "roomId": {
+          "type": "integer"
+        },
+        "from": {
+          "type": "date"
+        },
+        "to": {
+          "type": "date"
         }
       }
     }

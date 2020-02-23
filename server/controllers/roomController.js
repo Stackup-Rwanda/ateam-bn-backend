@@ -9,23 +9,23 @@ const createRoom = async (req, res) => {
     if (realAccommodation) {
       const url = await imageUploader(req.files.image);
       const addRoom = await RoomHelper.saveRoom({
-
         accommodationId: req.body.accommodationId,
-        description: req.body.description,
+        roomType: req.body.roomType,
+        amenities: req.body.amenities,
+        cost: req.body.cost,
         image: url,
-        status: req.body.status
-
+        status: req.body.status,
       });
-      res.status(200).send({
-        status: 200,
+      res.status(201).send({
+        status: 201,
         data: {
           addRoom
         }
       });
     }
 
-    res.status(500).send({
-      status: 500,
+    res.status(400).send({
+      status: 400,
       error: "provide the correct accommodation"
     });
   } catch (error) {

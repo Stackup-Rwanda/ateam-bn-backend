@@ -9,8 +9,8 @@ const bookingRoom = async (req, res) => {
     if (roomExists) {
       const bookRoom = await BookingHelper.saveBooked(req.body, requesterId);
       const updateStatus = await Room.update({ status: "booked" }, { where: { id: req.body.roomId } });
-      res.status(200).send({
-        status: 200,
+      res.status(201).send({
+        status: 201,
         message: "you have successfully booked this room",
         data: {
           bookRoom,
@@ -19,9 +19,9 @@ const bookingRoom = async (req, res) => {
       });
     }
 
-    res.status(500).send({
-      status: 500,
-      error: "the room you requested does not exist"
+    res.status(400).send({
+      status: 400,
+      error: "Sorry, the room you requested does not exist"
     });
   } catch (error) {
     return error;

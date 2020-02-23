@@ -32,7 +32,7 @@ class RoomHelper {
       ...room
     }, {
       fields: [
-        'accommodationId', 'description', 'image', 'status', 'createAt', 'updatedAt'
+        'accommodationId', 'roomType', 'amenities', 'cost', 'image', 'status', 'createAt', 'updatedAt'
       ]
     });
     return saved;

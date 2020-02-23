@@ -10,9 +10,17 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Rooms', {
     type: Sequelize.INTEGER,
 
   },
-  description: {
+  roomType: {
     type: Sequelize.TEXT,
-    allowNull: false,
+    allowNull: false
+  },
+  amenities: {
+    type: Sequelize.ARRAY(Sequelize.STRING),
+    allowNull: false
+  },
+  cost: {
+    type: Sequelize.STRING,
+    allowNull: false
   },
   image: {
     type: Sequelize.TEXT,

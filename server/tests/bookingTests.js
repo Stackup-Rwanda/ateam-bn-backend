@@ -36,7 +36,7 @@ describe('running create room route', () => {
       .attach('image', fs.readFileSync(accommodationFiles.image1Path), accommodationFiles.image1)
       .field('status', 'available')
       .set('token', managerToken);
-    res.should.have.status(200);
+    res.should.have.status(201);
     res.body.should.have.property('data');
   });
 
@@ -66,7 +66,7 @@ describe('running create room route', () => {
       .attach('image', fs.readFileSync(accommodationFiles.image1Path), accommodationFiles.image1)
       .field('status', 'available')
       .set('token', managerToken);
-    res.should.have.status(500);
+    res.should.have.status(400);
     res.body.should.have.property('error');
   });
   it('manager should not be able to add a room with no image', async () => {
@@ -107,7 +107,7 @@ describe('running booking room route', () => {
           roomId: 1, from: "2020-03-03", to: "2020-05-10"
         });
 
-      expect(res.body.status).to.equal(200);
+      expect(res.body.status).to.equal(201);
       expect(res.body).to.be.an('object');
       expect(res.body.message).to.be.a('string');
     })
@@ -141,7 +141,7 @@ describe('running booking room route', () => {
           roomId: 20, from: "2020-03-02", to: "2020-05-10"
         });
 
-      expect(res.body.status).to.equal(500);
+      expect(res.body.status).to.equal(400);
       expect(res.body).to.be.an('object');
       expect(res.body.error).to.be.a('string');
     })

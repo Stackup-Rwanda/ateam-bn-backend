@@ -34,8 +34,10 @@ router.patch(
   multipart,
   validateAccommodation,
   accommodation.editAccommodation
-)
-  .post('/room', isTokenValid, isManager, multipart, ValidateBody("room", "body"), validateImage, asyncErrorHandler(createRoom))
-  .get('/room', isTokenValid, asyncErrorHandler(retrieveRooms))
-  .post('/room/book', isTokenValid, ValidateBooking("booking", "body"), dateChecker, isBooked, asyncErrorHandler(bookingRoom));
+);
+
+
+router.post('/room', isTokenValid, isManager, multipart, ValidateBody("room", "body"), validateImage, asyncErrorHandler(createRoom));
+router.get('/room', isTokenValid, asyncErrorHandler(retrieveRooms));
+router.post('/room/book', isTokenValid, ValidateBooking("booking", "body"), dateChecker, isBooked, asyncErrorHandler(bookingRoom));
 export default router;

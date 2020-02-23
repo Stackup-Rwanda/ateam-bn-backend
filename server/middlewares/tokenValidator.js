@@ -15,6 +15,7 @@ const verifyToken = async (req, res, next) => {
     const tokenExists = await Token.findOne({
       where: { value: req.header('token') }
     });
+
     if (userExists) {
       if (tokenExists) {
         req.user = userExists;
