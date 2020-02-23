@@ -1,12 +1,13 @@
 import dotenv from 'dotenv';
 import express from 'express';
-import serverSocket from 'socket.io';
 import swaggerUi from 'swagger-ui-express';
-import userToNotifY from './helpers/socket';
+import path from 'path';
+import serverSocket from 'socket.io';
 import allRoutes from './routes';
 import apiDocumentation from '../swagger.json';
 import "./middlewares/fbStrategy";
 import "./middlewares/googleStrategy";
+import socketHelper from './helpers/socketHelper';
 
 dotenv.config();
 
@@ -14,6 +15,8 @@ const app = express();
 const basePath = '/api';
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(`${__dirname}/`));
+app.use(express.static(path.join(__dirname, '../UI/html')));
 app.use(basePath, allRoutes);
 app.use(`${basePath}/documentation`, swaggerUi.serve, swaggerUi.setup(apiDocumentation));
 
@@ -26,15 +29,14 @@ app.get('**', (req, res) => {
   });
 });
 const socketListen = app.listen(process.env.PORT, () => {
-  console.log('server is running on port 3000');
+  console.log(`server is running on port ${process.env.PORT}`);
 });
+
 const io = serverSocket(socketListen);
+
 io.on('connection', (socket) => {
   console.log('socket Connection is successfully');
-  socket.on('realReceipt', (data) => {
-    socket.join(data);
-    userToNotifY.sock(data);
-  });
+  socketHelper(socket);
 });
 
 export { io };
