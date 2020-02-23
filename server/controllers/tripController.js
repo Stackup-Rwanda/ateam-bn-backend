@@ -71,10 +71,12 @@ class TripController {
     const tripId = req.oldTrip.id;
     const status = 'Pending';
     const {
-      from, to, date, reasons, accommodationId, returnDate
+      name, passportId, from, to, date, reasons, accommodationId, returnDate
     } = req.body;
     const cityNumber = to.length;
     let tripUpdate = {
+      name,
+      passportId,
       from,
       to,
       date,
@@ -91,6 +93,18 @@ class TripController {
       message: 'Trip was updated successfully.',
       data: updatedTrip
     });
+  }
+
+  /**
+   * This method handles view all trip requests.
+   * @param {object} req The user's request.
+   * @param {object} res The response.
+   * @returns {object} The status and some data of the trip.
+   */
+  static async viewAllTrips(req, res) {
+    const { role, id } = req.user;
+    const foundTrips = await tripHelpers.findTripByRole(role, id);
+    return res.status(200).json({ status: 200, data: foundTrips });
   }
 
   /**
