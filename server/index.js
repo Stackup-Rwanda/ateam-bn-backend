@@ -7,8 +7,7 @@ import allRoutes from './routes';
 import apiDocumentation from '../swagger.json';
 import "./middlewares/fbStrategy";
 import "./middlewares/googleStrategy";
-import userToNotifY from './helpers/socket';
-import chatHelper from './helpers/ChatHelper';
+import socketHelper from './helpers/socketHelper';
 
 dotenv.config();
 
@@ -36,24 +35,8 @@ const socketListen = app.listen(process.env.PORT, () => {
 const io = serverSocket(socketListen);
 
 io.on('connection', (socket) => {
-  console.log('socket successfully connected');
-
-  socket.on('realReceipt', (data) => {
-    socket.join(data);
-    userToNotifY.sock(data);
-  });
-
-  socket.on('client-chat-message', async (messageData) => {
-    const clientData = {
-      userId: messageData.userId,
-      message: messageData.message,
-      createdAt: messageData.createdAt,
-      updatedAt: messageData.createdAt
-    };
-
-    const savedChat = await chatHelper.saveChat(clientData);
-    if (savedChat) socket.broadcast.emit('server-chat-message', messageData);
-  });
+  console.log('socket Connection is successfully');
+  socketHelper.socketHelper(socket);
 });
 
 export { io };

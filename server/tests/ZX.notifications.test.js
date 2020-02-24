@@ -111,70 +111,45 @@ describe('Notifications Tests', () => {
   });
 
   it('user should view paginated Notifications', async () => {
-    const page = 1;
     const response = await chai
       .request(app)
-      .get(`/api/notifications/${page}`)
+      .get(`/api/notifications/?page=1&limit=1`)
       .set('token', managerToken);
     response.should.have.status([200]);
     response.body.should.have.property('message');
   });
 
   it('user should view paginated Notifications', async () => {
-    const page = 2;
     const response = await chai
       .request(app)
-      .get(`/api/notifications/${page}`)
+      .get(`/api/notifications/?page=2&limit=1`)
       .set('token', managerToken);
     response.should.have.status([200]);
     response.body.should.have.property('message');
   });
 
-  it('user should not view paginated Notifications with empty page', async () => {
-    const page = 100;
+  it('user should view all notifications if there is no page specified', async () => {
     const response = await chai
       .request(app)
-      .get(`/api/notifications/${page}`)
+      .get(`/api/notifications/`)
+      .set('token', travelAdmniToken);
+    response.should.have.status([200]);
+    response.body.should.have.property('message');
+  });
+
+  it('user should not view paginated Notifications with empty page', async () => {
+    const response = await chai
+      .request(app)
+      .get(`/api/notifications/?page=100&limit=2`)
       .set('token', managerToken);
     response.should.have.status([404]);
     response.body.should.have.property('message');
   });
 
   it('user should not view paginated Notifications with empty page', async () => {
-    const page = -100;
     const response = await chai
       .request(app)
-      .get(`/api/notifications/${page}`)
-      .set('token', managerToken);
-    response.should.have.status([404]);
-    response.body.should.have.property('message');
-  });
-
-  it('user should not view paginated Notifications with empty page', async () => {
-    const page = -100;
-    const response = await chai
-      .request(app)
-      .get(`/api/notifications/${page}`)
-      .set('token', travelAdmniToken);
-    response.should.have.status([404]);
-    response.body.should.have.property('message');
-  });
-
-  it('user should not view if there is no page specified', async () => {
-    const page = 100;
-    const response = await chai
-      .request(app)
-      .get(`/api/notifications/${page}`)
-      .set('token', travelAdmniToken);
-    response.should.have.status([404]);
-    response.body.should.have.property('message');
-  });
-
-  it('user should not view if there is no page specified', async () => {
-    let page;
-    const response = await chai
-      .request(app)
-      .get(`/api/notifications/${page}`)
+      .get(`/api/notifications/?page=100&limit=2`)
       .set('token', travelAdmniToken);
     response.should.have.status([404]);
     response.body.should.have.property('message');

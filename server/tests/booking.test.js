@@ -200,4 +200,26 @@ describe('running retrieve rooms route', () => {
       expect(res.body).to.be.an('object');
     })
   );
+
+  it(
+    'user should retrieve all rooms',
+    mochaAsync(async () => {
+      const res = await router()
+        .get('api/room/?page=1&limit=1')
+        .set('token', currentToken);
+      expect(res.body.status).to.equal(200);
+      expect(res.body).to.be.an('object');
+    })
+  );
+
+  it(
+    'user should retrieve all rooms',
+    mochaAsync(async () => {
+      const res = await router()
+        .get('api/room/?page=2&limit=1')
+        .set('token', currentToken);
+      expect(res.body.status).to.equal(200);
+      expect(res.body).to.be.an('object');
+    })
+  );
 });

@@ -186,24 +186,33 @@ class AuthHelpers {
   }
 
   /**
-   * Finds all users.
-   * @returns {object} Trip request data.
+   * Finds a users.
+   * @param {integer} skip limit.
+   * @param {integer} start from.
+   * @returns {object} users request data.
    */
-  static async findAllUsers() {
-    const foundUsers = await User.findAll({
-      attributes: ['id', 'name', 'username', 'role', 'lineManager']
+  static async findAllUsers(skip, start) {
+    const foundUsers = await User.findAndCountAll({
+      limit: skip,
+      offset: start,
+      attributes: ['id', 'name', 'email', 'username', 'role', 'lineManager']
     });
     return foundUsers;
   }
 
+
   /**
-   * Finds all Managers.
-   * @returns {object} Trip request data.
+   * Finds a manager.
+   * @param {integer} skip limit.
+   * @param {integer} start from.
+   * @returns {object} manager request data.
    */
-  static async findAllManagers() {
-    const foundUsers = await User.findAll({
+  static async findAllManagers(skip, start) {
+    const foundUsers = await User.findAndCountAll({
       where: { role: 'Manager' },
-      attributes: ['id', 'name', 'username', 'role', 'lineManager']
+      limit: skip,
+      offset: start,
+      attributes: ['id', 'name', 'email', 'username', 'role', 'lineManager']
     });
     return foundUsers;
   }

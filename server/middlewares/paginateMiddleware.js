@@ -11,59 +11,22 @@ class PaginateData {
      * @returns {object} The paginated data.
      */
   static paginatedRetrievedData(req, res) {
-    const limit = 5;
-    const page = parseInt(req.params.page, 10);
-    const start = (page - 1) * limit;
-    const end = page * limit;
-    let messagePrevious = {};
-    let messageNext = {};
-    const paginate = {};
-    messagePrevious = { message: `No data found on this page ${page}` };
-    messageNext = { message: `No data found on this ${page}` };
-    paginate.paginate = req.data.slice(start, end);
-    messagePrevious.Previous = {
-      page: page - 1,
-      limit
-    };
-    messageNext.Next = {
-      page: 1,
-      limit
-    };
-    if (!page) {
-      return res.status(404).json({
-        status: 404,
-        message: 'No page found'
-      });
-    }
-    if (start < 0) {
-      return res.status(404).json({
-        status: 404,
-        message: messageNext
-      });
-    }
-    if (paginate.paginate.length <= 0) {
-      return res.status(404).json({
-        status: 404,
-        message: messagePrevious
-      });
-    }
-    if (start > 0) {
-      paginate.previous = {
-        test: `nmdfndffjksfnmsdjklf;gnklgd;kfg`,
-        page: page - 1,
-        limit
+    req.data.paginate.paginate = req.data.userAllData;
+    if (req.data.start > 0) {
+      req.data.paginate.Previous = {
+        page: req.data.pages - 1,
+        limit: req.data.skip
       };
-    }
-    if (end < req.data.length) {
-      paginate.next = {
-        page: page + 1,
-        limit
+    } if (req.data.end < req.data.countUserData) {
+      req.data.paginate.Next = {
+        page: req.data.pages + 1,
+        limit: req.data.skip
       };
     }
     return res.status(200).json({
       status: 200,
-      message: `${req.user.username} Those are data from this page ${page}`,
-      data: paginate
+      message: `${req.user.username} Those are data from this page ${req.data.pages}`,
+      data: req.data.paginate
     });
   }
 }

@@ -662,6 +662,49 @@
         }
       }
     },
+    "/trips/?page={page}&limit={limit}": {
+      "get": {
+        "tags": [
+          "Trip"
+        ],
+        "summary": "Viewing all trips",
+        "description": "a Requester user views all trip requests they've created, a Manager user views all trip requests",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token identify that a user has signed in"
+          },
+          {
+            "in": "path",
+            "name": "page",
+            "type": "string",
+            "required": true,
+            "description": "parsing a page number"
+          },
+          {
+            "in": "path",
+            "name": "limit",
+            "type": "string",
+            "required": true,
+            "description": "parsing a limits of data per page"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "trip requests successfuly retrieved"
+          },
+          "400": {
+            "description": "Malformed/ Incorrect security token ! Check token and try again."
+          },
+          "401": {
+            "description": "User not recognised. Please create account and try again./ Already logged out. Sign in and try again."
+          }
+        }
+      }
+    },
     "/trips/{id}": {
       "put": {
         "tags": [
@@ -1055,10 +1098,14 @@
       "get": {
         "description": "Travel Admin can view all accommodations",
         "summary": "View all Accommodation",
-        "tags": ["Accommodation"],
+        "tags": [
+          "Accommodation"
+        ],
         "operationId": "ViewAccommodations",
         "deprecated": false,
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "token",
@@ -1080,14 +1127,105 @@
         }
       }
     },
+    "/accommodation/?page={page}&limit={limit}": {
+      "get": {
+        "description": "Travel Admin can view all accommodations",
+        "summary": "View all Accommodation",
+        "tags": [
+          "Accommodation"
+        ],
+        "operationId": "ViewAccommodations",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "token",
+            "required": true,
+            "type": "string",
+            "description": "security token"
+          },
+          {
+            "in": "path",
+            "name": "page",
+            "type": "string",
+            "required": true,
+            "description": "parsing a page number"
+          },
+          {
+            "in": "path",
+            "name": "limit",
+            "type": "string",
+            "required": true,
+            "description": "parsing a limit of data per page"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of all Accommodations",
+            "headers": {}
+          },
+          "401": {
+            "description": "You are not allowed to access this route",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/accommodation/{id}": {
+      "get": {
+        "description": "Travel Admin can get a specific accommodation",
+        "summary": "View One Accommodation",
+        "tags": [
+          "Accommodation"
+        ],
+        "operationId": "ViewOneAccommodation",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "security token"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "parsing an accommodation Id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "headers": {}
+          },
+          "401": {
+            "description": "You are not allowed to access this route",
+            "headers": {}
+          }
+        }
+      }
+    },
     "/accommodation/{id}/edit": {
       "patch": {
         "description": "Travel Admin can edit an accommodation",
         "summary": "Edit Accommodation",
-        "tags": ["Accommodation"],
+        "tags": [
+          "Accommodation"
+        ],
         "operationId": "EditAccommodation",
         "deprecated": false,
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "token",
@@ -1170,10 +1308,14 @@
       "delete": {
         "description": "Travel Admin can delete an accommodation",
         "summary": "Delete Accommodation",
-        "tags": ["Accommodation"],
+        "tags": [
+          "Accommodation"
+        ],
         "operationId": "DeleteAccommodation",
         "deprecated": false,
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "token",
@@ -1292,12 +1434,17 @@
         }
       }
     },
-    "/notifications/{page}": {
+    "/notifications": {
       "get": {
-        "summary": "View all Notifications with pagination",
-        "description": "User can view 5 notifications per page",
+        "description": "User can view all their notifications assigned to them",
+        "summary": "Viewing all Notifications",
         "tags": [
           "Notification"
+        ],
+        "operationId": "ViewNotification",
+        "deprecated": false,
+        "produces": [
+          "application/json"
         ],
         "parameters": [
           {
@@ -1305,22 +1452,66 @@
             "in": "header",
             "required": true,
             "type": "string",
-            "description": "user must parsing his/her token to get authenticate to view notification"
-          },
-          {
-            "in": "path",
-            "name": "page",
-            "type": "integer",
-            "required": true,
-            "description": "page number needed to view"
+            "description": "security token"
           }
         ],
         "responses": {
           "200": {
-            "description": "Those are notifications from this page"
+            "description": "Lists of all notifications",
+            "content": {},
+            "headers": {}
           },
           "404": {
-            "description": "No notifications yet"
+            "description": "You dont have any notifications",
+            "headers": {}
+          }
+        }
+      }
+    },
+    "/notifications/?page={page}&limit={limit}": {
+      "get": {
+        "description": "User can view all their notifications assigned to them",
+        "summary": "Viewing all Notifications",
+        "tags": [
+          "Notification"
+        ],
+        "operationId": "ViewNotification",
+        "deprecated": false,
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "token",
+            "required": true,
+            "type": "string",
+            "description": "security token"
+          },
+          {
+            "in": "path",
+            "name": "page",
+            "type": "string",
+            "required": true,
+            "description": "parsing a page number"
+          },
+          {
+            "in": "path",
+            "name": "limit",
+            "type": "string",
+            "required": true,
+            "description": "parsing a limit of data per page"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists of all notifications",
+            "content": {},
+            "headers": {}
+          },
+          "404": {
+            "description": "You dont have any notifications",
+            "headers": {}
           }
         }
       }
@@ -1374,9 +1565,6 @@
         "tags": [
           "Notification"
         ],
-        "produces": [
-          "application/json"
-        ],
         "operationId": "markNotification",
         "deprecated": false,
         "produces": [
@@ -1415,6 +1603,78 @@
           "404": {
             "description": "Notification not found",
             "headers": {}
+          }
+        }
+      }
+    },
+    "/places": {
+      "get": {
+        "tags": [
+          "Most Travelled Destination"
+        ],
+        "summary": "Viewing all Places",
+        "description": "a user should be able to view  all places",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token to authenticate user to the resources"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "places  successfuly retrieved"
+          },
+          "400": {
+            "description": "Malformed/ Incorrect security token ! Check token and try again."
+          },
+          "401": {
+            "description": "User not recognised. Please create account and try again./ Already logged out. Sign in and try again."
+          }
+        }
+      }
+    },
+    "/places/?page={page}&limit={limit}": {
+      "get": {
+        "tags": [
+          "Most Travelled Destination"
+        ],
+        "summary": "Viewing all Places",
+        "description": "a user should be able to view  all places",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token to authenticate user to the resources"
+          },
+          {
+            "in": "path",
+            "name": "page",
+            "type": "string",
+            "required": true,
+            "description": "parsing a page number"
+          },
+          {
+            "in": "path",
+            "name": "limit",
+            "type": "string",
+            "required": true,
+            "description": "parsing a limit of data per page"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "places successfuly retrieved"
+          },
+          "400": {
+            "description": "Malformed/ Incorrect security token ! Check token and try again."
+          },
+          "401": {
+            "description": "User not recognised. Please create account and try again./ Already logged out. Sign in and try again."
           }
         }
       }
@@ -1492,7 +1752,9 @@
     },
     "/auth/admin/signup": {
       "post": {
-        "tags": ["Super Admin register a user"],
+        "tags": [
+          "Super Admin register a user"
+        ],
         "summary": "Super Administrator can register a user with a specific role",
         "description": "Super Administrator is able to create a certain user with a specific role and if the user is a requester he/she must be assigned a manager",
         "parameters": [
@@ -1533,10 +1795,14 @@
       "post": {
         "description": "Manager can create a room",
         "summary": "Create new room",
-        "tags": ["Room"],
+        "tags": [
+          "Room"
+        ],
         "operationId": "CreateRoom",
         "deprecated": false,
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "token",
@@ -1561,8 +1827,8 @@
             "in": "formData",
             "name": "amenities",
             "type": "string",
-            "items":{
-              "type":"string"
+            "items": {
+              "type": "string"
             },
             "description": "Amenities or facilities for the room"
           },
@@ -1607,10 +1873,14 @@
       "get": {
         "description": "Retrieve all rooms",
         "summary": "View all rooms available",
-        "tags": ["Rooms"],
+        "tags": [
+          "Room"
+        ],
         "operationId": "ViewRooms",
         "deprecated": false,
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "token",
@@ -1632,9 +1902,54 @@
         }
       }
     },
+    "/room/?page={page}&limit={limit}": {
+      "get": {
+        "tags": [
+          "Room"
+        ],
+        "summary": "Viewing all room",
+        "description": "a user should be able to view  all room",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token to authenticate user to the resources"
+          },
+          {
+            "in": "path",
+            "name": "page",
+            "type": "string",
+            "required": true,
+            "description": "parsing a page number"
+          },
+          {
+            "in": "path",
+            "name": "limit",
+            "type": "string",
+            "required": true,
+            "description": "parsing a limit of data per page"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "room successfuly retrieved"
+          },
+          "400": {
+            "description": "Malformed/ Incorrect security token ! Check token and try again."
+          },
+          "401": {
+            "description": "User not recognised. Please create account and try again./ Already logged out. Sign in and try again."
+          }
+        }
+      }
+    },
     "/room/book": {
       "post": {
-        "tags": ["Requester can book a room"],
+        "tags": [
+          "Requester can book a room"
+        ],
         "summary": "A Requester can book a room in a certain location",
         "parameters": [
           {
@@ -1693,6 +2008,49 @@
         }
       }
     },
+    "/users/?page={page}&limit={limit}": {
+      "get": {
+        "tags": [
+          "View Users"
+        ],
+        "summary": "Viewing all users",
+        "description": "a user should be able to view  all users",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token to authenticate user to the resources"
+          },
+          {
+            "in": "path",
+            "name": "page",
+            "type": "string",
+            "required": true,
+            "description": "parsing a page number"
+          },
+          {
+            "in": "path",
+            "name": "limit",
+            "type": "string",
+            "required": true,
+            "description": "parsing a limit of data per page"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "users successfuly retrieved"
+          },
+          "400": {
+            "description": "Malformed/ Incorrect security token ! Check token and try again."
+          },
+          "401": {
+            "description": "User not recognised. Please create account and try again./ Already logged out. Sign in and try again."
+          }
+        }
+      }
+    },
     "/users/managers": {
       "get": {
         "tags": [
@@ -1707,6 +2065,49 @@
             "required": true,
             "type": "string",
             "description": "token to identify a signed in and authentic super administrator"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Managers successfuly retrieved"
+          },
+          "400": {
+            "description": "Malformed/ Incorrect security token ! Check token and try again."
+          },
+          "401": {
+            "description": "User not recognised. Please create account and try again./ Already logged out. Sign in and try again."
+          }
+        }
+      }
+    },
+    "/users/managers/?page={page}&limit={limit}": {
+      "get": {
+        "tags": [
+          "View Users"
+        ],
+        "summary": "Viewing all Managers",
+        "description": "a user should be able to view  all Managers",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token to authenticate user to the resources"
+          },
+          {
+            "in": "path",
+            "name": "page",
+            "type": "string",
+            "required": true,
+            "description": "parsing a page number"
+          },
+          {
+            "in": "path",
+            "name": "limit",
+            "type": "string",
+            "required": true,
+            "description": "parsing a limit of data per page"
           }
         ],
         "responses": {
@@ -2131,16 +2532,16 @@
           "search": {
             "type": "string"
           },
-       "accommodationId": {
+          "accommodationId": {
             "type": "string"
           },
-           "description": {
+          "description": {
             "type": "string"
           },
-           "image": {
+          "image": {
             "type": "string"
           },
-           "status": {
+          "status": {
             "type": "string"
           }
         }
@@ -2148,7 +2549,11 @@
     },
     "roomBooking": {
       "type": "object",
-      "required": ["roomId", "from", "to"],
+      "required": [
+        "roomId",
+        "from",
+        "to"
+      ],
       "properties": {
         "roomId": {
           "type": "integer"
@@ -2164,7 +2569,12 @@
     "ManagerAssignment": {
       "title": "Assign requesters to managers",
       "example": {
-        "requesters": [8,9,10,11],
+        "requesters": [
+          8,
+          9,
+          10,
+          11
+        ],
         "manager": 3
       },
       "type": "object",

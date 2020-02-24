@@ -1,4 +1,5 @@
 import tripHelpers from '../helpers/tripHelpers';
+import pagination from '../helpers/paginateHelper';
 import notification from '../helpers/notifications';
 /**
  * This class contains all methods
@@ -95,16 +96,38 @@ class TripController {
     });
   }
 
+  /* eslint-disable object-curly-newline */
   /**
    * This method handles view all trip requests.
    * @param {object} req The user's request.
    * @param {object} res The response.
+   * @param {function} next The next action.
    * @returns {object} The status and some data of the trip.
    */
-  static async viewAllTrips(req, res) {
-    const { role, id } = req.user;
-    const foundTrips = await tripHelpers.findTripByRole(role, id);
-    return res.status(200).json({ status: 200, data: foundTrips });
+  static async viewAllTrips(req, res, next) {
+    try {
+      const { role, id } = req.user;
+      const { start, end, pages, skip, paginate } = await pagination.paginateData(req.query);
+      const foundTrips = await tripHelpers.findTripByRole(role, id, skip, start);
+
+
+      const userAllData = foundTrips.rows;
+      const countUserData = foundTrips.count;
+      if (foundTrips.rows.length === 0) {
+        return res.status(404).json({
+          status: 404,
+          message: `${req.user.username} You don't have trip request`
+        });
+      }
+      req.data = { userAllData, countUserData, start, end, pages, skip, paginate };
+      next();
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        message: ' something goes wrong ',
+        error: error.message
+      });
+    }
   }
 
   /**

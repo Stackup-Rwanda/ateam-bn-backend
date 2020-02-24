@@ -61,6 +61,24 @@ describe('running user role update route tests', () => {
     result.should.have.status(200);
     result.body.should.have.property('data');
   });
+  it('a super administrator should be able to view all users', async () => {
+    const result = await chai
+      .request(index)
+      .get('/api/users/?page=1&limit=1')
+      .send()
+      .set('token', superAdminToken);
+    result.should.have.status(200);
+    result.body.should.have.property('data');
+  });
+  it('a super administrator should be able to view all users', async () => {
+    const result = await chai
+      .request(index)
+      .get('/api/users/?page=2&limit=1')
+      .send()
+      .set('token', superAdminToken);
+    result.should.have.status(200);
+    result.body.should.have.property('data');
+  });
   it('a super administrator should not be able to assign a requesters to a manager when managersId is not valid', async () => {
     const result = await chai
       .request(index)

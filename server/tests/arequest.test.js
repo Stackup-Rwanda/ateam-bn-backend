@@ -38,7 +38,6 @@ describe('Test suite for approving/rejecting trip requests', () => {
     expect(res.body.data).to.be.an('object');
   });
 
-
   it('should approve trip request if manager has user under his/her authority', async () => {
     const res = await router().patch('/api/request/1/approve')
       .set('token', token).send({ status: 'Approved' });

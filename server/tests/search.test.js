@@ -80,7 +80,7 @@ describe('running user search route', () => {
       .request(index)
       .post('/api/search/request')
       .set('token', currentToken)
-      .send({ search: 17 });
+      .send({ search: 1754 });
     result.should.have.status(404);
     result.body.should.have.property('error', "request with given input was not found");
   });
@@ -156,7 +156,7 @@ describe('running manager search route', () => {
       .request(index)
       .post('/api/search/request')
       .set('token', managerToken)
-      .send({ search: 17 });
+      .send({ search: 17454 });
     result.should.have.status(404);
     result.body.should.have.property('error');
   });

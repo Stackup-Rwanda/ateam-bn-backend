@@ -2,6 +2,7 @@
 /* eslint-disable max-len */
 import accommodationHelper from '../helpers/accommodationHelper';
 import accommodationHelpers from '../helpers/accommodationHelpers';
+import pagination from '../helpers/paginateHelper';
 import picture from '../helpers/uploadImage';
 import models from '../models';
 
@@ -174,24 +175,35 @@ class AccommodationController {
     });
   }
 
+  /* eslint-disable object-curly-newline */
   /**
    * This method handles the reaction on accommodation.
    * @param {object} req The accommodation's request.
    * @param {object} res The response.
+   * @param {function} next The next action.
    * @returns {object} The s reaction and some data of the accomodation.
    */
-  static async viewAll(req, res) {
-    const foundAccommodation = await Accommodations.findAll();
-    if (foundAccommodation.length === 0) {
-      return res.status(404).json({
-        status: 404,
-        error: 'You dont have any Accommodations'
+  static async viewAll(req, res, next) {
+    try {
+      const { start, end, pages, skip, paginate } = await pagination.paginateData(req.query);
+      const foundAccommodation = await Accommodations.findAndCountAll({ limit: skip, offset: start, order: [['id', 'DESC']] });
+      const userAllData = foundAccommodation.rows;
+      const countUserData = foundAccommodation.count;
+      if (foundAccommodation.rows.length === 0) {
+        return res.status(404).json({
+          status: 404,
+          message: `${req.user.username} You don't have notification`
+        });
+      }
+      req.data = { userAllData, countUserData, start, end, pages, skip, paginate };
+      next();
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        message: ' something goes wrong ',
+        error: error.message
       });
     }
-    res.status(200).json({
-      status: 200,
-      data: foundAccommodation
-    });
   }
 
   /**

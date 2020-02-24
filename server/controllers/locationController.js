@@ -1,4 +1,5 @@
 import destinationsHelper from '../helpers/destinationsHelper';
+import pagination from '../helpers/paginateHelper';
 
 /**
  * This class contains all methods
@@ -26,6 +27,37 @@ class MostTravelledDestionController {
         message: ` Hey ${req.user.username} !! Those are the most travelled destination ever !!`,
         data: { Title: 'Let Take Look on Top most Travelled Destinations', informations }
       });
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        message: ' something goes wrong ',
+        error: error.message
+      });
+    }
+  }
+
+  /* eslint-disable object-curly-newline */
+  /**
+   * This method handle the places pagination.
+   * @param {object} req The place's request.
+   * @param {object} res The response.
+   * @param {function} next The next action.
+   * @returns {object} retrived places.
+   */
+  static async viewPlaces(req, res, next) {
+    try {
+      const { start, end, pages, skip, paginate } = await pagination.paginateData(req.query);
+      const placesData = await destinationsHelper.findPlaces(skip, start);
+      const userAllData = placesData.rows;
+      const countUserData = placesData.count;
+      if (placesData.rows.length === 0) {
+        return res.status(404).json({
+          status: 404,
+          message: `${req.user.username} No place found`
+        });
+      }
+      req.data = { userAllData, countUserData, start, end, pages, skip, paginate };
+      next();
     } catch (error) {
       return res.status(500).json({
         status: 500,

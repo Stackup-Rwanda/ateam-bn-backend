@@ -57,18 +57,21 @@ class TripHelpers {
     return foundTrip;
   }
 
+  /* eslint-disable object-curly-newline */
   /**
    * Finds a trip by user role.
    * @param {string} role From user details inside token.
    * @param {integer} id user's Id.
+   * @param {integer} skip limit.
+   * @param {integer} start from.
    * @returns {object} Trip request data.
    */
-  static async findTripByRole(role, id) {
+  static async findTripByRole(role, id, skip, start) {
     let foundTrip;
     if (role === 'Manager') {
-      foundTrip = await Trip.findAll();
+      foundTrip = await Trip.findAndCountAll({ limit: skip, offset: start, order: [['id', 'DESC']] });
     } else {
-      foundTrip = await Trip.findAll({ where: { userId: id } });
+      foundTrip = await Trip.findAndCountAll({ where: { userId: id }, limit: skip, offset: start, order: [['id', 'DESC']] });
     }
     return foundTrip;
   }

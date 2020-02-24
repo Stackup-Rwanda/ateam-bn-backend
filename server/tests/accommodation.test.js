@@ -86,6 +86,22 @@ describe('Accommodation Tests', () => {
     res.should.have.status(200);
     res.body.should.be.an('object');
   });
+  it('user should be able to view all accommodations', async () => {
+    const res = await chai
+      .request(app)
+      .get('/api/accommodation/?page=1&limit=1')
+      .set('token', travelAdmniToken);
+    res.should.have.status(200);
+    res.body.should.be.an('object');
+  });
+  it('user should be able to view all accommodations', async () => {
+    const res = await chai
+      .request(app)
+      .get('/api/accommodation/?page=2&limit=1')
+      .set('token', travelAdmniToken);
+    res.should.have.status(200);
+    res.body.should.be.an('object');
+  });
   it('user should be able to view a single accommodation', async () => {
     const id = 1;
     const res = await chai
@@ -105,7 +121,7 @@ describe('Accommodation Tests', () => {
     res.body.should.be.an('object');
   });
   it('When user doesnt have any single accommodation', async () => {
-    const id = 10;
+    const id = 100;
     const res = await chai
       .request(app)
       .get(`/api/accommodation/${id}`)
@@ -140,7 +156,7 @@ describe('Accommodation Tests', () => {
     res.body.should.have.property('message');
   });
   it('When user tries to delete an accommodation that doest exist', async () => {
-    const id = 10;
+    const id = 20;
     const res = await chai
       .request(app)
       .delete(`/api/accommodation/${id}/delete`)
@@ -201,7 +217,7 @@ describe('Accommodation Tests', () => {
     res.body.should.have.property('error');
   });
   it('When user tries to edit an accommodation that doest exist', async () => {
-    const id = 10;
+    const id = 100;
     const res = await chai
       .request(app)
       .patch(`/api/accommodation/${id}/edit`)
