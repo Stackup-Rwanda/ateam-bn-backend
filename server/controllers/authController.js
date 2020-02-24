@@ -28,6 +28,7 @@ class AuthController {
     req.body.role = 'Requester';
     req.body.isVerified = false;
     req.body.rememberMe = false;
+    req.body.lineManager = 3;
     const {
       username, email, role, isVerified, createdAt
     } = req.body;

@@ -1249,6 +1249,45 @@
           }
         }
       }
+    },
+    "/auth/admin/signup": {
+      "post": {
+        "tags": ["Super Admin register a user"],
+        "summary": "Super Administrator can register a user with a specific role",
+        "description": "Super Administrator is able to create a certain user with a specific role and if the user is a requester he/she must be assigned a manager",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Super admin can create a user with any role",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/superAdminSignUp"
+            }
+          },
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Super admin's token"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User was created successfully, Verify your email to confirm registration"
+          },
+          "400": {
+            "description": "Malformed/ Incorrect security token ! Check token and try again."
+          },
+          "401": {
+            "description": "User not recognised. Please create account and try again."
+          },
+          "409": {
+            "description": "This user already exists, use another email or username"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1257,22 +1296,24 @@
       "required": [
         "name",
         "gender",
+        "passportId",
         "email",
         "username",
         "password",
         "birthdate",
         "preferredLanguage",
         "referredCurrency",
-        "location",
-        "role",
-        "department",
-        "lineManager"
+        "locationId",
+        "department"
       ],
       "properties": {
         "name": {
           "type": "string"
         },
         "gender": {
+          "type": "string"
+        },
+        "passportId": {
           "type": "string"
         },
         "email": {
@@ -1293,16 +1334,10 @@
         "preferredCurrency": {
           "type": "string"
         },
-        "location": {
-          "type": "string"
-        },
-        "role": {
-          "type": "string"
+        "locationId": {
+          "type": "integer"
         },
         "department": {
-          "type": "string"
-        },
-        "lineManager": {
           "type": "string"
         }
       }
@@ -1514,6 +1549,65 @@
       "properties": {
         "feedback": {
           "type": "string"
+        }
+      }
+    },
+    "superAdminSignUp": {
+      "type": "object",
+      "required": [
+        "name",
+        "gender",
+        "passportId",
+        "email",
+        "username",
+        "password",
+        "birthdate",
+        "preferredLanguage",
+        "referredCurrency",
+        "locationId",
+        "role",
+        "department",
+        "lineManager"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        },
+        "passportId": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "birthdate": {
+          "type": "date"
+        },
+        "preferredLanguage": {
+          "type": "string"
+        },
+        "preferredCurrency": {
+          "type": "string"
+        },
+        "locationId": {
+          "type": "integer"
+        },
+        "role": {
+          "type": "string"
+        },
+        "department": {
+          "type": "string"
+        },
+        "lineManager": {
+          "type": "integer"
         }
       }
     }

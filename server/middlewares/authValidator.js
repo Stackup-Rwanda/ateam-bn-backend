@@ -52,7 +52,7 @@ const specialSignUp = (req, res, next) => {
     locationId: Joi.number().integer().required().messages({ 'number.base': 'Invalid type, your location id must be a integer', 'number.empty': 'Please enter your location id' }),
     role: validationObj({ 'string.base': 'Invalid type, your role must be a string', 'string.empty': 'Please enter your role' }),
     department: validationObj({ 'string.base': 'Invalid type, your department must be a string', 'string.empty': 'Please enter your department' }),
-    lineManager: Joi.number().integer().required().messages({ 'number.base': 'Invalid type, your line manager\'s id must be a integer', 'number.empty': 'Please enter your line manager\'s id' })
+    lineManager: Joi.number().integer().messages({ 'number.base': 'Invalid type, your line manager\'s id must be a integer', 'number.empty': 'Please enter your line manager\'s id' })
   });
   const { error } = schema.validate(req.body, {
     abortEarly: false
