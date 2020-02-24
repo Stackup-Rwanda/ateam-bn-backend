@@ -58,6 +58,22 @@ class TripHelpers {
   }
 
   /**
+   * Finds a trip by user role.
+   * @param {string} role From user details inside token.
+   * @param {integer} id user's Id.
+   * @returns {object} Trip request data.
+   */
+  static async findTripByRole(role, id) {
+    let foundTrip;
+    if (role === 'Manager') {
+      foundTrip = await Trip.findAll();
+    } else {
+      foundTrip = await Trip.findAll({ where: { userId: id } });
+    }
+    return foundTrip;
+  }
+
+  /**
    * Finds a trip by reasons and date.
    * @param {string} trip a trip data.
    * @returns {object} trip data.
@@ -123,6 +139,8 @@ class TripHelpers {
     try {
       const updated = await Trip.update(
         {
+          name: trip.name,
+          passportId: trip.passportId,
           tripType: trip.tripType,
           from: trip.from,
           to: trip.to,

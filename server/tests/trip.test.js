@@ -46,6 +46,27 @@ const updatedTrip = {
   accommodationId: 2
 };
 
+const rememberPassportId = {
+  passportId: "PC123777",
+  tripType: "Return",
+  from: 1,
+  to: [2, 1],
+  date: "2060-02-01",
+  reasons: "different reason",
+  returnDate: "2060-02-26",
+  accommodationId: 2
+};
+
+const rememberReasons = {
+  tripType: "Return",
+  from: 1,
+  to: [2, 1],
+  date: "2060-02-01",
+  reasons: "different reason",
+  returnDate: "2060-02-26",
+  accommodationId: 2
+};
+
 const returnTrip = {
   name: "Jay",
   passportId: "PC123777",
@@ -251,7 +272,9 @@ describe('remembered profile tests', () => {
 
 describe('Test for create one way trip endpoint', () => {
   let tripId;
+  let rememberTripId;
   let tripUpdateToken;
+  let rememberToken;
   let unauthorizedToken;
   let managerToken;
 
@@ -282,12 +305,30 @@ describe('Test for create one way trip endpoint', () => {
     result.body.should.be.an('object');
   });
 
+  it('user with activated rememberMe should first login', async () => {
+    const result = await chai.request(app)
+      .post('/api/auth/signin')
+      .send({ email: 'dummy2@email.rw', password: '123456789' });
+    rememberToken = result.body.data.token;
+    result.should.have.status(200);
+    result.body.should.be.an('object');
+  });
+
   it('user should be able to create a trip request', async () => {
     const result = await chai.request(app)
       .post('/api/trips')
       .send(newTrip)
       .set('token', tripUpdateToken);
     tripId = result.body.data.id;
+    result.should.have.status(201);
+  });
+
+  it('user should be able to create a trip request', async () => {
+    const result = await chai.request(app)
+      .post('/api/trips')
+      .send(newTrip)
+      .set('token', rememberToken);
+    rememberTripId = result.body.data.id;
     result.should.have.status(201);
   });
 
@@ -298,6 +339,33 @@ describe('Test for create one way trip endpoint', () => {
       .set('token', tripUpdateToken);
     result.should.have.status(201);
     result.body.should.have.property('message', 'Trip was updated successfully.');
+  });
+
+  it('users should first opt out of rememberMe to update their trip request with new name/passportId/reasons', async () => {
+    const result = await chai.request(app)
+      .put(`/api/trips/${rememberTripId}`)
+      .send(updatedTrip)
+      .set('token', rememberToken);
+    result.should.have.status(400);
+    result.body.should.have.property('error', 'to update the name/passport Number/reasons, first opt out of remember me');
+  });
+
+  it('users should first opt out of rememberMe to update their trip request with new name/passportId/reasons', async () => {
+    const result = await chai.request(app)
+      .put(`/api/trips/${rememberTripId}`)
+      .send(rememberPassportId)
+      .set('token', rememberToken);
+    result.should.have.status(400);
+    result.body.should.have.property('error', 'to update the name/passport Number/reasons, first opt out of remember me');
+  });
+
+  it('users should first opt out of rememberMe to update their trip request with new name/passportId/reasons', async () => {
+    const result = await chai.request(app)
+      .put(`/api/trips/${rememberTripId}`)
+      .send(rememberReasons)
+      .set('token', rememberToken);
+    result.should.have.status(400);
+    result.body.should.have.property('error', 'to update the name/passport Number/reasons, first opt out of remember me');
   });
 
   it('should report a non existing trip request (trip with id not registered)', async () => {
@@ -351,5 +419,48 @@ describe('Test for create one way trip endpoint', () => {
       .set('token', tokenTrue);
     result.should.have.status(401);
     result.body.should.have.property('error');
+  });
+});
+
+describe('viewing all trips test', () => {
+  let viewToken;
+  let managerToken;
+
+  it('logging in a requester', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/auth/signin')
+      .send({ email: 'dummy8jaja@email.rw', password: '123456789' });
+    viewToken = res.body.data.token;
+    res.should.have.status(200);
+    res.body.should.be.an('object');
+  });
+
+  it('logging in a manager', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/auth/signin')
+      .send({ email: 'nigorjeanluc@gmail.com', password: 'secret123' });
+    managerToken = res.body.data.token;
+    res.should.have.status(200);
+    res.body.should.be.an('object');
+  });
+
+  it('a requester user should only view their own trip requests', async () => {
+    const result = await chai.request(app)
+      .get('/api/trips')
+      .send()
+      .set('token', viewToken);
+    result.should.have.status(200);
+    result.body.should.have.property('data');
+  });
+
+  it('a manager user should view all trip requests', async () => {
+    const result = await chai.request(app)
+      .get('/api/trips')
+      .send()
+      .set('token', managerToken);
+    result.should.have.status(200);
+    result.body.should.have.property('data');
   });
 });

@@ -578,6 +578,33 @@
             "description": "This trip already exists, use another reasons or date."
           }
         }
+      },
+      "get": {
+        "tags": [
+          "Trip"
+        ],
+        "summary": "Viewing all trips",
+        "description": "a Requester user views all trip requests they've created, a Manager user views all trip requests",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token identify that a user has signed in"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "trip requests successfuly retrieved"
+          },
+          "400": {
+            "description": "Malformed/ Incorrect security token ! Check token and try again."
+          },
+          "401": {
+            "description": "User not recognised. Please create account and try again./ Already logged out. Sign in and try again."
+          }
+        }
       }
     },
     "/trips/{id}": {
