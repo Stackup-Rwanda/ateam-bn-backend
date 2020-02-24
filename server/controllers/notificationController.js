@@ -10,27 +10,22 @@ dotenv.config();
  */
 class Notifications {
   /**
-   * This method handle the accommodation request.
+   * This method handle the notifications pagination.
    * @param {object} req The notification's request.
    * @param {object} res The response.
-   * @returns {object} The status and some data of the accomodation.
+   * @param {function} next The next action.
+   * @returns {object} retrived notifications.
    */
-  static async viewNotifications(req, res) {
-    const foundNotice = await Notification.findAll({
-      where: {
-        receiverId: req.user.id
-      }
-    });
-    if (foundNotice.length === 0) {
+  static async viewNotifications(req, res, next) {
+    const notifications = await Notification.findAll({ where: { receiverId: req.user.id }, order: [['id', 'DESC']] });
+    if (notifications.length === 0) {
       return res.status(404).json({
         status: 404,
-        error: 'You dont have any notifications'
+        error: `${req.user.username} You don't have notification`
       });
     }
-    return res.status(200).json({
-      status: 200,
-      data: foundNotice
-    });
+    req.data = notifications;
+    next();
   }
 
   /**

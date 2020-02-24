@@ -18,6 +18,48 @@ describe('Test suite for approving/rejecting trip requests', () => {
     expect(res.body.data).to.be.an('object');
   });
 
+  it('should approve trip request if manager has user under his/her authority', async () => {
+    const res = await router().patch('/api/request/1/approve')
+      .set('token', token).send({ status: 'Approved' });
+    expect(res.body).to.be.an('object');
+    expect(res.body.status).to.equals(200);
+    expect(res.body.message).to.be.a('string');
+    expect(res.body.message).to.equals('This trip request was successfully approved');
+    expect(res.body.data).to.be.an('object');
+  });
+
+  it('should approve trip request if manager has user under his/her authority', async () => {
+    const res = await router().patch('/api/request/1/approve')
+      .set('token', token).send({ status: 'Approved' });
+    expect(res.body).to.be.an('object');
+    expect(res.body.status).to.equals(200);
+    expect(res.body.message).to.be.a('string');
+    expect(res.body.message).to.equals('This trip request was successfully approved');
+    expect(res.body.data).to.be.an('object');
+  });
+
+
+  it('should approve trip request if manager has user under his/her authority', async () => {
+    const res = await router().patch('/api/request/1/approve')
+      .set('token', token).send({ status: 'Approved' });
+    expect(res.body).to.be.an('object');
+    expect(res.body.status).to.equals(200);
+    expect(res.body.message).to.be.a('string');
+    expect(res.body.message).to.equals('This trip request was successfully approved');
+    expect(res.body.data).to.be.an('object');
+  });
+
+
+  it('should approve trip request if manager has user under his/her authority', async () => {
+    const res = await router().patch('/api/request/1/approve')
+      .set('token', token).send({ status: 'Approved' });
+    expect(res.body).to.be.an('object');
+    expect(res.body.status).to.equals(200);
+    expect(res.body.message).to.be.a('string');
+    expect(res.body.message).to.equals('This trip request was successfully approved');
+    expect(res.body.data).to.be.an('object');
+  });
+
   it('should reject trip request if manager has user under his/her authority', async () => {
     const res = await router().patch('/api/request/1/reject')
       .set('token', token).send({ status: 'Rejected' });
