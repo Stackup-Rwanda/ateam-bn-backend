@@ -7,7 +7,7 @@ import usersTester from './mochData/users';
 chai.use(chaiHttp);
 chai.should();
 const router = () => chai.request(app);
-chai.should();
+let token;
 
 
 describe('signUp validation tests', () => {
@@ -122,5 +122,19 @@ describe('signIn tests', () => {
     res.should.have.status(401);
     res.body.should.be.an('object');
     res.body.should.have.property('message', 'password or email is incorrect');
+  });
+});
+
+describe('Test suite for special signup executed by the Super Admin', () => {
+  it(`should not register a user without the super admin's token`, async () => {
+    mochaAsync(async () => {
+      const res = await router()
+        .post('/api/auth/admin/signup')
+        .send(usersTester[0]);
+      expect(res.body.status).to.equal(401);
+      expect(res.body).to.be.an('object');
+      expect(res.body.error).to.be.a('string');
+      expect(res.body.error).to.be.equals('Please provide a token first');
+    })
   });
 });
