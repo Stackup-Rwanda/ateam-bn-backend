@@ -21,24 +21,13 @@
       "description": "Authentication endpoints"
     }
   ],
-  "schemes": [
-    "http",
-    "https"
-  ],
-  "consumes": [
-    "application/json",
-    "none"
-  ],
-  "produces": [
-    "application/json",
-    "none"
-  ],
+  "schemes": ["http", "https"],
+  "consumes": ["application/json", "none"],
+  "produces": ["application/json", "none"],
   "paths": {
     "/users/jkhgftgftydcrdc": {
       "get": {
-        "tags": [
-          "User"
-        ],
+        "tags": ["User"],
         "summary": "Access wrong link",
         "description": "Now by the use of this GET endpoint user Should be redirected to the documentation of application",
         "responses": {
@@ -50,9 +39,7 @@
     },
     "/auth/signup/": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Signup with application",
         "description": "Now by the use of this POST endpoint user Should be able to create account with Barefoot Nomad application",
         "parameters": [
@@ -81,9 +68,7 @@
     },
     "/auth/signin/": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Signin with application",
         "description": "Now by the use of this POST endpoint user Should be able to signin into his/her account with  Barefoot Nomad  application",
         "parameters": [
@@ -109,9 +94,7 @@
     },
     "/auth/logout": {
       "get": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "logout user from application",
         "description": "Now by the use of this GET endpoint user Should logout from application",
         "responses": {
@@ -131,17 +114,11 @@
     },
     "/auth/reset-password": {
       "post": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Send Email to reset password",
         "description": "User can get an email to reset password, endpoint",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "body",
@@ -168,9 +145,7 @@
     },
     "/auth/update-password/{userId}/{token}": {
       "patch": {
-        "tags": [
-          "Auth"
-        ],
+        "tags": ["Auth"],
         "summary": "Reset password",
         "description": "User can reset password, endpoint",
         "parameters": [
@@ -216,14 +191,10 @@
       "get": {
         "description": "user can view his/her profile details",
         "summary": "View User's Profile",
-        "tags": [
-          "Profile"
-        ],
+        "tags": ["Profile"],
         "operationId": "ViewProfile",
         "deprecated": false,
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "token",
@@ -257,14 +228,10 @@
       "patch": {
         "description": "User can update details of his/her profile",
         "summary": "Update User's Profile",
-        "tags": [
-          "Profile"
-        ],
+        "tags": ["Profile"],
         "operationId": "UpdateProfile",
         "deprecated": false,
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "token",
@@ -355,15 +322,9 @@
       "post": {
         "description": "A user can search his trip request and approval based on request id , request owner, destination, origin and request status ",
         "summary": "search",
-        "tags": [
-          "Search"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ],
+        "tags": ["Search"],
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
         "parameters": [
           {
             "name": "token",
@@ -402,14 +363,10 @@
       "patch": {
         "description": "A super administrator can assign roles to users by using their email addresses",
         "summary": "Update a User's role",
-        "tags": [
-          "Role"
-        ],
+        "tags": ["Role"],
         "operationId": "UpdateRole",
         "deprecated": false,
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "token",
@@ -458,15 +415,9 @@
       "post": {
         "description": "A manager can search his trip request and approval based on request id , request owner, destination, origin and request status ",
         "summary": "search",
-        "tags": [
-          "Search"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "consumes": [
-          "application/json"
-        ],
+        "tags": ["Search"],
+        "produces": ["application/json"],
+        "consumes": ["application/json"],
         "parameters": [
           {
             "name": "token",
@@ -503,9 +454,7 @@
     },
     "/request/{id}/approve": {
       "patch": {
-        "tags": [
-          "Approve Trip Request"
-        ],
+        "tags": ["Approve Trip Request"],
         "summary": "Manager can approve a trip request",
         "description": "Manager can approve trip request done by users under his/her authority",
         "parameters": [
@@ -551,9 +500,7 @@
     },
     "/request/{id}/reject": {
       "patch": {
-        "tags": [
-          "Reject Trip Request"
-        ],
+        "tags": ["Reject Trip Request"],
         "summary": "Manager can reject a trip request",
         "description": "Manager can reject trip request done by users under his/her authority",
         "parameters": [
@@ -597,11 +544,9 @@
         }
       }
     },
-    "/trip": {
+    "/trips": {
       "post": {
-        "tags": [
-          "Trip"
-        ],
+        "tags": ["Trip"],
         "summary": "Trip creation",
         "description": "User can create a trip (One Way Trip, Return Trip and choose Multiple City on a trip)",
         "parameters": [
@@ -635,11 +580,9 @@
         }
       }
     },
-    "/trip/{id}": {
+    "/trips/{id}": {
       "put": {
-        "tags": [
-          "Trip"
-        ],
+        "tags": ["Trip"],
         "summary": "Trip creation",
         "description": "User can update a trip request if it is still open/Pending",
         "parameters": [
@@ -678,21 +621,57 @@
             "description": "This trip already exists, use another reasons or date."
           }
         }
-      }
-    },
-    "/trips/{tripId}/comment": {
-      "post": {
+      },
+       "get": {
+        "description": "A user should be able to see a single trip request that belongs to them",
+        "summary": "View single trip request ",
         "tags": [
-          "Trip Comment"
+          "Trips"
         ],
-        "summary": "create a trip comment",
-        "description": "User can create a trip comment, endpoint",
-        "consumes": [
-          "application/json"
-        ],
+        "operationId": "viewSingleTripRequest",
+        "deprecated": false,
         "produces": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "security token"
+          },
+          {
+            "in": "path",
+            "name": "id",
+            "type": "integer",
+            "required": true,
+            "description": "parsing a trip id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Single trip retrieved successfully",
+            "headers": {}
+          },
+          "404": {
+            "description": "Notifications not found",
+            "headers": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "headers": {}
+          }
+        }
+    }
+    },
+    "/trips/{tripId}/comment": {
+      "post": {
+        "tags": ["Trip Comment"],
+        "summary": "create a trip comment",
+        "description": "User can create a trip comment, endpoint",
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "body",
@@ -736,17 +715,11 @@
     },
     "/comments/{commentId}/update": {
       "patch": {
-        "tags": [
-          "Trip Comment"
-        ],
+        "tags": ["Trip Comment"],
         "summary": "update a trip comment",
         "description": "User can update a trip comment, endpoint",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "consumes": ["application/json"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "in": "body",
@@ -787,9 +760,7 @@
     },
     "/trips/{tripId}/comments": {
       "get": {
-        "tags": [
-          "Trip Comment"
-        ],
+        "tags": ["Trip Comment"],
         "summary": "get commets",
         "description": "User may get all comments, endpoint",
         "parameters": [
@@ -826,9 +797,7 @@
     },
     "/comments/{commentId}/delete": {
       "delete": {
-        "tags": [
-          "Trip Comment"
-        ],
+        "tags": ["Trip Comment"],
         "summary": "delete commet",
         "description": "User can delete a comment, endpoint",
         "parameters": [
@@ -864,12 +833,8 @@
       "post": {
         "description": "A user should be able to set their profile info to be remembered or not on their next travel request",
         "summary": "remember a use's profile",
-        "tags": [
-          "Remember profile"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "tags": ["Remember profile"],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "token",
@@ -905,14 +870,10 @@
       "post": {
         "description": "Travel Admin can create an accommodation",
         "summary": "Create new Accommodation",
-        "tags": [
-          "Accommodation"
-        ],
+        "tags": ["Accommodation"],
         "operationId": "CreateAccommodation",
         "deprecated": false,
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "token",
@@ -998,9 +959,7 @@
     },
     "/accomodation/react/:accommodationId": {
       "post": {
-        "tags": [
-          "Accommodation"
-        ],
+        "tags": ["Accommodation"],
         "summary": "user react on accommodation",
         "description": "User can like or unlike an accommodation",
         "parameters": [
@@ -1043,9 +1002,7 @@
     },
     "/accommodation/feedback/:accommodationId": {
       "post": {
-        "tags": [
-          "Accommodation"
-        ],
+        "tags": ["Accommodation"],
         "summary": "user give feedback on accommodation",
         "description": "User can give feedback on an accommodation",
         "parameters": [
@@ -1074,7 +1031,7 @@
           }
         ],
         "responses": {
-          "201":{
+          "201": {
             "description": "Your feedback was saved successfully"
           },
           "400": {
@@ -1090,32 +1047,17 @@
       "get": {
         "description": "User can view all their notifications assigned to them",
         "summary": "Viewing all Notifications",
-        "tags": [
-          "Accommodation"
-        ],
+        "tags": ["Notification"],
+        "operationId": "ViewNotification",
+        "deprecated": false,
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "token",
             "in": "header",
             "required": true,
             "type": "string",
-            "description": "token identify that a user has signed in"
-          },
-          {
-            "in": "path",
-            "name": "accommodationId",
-            "type": "integer",
-            "required": true,
-            "description": "parsing an accommodation Id"
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "description": "data to pass in body, to create a reaction",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/accomodationReaction"
-            }
+            "description": "security token"
           }
         ],
         "responses": {
@@ -1135,23 +1077,17 @@
       "post": {
         "description": "A user should be able to mark all notifications as read or unread",
         "summary": " Mark notifications",
-        "tags": [
-          "Accommodation"
-        ],
+        "tags": ["Notification"],
+        "operationId": "markNotifications",
+        "deprecated": false,
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "token",
             "in": "header",
             "required": true,
             "type": "string",
-            "description": "token identify that a user has signed in"
-          },
-          {
-            "in": "path",
-            "name": "accommodationId",
-            "type": "integer",
-            "required": true,
-            "description": "parsing an accommodation Id"
+            "description": "security token"
           },
           {
             "name": "Body",
@@ -1179,12 +1115,10 @@
       "post": {
         "description": "A user should be able to mark a notification as read or unread",
         "summary": " Mark notification",
-        "tags": [
-          "Remember profile"
-        ],
-        "produces": [
-          "application/json"
-        ],
+        "tags": ["Notification"],
+        "operationId": "markNotification",
+        "deprecated": false,
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "token",
@@ -1198,7 +1132,7 @@
             "name": "id",
             "type": "string",
             "required": true,
-            "description": ""
+            "description": "parsing a notification id"
           },
           {
             "name": "Body",
@@ -1224,9 +1158,7 @@
     },
     "/location/most-travelled-destination": {
       "get": {
-        "tags": [
-          "Most Travelled Destination"
-        ],
+        "tags": ["Most Travelled Destination"],
         "summary": "users can view most travelled destination",
         "description": "Users can view most travelled destination with extra information to help being clarity",
         "parameters": [
@@ -1250,9 +1182,7 @@
     },
     "/ratings/{id}": {
       "patch": {
-        "tags": [
-          "Rate an accommodation"
-        ],
+        "tags": ["Rate an accommodation"],
         "summary": "User can rate an accommodation",
         "description": "User can rate an accommodation according to the hospitality obtained from there",
         "parameters": [
@@ -1292,7 +1222,7 @@
           }
         }
       }
-    } 
+    }
   },
   "definitions": {
     "Signup": {
@@ -1336,8 +1266,8 @@
         "preferredCurrency": {
           "type": "string"
         },
-        "locationId": {
-          "type": "integer"
+        "location": {
+          "type": "string"
         },
         "role": {
           "type": "string"
@@ -1346,16 +1276,13 @@
           "type": "string"
         },
         "lineManager": {
-          "type": "integer"
+          "type": "string"
         }
       }
     },
     "signin": {
       "type": "object",
-      "required": [
-        "email",
-        "password"
-      ],
+      "required": ["email", "password"],
       "properties": {
         "email": {
           "type": "string"
@@ -1367,9 +1294,7 @@
     },
     "SendEmail": {
       "type": "object",
-      "required": [
-        "email"
-      ],
+      "required": ["email"],
       "properties": {
         "email": {
           "type": "string"
@@ -1378,10 +1303,7 @@
     },
     "ResetPassword": {
       "type": "object",
-      "required": [
-        "password",
-        "confirmPassword"
-      ],
+      "required": ["password", "confirmPassword"],
       "properties": {
         "password": {
           "type": "string"
@@ -1442,15 +1364,11 @@
           "type": "string"
         }
       },
-      "required": [
-        "role"
-      ]
+      "required": ["role"]
     },
     "searchRequest": {
       "type": "object",
-      "required": [
-        "search"
-      ],
+      "required": ["search"],
       "properties": {
         "search": {
           "type": "string"
@@ -1459,9 +1377,7 @@
     },
     "approvalRequest": {
       "type": "object",
-      "required": [
-        "status"
-      ],
+      "required": ["status"],
       "properties": {
         "status": {
           "type": "string"
@@ -1470,9 +1386,7 @@
     },
     "rejectRequest": {
       "type": "object",
-      "required": [
-        "status"
-      ],
+      "required": ["status"],
       "properties": {
         "status": {
           "type": "string"
@@ -1486,24 +1400,14 @@
         "passportId": "PC123487",
         "tripType": "One-way",
         "from": 1,
-        "to": [
-          2,
-          1
-        ],
+        "to": [2, 1],
         "date": "2050-09-13",
         "returnDate": "2050-10-30",
         "reasons": "hound issues",
         "accommodationId": 2
       },
       "type": "object",
-      "required": [
-        "tripType",
-        "from",
-        "to",
-        "date",
-        "reasons",
-        "accommodationId"
-      ],
+      "required": ["tripType", "from", "to", "date", "reasons", "accommodationId"],
       "properties": {
         "tripType": {
           "type": "string"
@@ -1530,9 +1434,7 @@
     },
     "createComment": {
       "type": "object",
-      "required": [
-        "comment"
-      ],
+      "required": ["comment"],
       "properties": {
         "comment": {
           "type": "string"
@@ -1541,20 +1443,38 @@
     },
     "updateComment": {
       "type": "object",
-      "required": [
-        "comment"
-      ],
+      "required": ["comment"],
       "properties": {
         "comment": {
           "type": "string"
         }
       }
     },
+    "markOne": {
+      "title": "User must be able to mark all notifications as read or unread",
+      "example": {
+        "viewed": "read"
+      },
+      "type": "object",
+      "properties": {
+        "viewed": {
+          "type": "string"
+        }
+      },
+      "required": ["viewed"]
+    },
+    "rateAccommodation": {
+      "type": "object",
+      "required": ["stars"],
+      "properties": {
+        "stars": {
+          "type": "integer"
+        }
+      }
+    },
     "like/unlike accommodation": {
       "type": "object",
-      "required": [
-        "reactionType"
-      ],
+      "required": ["reactionType"],
       "properties": {
         "liked": {
           "type": "string"
@@ -1563,18 +1483,10 @@
     },
     "give feedback on accommodation": {
       "type": "object",
-      "required": [
-        "viewed"
-      ]
-    },
-    "rateAccommodation": {
-      "type": "object",
-      "required": [
-        "stars"
-      ],
+      "required": ["feedback"],
       "properties": {
-        "stars": {
-          "type": "integer"
+        "feedback": {
+          "type": "string"
         }
       }
     }
