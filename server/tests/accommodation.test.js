@@ -9,6 +9,7 @@ chai.should();
 
 let travelAdmniToken;
 let tokenTrue;
+let approveToken;
 
 describe('Accommodation Tests', () => {
   it('Travel administrator login request', async () => {
@@ -20,7 +21,15 @@ describe('Accommodation Tests', () => {
     res.should.have.status(200);
     res.body.should.be.an('object');
   });
-
+  it('Travel administrator login request', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/auth/signin')
+      .send({ email: 'dummy2@email.rw', password: '123456789' });
+    approveToken = res.body.data.token;
+    res.should.have.status(200);
+    res.body.should.be.an('object');
+  });
   it('user should be able to add an accommodation with an image', async () => {
     const res = await chai
       .request(app)
@@ -91,7 +100,7 @@ describe('Accommodation Tests', () => {
     res.should.have.status(201);
     res.body.should.be.an('object');
   });
-  it('an message should be provided to the user if their feedback was not savedaccommodationId.', async () => {
+  it('a message should be provided to the user if their feedback was not saved(wrong accommodationId).', async () => {
     const res = await chai
       .request(app)
       .post('/api/accommodation/feedback/l')
@@ -100,13 +109,32 @@ describe('Accommodation Tests', () => {
     res.should.have.status(400);
     res.body.should.be.an('object');
   });
-  it('an message should be provided to the user if their feedback was not saved(userId).', async () => {
+  it('a message should be provided to the user if their feedback was not saved(wrong userId).', async () => {
     const res = await chai
       .request(app)
       .post('/api/accommodation/feedback/1')
       .set('token', tokenTrue)
       .send({ feedback: '%$one two three $%' });
     res.should.have.status(500);
+    res.body.should.be.an('object');
+  });
+  it('user should be able to like or fire an accommodation ', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/accomodation/react/1')
+      .set('token', approveToken)
+      .send({ reactionType: 'fire' });
+    res.should.have.status(200);
+    res.body.should.be.an('object');
+    res.body.should.have.property('message', 'reaction recorded successflly');
+  });
+  it('user should be able to change a reaction they made on an accommodation', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/accomodation/react/1')
+      .set('token', approveToken)
+      .send({ reactionType: 'jjj' });
+    res.should.have.status(400);
     res.body.should.be.an('object');
   });
 });

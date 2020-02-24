@@ -9,7 +9,7 @@
       "email": "the-a-team@gmail.com"
     }
   },
-  "host": "https://ateam-bn-backend-staging.herokuapp.com",
+  "host": "ateam-bn-backend-staging.herokuapp.com",
   "basePath": "/api",
   "tags": [
     {
@@ -996,17 +996,102 @@
         }
       }
     },
+    "/accomodation/react/:accommodationId": {
+      "post": {
+        "tags": [
+          "Accommodation"
+        ],
+        "summary": "user react on accommodation",
+        "description": "User can like or unlike an accommodation",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token identify that a user has signed in"
+          },
+          {
+            "in": "path",
+            "name": "accommodationId",
+            "type": "integer",
+            "required": true,
+            "description": "parsing an accommodation Id"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "data to pass in body, to create a reaction",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/accomodationReaction"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "reaction recorded successflly / reaction deleted"
+          },
+          "400": {
+            "description": "reactionType must be one of like,fire or hate"
+          },
+          "401": {
+            "description": "Already logged out. Sign in and try again."
+          }
+        }
+      }
+    },
+    "/accommodation/feedback/:accommodationId": {
+      "post": {
+        "tags": [
+          "Accommodation"
+        ],
+        "summary": "user give feedback on accommodation",
+        "description": "User can give feedback on an accommodation",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token identify that a user has signed in"
+          },
+          {
+            "in": "path",
+            "name": "accommodationId",
+            "type": "integer",
+            "required": true,
+            "description": "parsing an accommodation Id"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "data to pass in body, to create a feedback",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/accomodationFeedback"
+            }
+          }
+        ],
+        "responses": {
+          "201":{
+            "description": "Your feedback was saved successfully"
+          },
+          "400": {
+            "description": "you cannot give feedback to an accommodation you have not been to"
+          },
+          "401": {
+            "description": "Already logged out. Sign in and try again."
+          }
+        }
+      }
+    },
     "/notifications": {
       "get": {
         "description": "User can view all their notifications assigned to them",
         "summary": "Viewing all Notifications",
         "tags": [
-          "Notification"
-        ],
-        "operationId": "ViewNotification",
-        "deprecated": false,
-        "produces": [
-          "application/json"
+          "Accommodation"
         ],
         "parameters": [
           {
@@ -1014,7 +1099,23 @@
             "in": "header",
             "required": true,
             "type": "string",
-            "description": "security token"
+            "description": "token identify that a user has signed in"
+          },
+          {
+            "in": "path",
+            "name": "accommodationId",
+            "type": "integer",
+            "required": true,
+            "description": "parsing an accommodation Id"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "data to pass in body, to create a reaction",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/accomodationReaction"
+            }
           }
         ],
         "responses": {
@@ -1035,12 +1136,7 @@
         "description": "A user should be able to mark all notifications as read or unread",
         "summary": " Mark notifications",
         "tags": [
-          "Notification"
-        ],
-        "operationId": "markNotifications",
-        "deprecated": false,
-        "produces": [
-          "application/json"
+          "Accommodation"
         ],
         "parameters": [
           {
@@ -1048,7 +1144,14 @@
             "in": "header",
             "required": true,
             "type": "string",
-            "description": "security token"
+            "description": "token identify that a user has signed in"
+          },
+          {
+            "in": "path",
+            "name": "accommodationId",
+            "type": "integer",
+            "required": true,
+            "description": "parsing an accommodation Id"
           },
           {
             "name": "Body",
@@ -1077,10 +1180,8 @@
         "description": "A user should be able to mark a notification as read or unread",
         "summary": " Mark notification",
         "tags": [
-          "Notification"
+          "Remember profile"
         ],
-        "operationId": "markNotification",
-        "deprecated": false,
         "produces": [
           "application/json"
         ],
@@ -1097,7 +1198,7 @@
             "name": "id",
             "type": "string",
             "required": true,
-            "description": "parsing a notification id"
+            "description": ""
           },
           {
             "name": "Body",
@@ -1191,7 +1292,7 @@
           }
         }
       }
-    }
+    } 
   },
   "definitions": {
     "Signup": {
@@ -1449,17 +1550,19 @@
         }
       }
     },
-    "markOne": {
-      "title": "User must be able to mark all notifications as read or unread",
-      "example": {
-        "viewed": "read"
-      },
+    "like/unlike accommodation": {
       "type": "object",
+      "required": [
+        "reactionType"
+      ],
       "properties": {
-        "viewed": {
+        "liked": {
           "type": "string"
         }
-      },
+      }
+    },
+    "give feedback on accommodation": {
+      "type": "object",
       "required": [
         "viewed"
       ]
