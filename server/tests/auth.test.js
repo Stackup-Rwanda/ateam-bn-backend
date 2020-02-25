@@ -137,7 +137,6 @@ describe('Test suite for special signup executed by the Super Admin', () => {
       const res = await router()
         .post('/api/auth/admin/signup')
         .send(usersTester[8]);
-      console.log(res.body);
       expect(res.body.status).to.equal(401);
       expect(res.body).to.be.an('object');
       expect(res.body.error).to.be.a('string');
@@ -150,7 +149,6 @@ describe('Test suite for special signup executed by the Super Admin', () => {
       const res = await router()
         .post('/api/auth/admin/signup')
         .set('token', jwt).send(usersTester[8]);
-      console.log(res.body);
       expect(res.body.status).to.equal(201);
       expect(res.body).to.be.an('object');
       expect(res.body.message).to.be.a('string');
@@ -163,7 +161,6 @@ describe('Test suite for special signup executed by the Super Admin', () => {
       const res = await router()
         .post('/api/auth/admin/signup')
         .set('token', jwt).send(usersTester[9]);
-      console.log(res.body.error);
       expect(res.body.status).to.equal(409);
       expect(res.body).to.be.an('object');
       expect(res.body.error).to.be.a('string');

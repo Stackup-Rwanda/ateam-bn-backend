@@ -13,6 +13,8 @@ import accommodationRoutes from './accommodationRoutes';
 
 const router = Router();
 
+
+router.use(accommodationRoutes);
 router.use(tripRoutes);
 router.use(authRoutes);
 router.use(profileRoute);

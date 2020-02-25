@@ -15,7 +15,7 @@ const uploadToCloudinary = async (image) => {
     const { url } = result;
     return url;
   } catch (error) {
-    const customError = `${error.message} '${image.originalFilename}'`;
+    const customError = `${error} '${image.originalFilename}'`;
     throw customError;
   }
 };

@@ -11,8 +11,6 @@ const { expect } = chai;
 const realToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiR2lyYW1hdGEgS2FyZW4iLCJ1c2VybmFtZSI6ImtnaXIiLCJlbWFpbCI6IkthcmVuQGdtYWlsLmNvbSIsImlhdCI6MTU4MDgyMTI3OH0.AR-FqtlZ5-MnWqWZS-R-zjsiq6ingBz8b0RwvZ_GUSk';
 const wrongToken = 'eyJhbGciOijIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmltbXkgS2F5a2F5IiwidXNlcm5hbWUiOiJrYXkiLCJlbWFpbCI6IkprYXlAZ21haWwuY29tIiwiaWF0IjoxNTgwODIwNzM3fQ.jCVUdtDEMpcyliUcuwxGixSn2dcqoJ6xLaXEFswHfFI';
 describe('running user search route', () => {
-  // sample
-
   it('User should login before search', async () => {
     const result = await chai
       .request(index)
@@ -46,6 +44,27 @@ describe('running user search route', () => {
       .send({ search: 'Pending' });
     result.should.have.status(200);
     result.body.should.have.property('data');
+  });
+
+
+  it('user should be able search data by date', async () => {
+    const result = await chai
+      .request(index)
+      .post('/api/search/request')
+      .set('token', currentToken)
+      .send({ search: "2020-08-12T19:59:11Z" });
+    result.should.have.status(200);
+    result.body.should.have.property('data');
+  });
+
+  it('user should not be able search data by wrong date', async () => {
+    const result = await chai
+      .request(index)
+      .post('/api/search/request')
+      .set('token', currentToken)
+      .send({ search: "2020-03-12T19:59:11Z" });
+    result.should.have.status(404);
+    result.body.should.have.property('error');
   });
   it('user should be able search data by origin', async () => {
     const result = await chai
@@ -90,7 +109,7 @@ describe('running manager search route', () => {
   it('Manager should be able search data by status', async () => {
     const result = await chai
       .request(index)
-      .post('/api/search/request/manager')
+      .post('/api/search/request')
       .set('token', wrongToken)
       .send({ search: 'Pending' });
     result.should.have.status(400);
@@ -99,16 +118,34 @@ describe('running manager search route', () => {
   it('Manager should be able search data by status', async () => {
     const result = await chai
       .request(index)
-      .post('/api/search/request/manager')
+      .post('/api/search/request')
       .set('token', managerToken)
       .send({ search: 'Pending' });
     result.should.have.status(200);
     result.body.should.have.property('data');
   });
+  it('Manager should be able search data by date', async () => {
+    const result = await chai
+      .request(index)
+      .post('/api/search/request')
+      .set('token', managerToken)
+      .send({ search: "2020-08-12T19:59:11Z" });
+    result.should.have.status(200);
+    result.body.should.have.property('data');
+  });
+  it('Manager should not be able search data by wrong date', async () => {
+    const result = await chai
+      .request(index)
+      .post('/api/search/request')
+      .set('token', managerToken)
+      .send({ search: "2020-05-12T19:59:11Z" });
+    result.should.have.status(404);
+    result.body.should.have.property('error');
+  });
   it('manager should be able search data by origin, destination, tripId, userId, ', async () => {
     const result = await chai
       .request(index)
-      .post('/api/search/request/manager')
+      .post('/api/search/request')
       .set('token', managerToken)
       .send({ search: 1 });
     result.should.have.status(200);
@@ -117,7 +154,7 @@ describe('running manager search route', () => {
   it('manager should be not able to search unavailable data', async () => {
     const result = await chai
       .request(index)
-      .post('/api/search/request/manager')
+      .post('/api/search/request')
       .set('token', managerToken)
       .send({ search: 17 });
     result.should.have.status(404);
@@ -126,7 +163,7 @@ describe('running manager search route', () => {
   it('requester should not be able search data of manager ', async () => {
     const result = await chai
       .request(index)
-      .post('/api/search/request/manager')
+      .post('/api/search/request')
       .set('token', realToken)
       .send({ search: 1 });
     result.should.have.status(401);

@@ -39,7 +39,6 @@ const validateToken = async (req, res, next) => {
     }
 
     const rated = await RatingHelper.findRatedRating(req.requesterUser.id, parseInt(req.params.id, 10));
-    console.log(rated, req.requesterUser.id);
 
     if (rated) {
       return res.status(403).send({

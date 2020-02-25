@@ -10,9 +10,9 @@ import userIdExistMiddleware from '../middlewares/UserIdExistMiddleware';
 import { googleAuth, storeAuth } from '../controllers/socialController';
 import { signUp, signIn, specialSignUp } from '../middlewares/authValidator';
 import importedTokenValidator from '../middlewares/tokenValidator';
-import { searchData, managerSearch } from '../controllers/searchController';
-import isManager from '../middlewares/isManager';
+import searchData from '../controllers/searchController';
 import isSuperManager from '../middlewares/isSuperAdmin';
+
 
 const router = Router();
 router.use(passport.initialize());
@@ -29,7 +29,6 @@ router
   .get('/auth/google/callback', passport.authenticate('google', { session: false }), asyncErrorHandler(googleAuth))
   .get('/auth/facebook', passport.authenticate('facebook'))
   .get('/auth/facebook/callback', passport.authenticate('facebook', { session: false }), asyncErrorHandler(storeAuth))
-  .post('/search/request', importedTokenValidator, asyncErrorHandler(searchData))
-  .post('/search/request/manager', importedTokenValidator, isManager, asyncErrorHandler(managerSearch));
+  .post('/search/request', importedTokenValidator, asyncErrorHandler(searchData));
 
 export default router;

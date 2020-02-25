@@ -107,6 +107,63 @@ class SearchHelpers {
     });
     return findRequest;
   }
+
+  /**
+       * Saves a trip in the DB.
+       * @param {object} request,myId request sent by a user.
+       * @returns {array} trip data.
+       */
+  static async managerDateSearch(request) {
+    try {
+      const findRequest = await Trip.findAll({
+
+        where: {
+          [Op.or]: [
+            { date: request },
+            { returnDate: request }
+          ],
+        },
+        include: [{
+          model: User,
+          as: "Users",
+          attributes: ['name', 'email', 'username', 'role', 'locationId', 'lineManager', 'gender', 'createdAt', 'updatedAt']
+        }]
+
+      });
+      return findRequest;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  /**
+       * Saves a trip in the DB.
+       * @param {object} request,myId request sent by a user.
+       * @returns {array} trip data.
+       */
+  static async requesterDateSearch({ request, myId }) {
+    try {
+      const findRequest = await Trip.findAll({
+
+        where: {
+          [Op.or]: [
+            { date: request },
+            { returnDate: request }
+          ],
+          userId: myId
+        },
+        include: [{
+          model: User,
+          as: "Users",
+          attributes: ['name', 'email', 'username', 'role', 'locationId', 'lineManager', 'gender', 'createdAt', 'updatedAt']
+        }]
+
+      });
+      return findRequest;
+    } catch (error) {
+      return error;
+    }
+  }
 }
 
 
