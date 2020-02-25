@@ -2,33 +2,30 @@ export default [
   {
     name: 'Agasaro',
     gender: 'Female',
+    passportId: 'PC123445',
     email: 'elsieagasaro@gmail.com',
     username: 'TheOneAndOnly',
     password: 'abcd123456789',
     birthdate: '2002-07-02',
     preferredLanguage: 'French',
     preferredCurrency: 'Dollars',
-    rememberMe: 'false',
     locationId: 1,
-    role: 'Architect',
-    department: 'Construction',
-    lineManager: '1'
+    department: 'Construction'
   }, {
     name: 'Dummy',
     gender: 'Male',
+    passportId: 'PC123455',
     email: 'dummy2@email.rw',
     username: 'MrDummy',
     password: '123456789',
     birthdate: new Date(),
     preferredLanguage: 'French',
     preferredCurrency: 'Euro',
-    rememberMe: 'false',
     locationId: 1,
-    role: 'Broker',
-    department: 'Cleaner',
-    lineManager: 3
+    department: 'Cleaner'
   }, {
     name: 'Jaja Jaden',
+    passportId: 'PC123465',
     gender: 'Male',
     email: 'jajajaden01@gmail.com',
     username: 'jasmin',
@@ -36,9 +33,8 @@ export default [
     birthdate: '2002-07-02',
     preferredLanguage: 'French',
     preferredCurrency: 'Dollars',
-    rememberMe: 'false',
     locationId: 1,
-    role: 'Architect',
+    role: 'Requester',
     department: 'Construction',
     lineManager: 3
   }, {
@@ -65,4 +61,33 @@ export default [
     email: 'dummy3@email.rw',
     password: '123456789'
   },
+  {
+    name: 'King Luc',
+    gender: 'Male',
+    passportId: 'PC123745',
+    email: 'jeanluc05@live.com',
+    username: 'Jean Luc',
+    password: '123456789',
+    birthdate: '2002-07-02',
+    preferredLanguage: 'French',
+    preferredCurrency: 'Dollars',
+    locationId: 1,
+    role: 'Manager',
+    department: 'Construction',
+    lineManager: 3
+  }, {
+    name: "Igor Jean-Luc",
+    username: "Nigorjeeanluc0",
+    passportId: "PC123456",
+    email: "dummy2@email.rw",
+    password: "123456789",
+    gender: "Male",
+    birthdate: "2020-05-21",
+    preferredLanguage: "French",
+    preferredCurrency: "Dollars",
+    locationId: 1,
+    role: "Manager",
+    department: "IT",
+    lineManager: 3
+  }
 ];

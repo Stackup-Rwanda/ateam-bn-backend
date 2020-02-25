@@ -7,7 +7,7 @@ import usersTester from './mochData/users';
 chai.use(chaiHttp);
 chai.should();
 const router = () => chai.request(app);
-chai.should();
+let jwt;
 
 
 describe('signUp validation tests', () => {
@@ -123,4 +123,50 @@ describe('signIn tests', () => {
     res.body.should.be.an('object');
     res.body.should.have.property('message', 'password or email is incorrect');
   });
+});
+
+describe('Test suite for special signup executed by the Super Admin', () => {
+  before(mochaAsync(async () => {
+    const res = await router()
+      .post("/api/auth/signin")
+      .send({ email: 'dummy2@email.rw', password: '123456789' });
+    jwt = res.body.data.token;
+  }));
+  it(`should not register a user without the super admin's token`, async () => {
+    mochaAsync(async () => {
+      const res = await router()
+        .post('/api/auth/admin/signup')
+        .send(usersTester[8]);
+      console.log(res.body);
+      expect(res.body.status).to.equal(401);
+      expect(res.body).to.be.an('object');
+      expect(res.body.error).to.be.a('string');
+      expect(res.body.error).to.be.equals('Please provide a token first');
+    });
+  });
+  it(
+    'should let Super Admin create a new user account with appropriate request',
+    mochaAsync(async () => {
+      const res = await router()
+        .post('/api/auth/admin/signup')
+        .set('token', jwt).send(usersTester[8]);
+      console.log(res.body);
+      expect(res.body.status).to.equal(201);
+      expect(res.body).to.be.an('object');
+      expect(res.body.message).to.be.a('string');
+      expect(res.body.data).to.be.an('object');
+    })
+  );
+  it(
+    "shouldn't let Super Admin signup already saved user",
+    mochaAsync(async () => {
+      const res = await router()
+        .post('/api/auth/admin/signup')
+        .set('token', jwt).send(usersTester[9]);
+      console.log(res.body.error);
+      expect(res.body.status).to.equal(409);
+      expect(res.body).to.be.an('object');
+      expect(res.body.error).to.be.a('string');
+    })
+  );
 });

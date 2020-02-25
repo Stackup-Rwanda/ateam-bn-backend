@@ -8,16 +8,18 @@ import Validations from '../middlewares/ValidateResetPassword';
 import resetEmailTokenMiddleware from '../middlewares/ResetEmailTokenMiddleware';
 import userIdExistMiddleware from '../middlewares/UserIdExistMiddleware';
 import { googleAuth, storeAuth } from '../controllers/socialController';
-import { signUp, signIn } from '../middlewares/authValidator';
+import { signUp, signIn, specialSignUp } from '../middlewares/authValidator';
 import importedTokenValidator from '../middlewares/tokenValidator';
 import { searchData, managerSearch } from '../controllers/searchController';
 import isManager from '../middlewares/isManager';
+import isSuperManager from '../middlewares/isSuperAdmin';
 
 const router = Router();
 router.use(passport.initialize());
 
 router
   .post('/auth/signup', signUp, passwordHasher, asyncErrorHandler(AuthController.signUp))
+  .post('/auth/admin/signup', importedTokenValidator, isSuperManager, specialSignUp, passwordHasher, asyncErrorHandler(AuthController.adminSignUp))
   .post('/auth/reset-password', Validations.checkEmail, asyncErrorHandler(EmailController.sendResetPasswordEmail))
   .patch('/auth/update-password/:userId/:token', Validations.checkPassword, Validations.checkPasswordAnConfirmPassword, userIdExistMiddleware, resetEmailTokenMiddleware, asyncErrorHandler(EmailController.updatePassword))
   .get('/user/:email/confirm', AuthController.confirmation)
