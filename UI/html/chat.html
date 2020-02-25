@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Barefoot Nomand chat</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .container-chat {
+            width: 500px;
+            margin: auto;
+        }
+
+        .container {
+            border: 2px solid #dedede;
+            background-color: #f1f1f1;
+            border-radius: 5px;
+            padding: 1px 10px;
+            margin: 10px 0;
+        }
+
+        .darker {
+            border-color: #ccc;
+            background-color: #ddd;
+            text-align: right;
+        }
+
+        .container::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        .time-right {
+            float: right;
+            color: #aaa;
+        }
+        .time-left {
+            float: left;
+            color: #999;
+        }
+        .logo{ font-weight: bold; }
+        .form{
+            overflow: hidden;
+        }
+        .form input{
+            width: 82%;
+            padding: .8em;
+            float: left;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            border-radius: 5px 0 0 5px;
+            font-size: 15px;
+        }
+        .form button{
+            background-color: #4CAF50;
+            color: white;
+            padding: .8em;
+            border: none;
+            cursor: pointer;
+            width: 17%;
+            float: right;
+            border-radius: 0 5px 5px 0;
+            font-weight: bold;
+            font-size: 15px;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container-chat">
+        <h2>Barefoot Chat</h2>
+
+        <div class="message-container">
+        </div>
+
+        <form method="POST" action="" class="form">
+            <input type="text" name="message" class="message-input" placeholder="type here..." required />
+            <button type="submit" class="send-button">send</button>
+        </form>
+    </div>
+
+    <script src="/script.js"></script>
+  </body>
+</html>

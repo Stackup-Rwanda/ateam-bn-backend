@@ -8,6 +8,7 @@ import notificationRoute from './notificationRoute';
 import tripCommentRoutes from './tripCommentRoutes';
 import locationRoute from './locationRoute';
 import ratingRoutes from './ratingRoutes';
+import chatRoutes from './chatRoutes';
 
 const router = Router();
 
@@ -20,5 +21,6 @@ router.use(notificationRoute);
 router.use(tripCommentRoutes);
 router.use(locationRoute);
 router.use(ratingRoutes);
+router.use(chatRoutes);
 
 export default router;

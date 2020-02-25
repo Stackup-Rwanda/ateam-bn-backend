@@ -95,6 +95,14 @@ class AuthController {
               emailExists.role,
               emailExists.isVerified
             ),
+            userData: {
+              id: emailExists.id,
+              name: emailExists.name,
+              username: emailExists.username,
+              email: emailExists.email,
+              role: emailExists.role,
+              lineManager: emailExists.lineManager
+            }
           }
         });
       }
