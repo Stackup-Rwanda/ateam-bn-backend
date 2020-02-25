@@ -20,4 +20,4 @@ const sockeHelper = (socket) => {
   });
 };
 
-export default { sockeHelper };
+export default sockeHelper;

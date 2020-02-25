@@ -245,7 +245,7 @@ describe('remembered profile tests', () => {
     const res = await chai
       .request(app)
       .post('/api/auth/signin')
-      .send({ email: 'nigorjeanluc@gmail.com', password: 'secret123' });
+      .send({ email: 'JkayOne2@gmail.com', password: '123456789' });
     tokenFalse = res.body.data.token;
     res.should.have.status(200);
     res.body.should.be.an('object');
@@ -277,6 +277,26 @@ describe('Test for create one way trip endpoint', () => {
   let rememberToken;
   let unauthorizedToken;
   let managerToken;
+  let superToken;
+
+  it('user should first login', async () => {
+    const result = await chai.request(app)
+      .post('/api/auth/signin')
+      .send({ email: 'kwizeradoddy@gmail.com', password: 'kalimba123' });
+    superToken = result.body.data.token;
+    result.should.have.status(200);
+    result.body.should.be.an('object');
+  });
+
+  it('a signed in super admin should be able to update a particular user role ', async () => {
+    const result = await chai
+      .request(app)
+      .patch('/api/users/MrDummy2/role')
+      .send({ role: 'Requester' })
+      .set('token', superToken);
+    result.should.have.status(201);
+    result.body.should.have.property('message', 'user role updated successfully');
+  });
 
   it('user should first login', async () => {
     const result = await chai.request(app)
@@ -419,6 +439,58 @@ describe('Test for create one way trip endpoint', () => {
       .set('token', tokenTrue);
     result.should.have.status(401);
     result.body.should.have.property('error');
+  });
+  it('a signed in super admin should be able to update a particular user role ', async () => {
+    const result = await chai
+      .request(app)
+      .patch('/api/users/MrDummy2/role')
+      .send({ role: 'Super Administrator' })
+      .set('token', superToken);
+    result.should.have.status(201);
+    result.body.should.have.property('message', 'user role updated successfully');
+  });
+});
+
+describe('viewing all trips test', () => {
+  let viewToken;
+  let managerToken;
+
+  it('logging in a requester', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/auth/signin')
+      .send({ email: 'dummy8jaja@email.rw', password: '123456789' });
+    viewToken = res.body.data.token;
+    res.should.have.status(200);
+    res.body.should.be.an('object');
+  });
+
+  it('logging in a manager', async () => {
+    const res = await chai
+      .request(app)
+      .post('/api/auth/signin')
+      .send({ email: 'nigorjeanluc@gmail.com', password: 'secret123' });
+    managerToken = res.body.data.token;
+    res.should.have.status(200);
+    res.body.should.be.an('object');
+  });
+
+  it('a requester user should only view their own trip requests', async () => {
+    const result = await chai.request(app)
+      .get('/api/trips')
+      .send()
+      .set('token', viewToken);
+    result.should.have.status(200);
+    result.body.should.have.property('data');
+  });
+
+  it('a manager user should view all trip requests', async () => {
+    const result = await chai.request(app)
+      .get('/api/trips')
+      .send()
+      .set('token', managerToken);
+    result.should.have.status(200);
+    result.body.should.have.property('data');
   });
 });
 

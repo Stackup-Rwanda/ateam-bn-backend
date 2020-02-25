@@ -1,6 +1,9 @@
 /* eslint-disable no-undef */
 const socket = io();
 
+const haveToken = localStorage.getItem('token');
+if (haveToken) window.location.href = `${socket.io.uri}/api/barefoot-chat`;
+
 const loginForm = document.getElementById('form');
 const responseContainer = document.querySelector(".response");
 const emailInput = document.querySelector(".emailInput");
