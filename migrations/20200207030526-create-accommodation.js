@@ -5,15 +5,14 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Accommodat
     primaryKey: true,
     type: Sequelize.INTEGER
   },
+  createdBy: { type: Sequelize.INTEGER },
   name: { type: Sequelize.STRING },
   description: { type: Sequelize.STRING },
   image: { type: Sequelize.TEXT },
   locationId: { type: Sequelize.INTEGER },
   geoLocation: { type: Sequelize.STRING },
-  space: { type: Sequelize.STRING },
-  cost: { type: Sequelize.STRING },
   highlights: { type: Sequelize.STRING },
-  amenities: { type: Sequelize.STRING },
+  amenities: { type: Sequelize.ARRAY(Sequelize.STRING) },
   createdAt: {
     allowNull: false,
     type: Sequelize.DATE

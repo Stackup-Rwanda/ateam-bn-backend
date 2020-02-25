@@ -45,8 +45,6 @@ class AccommodationHelpers {
           'image',
           'locationId',
           'geoLocation',
-          'space',
-          'cost',
           'highlights',
           'amenities'
         ]

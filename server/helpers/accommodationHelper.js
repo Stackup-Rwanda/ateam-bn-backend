@@ -23,6 +23,7 @@ class AccommodationHelper {
       },
       {
         fields: [
+          'createdBy',
           'name',
           'description',
           'image',

@@ -31,22 +31,16 @@ const createAccommodation = (req, res, next) => {
       'string.base': 'Invalid type, your geoLocation must be a string',
       'string.empty': 'Please enter your geoLocation'
     }),
-    space: validationObj({
-      'string.base': 'Invalid type, your space must be a string',
-      'string.empty': 'Please enter your space'
-    }),
-    cost: validationObj({
-      'string.base': 'Invalid type, the cost must be a string',
-      'string.empty': 'Please enter the cost'
-    }),
     highlights: validationObj({
       'string.base': 'Invalid type, highlights must be a string',
       'string.empty': 'Please enter some highlights'
     }),
-    amenities: validationObj({
-      'string.base': 'Invalid type, your amenities must be a string',
-      'string.empty': 'Please enter your amenities'
-    })
+    amenities: Joi.array().items(Joi.string())
+      .required()
+      .messages({
+        'array.base': 'Amenities must be an array',
+        'any.required': 'amenities are required'
+      }),
   });
   const { error } = schema.validate(req.body, {
     abortEarly: false

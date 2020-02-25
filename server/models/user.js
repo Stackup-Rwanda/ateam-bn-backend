@@ -59,6 +59,13 @@ const userDefinition = (sequelize, DataTypes) => {
       foreignKey: 'lineManager', as: 'Users', onDelete: 'CASCADE'
     });
   };
+  User.associate = (models) => {
+    User.hasMany(models.Accommodations, {
+      foreignKey: 'createdBy',
+      as: 'Accommodations',
+      onDelete: 'CASCADE'
+    });
+  };
   return User;
 };
 
