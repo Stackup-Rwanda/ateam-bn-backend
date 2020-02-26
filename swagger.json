@@ -1560,6 +1560,105 @@
           }
         }
       }
+    },
+    "/users": {
+      "get": {
+        "tags": [
+          "View Users"
+        ],
+        "summary": "Viewing all users",
+        "description": "a Super administrator user views all users",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token to identify a signed in and authentic super administrator"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "users successfuly retrieved"
+          },
+          "400": {
+            "description": "Malformed/ Incorrect security token ! Check token and try again."
+          },
+          "401": {
+            "description": "User not recognised. Please create account and try again./ Already logged out. Sign in and try again."
+          }
+        }
+      }
+    },
+    "/users/managers": {
+      "get": {
+        "tags": [
+          "View Users"
+        ],
+        "summary": "Viewing all Managers",
+        "description": "a Super administrator user views all users with Manager privileges",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token to identify a signed in and authentic super administrator"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Managers successfuly retrieved"
+          },
+          "400": {
+            "description": "Malformed/ Incorrect security token ! Check token and try again."
+          },
+          "401": {
+            "description": "User not recognised. Please create account and try again./ Already logged out. Sign in and try again."
+          }
+        }
+      }
+    },
+    "/users/managers/assign": {
+      "put": {
+        "tags": [
+          "Manager Assignment"
+        ],
+        "summary": "Assign Requesters to Managers",
+        "description": "a super administrator can assign users to to a particular manager",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "token to identify a signed in and authentic super administrator"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "data needed to create a trip",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagerAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Requesters assigned successfully"
+          },
+          "400": {
+            "description": "Malformed/ Incorrect security token ! Check token and try again. or invalid fields"
+          },
+          "401": {
+            "description": "User not recognised. Please create account and try again./ Already logged out. Sign in and try again / not an authorized super admin"
+          },
+          "500": {
+            "description": "database error while assigning requesters to manager"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1920,6 +2019,26 @@
           "type": "date"
         }
       }
+    },
+    "ManagerAssignment": {
+      "title": "Assign requesters to managers",
+      "example": {
+        "requesters": [8,9,10,11],
+        "manager": 3
+      },
+      "type": "object",
+      "properties": {
+        "requesters": {
+          "type": "array"
+        },
+        "birthdate": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "requesters",
+        "manager"
+      ]
     }
   }
 }

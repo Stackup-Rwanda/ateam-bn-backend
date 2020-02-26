@@ -6,11 +6,12 @@ import { tripValidator, tripChecker } from '../middlewares/tripValidation';
 import tokenValidator from "../middlewares/tokenValidator";
 import { checkTripId, isOwned, isEditable } from '../middlewares/tripExists';
 import checkRememberFields from '../middlewares/checkRememberFields';
+import checkRequester from '../middlewares/isRequester';
 
 const router = Router();
 
 router.post(
-  '/trips', tokenValidator, rememberMeValidation.IfRememberProfile, tripValidator('trip', 'body'), tripChecker,
+  '/trips', tokenValidator, checkRequester, rememberMeValidation.IfRememberProfile, tripValidator('trip', 'body'), tripChecker,
   asyncErrorHandler(TripController.oneWayTrip)
 );
 

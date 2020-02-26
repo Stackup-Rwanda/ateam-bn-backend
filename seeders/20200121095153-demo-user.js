@@ -194,7 +194,59 @@ const jimmyKay = {
   createdAt: new Date(),
   updatedAt: new Date()
 };
-const up = (queryInterface) => queryInterface.bulkInsert('Users', [dummy1, dummy2, dummy3, dummy4, dummy5, dummy6jajaManager, dummy7jajaManager, dummy8jajaRequester, dummy9jajaRequester, manzi, jimmyKay]);
+const Doddy = {
+  name: 'Kalimba K Doddy',
+  gender: 'male',
+  email: 'kwizeradoddy@gmail.com',
+  username: 'doddy',
+  password: Hasher.hashPassword('kalimba123'),
+  birthdate: new Date(),
+  preferredLanguage: 'English',
+  preferredCurrency: 'Euro',
+  locationId: 1,
+  role: 'Super Administrator',
+  department: 'Operations',
+  lineManager: null,
+  isVerified: true,
+  createdAt: new Date(),
+  updatedAt: new Date()
+};
+const Guevara = {
+  name: 'Manzi Guevara',
+  gender: 'male',
+  email: 'manziguevara@gmail.com',
+  username: 'gege',
+  password: Hasher.hashPassword('manzi123'),
+  birthdate: new Date(),
+  preferredLanguage: 'English',
+  preferredCurrency: 'Euro',
+  locationId: 1,
+  role: 'Travel Administrator',
+  department: 'Operations',
+  lineManager: null,
+  isVerified: true,
+  createdAt: new Date(),
+  updatedAt: new Date()
+};
+const Karen = {
+  name: 'Giramata Karen',
+  gender: 'female',
+  email: 'kgiramata57@gmail.com',
+  username: 'karen',
+  password: Hasher.hashPassword('giramata123'),
+  birthdate: new Date(),
+  preferredLanguage: 'English',
+  preferredCurrency: 'Euro',
+  locationId: 1,
+  role: 'Requester',
+  department: 'Operations',
+  lineManager: null,
+  isVerified: true,
+  createdAt: new Date(),
+  updatedAt: new Date()
+};
+
+const up = (queryInterface) => queryInterface.bulkInsert('Users', [dummy1, dummy2, dummy3, dummy4, dummy5, dummy6jajaManager, dummy7jajaManager, dummy8jajaRequester, dummy9jajaRequester, manzi, jimmyKay, Doddy, Guevara, Karen]);
 
 const down = (queryInterface) => queryInterface.bulkDelete('Users', null, {});
 

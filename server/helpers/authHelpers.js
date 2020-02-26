@@ -184,5 +184,29 @@ class AuthHelpers {
     const userNotification = await Notification.findAll({ where: { receiverId: argument } }).then((userNotify) => userNotify);
     return userNotification;
   }
+
+  /**
+   * Finds all users.
+   * @returns {object} Trip request data.
+   */
+  static async findAllUsers() {
+    const foundUsers = await User.findAll({
+      attributes: ['id', 'name', 'username', 'role', 'lineManager']
+    });
+    return foundUsers;
+  }
+
+  /**
+   * Finds all Managers.
+   * @returns {object} Trip request data.
+   */
+  static async findAllManagers() {
+    const foundUsers = await User.findAll({
+      where: { role: 'Manager' },
+      attributes: ['id', 'name', 'username', 'role', 'lineManager']
+    });
+    return foundUsers;
+  }
 }
+
 export default AuthHelpers;
