@@ -1,9 +1,10 @@
 import Router from 'express';
 import multiparty from 'connect-multiparty';
-import accommodation from '../controllers/accommodationController';
+import check from '../middlewares/accommodationFound';
+import paginate from '../middlewares/paginateMiddleware';
 import isTokenValid from '../middlewares/tokenValidator';
 import isTravelAdmin from '../middlewares/isTravelAdmin';
-import check from '../middlewares/accommodationFound';
+import accommodation from '../controllers/accommodationController';
 import validateAccommodation from '../middlewares/validateAccommodations';
 import { createRoom, retrieveRooms } from '../controllers/roomController';
 import asyncErrorHandler from '../helpers/asyncErrorHandler';
@@ -15,7 +16,7 @@ import { isBooked, ValidateBooking, dateChecker } from '../middlewares/bookingVa
 const router = Router();
 const multipart = multiparty();
 
-router.get('/accommodation', isTokenValid, isTravelAdmin, accommodation.viewAll);
+router.get('/accommodation', isTokenValid, isTravelAdmin, accommodation.viewAll, paginate.paginatedRetrievedData);
 router.get('/accommodation/:id', isTokenValid, isTravelAdmin, check.CheckAccommodation, accommodation.viewSpecific);
 router.delete(
   '/accommodation/:id/delete',
@@ -38,6 +39,6 @@ router.patch(
 
 
 router.post('/room', isTokenValid, isManager, multipart, ValidateBody("room", "body"), validateImage, asyncErrorHandler(createRoom));
-router.get('/room', isTokenValid, asyncErrorHandler(retrieveRooms));
+router.get('/room', isTokenValid, retrieveRooms, paginate.paginatedRetrievedData);
 router.post('/room/book', isTokenValid, ValidateBooking("booking", "body"), dateChecker, isBooked, asyncErrorHandler(bookingRoom));
 export default router;

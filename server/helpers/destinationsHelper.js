@@ -44,6 +44,17 @@ class Destinstion {
     });
     return information;
   }
+
+  /**
+   * Finds a place by user .
+   * @param {integer} skip limit.
+   * @param {integer} start from.
+   * @returns {object} place request data.
+   */
+  async findPlaces(skip, start) {
+    const foundPlaces = await Place.findAndCountAll({ limit: skip, offset: start });
+    return foundPlaces;
+  }
 }
 
 const exportDestinstion = new Destinstion();

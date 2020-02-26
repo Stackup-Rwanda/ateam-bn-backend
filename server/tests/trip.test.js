@@ -527,9 +527,72 @@ describe('viewing all trips test', () => {
     result.body.should.have.property('data');
   });
 
+  it('a requester user should only view their own trip requests', async () => {
+    const result = await chai.request(app)
+      .get('/api/trips/?page=1&limit=1')
+      .send()
+      .set('token', viewToken);
+    result.should.have.status(200);
+    result.body.should.have.property('data');
+  });
+
+  it('a requester user should only view their own trip requests', async () => {
+    const result = await chai.request(app)
+      .get('/api/trips/?page=2&limit=1')
+      .send()
+      .set('token', viewToken);
+    result.should.have.status(200);
+    result.body.should.have.property('data');
+  });
+
   it('a manager user should view all trip requests', async () => {
     const result = await chai.request(app)
       .get('/api/trips')
+      .send()
+      .set('token', managerToken);
+    result.should.have.status(200);
+    result.body.should.have.property('data');
+  });
+
+  it('a manager user should view all trip requests', async () => {
+    const result = await chai.request(app)
+      .get('/api/trips/?page=1&limit=1')
+      .send()
+      .set('token', managerToken);
+    result.should.have.status(200);
+    result.body.should.have.property('data');
+  });
+
+  it('a manager user should view all trip requests', async () => {
+    const result = await chai.request(app)
+      .get('/api/trips/?page=2&limit=1')
+      .send()
+      .set('token', managerToken);
+    result.should.have.status(200);
+    result.body.should.have.property('data');
+  });
+
+  it('a manager user should view all trip requests', async () => {
+    const result = await chai.request(app)
+      .get('/api/places')
+      .send()
+      .set('token', managerToken);
+    result.should.have.status(200);
+    result.body.should.have.property('data');
+  });
+
+  it('a manager user should view all trip requests', async () => {
+    const result = await chai.request(app)
+      .get('/api/places/?page=1&limit=1')
+      .send()
+      .set('token', managerToken);
+    result.should.have.status(200);
+    result.body.should.have.property('data');
+  });
+
+  it('a manager user should view all trip requests', async () => {
+    const result = await chai.request(app)
+      .get('/api/places/?page=2&limit=1')
       .send()
       .set('token', managerToken);
     result.should.have.status(200);

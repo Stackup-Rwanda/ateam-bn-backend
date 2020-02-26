@@ -10,6 +10,42 @@ const up = (queryInterface) => queryInterface.bulkInsert('Accommodations', [
     amenities: ['5 star hotel with swimming pool and gym', 'And yes we have the best kitchen'],
     createdAt: new Date(),
     updatedAt: new Date()
+  },
+  {
+    createdBy: 4,
+    name: 'Legacy Hotel',
+    description: 'Only goats are accepted here',
+    image: 'no image',
+    locationId: 1,
+    geoLocation: '31.0349523, 34.2346914',
+    highlights: 'The President of Rwanda His Excellence Paul Kagame has launched the Karen Hotel',
+    amenities: ['5 star hotel with swimming pool and gym', 'And yes we have the best kitchen'],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    createdBy: 4,
+    name: 'Serana Hotel',
+    description: 'Only goats are accepted here',
+    image: 'no image',
+    locationId: 1,
+    geoLocation: '31.0349523, 34.2346914',
+    highlights: 'The President of Rwanda His Excellence Paul Kagame has launched the Karen Hotel',
+    amenities: ['5 star hotel with swimming pool and gym', 'And yes we have the best kitchen'],
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    createdBy: 4,
+    name: 'Arena Hotel',
+    description: 'Only goats are accepted here',
+    image: 'no image',
+    locationId: 1,
+    geoLocation: '31.0349523, 34.2346914',
+    highlights: 'The President of Rwanda His Excellence Paul Kagame has launched the Karen Hotel',
+    amenities: ['5 star hotel with swimming pool and gym', 'And yes we have the best kitchen'],
+    createdAt: new Date(),
+    updatedAt: new Date()
   }
 ]);
 

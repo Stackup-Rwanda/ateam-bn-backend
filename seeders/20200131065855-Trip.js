@@ -198,6 +198,36 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
     status: 'Approved',
     createdAt: new Date(),
     updatedAt: new Date()
+  },
+  {
+    name: 'john',
+    passportId: 'PC234567',
+    userId: 8,
+    tripType: 'One-way',
+    from: 1,
+    to: [2, 1],
+    date: new Date(),
+    returnDate: null,
+    reasons: 'Jaja dummy data, plz do not delete',
+    accommodationId: 1,
+    status: 'Approved',
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    name: 'john',
+    passportId: 'PC234567',
+    userId: 8,
+    tripType: 'One-way',
+    from: 1,
+    to: [2, 1],
+    date: new Date(),
+    returnDate: null,
+    reasons: 'Jaja dummy data, plz',
+    accommodationId: 1,
+    status: 'Approved',
+    createdAt: new Date(),
+    updatedAt: new Date()
   }
 ]);
 

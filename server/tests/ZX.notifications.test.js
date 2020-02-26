@@ -6,7 +6,7 @@ chai.use(chaiHttp);
 chai.should();
 
 let travelAdmniToken;
-let normalToken;
+let managerToken;
 
 const status = {
   viewed: 'read'
@@ -24,28 +24,12 @@ describe('Notifications Tests', () => {
     res.should.have.status(200);
     res.body.should.be.an('object');
   });
-  it('Normal user login request', async () => {
+  it('Manager login request', async () => {
     const res = await chai
       .request(app)
       .post('/api/auth/signin')
-      .send({ email: 'dummy7jaja@email.rw', password: '123456789' });
-    normalToken = res.body.data.token;
-    res.should.have.status(200);
-    res.body.should.be.an('object');
-  });
-  it('When a user doesnt have a notification', async () => {
-    const res = await chai
-      .request(app)
-      .get('/api/notifications')
-      .set('token', normalToken);
-    res.should.have.status(404);
-    res.body.should.have.property('error');
-  });
-  it('When a user has notifications', async () => {
-    const res = await chai
-      .request(app)
-      .get('/api/notifications')
-      .set('token', travelAdmniToken);
+      .send({ email: 'nigorjeanluc@gmail.com', password: 'secret123' });
+    managerToken = res.body.data.token;
     res.should.have.status(200);
     res.body.should.be.an('object');
   });
@@ -124,5 +108,50 @@ describe('Notifications Tests', () => {
       .set('token', travelAdmniToken);
     res.should.have.status(200);
     res.body.should.have.property('message');
+  });
+
+  it('user should view paginated Notifications', async () => {
+    const response = await chai
+      .request(app)
+      .get(`/api/notifications/?page=1&limit=1`)
+      .set('token', managerToken);
+    response.should.have.status([200]);
+    response.body.should.have.property('message');
+  });
+
+  it('user should view paginated Notifications', async () => {
+    const response = await chai
+      .request(app)
+      .get(`/api/notifications/?page=2&limit=1`)
+      .set('token', managerToken);
+    response.should.have.status([200]);
+    response.body.should.have.property('message');
+  });
+
+  it('user should view all notifications if there is no page specified', async () => {
+    const response = await chai
+      .request(app)
+      .get(`/api/notifications/`)
+      .set('token', travelAdmniToken);
+    response.should.have.status([200]);
+    response.body.should.have.property('message');
+  });
+
+  it('user should not view paginated Notifications with empty page', async () => {
+    const response = await chai
+      .request(app)
+      .get(`/api/notifications/?page=100&limit=2`)
+      .set('token', managerToken);
+    response.should.have.status([404]);
+    response.body.should.have.property('message');
+  });
+
+  it('user should not view paginated Notifications with empty page', async () => {
+    const response = await chai
+      .request(app)
+      .get(`/api/notifications/?page=100&limit=2`)
+      .set('token', travelAdmniToken);
+    response.should.have.status([404]);
+    response.body.should.have.property('message');
   });
 });

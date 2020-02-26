@@ -1,7 +1,7 @@
 import userToNotifY from './socket';
 import chatHelper from './ChatHelper';
 
-const sockeHelper = (socket) => {
+const socketHelper = (socket) => {
   socket.on('realReceipt', (data) => {
     socket.join(data);
     userToNotifY.sock(data);
@@ -20,4 +20,4 @@ const sockeHelper = (socket) => {
   });
 };
 
-export default sockeHelper;
+export default { socketHelper };

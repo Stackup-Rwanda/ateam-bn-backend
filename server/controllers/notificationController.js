@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import models from '../models';
+import pagination from '../helpers/paginateHelper';
 
 const { Notification } = models;
 dotenv.config();
@@ -9,28 +10,35 @@ dotenv.config();
  * accommodations' request.
  */
 class Notifications {
+  /* eslint-disable object-curly-newline */
   /**
-   * This method handle the accommodation request.
+   * This method handle the notifications pagination.
    * @param {object} req The notification's request.
    * @param {object} res The response.
-   * @returns {object} The status and some data of the accomodation.
+   * @param {function} next The next action.
+   * @returns {object} retrived notifications.
    */
-  static async viewNotifications(req, res) {
-    const foundNotice = await Notification.findAll({
-      where: {
-        receiverId: req.user.id
+  static async viewNotifications(req, res, next) {
+    try {
+      const { start, end, pages, skip, paginate } = await pagination.paginateData(req.query);
+      const notifications = await Notification.findAndCountAll({ where: { receiverId: req.user.id }, limit: skip, offset: start, order: [['id', 'DESC']] });
+      const userAllData = notifications.rows;
+      const countUserData = notifications.count;
+      if (notifications.rows.length === 0) {
+        return res.status(404).json({
+          status: 404,
+          message: `${req.user.username} You don't have notification`
+        });
       }
-    });
-    if (foundNotice.length === 0) {
-      return res.status(404).json({
-        status: 404,
-        error: 'You dont have any notifications'
+      req.data = { userAllData, countUserData, start, end, pages, skip, paginate };
+      next();
+    } catch (error) {
+      return res.status(500).json({
+        status: 500,
+        message: ' something goes wrong ',
+        error: error.message
       });
     }
-    return res.status(200).json({
-      status: 200,
-      data: foundNotice
-    });
   }
 
   /**
