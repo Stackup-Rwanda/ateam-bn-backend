@@ -16,8 +16,8 @@ import { isBooked, ValidateBooking, dateChecker } from '../middlewares/bookingVa
 const router = Router();
 const multipart = multiparty();
 
-router.get('/accommodation', isTokenValid, isTravelAdmin, accommodation.viewAll, paginate.paginatedRetrievedData);
-router.get('/accommodation/:id', isTokenValid, isTravelAdmin, check.CheckAccommodation, accommodation.viewSpecific);
+router.get('/accommodation', isTokenValid, accommodation.viewAll, paginate.paginatedRetrievedData);
+router.get('/accommodation/:id', isTokenValid, check.CheckAccommodation, accommodation.viewSpecific);
 router.delete(
   '/accommodation/:id/delete',
   isTokenValid,

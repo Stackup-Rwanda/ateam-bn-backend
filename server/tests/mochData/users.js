@@ -34,7 +34,7 @@ export default [
     preferredLanguage: 'French',
     preferredCurrency: 'Dollars',
     locationId: 1,
-    role: 'Requester',
+    role: 'REQUESTER',
     department: 'Construction',
     lineManager: 3
   }, {
@@ -72,7 +72,7 @@ export default [
     preferredLanguage: 'French',
     preferredCurrency: 'Dollars',
     locationId: 1,
-    role: 'Manager',
+    role: 'MANAGER',
     department: 'Construction',
     lineManager: 3
   }, {
@@ -86,7 +86,7 @@ export default [
     preferredLanguage: "French",
     preferredCurrency: "Dollars",
     locationId: 1,
-    role: "Manager",
+    role: "MANAGER",
     department: "IT",
     lineManager: 3
   }

@@ -46,7 +46,7 @@ class CommentsHelper {
 
     const { lineManager } = trip.Users;
     const userId = trip.Users.id;
-    if ((userId === id) || (role === 'Manager' && lineManager === id)) return trip.Comments;
+    if ((userId === id) || (role === 'MANAGER' && lineManager === id)) return trip.Comments;
 
     return 'Forbidden';
   }

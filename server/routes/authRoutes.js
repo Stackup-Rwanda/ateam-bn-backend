@@ -7,7 +7,7 @@ import passwordHasher from '../middlewares/passwordHashMiddleware';
 import Validations from '../middlewares/ValidateResetPassword';
 import resetEmailTokenMiddleware from '../middlewares/ResetEmailTokenMiddleware';
 import userIdExistMiddleware from '../middlewares/UserIdExistMiddleware';
-import { googleAuth, storeAuth } from '../controllers/socialController';
+import OAuthController from '../controllers/socialController';
 import { signUp, signIn, specialSignUp } from '../middlewares/authValidator';
 import importedTokenValidator from '../middlewares/tokenValidator';
 import searchData from '../controllers/searchController';
@@ -26,9 +26,9 @@ router
   .post('/auth/signin', signIn, asyncErrorHandler(AuthController.signIn))
   .get('/auth/logout', importedTokenValidator, AuthController.logout)
   .get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
-  .get('/auth/google/callback', passport.authenticate('google', { session: false }), asyncErrorHandler(googleAuth))
-  .get('/auth/facebook', passport.authenticate('facebook'))
-  .get('/auth/facebook/callback', passport.authenticate('facebook', { session: false }), asyncErrorHandler(storeAuth))
+  .get('/auth/google/callback', passport.authenticate('google', { session: false }), asyncErrorHandler(OAuthController.storeAuth))
+  .get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }))
+  .get('/auth/facebook/callback', passport.authenticate('facebook', { session: false }), asyncErrorHandler(OAuthController.storeAuth))
   .post('/search/request', importedTokenValidator, asyncErrorHandler(searchData));
 
 export default router;

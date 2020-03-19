@@ -8,7 +8,7 @@ passport.use(new FacebookStrategy(
     clientID: process.env.clientID,
     clientSecret: process.env.clientSecret,
     callbackURL: process.env.callbackURL,
-    profileFields: ['id', 'displayName', 'email']
+    profileFields: ["id", "displayName", "emails"]
   },
   (accessToken, refreshToken, profile, cb) => {
     cb(null, profile);

@@ -25,22 +25,15 @@ class AuthController {
         error: 'This user already exists, use another email or username'
       });
     }
-    req.body.role = 'Requester';
+    req.body.role = 'REQUESTER';
     req.body.isVerified = false;
     req.body.rememberMe = false;
     req.body.lineManager = 3;
-    const {
-      username, email, role, isVerified, createdAt
-    } = req.body;
     const savedUser = await AuthHelpers.saveUser(req.body);
     await sendmail(savedUser.email, savedUser.name);
     return res.status(201).json({
       status: 201,
-      message: 'User was created successfully, Verify your email to confirm registration',
-      data: {
-        token: await TokenHelper.generateToken(savedUser.id, username, email, role, isVerified),
-        createdAt
-      }
+      message: 'User was created successfully, Verify your email to confirm registration'
     });
   }
 
@@ -154,6 +147,7 @@ class AuthController {
     }
     req.body.isVerified = false;
     req.body.rememberMe = false;
+    req.body.role = req.body.role.toUpperCase();
     const {
       username, email, role, isVerified, createdAt
     } = req.body;

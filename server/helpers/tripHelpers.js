@@ -32,7 +32,7 @@ class TripHelpers {
 
     const { lineManager } = trip.Users;
     const userId = trip.Users.id;
-    if (userId === id || (role === 'Manager' && lineManager === id)) return true;
+    if (userId === id || (role === 'MANAGER' && lineManager === id)) return true;
 
     return 'Forbidden';
   }
@@ -68,7 +68,7 @@ class TripHelpers {
    */
   static async findTripByRole(role, id, skip, start) {
     let foundTrip;
-    if (role === 'Manager') {
+    if (role === 'MANAGER') {
       foundTrip = await Trip.findAndCountAll({ limit: skip, offset: start, order: [['id', 'DESC']] });
     } else {
       foundTrip = await Trip.findAndCountAll({ where: { userId: id }, limit: skip, offset: start, order: [['id', 'DESC']] });

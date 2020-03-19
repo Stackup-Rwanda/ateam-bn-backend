@@ -4,7 +4,10 @@ const validationObj = (messages) => Joi.string().trim().required().messages(mess
 const joiMessageFunction = (error, req, res, next) => {
   if (error) {
     const { details } = error;
-    const message = details.map((i) => i.message.replace(/"/g, '')).join(', ');
+    const message = {};
+    details.forEach((d) => {
+      message[d.context.key] = d.message;
+    });
     return res.status(400).json({ status: 400, error: message });
   }
   return next();
@@ -20,7 +23,6 @@ const signUp = (req, res, next) => {
     birthdate: Joi.date().iso().required().messages({ 'date.base': 'Birthdate must be a date', 'date.format': 'your birthdate must be in the format YYYY-MM-DD' }),
     preferredLanguage: validationObj({ 'string.base': 'Invalid type, your preferred language must be a string', 'string.empty': 'Please enter your prefeered language' }),
     preferredCurrency: validationObj({ 'string.base': 'Invalid type, your preferred currency must be a string', 'string.empty': 'Please enter your preferred currency' }),
-    locationId: Joi.number().integer().required().messages({ 'number.base': 'Invalid type, your location id must be a integer', 'number.empty': 'Please enter your location id' }),
     department: validationObj({ 'string.base': 'Invalid type, your department must be a string', 'string.empty': 'Please enter your department' })
   });
   const { error } = schema.validate(req.body, {

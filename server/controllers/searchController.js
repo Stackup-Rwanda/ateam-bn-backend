@@ -13,7 +13,7 @@ const searchData = async (req, res) => {
     const request = req.body.search;
     const myId = req.user.id;
     let data;
-    if (req.userData.role === 'Manager') {
+    if (req.userData.role === 'MANAGER') {
       if (typeof request === 'string') {
         data = await searchHelpers.managerStringSearch(request);
         if (!data.length) {

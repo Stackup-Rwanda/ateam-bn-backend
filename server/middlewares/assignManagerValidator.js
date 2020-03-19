@@ -23,11 +23,11 @@ class validateManagerAssignment {
 
     const managerExists = await User.findOne({
       attributes: ['id', 'name', 'username', 'role', 'lineManager'],
-      where: { id: manager, role: 'Manager' }
+      where: { id: manager, role: 'MANAGER' }
     });
     const requestersExist = await User.findAll({
       attributes: ['id', 'name', 'username', 'role', 'lineManager'],
-      where: { id: requesters, role: 'Requester' }
+      where: { id: requesters, role: 'REQUESTER' }
     });
 
     if (!managerExists) {
