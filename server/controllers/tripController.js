@@ -139,7 +139,7 @@ class TripController {
   static async viewOneTrip(req, res) {
     const { role, id } = req.user;
     const foundTrip = req.oldTrip;
-    if (foundTrip.userId === id || role === 'Manager') {
+    if (foundTrip.userId === id || role === 'MANAGER') {
       return res.status(200).json({
         status: 200,
         data: foundTrip

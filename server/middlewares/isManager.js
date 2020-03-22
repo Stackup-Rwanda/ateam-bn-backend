@@ -15,7 +15,7 @@ export default (req, res, next) => {
     const { token } = req.headers;
     const decoded = Auth.decodedToken(token, process.env.SECRET_KEY);
     req.userData = decoded;
-    if (req.userData.role !== 'Manager') {
+    if (req.userData.role !== 'MANAGER') {
       return res.status(403).send({
         status: 403,
         error: 'You are not allowed'

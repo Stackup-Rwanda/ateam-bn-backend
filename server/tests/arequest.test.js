@@ -1,16 +1,22 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../index';
-import token from './mochData/mochToken';
 import otherTokens from './mochData/token';
 
 chai.use(chaiHttp);
 const router = () => chai.request(app);
-
+let managerToken = '';
 describe('Test suite for approving/rejecting trip requests', () => {
+  it('manager logs in to approve request', async () => {
+    const result = await chai.request(app)
+      .post('/api/auth/signin')
+      .send({ email: 'nigorjeanluc@gmail.com', password: 'secret123' });
+    managerToken = result.body.data.token;
+    expect(result.body.status).to.equals(200);
+  });
   it('should approve trip request if manager has user under his/her authority', async () => {
     const res = await router().patch('/api/request/1/approve')
-      .set('token', token).send({ status: 'Approved' });
+      .set('token', managerToken).send({ status: 'Approved' });
     expect(res.body).to.be.an('object');
     expect(res.body.status).to.equals(200);
     expect(res.body.message).to.be.a('string');
@@ -20,7 +26,7 @@ describe('Test suite for approving/rejecting trip requests', () => {
 
   it('should approve trip request if manager has user under his/her authority', async () => {
     const res = await router().patch('/api/request/1/approve')
-      .set('token', token).send({ status: 'Approved' });
+      .set('token', managerToken).send({ status: 'Approved' });
     expect(res.body).to.be.an('object');
     expect(res.body.status).to.equals(200);
     expect(res.body.message).to.be.a('string');
@@ -30,7 +36,7 @@ describe('Test suite for approving/rejecting trip requests', () => {
 
   it('should approve trip request if manager has user under his/her authority', async () => {
     const res = await router().patch('/api/request/1/approve')
-      .set('token', token).send({ status: 'Approved' });
+      .set('token', managerToken).send({ status: 'Approved' });
     expect(res.body).to.be.an('object');
     expect(res.body.status).to.equals(200);
     expect(res.body.message).to.be.a('string');
@@ -40,7 +46,7 @@ describe('Test suite for approving/rejecting trip requests', () => {
 
   it('should approve trip request if manager has user under his/her authority', async () => {
     const res = await router().patch('/api/request/1/approve')
-      .set('token', token).send({ status: 'Approved' });
+      .set('token', managerToken).send({ status: 'Approved' });
     expect(res.body).to.be.an('object');
     expect(res.body.status).to.equals(200);
     expect(res.body.message).to.be.a('string');
@@ -51,7 +57,7 @@ describe('Test suite for approving/rejecting trip requests', () => {
 
   it('should approve trip request if manager has user under his/her authority', async () => {
     const res = await router().patch('/api/request/1/approve')
-      .set('token', token).send({ status: 'Approved' });
+      .set('token', managerToken).send({ status: 'Approved' });
     expect(res.body).to.be.an('object');
     expect(res.body.status).to.equals(200);
     expect(res.body.message).to.be.a('string');
@@ -61,7 +67,7 @@ describe('Test suite for approving/rejecting trip requests', () => {
 
   it('should reject trip request if manager has user under his/her authority', async () => {
     const res = await router().patch('/api/request/1/reject')
-      .set('token', token).send({ status: 'Rejected' });
+      .set('token', managerToken).send({ status: 'Rejected' });
     expect(res.body).to.be.an('object');
     expect(res.body.status).to.equals(200);
     expect(res.body.message).to.be.a('string');
@@ -71,7 +77,7 @@ describe('Test suite for approving/rejecting trip requests', () => {
 
   it('should not approve trip request with invalid http request', async () => {
     const res = await router().patch('/api/request/1/approve')
-      .set('token', token).send({ status: 'Approve' });
+      .set('token', managerToken).send({ status: 'Approve' });
     expect(res.body).to.be.an('object');
     expect(res.body.status).to.equals(400);
     expect(res.body.error).to.be.a('string');
@@ -79,7 +85,7 @@ describe('Test suite for approving/rejecting trip requests', () => {
 
   it('should not reject trip request with invalid http request', async () => {
     const res = await router().patch('/api/request/1/reject')
-      .set('token', token).send({ status: 'Reject' });
+      .set('token', managerToken).send({ status: 'Reject' });
     expect(res.body).to.be.an('object');
     expect(res.body.status).to.equals(400);
     expect(res.body.error).to.be.a('string');
@@ -115,7 +121,7 @@ describe('Test suite for approving/rejecting trip requests', () => {
 
   it('should not approve trip request if the trip id is not authentic', async () => {
     const res = await router().patch('/api/request/5971/approve')
-      .set('token', token).send({ status: 'Approved' });
+      .set('token', managerToken).send({ status: 'Approved' });
     expect(res.body).to.be.an('object');
     expect(res.body.status).to.equals(400);
     expect(res.body.error).to.be.a('string');

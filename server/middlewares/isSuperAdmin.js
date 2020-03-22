@@ -1,5 +1,5 @@
 const checkRole = (req, res, next) => {
-  if (req.user.role === 'Super Administrator') {
+  if (req.user.role === 'SUPER ADMINISTRATOR') {
     return next();
   }
   return res.status(401).json({

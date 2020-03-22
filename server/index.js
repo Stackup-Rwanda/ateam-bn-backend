@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import path from 'path';
+import cors from 'cors';
 import serverSocket from 'socket.io';
 import allRoutes from './routes';
 import apiDocumentation from '../swagger.json';
@@ -13,6 +14,7 @@ dotenv.config();
 
 const app = express();
 const basePath = '/api';
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(`${__dirname}/`));

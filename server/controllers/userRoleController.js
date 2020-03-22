@@ -6,10 +6,11 @@ import { userRoleNotification } from '../helpers/email';
 const { User } = models;
 
 const updateRole = async (req, res) => {
-  const { role } = req.body;
+  let { role } = req.body;
   const { username } = req.params;
   const exists = await AuthHelpers.userExists('username', username);
   if (exists) {
+    role = role.toUpperCase();
     return User.update({ role }, { where: { username } }).then((updated) => {
       if (!updated[0]) {
         throw new Error('unable to update role');

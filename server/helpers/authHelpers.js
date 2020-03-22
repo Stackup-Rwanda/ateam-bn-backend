@@ -105,10 +105,11 @@ class AuthHelpers {
         password: user.password,
         passportId: user.passportId,
         birthdate: user.birthdate,
+        profilePhoto: user.profilePhoto,
         preferredLanguage: "English",
         preferredCurrency: "Rwf",
         location: user.location,
-        role: "requester",
+        role: "REQUESTER",
         department: user.department,
         lineManager: 3,
         isVerified: true,
@@ -119,7 +120,7 @@ class AuthHelpers {
       },
       {
         fields: [
-          'name', 'gender', 'email', 'username', 'password', 'birthdate', 'preferredLanguage', 'preferredCurrency', 'location', 'role', 'department', 'lineManager', 'isVerified', 'createAt', 'updatedAt', 'social_id', 'provider'
+          'name', 'gender', 'email', 'username', 'password', 'birthdate', 'profilePhoto', 'preferredLanguage', 'preferredCurrency', 'location', 'role', 'department', 'lineManager', 'isVerified', 'createAt', 'updatedAt', 'social_id', 'provider'
         ]
       }
     );
@@ -209,7 +210,7 @@ class AuthHelpers {
    */
   static async findAllManagers(skip, start) {
     const foundUsers = await User.findAndCountAll({
-      where: { role: 'Manager' },
+      where: { role: 'MANAGER' },
       limit: skip,
       offset: start,
       attributes: ['id', 'name', 'email', 'username', 'role', 'lineManager']

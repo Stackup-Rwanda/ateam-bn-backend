@@ -4,7 +4,7 @@
   "description": "We make company global travel and accommodation easy and convenient for the strong workforce of savvy members of staff, by leveraging the modern web.",
   "main": "index.js",
   "scripts": {
-    "test": "npm run droptables:test && npm run createtables:test && npm run seed:test && cross-env NODE_ENV=test nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.js --timeout 200000 --exit",
+    "test": "npm run droptables:test && npm run createtables:test && npm run seed:test && cross-env NODE_ENV=test nyc --reporter=text --reporter=lcov mocha --require @babel/register --require babel-polyfill ./server/tests/*.test.js --timeout 200000 --exit",
     "server": "nodemon --exec babel-node ./server/index.js",
     "start": "cross-env NODE_ENV=production npx sequelize-cli db:migrate && cross-env NODE_ENV=production babel-node ./server/index.js",
     "createtables:dev": "npx sequelize db:migrate",
@@ -48,6 +48,7 @@
     "chai-passport-strategy": "^1.0.1",
     "cloudinary": "^1.19.0",
     "connect-multiparty": "^2.2.0",
+    "cors": "^2.8.5",
     "coveralls": "^3.0.9",
     "cross-env": "^7.0.0",
     "dotenv": "^8.2.0",
@@ -74,6 +75,7 @@
     "socket.io": "^2.3.0",
     "star-ratings": "^1.0.0",
     "swagger-ui-express": "^4.1.1",
+    "webpack": "^4.41.5",
     "zombie": "^6.1.4"
   },
   "devDependencies": {
