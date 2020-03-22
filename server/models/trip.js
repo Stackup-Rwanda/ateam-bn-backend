@@ -57,7 +57,7 @@ const tripDefinition = (sequelize, DataTypes) => {
       as: 'Users',
       onDelete: 'CASCADE'
     });
-    Trip.belongsTo(models.User, {
+    Trip.belongsTo(models.Accommodations, {
       foreignKey: 'accommodationId',
       as: 'Accommodations',
       onDelete: 'CASCADE'

@@ -1,7 +1,7 @@
 import { Op } from 'sequelize';
 import models from '../models';
 
-const { Trip, User } = models;
+const { Trip, User, Accommodations } = models;
 
 /**
  * This class contains
@@ -69,9 +69,31 @@ class TripHelpers {
   static async findTripByRole(role, id, skip, start) {
     let foundTrip;
     if (role === 'MANAGER') {
-      foundTrip = await Trip.findAndCountAll({ limit: skip, offset: start, order: [['id', 'DESC']] });
+      foundTrip = await Trip.findAndCountAll({ limit: skip,
+        offset: start,
+        order: [['id', 'DESC']],
+        include:
+        [
+          {
+            model: Accommodations,
+            as: 'Accommodations',
+            attributes: ['id', 'image', 'name']
+          }
+        ]
+      });
     } else {
-      foundTrip = await Trip.findAndCountAll({ where: { userId: id }, limit: skip, offset: start, order: [['id', 'DESC']] });
+      foundTrip = await Trip.findAndCountAll({ where: { userId: id },
+        limit: skip,
+        offset: start,
+        order: [['id', 'DESC']],
+        include:
+        [
+          {
+            model: Accommodations,
+            as: 'Accommodations',
+            attributes: ['id', 'image', 'name']
+          }
+        ] });
     }
     return foundTrip;
   }
