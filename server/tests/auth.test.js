@@ -121,7 +121,7 @@ describe('signIn tests', () => {
       .send(usersTester[5]);
     res.should.have.status(401);
     res.body.should.be.an('object');
-    res.body.should.have.property('message', 'password or email is incorrect');
+    res.body.should.have.property('error', 'password or email is incorrect');
   });
 });
 
