@@ -103,7 +103,7 @@ class AuthController {
     }
     return res.status(401).json({
       status: 401,
-      message: 'password or email is incorrect'
+      error: 'password or email is incorrect'
     });
   }
 
