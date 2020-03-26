@@ -21,8 +21,6 @@ const signUp = (req, res, next) => {
     passportId: validationObj({ 'string.base': 'Invalid type, your passportId must be a string', 'string.min': 'passportId must be at least 8 characters long', 'string.empty': 'Please enter your passportId' }).min(8).alphanum().max(8),
     gender: validationObj({ 'string.base': 'Invalid type, your gender must be a string', 'string.empty': 'Please enter your gender' }),
     birthdate: Joi.date().iso().required().messages({ 'date.base': 'Birthdate must be a date', 'date.format': 'your birthdate must be in the format YYYY-MM-DD' }),
-    preferredLanguage: validationObj({ 'string.base': 'Invalid type, your preferred language must be a string', 'string.empty': 'Please enter your prefeered language' }),
-    preferredCurrency: validationObj({ 'string.base': 'Invalid type, your preferred currency must be a string', 'string.empty': 'Please enter your preferred currency' }),
     department: validationObj({ 'string.base': 'Invalid type, your department must be a string', 'string.empty': 'Please enter your department' })
   });
   const { error } = schema.validate(req.body, {
