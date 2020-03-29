@@ -10,7 +10,7 @@ dotenv.config();
 const viewProfile = async (req, res) => {
   const foundUser = await User.findOne({
     where: {
-      username: req.params.username
+      id: req.user.id
     }
   });
   res.status(200).json({

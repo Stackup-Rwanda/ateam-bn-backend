@@ -45,27 +45,17 @@ describe('running profile route tests', () => {
   it('user should be able to view details of his/her profile', async () => {
     const result = await chai
       .request(index)
-      .get('/api/profile/kay')
+      .get('/api/profile')
       .send()
       .set('token', jimmyToken);
     result.should.have.status(200);
     result.body.should.have.property('data');
   });
 
-  it('user should not be allowed to view a not owned profile', async () => {
-    const result = await chai
-      .request(index)
-      .get('/api/profile/manzi')
-      .send()
-      .set('token', jimmyToken);
-    result.should.have.status(401);
-    result.body.should.have.property('error', 'unauthorized, profile not owned or token bears wrong data');
-  });
-
   it('user should be not be allowed to view a profile with an incorrect token', async () => {
     const result = await chai
       .request(index)
-      .get('/api/profile/kay')
+      .get('/api/profile')
       .send()
       .set('token', wrongToken);
     result.should.have.status(400);
@@ -75,7 +65,7 @@ describe('running profile route tests', () => {
   it('user should be not be allowed to view a profile when not registered', async () => {
     const result = await chai
       .request(index)
-      .get('/api/profile/kay')
+      .get('/api/profile')
       .send()
       .set('token', karenToken);
     result.should.have.status(401);
@@ -85,7 +75,7 @@ describe('running profile route tests', () => {
   it('user should be able to update his/her profile', async () => {
     const result = await chai
       .request(index)
-      .patch('/api/profile/kay')
+      .patch('/api/profile')
       .send(updatedJimmy)
       .set('token', jimmyToken);
     result.should.have.status(201);
@@ -95,7 +85,7 @@ describe('running profile route tests', () => {
   it('user should be able to update his/her profile with a profile photo and cover photo', async () => {
     const result = await chai
       .request(index)
-      .patch('/api/profile/kay')
+      .patch('/api/profile')
       .field('name', updatedJimmy.name)
       .field('birthdate', updatedJimmy.birthdate)
       .field('gender', updatedJimmy.gender)
@@ -112,7 +102,7 @@ describe('running profile route tests', () => {
   it('user should be able to update his/her profile with a profile photo and cover photo', async () => {
     const result = await chai
       .request(index)
-      .patch('/api/profile/kay')
+      .patch('/api/profile')
       .field('name', updatedJimmy.name)
       .field('birthdate', updatedJimmy.birthdate)
       .field('gender', updatedJimmy.gender)
@@ -128,7 +118,7 @@ describe('running profile route tests', () => {
   it('user should be able to update his/her profile with a profile photo and cover photo', async () => {
     const result = await chai
       .request(index)
-      .patch('/api/profile/kay')
+      .patch('/api/profile')
       .field('name', updatedJimmy.name)
       .field('birthdate', updatedJimmy.birthdate)
       .field('gender', updatedJimmy.gender)
@@ -144,7 +134,7 @@ describe('running profile route tests', () => {
   it('user should not be able to update his/her profile with an invalid profile photo and/or cover photo', async () => {
     const result = await chai
       .request(index)
-      .patch('/api/profile/kay')
+      .patch('/api/profile')
       .field('name', updatedJimmy.name)
       .field('birthdate', updatedJimmy.birthdate)
       .field('gender', updatedJimmy.gender)
@@ -161,7 +151,7 @@ describe('running profile route tests', () => {
   it('user should not be able to update his/her profile with an invalid profile photo and/or cover photo (wrong extension)', async () => {
     const result = await chai
       .request(index)
-      .patch('/api/profile/kay')
+      .patch('/api/profile')
       .field('name', updatedJimmy.name)
       .field('birthdate', updatedJimmy.birthdate)
       .field('gender', updatedJimmy.gender)
@@ -178,7 +168,7 @@ describe('running profile route tests', () => {
   it('user should not be able to update his/her profile with more than one profile and/or cover photos', async () => {
     const result = await chai
       .request(index)
-      .patch('/api/profile/kay')
+      .patch('/api/profile')
       .field('name', updatedJimmy.name)
       .field('birthdate', updatedJimmy.birthdate)
       .field('gender', updatedJimmy.gender)
@@ -197,7 +187,7 @@ describe('running profile route tests', () => {
   it('user should not be able to update his/her profile with invalid fields', async () => {
     const result = await chai
       .request(index)
-      .patch('/api/profile/kay')
+      .patch('/api/profile')
       .send(updatedInvalidJimmy)
       .set('token', jimmyToken);
     result.should.have.status(400);

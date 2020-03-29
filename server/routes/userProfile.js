@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import multiparty from 'connect-multiparty';
-import isProfileOwner from '../middlewares/isProfileOwner';
 import validateProfile from '../middlewares/profileValidator';
 import validateProfileImage from '../middlewares/ProfileImageValidator';
 import validateCoverImage from '../middlewares/coverImageValidator';
@@ -17,11 +16,10 @@ import validateReaction from '../middlewares/reactionvalidation';
 const router = Router();
 const multipart = multiparty();
 
-router.get('/profile/:username', isTokenValid, isProfileOwner, viewProfile);
+router.get('/profile', isTokenValid, viewProfile);
 router.patch(
-  '/profile/:username',
+  '/profile',
   isTokenValid,
-  isProfileOwner,
   multipart,
   validateProfile,
   validateProfileImage,
