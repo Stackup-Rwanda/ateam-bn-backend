@@ -24,7 +24,7 @@ router
   .patch('/auth/update-password/:userId/:token', Validations.checkPassword, Validations.checkPasswordAnConfirmPassword, userIdExistMiddleware, resetEmailTokenMiddleware, asyncErrorHandler(EmailController.updatePassword))
   .get('/user/:email/confirm', AuthController.confirmation)
   .post('/auth/signin', signIn, asyncErrorHandler(AuthController.signIn))
-  .get('/auth/logout', importedTokenValidator, AuthController.logout)
+  .post('/auth/logout', importedTokenValidator, AuthController.logout)
   .get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
   .get('/auth/google/callback', passport.authenticate('google', { session: false }), asyncErrorHandler(OAuthController.storeAuth))
   .get('/auth/facebook', passport.authenticate('facebook', { scope: ['email'] }))
