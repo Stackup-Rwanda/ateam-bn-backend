@@ -29,7 +29,7 @@ class SearchHelpers {
       },
       include: [{
         model: User,
-        as: "Users",
+        as: "User",
         attributes: ['name', 'email', 'username', 'role', 'locationId', 'lineManager', 'gender', 'createdAt', 'updatedAt']
       }]
 
@@ -52,7 +52,7 @@ class SearchHelpers {
       },
       include: [{
         model: User,
-        as: "Users",
+        as: "User",
         attributes: ['name', 'email', 'username', 'role', 'locationId', 'lineManager', 'gender', 'createdAt', 'updatedAt']
       }]
     });
@@ -74,7 +74,7 @@ class SearchHelpers {
       },
       include: [{
         model: User,
-        as: "Users",
+        as: "User",
         attributes: ['name', 'email', 'username', 'role', 'locationId', 'lineManager', 'gender', 'createdAt', 'updatedAt'],
 
       }],
@@ -100,7 +100,7 @@ class SearchHelpers {
       },
       include: [{
         model: User,
-        as: "Users",
+        as: "User",
         attributes: ['name', 'email', 'username', 'role', 'locationId', 'lineManager', 'gender', 'createdAt', 'updatedAt']
       }]
 
@@ -125,7 +125,7 @@ class SearchHelpers {
         },
         include: [{
           model: User,
-          as: "Users",
+          as: "User",
           attributes: ['name', 'email', 'username', 'role', 'locationId', 'lineManager', 'gender', 'createdAt', 'updatedAt']
         }]
 
@@ -154,7 +154,7 @@ class SearchHelpers {
         },
         include: [{
           model: User,
-          as: "Users",
+          as: "User",
           attributes: ['name', 'email', 'username', 'role', 'locationId', 'lineManager', 'gender', 'createdAt', 'updatedAt']
         }]
 
