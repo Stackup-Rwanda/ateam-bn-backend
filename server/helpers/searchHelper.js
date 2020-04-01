@@ -3,7 +3,7 @@ import models from '../models';
 
 
 const { Op } = Sequelize;
-const { Trip, User } = models;
+const { Trip, User, Accommodations } = models;
 
 /**
  * This class contains
@@ -31,7 +31,12 @@ class SearchHelpers {
         model: User,
         as: "User",
         attributes: ['name', 'email', 'username', 'role', 'locationId', 'lineManager', 'gender', 'createdAt', 'updatedAt']
+      }, {
+        model: Accommodations,
+        as: 'Accommodations',
+        attributes: ['id', 'image', 'name']
       }]
+
 
     });
     return findRequest;
@@ -54,7 +59,12 @@ class SearchHelpers {
         model: User,
         as: "User",
         attributes: ['name', 'email', 'username', 'role', 'locationId', 'lineManager', 'gender', 'createdAt', 'updatedAt']
+      }, {
+        model: Accommodations,
+        as: 'Accommodations',
+        attributes: ['id', 'image', 'name']
       }]
+
     });
     return findStringData;
   }
@@ -77,7 +87,11 @@ class SearchHelpers {
         as: "User",
         attributes: ['name', 'email', 'username', 'role', 'locationId', 'lineManager', 'gender', 'createdAt', 'updatedAt'],
 
-      }],
+      }, {
+        model: Accommodations,
+        as: 'Accommodations',
+        attributes: ['id', 'image', 'name']
+      }]
 
     });
     return findStringData;
@@ -102,6 +116,10 @@ class SearchHelpers {
         model: User,
         as: "User",
         attributes: ['name', 'email', 'username', 'role', 'locationId', 'lineManager', 'gender', 'createdAt', 'updatedAt']
+      }, {
+        model: Accommodations,
+        as: 'Accommodations',
+        attributes: ['id', 'image', 'name']
       }]
 
     });
@@ -127,6 +145,10 @@ class SearchHelpers {
           model: User,
           as: "User",
           attributes: ['name', 'email', 'username', 'role', 'locationId', 'lineManager', 'gender', 'createdAt', 'updatedAt']
+        }, {
+          model: Accommodations,
+          as: 'Accommodations',
+          attributes: ['id', 'image', 'name']
         }]
 
       });
@@ -156,6 +178,10 @@ class SearchHelpers {
           model: User,
           as: "User",
           attributes: ['name', 'email', 'username', 'role', 'locationId', 'lineManager', 'gender', 'createdAt', 'updatedAt']
+        }, {
+          model: Accommodations,
+          as: 'Accommodations',
+          attributes: ['id', 'image', 'name']
         }]
 
       });

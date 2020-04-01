@@ -52,7 +52,15 @@ class TripHelpers {
         date: {
           [Op.lt]: new Date()
         }
-      }
+      },
+      include:
+      [
+        {
+          model: Accommodations,
+          as: 'Accommodations',
+          attributes: ['id', 'image', 'name']
+        }
+      ]
     });
     return foundTrip;
   }

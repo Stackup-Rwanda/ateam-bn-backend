@@ -1,5 +1,5 @@
 const up = (queryInterface) => queryInterface.bulkInsert('Rooms', [{
-  accommodationId: 1,
+  accommodationId: 3,
   roomType: 'A room with a king-sized bed',
   amenities: ['breakfast , cleaning and loundry,TV and internet are provided '],
   cost: '500 000 Rwfr',
@@ -8,7 +8,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Rooms', [{
   createdAt: new Date(),
   updatedAt: new Date()
 }, {
-  accommodationId: 2,
+  accommodationId: 4,
   roomType: ' A room with a queen-sized bed. ',
   amenities: ['breakfast , cleaning and loundry, TV and internet are provided'],
   cost: '500 000 Rwfr',
@@ -18,7 +18,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Rooms', [{
   updatedAt: new Date()
 },
 {
-  accommodationId: 2,
+  accommodationId: 1,
   roomType: ' A room with two beds',
   amenities: ['breakfast , cleaning and loundry'],
   cost: '400 000 Rwfr',
@@ -38,7 +38,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Rooms', [{
   updatedAt: new Date()
 },
 {
-  accommodationId: 2,
+  accommodationId: 5,
   roomType: ' A room with two beds',
   amenities: ['breakfast , cleaning and loundry'],
   cost: '400 000 Rwfr',
