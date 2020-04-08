@@ -1,6 +1,6 @@
 import models from '../models';
 
-const { Trip, User } = models;
+const { Trip, User, Accommodations, Comment } = models;
 
 const tripFound = async (id, req) => {
   const exists = await Trip.findOne({
@@ -10,6 +10,16 @@ const tripFound = async (id, req) => {
         model: User,
         as: 'User',
         attributes: ['id', 'role', 'lineManager']
+      },
+      {
+        model: Accommodations,
+        as: 'Accommodations',
+        attributes: ['id', 'image', 'name']
+      },
+      {
+        model: Comment,
+        as: 'Comments',
+        attributes: ['id', 'comment', 'createdAt']
       }
     ]
   });
