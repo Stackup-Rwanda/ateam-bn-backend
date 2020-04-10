@@ -66,6 +66,10 @@ class AccommodationController {
           }
         });
       }
+      return res.status(401).json({
+        status: 401,
+        error: 'Please select one or more images'
+      });
     } catch (error) {
       return res.status(500).json({
         status: 500,
