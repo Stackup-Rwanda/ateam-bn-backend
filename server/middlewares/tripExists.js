@@ -1,10 +1,27 @@
 import models from '../models';
 
-const { Trip } = models;
+const { Trip, User, Accommodations, Comment } = models;
 
 const tripFound = async (id, req) => {
   const exists = await Trip.findOne({
-    where: { id }
+    where: { id },
+    include: [
+      {
+        model: User,
+        as: 'User',
+        attributes: ['id', 'role', 'lineManager']
+      },
+      {
+        model: Accommodations,
+        as: 'Accommodations',
+        attributes: ['id', 'image', 'name']
+      },
+      {
+        model: Comment,
+        as: 'Comments',
+        attributes: ['id', 'comment', 'createdAt']
+      }
+    ]
   });
   if (exists) {
     req.oldTrip = exists;

@@ -22,7 +22,7 @@ class TripHelpers {
       include: [
         {
           model: User,
-          as: 'Users',
+          as: 'User',
           attributes: ['id', 'role', 'lineManager']
         }
       ]
@@ -52,7 +52,15 @@ class TripHelpers {
         date: {
           [Op.lt]: new Date()
         }
-      }
+      },
+      include:
+      [
+        {
+          model: Accommodations,
+          as: 'Accommodations',
+          attributes: ['id', 'image', 'name']
+        }
+      ]
     });
     return foundTrip;
   }
@@ -69,7 +77,16 @@ class TripHelpers {
   static async findTripByRole(role, id, skip, start) {
     let foundTrip;
     if (role === 'MANAGER') {
-      foundTrip = await Trip.findAndCountAll({ limit: skip,
+      const assignedUsers = await User.findAndCountAll({
+        where: { lineManager: id },
+        attributes: ['id', 'name', 'email', 'username', 'role', 'lineManager']
+      });
+
+      const users = assignedUsers.rows.map((user) => user.id);
+
+      foundTrip = await Trip.findAndCountAll({
+        where: { userId: users },
+        limit: skip,
         offset: start,
         order: [['id', 'DESC']],
         include:
@@ -78,6 +95,19 @@ class TripHelpers {
             model: Accommodations,
             as: 'Accommodations',
             attributes: ['id', 'image', 'name']
+          },
+          {
+            model: User,
+            as: 'User',
+            attributes: [
+              'id',
+              'name',
+              'email',
+              'profilePhoto',
+              'coverPhoto',
+              'department',
+              'username'
+            ]
           }
         ]
       });

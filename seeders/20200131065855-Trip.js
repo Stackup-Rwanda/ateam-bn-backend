@@ -9,7 +9,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
     date: new Date(),
     returnDate: null,
     reasons: 'being a mannager',
-    accommodationId: 1,
+    accommodationId: 3,
     status: 'Approved',
     createdAt: new Date(),
     updatedAt: new Date()
@@ -24,7 +24,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
     date: new Date(),
     returnDate: null,
     reasons: 'visiting hawai',
-    accommodationId: 1,
+    accommodationId: 2,
     status: 'Approved',
     createdAt: new Date(),
     updatedAt: new Date()
@@ -69,7 +69,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
     date: new Date(),
     returnDate: null,
     reasons: 'being a mannager',
-    accommodationId: 1,
+    accommodationId: 4,
     status: 'Approved',
     createdAt: new Date(),
     updatedAt: new Date()
@@ -84,7 +84,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
     date: '2020-02-21',
     returnDate: null,
     reasons: 'being a mannager',
-    accommodationId: 1,
+    accommodationId: 2,
     status: 'Approved',
     createdAt: new Date(),
     updatedAt: new Date()
@@ -129,7 +129,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
     date: new Date(),
     returnDate: null,
     reasons: 'Jaja dummy data, plz do not delete this',
-    accommodationId: 1,
+    accommodationId: 3,
     status: 'Approved',
     createdAt: new Date(),
     updatedAt: new Date()
@@ -142,7 +142,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
     date: new Date(),
     returnDate: null,
     reasons: 'I want to rate accommodation one',
-    accommodationId: 1,
+    accommodationId: 5,
     status: 'Approved',
     createdAt: new Date(),
     updatedAt: new Date()
@@ -168,7 +168,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
     date: new Date(),
     returnDate: null,
     reasons: 'I want to rate accommodation one',
-    accommodationId: 4,
+    accommodationId: 1,
     status: 'Approved',
     createdAt: new Date(),
     updatedAt: new Date()
@@ -209,7 +209,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
     date: new Date(),
     returnDate: null,
     reasons: 'Jaja dummy data, plz do not delete',
-    accommodationId: 1,
+    accommodationId: 3,
     status: 'Approved',
     createdAt: new Date(),
     updatedAt: new Date()
@@ -224,7 +224,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Trips', [
     date: new Date(),
     returnDate: null,
     reasons: 'Jaja dummy data, plz',
-    accommodationId: 1,
+    accommodationId: 4,
     status: 'Approved',
     createdAt: new Date(),
     updatedAt: new Date()

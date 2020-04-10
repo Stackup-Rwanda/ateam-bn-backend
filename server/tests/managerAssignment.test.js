@@ -40,6 +40,7 @@ describe('running user role update route tests', () => {
       .put('/api/users/managers/assign')
       .send(validAssignment)
       .set('token', superAdminToken);
+    console.log(result.body);
     result.should.have.status(201);
     result.body.should.have.property('message', 'operation terminated successfully');
   });
@@ -49,6 +50,7 @@ describe('running user role update route tests', () => {
       .get('/api/users/managers')
       .send()
       .set('token', superAdminToken);
+    console.log(result.body);
     result.should.have.status(200);
     result.body.should.have.property('data');
   });
