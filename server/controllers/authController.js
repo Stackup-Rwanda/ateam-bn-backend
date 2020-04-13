@@ -62,10 +62,7 @@ class AuthController {
     }
     const result = await AuthHelpers.confirm(req.params.email);
     if (result) {
-      return res.status(200).json({
-        status: 200,
-        message: 'Email has successfully been verified. You can now login'
-      });
+      res.redirect(`${process.env.FRONT_END_URL}/login?message="Email has successfully been verified. You can now login"`);
     }
   }
 

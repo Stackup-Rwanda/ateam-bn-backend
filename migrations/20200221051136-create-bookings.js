@@ -10,6 +10,9 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Bookings',
     type: Sequelize.INTEGER,
 
   },
+  tripId: {
+    type: Sequelize.INTEGER,
+  },
   bookedBy: {
     type: Sequelize.INTEGER,
     allowNull: false,
