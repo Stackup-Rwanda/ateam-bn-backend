@@ -17,7 +17,7 @@ const isBooked = async (req, res, next) => {
     },
   });
   if (roomIsBooked.length) {
-    res.status(302).send({
+    return res.status(302).send({
       status: 302,
       message: 'the room you requested is booked please check other rooms'
     });
@@ -28,6 +28,7 @@ const isBooked = async (req, res, next) => {
 const bookingSchema = {
   booking: Joi.object().keys({
     roomId: Joi.number().integer().required(),
+    tripId: Joi.number().integer().required(),
     from: Joi.date().iso().required(),
     to: Joi.date().iso().required(),
   }),

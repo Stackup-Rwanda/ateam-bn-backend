@@ -4,6 +4,10 @@ const BookingDefinition = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
+    tripId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
     bookedBy: {
       type: DataTypes.INTEGER,
       allowNull: false
@@ -29,6 +33,11 @@ const BookingDefinition = (sequelize, DataTypes) => {
     Booking.belongsTo(models.Room, {
       foreignKey: 'roomId',
       as: 'Room',
+      onDelete: 'CASCADE'
+    });
+    Booking.belongsTo(models.Trip, {
+      foreignKey: 'tripId',
+      as: 'Trip',
       onDelete: 'CASCADE'
     });
     return Booking;
