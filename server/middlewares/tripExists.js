@@ -9,7 +9,15 @@ const tripFound = async (id, req) => {
       {
         model: User,
         as: 'User',
-        attributes: ['id', 'role', 'lineManager']
+        attributes: [
+          'id',
+          'name',
+          'email',
+          'profilePhoto',
+          'coverPhoto',
+          'department',
+          'username'
+        ]
       },
       {
         model: Accommodations,

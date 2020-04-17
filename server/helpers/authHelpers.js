@@ -2,7 +2,7 @@ import models from '../models';
 import Hasher from './passwordHashHelper';
 
 const {
-  User, Token, Notification, Trip
+  User, Token, Notification, Trip, Accommodations, Comment
 } = models;
 
 /**
@@ -162,7 +162,34 @@ class AuthHelpers {
    * @returns {object} The Trip will retrieved.
    */
   static async retrieveTrip(tripId) {
-    const findTrip = Trip.findOne({ where: { id: tripId } });
+    const findTrip = Trip.findOne({
+      where: { id: tripId },
+      include: [
+        {
+          model: User,
+          as: 'User',
+          attributes: [
+            'id',
+            'name',
+            'email',
+            'profilePhoto',
+            'coverPhoto',
+            'department',
+            'username'
+          ]
+        },
+        {
+          model: Accommodations,
+          as: 'Accommodations',
+          attributes: ['id', 'image', 'name']
+        },
+        {
+          model: Comment,
+          as: 'Comments',
+          attributes: ['id', 'comment', 'createdAt']
+        }
+      ]
+    });
     return findTrip;
   }
 
