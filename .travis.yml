@@ -26,6 +26,7 @@ cache:
 
 before_install:
   - npm i
+
 before_script:
   - psql -c 'CREATE DATABASE barefootnomaddb_test;' -U postgres
   - npm i sequelize-cli -g

@@ -89,5 +89,9 @@ export default [
     role: "MANAGER",
     department: "IT",
     lineManager: 3
+  },
+  {
+    email: 'dummy8jaja@email.rw',
+    password: '123456789'
   }
 ];

@@ -3,7 +3,7 @@ import multiparty from 'connect-multiparty';
 import validateProfile from '../middlewares/profileValidator';
 import validateProfileImage from '../middlewares/ProfileImageValidator';
 import validateCoverImage from '../middlewares/coverImageValidator';
-import { viewProfile, editProfile, rememberProfile } from '../controllers/profileController';
+import { viewProfile, editProfile, rememberProfile, getRememberProfile } from '../controllers/profileController';
 import saveAccommodation from '../controllers/accommodationController';
 import isTokenValid from '../middlewares/tokenValidator';
 import isTravelAdmin from '../middlewares/isTravelAdmin';
@@ -42,4 +42,10 @@ router.post(
   rememberMeValidation.rememberMe,
   asyncErrorHandler(rememberProfile)
 );
+router.get(
+  '/profile/rememberMe',
+  isTokenValid,
+  asyncErrorHandler(getRememberProfile)
+);
+
 export default router;
