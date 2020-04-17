@@ -35,7 +35,7 @@ class SearchHelpers {
         model: Accommodations,
         as: 'Accommodations',
         attributes: ['id', 'image', 'name']
-      }]
+      }],
 
 
     });

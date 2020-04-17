@@ -1,6 +1,6 @@
 import models from '../models';
 
-const { Trip } = models;
+const { Trip, Accommodations, User, Comment } = models;
 /**
  * This class contains
  * all methods required to view/approve/reject
@@ -14,7 +14,35 @@ class RequestHelper {
    * @returns {object} The notification's data.
    */
   static async findRequest(attr, val) {
-    const request = await Trip.findOne({ where: { [attr]: val } });
+    const request = await Trip.findOne({
+      where: { [attr]: val },
+      include:
+      [
+        {
+          model: Accommodations,
+          as: 'Accommodations',
+          attributes: ['id', 'image', 'name']
+        },
+        {
+          model: User,
+          as: 'User',
+          attributes: [
+            'id',
+            'name',
+            'email',
+            'profilePhoto',
+            'coverPhoto',
+            'department',
+            'username'
+          ]
+        },
+        {
+          model: Comment,
+          as: 'Comments',
+          attributes: ['id', 'comment', 'createdAt']
+        }
+      ]
+    });
     return request;
   }
 
@@ -25,7 +53,35 @@ class RequestHelper {
    * @returns {object} The notification's data.
    */
   static async findTripRequest(accommodationId, userId) {
-    const request = await Trip.findOne({ where: { accommodationId, userId } });
+    const request = await Trip.findOne({
+      where: { accommodationId, userId },
+      include:
+      [
+        {
+          model: Accommodations,
+          as: 'Accommodations',
+          attributes: ['id', 'image', 'name']
+        },
+        {
+          model: User,
+          as: 'User',
+          attributes: [
+            'id',
+            'name',
+            'email',
+            'profilePhoto',
+            'coverPhoto',
+            'department',
+            'username'
+          ]
+        },
+        {
+          model: Comment,
+          as: 'Comments',
+          attributes: ['id', 'comment', 'createdAt']
+        }
+      ]
+    });
     return request;
   }
 

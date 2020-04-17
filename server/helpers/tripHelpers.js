@@ -1,7 +1,7 @@
 import { Op } from 'sequelize';
 import models from '../models';
 
-const { Trip, User, Accommodations } = models;
+const { Trip, User, Accommodations, Comment } = models;
 
 /**
  * This class contains
@@ -59,6 +59,19 @@ class TripHelpers {
           model: Accommodations,
           as: 'Accommodations',
           attributes: ['id', 'image', 'name']
+        },
+        {
+          model: User,
+          as: 'User',
+          attributes: [
+            'id',
+            'name',
+            'email',
+            'profilePhoto',
+            'coverPhoto',
+            'department',
+            'username'
+          ]
         }
       ]
     });
@@ -108,6 +121,11 @@ class TripHelpers {
               'department',
               'username'
             ]
+          },
+          {
+            model: Comment,
+            as: 'Comments',
+            attributes: ['id', 'comment', 'createdAt']
           }
         ]
       });
@@ -122,6 +140,24 @@ class TripHelpers {
             model: Accommodations,
             as: 'Accommodations',
             attributes: ['id', 'image', 'name']
+          },
+          {
+            model: User,
+            as: 'User',
+            attributes: [
+              'id',
+              'name',
+              'email',
+              'profilePhoto',
+              'coverPhoto',
+              'department',
+              'username'
+            ]
+          },
+          {
+            model: Comment,
+            as: 'Comments',
+            attributes: ['id', 'comment', 'createdAt']
           }
         ] });
     }
