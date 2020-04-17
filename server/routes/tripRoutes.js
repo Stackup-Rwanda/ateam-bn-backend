@@ -8,6 +8,7 @@ import rememberMeValidation from '../middlewares/rememberMeValidation';
 import { tripValidator, tripChecker } from '../middlewares/tripValidation';
 import { checkTripId, isOwned, isEditable } from '../middlewares/tripExists';
 import checkRequester from '../middlewares/isRequester';
+import tripStats from '../controllers/statsController';
 
 const router = Router();
 
@@ -19,5 +20,6 @@ router.post(
 router.get('/trips/:id', tokenValidator, checkTripId, TripController.viewOneTrip);
 router.put('/trips/:id', tokenValidator, checkTripId, isOwned, isEditable, checkRememberFields, rememberMeValidation.IfRememberProfile, tripValidator('trip', 'body'), tripChecker, asyncErrorHandler(TripController.editTrip));
 router.get('/trips', tokenValidator, TripController.viewAllTrips, paginate.paginatedRetrievedData);
+router.get('/stats', tokenValidator, tripStats);
 
 export default router;
