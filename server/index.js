@@ -37,7 +37,7 @@ const socketListen = app.listen(process.env.PORT, () => {
 const io = serverSocket(socketListen);
 
 io.on('connection', (socket) => {
-  console.log('socket Connection is successfully');
+  console.log('new socket connected successfully');
   socketHelper.socketHelper(socket);
 });
 

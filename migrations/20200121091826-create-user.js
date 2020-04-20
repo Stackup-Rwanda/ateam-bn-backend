@@ -72,6 +72,9 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Users', {
   },
   provider: {
     type: Sequelize.STRING
+  },
+  messageLastSeen: {
+    type: Sequelize.DATE
   }
 });
 

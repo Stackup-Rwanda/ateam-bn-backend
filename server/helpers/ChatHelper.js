@@ -17,7 +17,7 @@ class ChatHelper {
         {
           model: User,
           as: 'Users',
-          attributes: ['name', 'role'],
+          attributes: ['username', 'role', 'profilePhoto'],
         }
       ]
     });

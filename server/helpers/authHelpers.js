@@ -244,6 +244,16 @@ class AuthHelpers {
     });
     return foundUsers;
   }
+
+  /**
+   * Updates user's messagesLastSeen.
+   * @param {integer} id users table field.
+   * @returns {object} The users's data.
+   */
+  static async updateLastSeen(id) {
+    const user = await User.update({ messageLastSeen: new Date() }, { where: { id } });
+    return user;
+  }
 }
 
 export default AuthHelpers;
