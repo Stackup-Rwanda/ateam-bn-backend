@@ -20,7 +20,8 @@ const userDefinition = (sequelize, DataTypes) => {
     createdAt: { type: DataTypes.DATE },
     updatedAt: { type: DataTypes.DATE },
     social_id: { type: DataTypes.STRING },
-    provider: { type: DataTypes.STRING }
+    provider: { type: DataTypes.STRING },
+    messageLastSeen: { type: DataTypes.DATE }
   }, {});
 
   User.associate = (models) => {
