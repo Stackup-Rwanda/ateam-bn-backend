@@ -36,6 +36,8 @@ router.post(
 );
 router.post('/accommodation/feedback/:accommodationId', isTokenValid, accommMiddleware.validateParams, accommMiddleware.validateAccommodationId, accommMiddleware.allowFeedback, saveAccommodation.giveFeedBack);
 router.post('/accomodation/react/:accommodationId', isTokenValid, validateReaction, accommMiddleware.validateParams, accommMiddleware.validateAccommodationId, asyncErrorHandler(saveAccommodation.createReaction));
+router.get('/accomodation/react/:accommodationId', isTokenValid, accommMiddleware.validateParams, accommMiddleware.validateAccommodationId, asyncErrorHandler(saveAccommodation.getReaction));
+router.get('/accomodation/:reactionType/:accommodationId', isTokenValid, accommMiddleware.validateAccommodationId, asyncErrorHandler(saveAccommodation.countReactions));
 router.post(
   '/profile/rememberMe/:state',
   isTokenValid,

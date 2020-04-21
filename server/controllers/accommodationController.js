@@ -179,6 +179,51 @@ class AccommodationController {
     });
   }
 
+
+  /**
+   * This method handles the reaction on accommodation.
+   * @param {object} req The accommodation's request.
+   * @param {object} res The response.
+   * @returns {object} The s reaction and some data of the accomodation.
+   */
+  static async getReaction(req, res) {
+    const userId = req.user.id;
+    const accommodationId = req.params.accommodationId;
+    const reaction = await accommodationHelpers.findByUserAndAccomodation(userId, accommodationId);
+    if (reaction) {
+      return res.status(200).json({
+        status: 200,
+        reaction
+      });
+    }
+    return res.status(404).json({
+      status: 404,
+      error: 'reaction not found'
+    });
+  }
+
+  /**
+   * This method handles the reaction on accommodation.
+   * @param {object} req The accommodation's request.
+   * @param {object} res The response.
+   * @returns {object} The s reaction and some data of the accomodation.
+   */
+  static async countReactions(req, res) {
+    const { reactionType } = req.params;
+    const accommodationId = req.params.accommodationId;
+    const reactions = await accommodationHelpers.findByAccommAndReactionType(accommodationId, reactionType);
+    if (reactions >= 0) {
+      return res.status(200).json({
+        status: 200,
+        reactions
+      });
+    }
+    return res.status(404).json({
+      status: 400,
+      error: 'no reactions'
+    });
+  }
+
   /* eslint-disable object-curly-newline */
   /**
    * This method handles the reaction on accommodation.
