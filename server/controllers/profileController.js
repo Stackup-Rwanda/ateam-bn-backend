@@ -16,6 +16,7 @@ const viewProfile = async (req, res) => {
   res.status(200).json({
     status: 200,
     data: {
+      id: foundUser.id,
       name: foundUser.name,
       email: foundUser.email,
       gender: foundUser.gender,

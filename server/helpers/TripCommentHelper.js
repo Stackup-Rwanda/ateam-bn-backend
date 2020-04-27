@@ -31,22 +31,23 @@ class CommentsHelper {
       include: [
         {
           model: User,
-          as: 'Users',
-          attributes: ['id', 'role', 'lineManager'],
+          as: 'User',
+          attributes: ['id', 'name', 'role', 'lineManager', 'profilePhoto'],
         },
         {
           model: Comment,
           as: 'Comments',
-          attributes: ['userId', 'comment', 'createdAt', 'updatedAt'],
+          attributes: ['id', 'userId', 'userName', 'userRole', 'comment', 'profile', 'createdAt', 'updatedAt'],
         }
       ]
     });
-
     if (!trip) return trip;
 
-    const { lineManager } = trip.Users;
-    const userId = trip.Users.id;
-    if ((userId === id) || (role === 'MANAGER' && lineManager === id)) return trip.Comments;
+    const { lineManager } = trip.User;
+    const userId = trip.User.id;
+    if ((userId === id) || (role === 'MANAGER' && lineManager === id)) {
+      return trip.Comments;
+    }
 
     return 'Forbidden';
   }
@@ -84,7 +85,7 @@ class CommentsHelper {
       },
       {
         fields: [
-          'userId', 'tripId', 'comment', 'createAt', 'updatedAt'
+          'userId', 'userName', 'userRole', 'tripId', 'comment', 'profile', 'createAt', 'updatedAt'
         ]
       }
     );

@@ -16,6 +16,9 @@ class TripCommentController {
    */
   static async saveComment(req, res) {
     req.body.userId = req.user.id;
+    req.body.userName = req.user.name;
+    req.body.userRole = req.user.role;
+    req.body.profile = req.user.profilePhoto;
     req.body.tripId = req.params.tripId;
 
     const tripExists = await tripHelpers.tripExists(req.params.tripId, req.user);
@@ -32,9 +35,8 @@ class TripCommentController {
         error: 'Sorry, You are not allowed to comment on This trip.'
       });
     }
-
+    // await notification.sendNotification(req.body.tripId, `Commented by ${req.user.role}`, res);
     const savedComment = await commentHelper.saveComment(req.body);
-    await notification.sendNotification(req.body.tripId, `Commented by ${req.user.role}`, res);
 
     return res.status(201).json({
       status: res.statusCode,

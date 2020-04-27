@@ -1,6 +1,6 @@
 import tripHelpers from '../helpers/tripHelpers';
 
-const tripStats = async (req, res, next) => {
+const tripStats = async (req, res) => {
   try {
     const { role, id } = req.user;
     const foundTrips = await tripHelpers.findTripByRole(role, id);
@@ -11,7 +11,7 @@ const tripStats = async (req, res, next) => {
     const approved = approvedStats.length;
     const pending = pendingStats.length;
     const rejected = rejectedStats.length;
-    res.status(200).send({
+    return res.status(200).send({
       status: 200,
       data: {
         approved,
@@ -19,7 +19,6 @@ const tripStats = async (req, res, next) => {
         rejected
       }
     });
-    next();
   } catch (error) {
     return error;
   }

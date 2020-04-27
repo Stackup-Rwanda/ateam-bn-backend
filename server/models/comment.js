@@ -4,11 +4,23 @@ const commentDefinition = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
+    userName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    userRole: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     tripId: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
     comment: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    profile: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -27,7 +39,7 @@ const commentDefinition = (sequelize, DataTypes) => {
     });
     Comment.belongsTo(models.User, {
       foreignKey: 'userId',
-      as: 'Users',
+      as: 'User',
       onDelete: 'CASCADE'
     });
   };

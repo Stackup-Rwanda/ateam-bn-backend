@@ -23,15 +23,15 @@ class TripHelpers {
         {
           model: User,
           as: 'User',
-          attributes: ['id', 'role', 'lineManager']
+          attributes: ['id', 'name', 'role', 'name', 'lineManager', 'profilePhoto']
         }
       ]
     });
 
     if (!trip) return false;
 
-    const { lineManager } = trip.Users;
-    const userId = trip.Users.id;
+    const { lineManager } = trip.User;
+    const userId = trip.User.id;
     if (userId === id || (role === 'MANAGER' && lineManager === id)) return true;
 
     return 'Forbidden';

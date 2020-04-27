@@ -9,11 +9,20 @@ const up = (queryInterface, Sequelize) => queryInterface.createTable('Comments',
   userId: {
     type: Sequelize.INTEGER
   },
+  userName: {
+    type: Sequelize.STRING
+  },
+  userRole: {
+    type: Sequelize.STRING
+  },
   tripId: {
     type: Sequelize.INTEGER
   },
   comment: {
     type: Sequelize.TEXT
+  },
+  profile: {
+    type: Sequelize.STRING
   },
   createdAt: {
     allowNull: false,
