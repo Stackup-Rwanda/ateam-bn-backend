@@ -131,6 +131,23 @@ class AccommodationHelpers {
   }
 
   /**
+   * finds a reaction by userId and reactionType.
+   * @param {integer} accommodationId The request sent by a user.
+   * @param {integer} reactionType The request sent by a user.
+   * @returns {object} reaction data.
+   */
+  static async findByAccommAndReactionType(accommodationId, reactionType) {
+    const { count } = await reactions.findAndCountAll({
+      where: {
+        accommodationId,
+        reactionType
+      }
+    });
+
+    return count;
+  }
+
+  /**
    * deletes a reaction by userId and accommodationId.
    * @param {integer} userId The request sent by a user.
    * @param {integer} accommodationId The request sent by a user.
