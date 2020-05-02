@@ -22,7 +22,7 @@ class CommentValidator {
       abortEarly: false
     });
 
-    error4OOHappyJoi(error, res, next);
+    return error4OOHappyJoi(error, res, next);
   }
 }
 
