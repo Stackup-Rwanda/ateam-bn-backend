@@ -3,7 +3,7 @@ const up = (queryInterface) => queryInterface.bulkInsert('Rooms', [{
   roomType: 'Suites',
   amenities: ['breakfast , cleaning and loundry,TV and internet are provided '],
   cost: '500 000 Rwfr',
-  image: 'https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+  image: 'https://media-cdn.tripadvisor.com/media/oyster/890/0a/74/84/64/excellence-club-junior-suite-ocea.jpg',
   status: 'available',
   createdAt: new Date(),
   updatedAt: new Date()
