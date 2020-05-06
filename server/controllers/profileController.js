@@ -3,7 +3,7 @@ import models from '../models';
 import imageUploader from '../helpers/imageUploader';
 import AuthHelpers from '../helpers/authHelpers';
 
-const { User } = models;
+const { User, Trip } = models;
 
 dotenv.config();
 
@@ -85,4 +85,36 @@ const rememberProfile = async (req, res) => {
   });
 };
 
-export { viewProfile, editProfile, rememberProfile };
+const getRememberProfile = async (req, res) => {
+  let userRememberData = { dataFound: null };
+  if (req.user.rememberMe === true) {
+    const foundUsers = await Trip.findAll({
+      limit: 1,
+      where: {
+        userId: req.user.id
+      },
+      order: [['createdAt', 'DESC']]
+    });
+
+    if (foundUsers) {
+      userRememberData = {
+        name: foundUsers[0].name,
+        passportId: foundUsers[0].passportId,
+        reasons: foundUsers[0].reasons
+      };
+    }
+  }
+  res.status(200).json({
+    status: res.statusCode,
+    message: 'Remember data has been found successfully.',
+    data: {
+      id: req.user.id,
+      email: req.user.email,
+      role: req.user.role,
+      rememberMe: req.user.rememberMe,
+      ...userRememberData
+    }
+  });
+};
+
+export { viewProfile, editProfile, rememberProfile, getRememberProfile };

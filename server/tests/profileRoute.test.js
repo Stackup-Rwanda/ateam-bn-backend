@@ -1,11 +1,12 @@
 import chai from 'chai';
 import http from 'chai-http';
 import index from '../index';
+import usersTester from './mochData/users';
 
 chai.use(http);
 chai.should();
 
-let jimmyToken;
+let jimmyToken, dummy8jajaToken;
 const wrongToken = 'eyJhbGciOijIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSmltbXkgS2F5a2F5IiwidXNlcm5hbWUiOiJrYXkiLCJlbWFpbCI6IkprYXlAZ21haWwuY29tIiwiaWF0IjoxNTgwODIwNzM3fQ.jCVUdtDEMpcyliUcuwxGixSn2dcqoJ6xLaXEFswHfFI';
 const karenToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiR2lyYW1hdGEgS2FyZW4iLCJ1c2VybmFtZSI6ImtnaXIiLCJlbWFpbCI6IkthcmVuQGdtYWlsLmNvbSIsImlhdCI6MTU4MDgyMTI3OH0.AR-FqtlZ5-MnWqWZS-R-zjsiq6ingBz8b0RwvZ_GUSk';
 
@@ -38,6 +39,15 @@ describe('running profile route tests', () => {
       .post('/api/auth/signin')
       .send({ email: 'JkayOne2@gmail.com', password: '123456789' });
     jimmyToken = res.body.data.token;
+    res.should.have.status(200);
+    res.body.should.be.an('object');
+  });
+  it('User should login before viewing a Remember profile (dummy8jajaToken)', async () => {
+    const res = await chai
+      .request(index)
+      .post('/api/auth/signin')
+      .send(usersTester[10]);
+    dummy8jajaToken = res.body.data.token;
     res.should.have.status(200);
     res.body.should.be.an('object');
   });
@@ -233,4 +243,24 @@ describe('remember profile test', () => {
       result.should.have.status(200);
       result.body.should.have.property('message', 'your profile will not be remembered on your next request initiation');
     });
+  it('user should be able to view some details of his/her Remember profile (jimmyToken)', async () => {
+    const result = await chai
+      .request(index)
+      .get('/api/profile/rememberMe')
+      .send()
+      .set('token', jimmyToken);
+    result.should.have.status(200);
+    result.body.should.have.property('message');
+    result.body.should.have.property('data');
+  });
+  it('user should be able to view some details of his/her Remember profile (dummy8jajaToken)', async () => {
+    const result = await chai
+      .request(index)
+      .get('/api/profile/rememberMe')
+      .send()
+      .set('token', dummy8jajaToken);
+    result.should.have.status(200);
+    result.body.should.have.property('message');
+    result.body.should.have.property('data');
+  });
 });
